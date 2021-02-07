@@ -12,7 +12,7 @@
 
 var middleNode = function(head) {
   slow = fast = head;
-  while (fast && fast.next) {
+  while (fast && fast.next) { // fast--> even ; fast.next--> odd
       slow = slow.next;
       fast = fast.next.next;
   }
