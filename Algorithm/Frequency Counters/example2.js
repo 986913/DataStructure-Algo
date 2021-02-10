@@ -15,8 +15,7 @@
   validaAnagram('rat', 'car')                       true
  */
 
-
-
+// frequency counter solution 1:
 const validaAnagram = (str1, str2) => {
   if (str1.length !== str2.length) return false;
   if (!str1.length && !str1.length) return true;
@@ -39,4 +38,22 @@ const validaAnagram = (str1, str2) => {
   return true;
 };
 
-console.log(validaAnagram("texttwisttime", "timetwisttext"));
+// frequency counter solution 2:
+const validaAnagram2 = (str1, str2) => {
+  if (str1.length !== str2.length) return false;
+
+  let lookUp = {};
+
+  for (let char of str1) {
+    lookUp[char] = (lookUp[char] || 0) + 1;
+  }
+
+  for (let char of str2) {
+    if (!lookUp[char]) return false;
+    else lookUp[char] -= 1;
+  }
+
+  return true;
+};
+
+// console.log(validaAnagram2("aaz", "zza"));
