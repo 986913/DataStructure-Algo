@@ -19,3 +19,13 @@ const hasDuplicates = (...args) => {
   }
   return false
 }
+
+
+const hasDuplicatesV2 = (...args) => {
+  const lookUp = new Map();
+  for(let val of args){
+    if(lookUp.has(val)) return true
+    else lookUp.set(val, true)
+  }
+  return false;
+}
