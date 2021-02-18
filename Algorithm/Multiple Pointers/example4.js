@@ -16,7 +16,7 @@ const isSubsequence = (str1, str2) => {
 
   while (pointer1 < str1.length) {
     if (pointer2 >= str2.length) return false;
-    if (str1.charAt(pointer1) === str2.charAt(pointer2)) {
+    if (str1[pointer1] === str2[pointer2]) {
       pointer1++;
       pointer2++;
     } else {
