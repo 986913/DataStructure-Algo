@@ -44,4 +44,30 @@ const findLongestSubstring = (str) => {
   return maxLen;
 };
 
-console.log(findLongestSubstring("longestsubstring")); //0
+
+// 优化后：
+
+/* 解法一：维护数组
+  解题思路： 使用一个数组来维护滑动窗口
+  遍历字符串，判断字符是否在滑动窗口数组里  
+    不在则 push 进数组
+    在则删除滑动窗口数组里相同字符及相同字符前的字符，然后将当前字符 push 进数组
+    然后将 max 更新为当前最长子串的长度
+    遍历完，返回 max 即可 
+*/
+const findLongestSubstring = (str) => {
+  let arr = [];
+  let maxLen = 0;
+
+  for (let char of str) {
+    const index = arr.indexOf(char);
+    if (index !== -1) {
+      arr.splice(0, index + 1);
+    }
+    arr.push(char);
+    maxLen = Math.max(maxLen, arr.length);
+  }
+  return maxLen;
+};
+
+console.log(findLongestSubstring("longestsubstring")); //8
