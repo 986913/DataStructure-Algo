@@ -62,8 +62,10 @@ const findLongestSubstring = (str) => {
   for (let char of str) {
     const index = arr.indexOf(char);
     if (index !== -1) {
+      // 收缩窗口
       arr.splice(0, index + 1);
     }
+    // 加大窗口
     arr.push(char);
     maxLen = Math.max(maxLen, arr.length);
   }
