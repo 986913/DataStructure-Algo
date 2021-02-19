@@ -36,6 +36,7 @@ const minSubArrayLen = (arr, n) => {
   // return 0;
 };
 
+// 双指针/sliding window 解法:
 const minSubArrayLenV2 = (arr, n) => {
   let total = 0;
   let start = 0;
