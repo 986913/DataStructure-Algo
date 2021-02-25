@@ -17,3 +17,27 @@ var intersection = function(nums1, nums2) {
   }
   return result;
 };
+
+// 2 pointer:
+var intersection = function (nums1, nums2){
+  let result =[];
+  let p1=0;
+  let p2 =0;
+
+  nums1.sort((a, b)=> a-b);
+  nums2.sort((a, b)=> a-b);
+  
+  while(p1<nums1.length && p2<nums2.length){
+    if(nums1[p1]>nums2[p2]){
+      p2++
+    }else if(nums1[p1]<nums2[p2]){
+      p1++
+    }else{
+      // nums1[p1] === nums2[p2]
+      if(result.indexOf(nums2[p2])==-1) result.push(nums2[p2]);
+      p1++;
+      p2++
+    }
+  }
+  return result;
+}
