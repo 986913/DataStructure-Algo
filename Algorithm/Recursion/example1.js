@@ -13,11 +13,25 @@ eg: countDown(4)  4 3 2 1 'all done'
  */
 
 //迭代
-const countDown = n => {
-  for(let i=n; i>0; i--){
-    console.log(i)
-  }
-  console.log('all done')
-}
+// const countDown = n => {
+//   for(let i=n; i>0; i--){
+//     console.log(i)
+//   }
+//   console.log('all done')
+// }
+
+
 
 // recursion:
+const countDown = n => {
+  if(n<=0){
+    console.log('all done')
+    return
+  }
+  console.log(n);
+  n--
+  countDown(n);
+}
+
+
+countDown(4)  // 4 3 2 1 'all done'
