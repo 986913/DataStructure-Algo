@@ -17,4 +17,10 @@ eg: factorial(4) // 24   解释：4x3x2x1=24
 //   return result;
 // }
 
-factorial(5)
+// recurrsion:
+const factorial = n => {
+  if(n===1) return 1
+  return n*factorial(n-1);
+}
+
+factorial(5) // 120
