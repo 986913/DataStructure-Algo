@@ -11,7 +11,7 @@ eg: factorial(4) // 24   解释：4x3x2x1=24
 // 迭代法：
 // const factorial = n => {
 //   let result = 1;
-//   for(i=1; i<=n; i++){
+//   for(i=n; i>0; i--){
 //     result = result * i
 //   }
 //   return result;
