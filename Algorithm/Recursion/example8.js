@@ -7,7 +7,7 @@
     reverse('rithmschool')    // 'loohcsmhtir
  */
 
-
+// solution 1:  use helper method pattern
 function reverse(str){
   let result='';
   function helper(helperInput){
@@ -21,3 +21,11 @@ function reverse(str){
   helper(str);
   return result;
 }
+
+
+// solution 2
+function reverse(str){
+	if(str.length <= 1) return str;
+	return reverse(str.slice(1)) + str[0];
+}
+
