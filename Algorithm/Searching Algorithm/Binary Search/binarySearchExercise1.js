@@ -1,5 +1,9 @@
 
-/* Binary search only works on sorted arrays! */
+/* 
+  1. Binary search only works on sorted arrays!
+  2. worst and average case:  O(log n)                 best Case O(1)
+
+*/
 
 
 function binarySearch(arr, value){
