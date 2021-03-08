@@ -14,7 +14,7 @@ while(left<=right){
   let middle = Math.ceil((left+right)/2);
     if(nums[middle]<target){
       left = middle+1
-    } elsFe if (nums[middle]>target){
+    } else if (nums[middle]>target){
       right = middle -1
     } else {
       return middle;
