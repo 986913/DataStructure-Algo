@@ -45,14 +45,14 @@ function sort(arr){
 function sort(arr){
   let done;
   for(let i = 0; i <arr.length-1; i++){ 
-    noSwaps = true;
+    done = true;
     for(let j = 0; j < arr.length-1-i; j++){
       if(arr[j] > arr[j+1]){ 
         // swap :
         let tmp = arr[j+1];
         arr[j+1] = arr[j];
         arr[j] = tmp;
-        donedone = false;
+        done = false;
       }
     }
     if(done) break;
