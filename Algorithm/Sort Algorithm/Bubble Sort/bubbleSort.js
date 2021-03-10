@@ -1,6 +1,8 @@
 /* 
   Bubble Sort:
   数组中有n个数，从第一个数开始，逐个比较相邻的两数，如果前面的大于后面的，交换位置，将比较大的数往后排
+
+  博客解说： https://www.cnblogs.com/echolun/p/12638903.html
 */
 
 
