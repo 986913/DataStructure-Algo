@@ -7,8 +7,8 @@
 
 /* bubble sort's dummy version: */
 function sort(arr){
-  for(let i=0; i<arr.length; i++){ 
-    for(let j=0; j<arr.length; j++){
+  for(let i=0; i<arr.length-1; i++){ 
+    for(let j=0; j<arr.length-1; j++){
       if(arr[j] > arr[j+1]){ 
         // swap :
         let tmp = arr[j+1];
@@ -23,8 +23,8 @@ function sort(arr){
 
 /* bubble sort's effient version: 注意循环条件*/
 function sort(arr){
-  for(let i = 0; i <arr.length; i++){ 
-    for(let j = 0; j < arr.length-i; j++){
+  for(let i = 0; i <arr.length-1; i++){ 
+    for(let j = 0; j < arr.length-1-i; j++){
       if(arr[j] > arr[j+1]){ 
         // swap :
         let tmp = arr[j+1];
@@ -44,9 +44,9 @@ function sort(arr){
 */
 function sort(arr){
   let done;
-  for(let i = 0; i <arr.length; i++){ 
+  for(let i = 0; i <arr.length-1; i++){ 
     done = true;
-    for(let j = 0; j < arr.length-i; j++){
+    for(let j = 0; j < arr.length-1-i; j++){
       if(arr[j] > arr[j+1]){ 
         // swap :
         let tmp = arr[j+1];
