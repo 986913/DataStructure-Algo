@@ -1,5 +1,7 @@
 /* 
   Selection Sort:
+
+  selection sort没有bubble sort和insertion sort好使
 */
 
 function selectionSort(arr){
