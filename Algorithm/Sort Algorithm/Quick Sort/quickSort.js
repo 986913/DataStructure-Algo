@@ -55,8 +55,7 @@ function quickSort(arr, left = 0, right = arr.length -1){
       //right
       quickSort(arr,pivotIndex+1,right);
     }
-  return arr;
+  return arr;           // left==right is base case to stop recursion
 } 
       
 quickSort([100,-3,2,4,6,9,1,2,5,3,23])
-
