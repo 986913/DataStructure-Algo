@@ -1,5 +1,6 @@
 /* 
   博客： https://www.guru99.com/quicksort-in-javascript.html
+  另一种写法的博客： https://stackabuse.com/quicksort-in-javascript/
   这个印度叔讲的好 https://www.youtube.com/watch?v=7h1s2SojIRw&ab_channel=AbdulBari
 
 
@@ -55,16 +56,10 @@ function partition(arr, left, right) {
 }
 
 function quickSort(arr, left = 0, right = arr.length - 1) {
-  if (arr.length > 1) {
-    let privotIndex = partition(arr, left, right);  //index returned from partition
-    if (left < privotIndex - 1) {
-      //more elements on the left side of the pivot
-      quickSort(arr, left, privotIndex - 1);
-    }
-    if (privotIndex < right) {
-      //more elements on the right side of the pivot
-      quickSort(arr, privotIndex, right);
-    }
+  if (left < right) {                   // left==right is base case to stop recursion, so here condition is left<right
+    let privotIndex = partition(arr, left, right);
+    quickSort(arr, left, privotIndex - 1);
+    quickSort(arr, privotIndex, right);  // 注意：是privotIndex而不是privotIndex+1
   }
   return arr;
 }
