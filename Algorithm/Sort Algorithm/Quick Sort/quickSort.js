@@ -34,37 +34,36 @@ function swap(arr, i, j) {
   arr[j] = tmp;
 }
 function partition(arr, left, right) {
-  let pivot = arr[Math.floor((right + left) / 2)];  //middle element
-  let i = left;    //left pointer
-  let j = right;    //right pointer
+  let pivot = arr[left];                //将第一个元素作为privot 
+  let i = left;                         //left pointer
+  let j = right;                        //right pointer
 
   while (i <= j) {
-    while (arr[i] < pivot) {
+    while (arr[i] < pivot) {            //注意： 是while而不是if
       i++;
     }
     while (arr[j] > pivot) {
       j--;
     }
-    if (i <= j) {
-      swap(arr, i, j); //sawpping two elements
+    if (i <= j) {                       //注意：condition条件
+      swap(arr, i, j);                  //sawpping two elements
       i++;
       j--;
     }
   }
-  return i;
+  return i;                             // 注意： return i 不是j
 }
 
 function quickSort(arr, left = 0, right = arr.length - 1) {
-  var index;
   if (arr.length > 1) {
-    index = partition(arr, left, right);  //index returned from partition
-    if (left < index - 1) {
+    let privotIndex = partition(arr, left, right);  //index returned from partition
+    if (left < privotIndex - 1) {
       //more elements on the left side of the pivot
-      quickSort(arr, left, index - 1);
+      quickSort(arr, left, privotIndex - 1);
     }
-    if (index < right) {
+    if (privotIndex < right) {
       //more elements on the right side of the pivot
-      quickSort(arr, index, right);
+      quickSort(arr, privotIndex, right);
     }
   }
   return arr;
