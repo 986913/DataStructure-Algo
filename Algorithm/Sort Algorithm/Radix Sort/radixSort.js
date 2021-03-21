@@ -1,4 +1,4 @@
-/* Radix sorting:   */
+/* Radix sorting:  ONLY works for number sorting!!!   */
 
 /* helper function1 : getDigit(num, place) -> returns the digit in num at the given place value
 eg:
@@ -9,7 +9,7 @@ eg:
     getDigit(12345, 4)    //1
     getDigit(12345, 5)    //0
 */
-const getDigit = (n, place) => Math.floor(Math.abs(n)/Math.pow(10, place))%10
+const getDigit = (n, place) => Math.floor(Math.abs(n) / Math.pow(10, place)) % 10;
 
 /* helper function2: digitCount-> return the counts of all digital
   eg:
@@ -18,8 +18,8 @@ const getDigit = (n, place) => Math.floor(Math.abs(n)/Math.pow(10, place))%10
     digitCount(8353)     //4
  */
 const digitCount = n => {
-  if(n===0) return 1;
-  return Math.floor(Math.log10(Math.abs(n))) + 1
+  if (n === 0) return 1;
+  return Math.floor(Math.log10(Math.abs(n))) + 1;
 }
 
 /* helper function3: mostDigits(nums) -> Given an array of numbers, return the numbers of digits in the largest number in the list
@@ -30,8 +30,27 @@ eg:
  */
 const mostDigits = nums => {
   let maxDigits = 0;
-  for(let i=0; i<nums.length; i++){
-    maxDigits = Math.max(maxDigits, digitCount(nums[i]))
+  for (let i = 0; i < nums.length; i++) {
+    maxDigits = Math.max(maxDigits, digitCount(nums[i]));
   }
   return maxDigits;
 }
+
+const quickSort = (arr) => {
+  let maxDigitCount = mostDigits(arr);
+
+  for(let k = 0; k < maxDigitCount; k++){
+      let digitBuckets = Array.from({length: 10}, () => []);
+
+      for(let i = 0; i < arr.length; i++){
+          let digit = getDigit(arr[i],k);
+          digitBuckets[digit].push(arr[i]);
+      }
+
+      arr = [].concat(...digitBuckets);
+  }
+
+  return arr;
+}
+
+console.log(quickSort([34,456,111,459,-2,7, 0])) // 这块有问题
