@@ -40,17 +40,22 @@ const quickSort = (arr) => {
   let maxDigitCount = mostDigits(arr);
 
   for(let k = 0; k < maxDigitCount; k++){
-      let digitBuckets = Array.from({length: 10}, () => []);
+      let posDigitBuckets = Array.from({length: 10}, () => []);
+      let negDigitBuckets = Array.from({length: 10}, () => []);
 
       for(let i = 0; i < arr.length; i++){
           let digit = getDigit(arr[i],k);
-          digitBuckets[digit].push(arr[i]);
+          if(arr[i]>0){
+            posDigitBuckets[digit].push(arr[i]);
+          }else{
+            negDigitBuckets[negDigitBuckets.length-1-digit].push(arr[i])
+          }
       }
 
-      arr = [].concat(...digitBuckets);
+      arr = [].concat(...negDigitBuckets ,...posDigitBuckets)
   }
 
   return arr;
 }
 
-console.log(quickSort([34,456,111,459,-2,7, 0])) // 这块有问题
+console.log(quickSort([34,456, 9999, -11, 111,459,-2,7, 0]));
