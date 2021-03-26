@@ -6,6 +6,8 @@
     将它插入到有序表中的适当位置， 使之成为新的有序表
 */
 
+//https://www.youtube.com/watch?v=i-SKeOcBwko&ab_channel=mycodeschool
+
 const insertionSort = (arr) => {
   for (let i = 1; i < arr.length; i++) {
 
@@ -16,7 +18,7 @@ const insertionSort = (arr) => {
       i--;
     }
     arr[i] = currentValue;
-    
+
   }
 
   return arr;
