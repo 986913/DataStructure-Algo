@@ -1,8 +1,9 @@
 /* 
   Selection Sort:
-
   selection sort没有bubble sort和insertion sort好使
 */
+
+// https://www.youtube.com/watch?v=xWBP4lzkoyM&ab_channel=GeeksforGeeks
 
 function selectionSort(arr){
 
