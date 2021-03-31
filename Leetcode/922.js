@@ -3,6 +3,7 @@
  * @return {number[]}
  */
 
+// easy understand solution:
 var sortArrayByParityII = function (nums) {
   let result = [];
 
@@ -22,3 +23,6 @@ var sortArrayByParityII = function (nums) {
 
 
 console.log(sortArrayByParityII([3,1,4,2]))  //[2,1,4,3]
+
+
+// 2 pointer solution
