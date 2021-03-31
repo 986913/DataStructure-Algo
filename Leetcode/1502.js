@@ -3,6 +3,12 @@
  * @return {boolean}
  */
 
+/*
+思路： 
+  Consider that any valid arithmetic progression will be in sorted order.
+  Sort the array, then check if the differences of all consecutive elements are equal.
+ */
+
 var canMakeArithmeticProgression = function (arr) {
   const sorted = arr.sort((a, b) => a - b);
   let diff = sorted[1] - sorted[0];
