@@ -4,7 +4,7 @@
  * @return {number[]}
  */
 
-// force brute...
+//解法一： force brute...
 var relativeSortArray = function (arr1, arr2) {
   let results = [];
 
@@ -24,3 +24,6 @@ var relativeSortArray = function (arr1, arr2) {
 };
 
 console.log(relativeSortArray([28,6,22,8,44,17],[22,28,8,6])) //[22,28,8,6,17,44]
+
+
+
