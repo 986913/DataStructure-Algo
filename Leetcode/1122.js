@@ -21,7 +21,7 @@ var relativeSortArray = function (arr1, arr2) {
 };
 console.log(relativeSortArray([28,6,22,8,44,17],[22,28,8,6])) //[22,28,8,6,17,44]
 
-/* 解法2： Radix sort */
+/* 解法2： 桶排序*/
 /**
  * @param {number[]} arr1
  * @param {number[]} arr2
