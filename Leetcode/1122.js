@@ -12,15 +12,12 @@ var relativeSortArray = function (arr1, arr2) {
     for (let j = 0; j < arr1.length; j++) {
       if (arr2[i] === arr1[j]) {
         results.push(arr1[j]);
-        arr1[j] = "str";
       }
     }
   }
-  const dontAppear = arr1
-    .filter((item) => typeof item === "number")
-    .sort((a, b) => a - b);
-
-  return results.concat(dontAppear);
+  const difference = arr1.filter(item=>!results.includes(item)).sort((a,b)=>a-b);
+  
+  return results.concat(difference);
 };
 
 console.log(relativeSortArray([28,6,22,8,44,17],[22,28,8,6])) //[22,28,8,6,17,44]
