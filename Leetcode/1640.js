@@ -27,6 +27,31 @@ var canFormArray = function(arr, pieces) {
   return pieces.length == 0
 };
 
+console.log(canFormArray([91,4,64,78], [[78],[4,64],[91]]))  // true
+
+
+//使用Map
+var canFormArray = function(arr, pieces) {
+  let map = new Map()
+
+  for (let p of pieces) {
+      map.set(p[0], p)
+  }
+
+  for(let i = 0; i < arr.length;) {
+      let num = arr[i]
+      if (!map.has(num)) return false;
+      
+      let pArr = map.get(num)
+      for (let j = 0; j < pArr.length; j++) {
+          if (pArr[j] !== arr[i]) return false
+          else i++; // 注意在这 i++
+      }
+  }
+
+  return true
+};
+
 
 
 
