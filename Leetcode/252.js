@@ -13,7 +13,7 @@ Output: true
 
 const canAttendAll = (arr) => {
   arr.sort((a,b)=>a[0]-b[0]);
-  console.log(arr)
+
   for(let i=0; i<arr.length-1; i++){
     if(arr[i][1]>arr[i+1][1])
       return false
@@ -22,4 +22,4 @@ const canAttendAll = (arr) => {
 }
 
 console.log(canAttendAll([[0,30],[5,10],[15,20]])) // false
-console.log(canAttendAll([[7,10],[2,4]]))
+console.log(canAttendAll([[7,10],[2,4]]))    // true
