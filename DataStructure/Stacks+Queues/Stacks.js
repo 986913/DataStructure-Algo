@@ -6,3 +6,19 @@
     - searching for an element in the stack ——→ O(n)
 - A stack is typically implemented with a dynamic array  or with a singly linked list
 */
+
+
+
+/* 1. build Stacks by using Array */
+
+
+
+
+
+
+
+
+
+
+
+/* 2. build Stacks by using Single Linked List */
