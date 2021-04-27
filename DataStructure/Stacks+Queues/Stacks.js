@@ -10,14 +10,38 @@
 
 
 /* 1. build Stacks by using Array */
-
-
-
-
-
-
-
-
+class Stack {
+  constructor() {
+    this.items = [];
+  }
+  push(val) {
+    this.items.push(val);
+  }
+  pop() {
+    this.items.shift();
+  }
+  peek() {
+    return this.items[this.items.length - 1];
+  }
+  search(val) {
+    return this.items.indexOf(val);
+  }
+  isEmpty() {
+    return this.items.length === 0;
+  }
+  print() {
+    let result = "";
+    this.items.forEach((item) => {
+      result += item;
+    });
+    return result;
+  }
+}
+let s = new Stack();
+s.push("ming");
+s.push("yue");
+s.push("liu");
+console.log(s.print());
 
 
 
