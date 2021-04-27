@@ -7,3 +7,9 @@ an array-like data structure whose elements follow the FIFO rule: First In, Firs
     - searching for an element in the queue ——→ O(n)
 A stack is typically implemented with a doubly linked list 
 */
+
+class Queues{
+    constructor(){
+        
+    }
+}
