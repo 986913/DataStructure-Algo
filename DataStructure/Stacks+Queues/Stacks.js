@@ -52,7 +52,6 @@ class Node {
     this.next = null;
   }
 }
-
 class Stack {
   constructor() {
     this.first = null;
