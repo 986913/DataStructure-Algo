@@ -8,8 +8,27 @@ an array-like data structure whose elements follow the FIFO rule: First In, Firs
 A stack is typically implemented with a doubly linked list 
 */
 
+/* 1. build Stacks by using Array */
 class Queues{
     constructor(){
+        this.items =[]
+    }
+    enqueue(val){
+
+    }
+    dequeue(){
+
+    }
+    peek(){
+
+    }
+    search(){
+
+    }
+    isEmpty(){
+
+    }
+    print(){
         
     }
 }
