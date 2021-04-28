@@ -31,3 +31,5 @@ var removeOuterParentheses = function (S) {
 
   return result;
 };
+
+console.log( removeOuterParentheses("(()())(())") ) // "()()()"
