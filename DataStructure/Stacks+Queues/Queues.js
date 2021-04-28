@@ -9,26 +9,33 @@ A stack is typically implemented with a doubly linked list
 */
 
 /* 1. build Stacks by using Array */
-class Queues{
-    constructor(){
-        this.items =[]
-    }
-    enqueue(val){
-
-    }
-    dequeue(){
-
-    }
-    peek(){
-
-    }
-    search(){
-
-    }
-    isEmpty(){
-
-    }
-    print(){
-        
-    }
+class Queues {
+  constructor() {
+    this.items = [];
+  }
+  enqueue(val) {
+    this.items.push(val);
+  }
+  dequeue() {
+    return this.items.shift();
+  }
+  peek() {
+    return this.items[this.items.length - 1];
+  }
+  search(val) {
+    return this.items.indexOf(val);
+  }
+  isEmpty() {
+    return this.items.length === 0;
+  }
+  print() {
+    let res = "";
+    this.items.forEach((i) => (res += i));
+    return res;
+  }
 }
+// let q = new Queues();
+// q.enqueue("ming");
+// q.enqueue("yue");
+// q.enqueue("liu");
+// q.dequeue();
