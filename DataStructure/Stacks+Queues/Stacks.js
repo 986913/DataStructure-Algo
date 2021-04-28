@@ -89,18 +89,11 @@ class Stack2 {
       this.first = null;
       this.last = null;
     }
-    
     return current.value;
   }
 
   peek() {
-    if (!this.size) return null;
-
-    let current = this.first;
-    while (current.next) {
-      current = current.next;
-    }
-    return current.value;
+    return this.last.value;
   }
 
   search(val) {
