@@ -18,7 +18,7 @@ class Stack {
     this.items.push(val);
   }
   pop() {
-    this.items.shift();
+    this.items.pop();
   }
   peek() {
     return this.items[this.items.length - 1];
@@ -37,10 +37,12 @@ class Stack {
     return result;
   }
 }
+
 let s = new Stack();
 s.push("ming");
 s.push("yue");
 s.push("liu");
+s.pop();
 console.log(s.print());
 
 
@@ -52,7 +54,7 @@ class Node {
     this.next = null;
   }
 }
-class Stack {
+class Stack2 {
   constructor() {
     this.first = null;
     this.last = null;
@@ -71,12 +73,24 @@ class Stack {
   }
   pop() {
     if (!this.size) return null;
-    const currentFirst = this.first;
-    this.first = currentFirst.next;
-    this.size--;
-    if (this.size === 0) this.last = null;
 
-    return currentFirst.value;
+    let current = this.first;
+    let newLast = current; // notice here
+
+    while (current.next) {
+      newLast = current; // update newLast
+      current = current.next;
+    }
+    this.last = newLast; // update last here
+    this.last.next = null;
+    this.size--;
+
+    if (this.size === 0) {
+      this.first = null;
+      this.last = null;
+    }
+    
+    return current.value;
   }
 
   peek() {
@@ -114,11 +128,13 @@ class Stack {
   }
 }
 
-const s = new Stack();
+const s = new Stack2();
 s.push("ming");
-s.push("ming2");
-s.push("ming3");
+s.push("yue");
 s.push("liu");
-console.log(s.peek());
-console.log(s.search("hh"));
-console.log(s.print());
+console.log(s.pop()); // liu
+console.log(s.pop()); // yue
+console.log(s.pop()); // ming
+// console.log(s.peek());
+// console.log(s.search("hh"));
+// console.log(s.print());
