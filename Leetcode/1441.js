@@ -22,3 +22,5 @@ var buildArray = function (target, n) {
 
   return result;
 };
+
+console.log(buildArray([1,3], 3)) //[ 'Push', 'Push', 'Pop', 'Push' ]
