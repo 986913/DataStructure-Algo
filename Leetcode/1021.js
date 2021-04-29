@@ -5,8 +5,8 @@
 
 // brute force:
 var removeOuterParentheses = function (S) {
-  let decomposition = [];     // use to save decomposition 
-  let chars = "";             // each item of decomposition
+  let decomposition = []; // use to save decomposition
+  let chars = ""; // each item of decomposition
   let leftAmount = 0;
   let rightAmount = 0;
   let result = "";
@@ -31,5 +31,26 @@ var removeOuterParentheses = function (S) {
 
   return result;
 };
+console.log(removeOuterParentheses("(()())(())")); // "()()()"
 
-console.log( removeOuterParentheses("(()())(())") ) // "()()()"
+
+// use Stack:
+var removeOuterParentheses = function (S) {
+  let stack = [];    //stack only save "("
+  let result = "";
+  let index = 0;
+
+  for (let i = 0; i < S.length; i++) {
+    if (S[i] === "(") stack.push(S[i]);
+    else stack.pop();
+    
+    if (stack.length === 0) {
+      // when stack is empty. update result and index
+      result += S.substring(index + 1, i);
+      index = i + 1;
+    }
+  }
+  
+  return result;
+};
+console.log(removeOuterParentheses("(()())(())")); // "()()()"
