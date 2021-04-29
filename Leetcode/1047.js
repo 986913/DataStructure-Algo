@@ -16,3 +16,5 @@ var removeDuplicates = function (S) {
 
   return stacks.join("");
 };
+
+console.log(removeDuplicates("abbaca")) //'ca'
