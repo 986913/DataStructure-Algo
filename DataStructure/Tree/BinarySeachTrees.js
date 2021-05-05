@@ -41,7 +41,7 @@ class BinarySearchTree {
 
   contains(val) {
     if (!this.root) return false;
-    
+
     let current = this.root;
     while (current) {
       if (val < current.value) {
@@ -56,6 +56,32 @@ class BinarySearchTree {
 
     return false;
   }
+
+  //Breadth-first search
+  BFS() { 
+    let queue = [];
+    let visited = [];
+    let node = this.root;
+
+    queue.push(node);
+
+    while (queue.length) {
+      node = queue.shift();
+      visited.push(node.value);
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    }
+
+    return visited;
+  }
+
+  //Depth-first search
+  DFS() {
+    
+  }
+
+
+
 }
 
 const tree = new BinarySearchTree();
