@@ -58,7 +58,7 @@ class BinarySearchTree {
   }
 
   //Breadth-first search
-  BFS() { 
+  BFS() {
     let queue = [];
     let visited = [];
     let node = this.root;
@@ -75,10 +75,26 @@ class BinarySearchTree {
     return visited;
   }
 
-  //Depth-first search
-  DFS() {
-    
+  //Depth-first search: PreOrder
+  DFS_preOrder() {
+    let visited = [];
+
+    const helper = (helperInput) => {
+      // change outside variable
+      visited.push(helperInput.value);
+
+      // change recussion's input.
+      if (helperInput.left) helper(helperInput.left);
+      if (helperInput.right) helper(helperInput.right);
+    };
+
+    helper(this.root);
+    return visited;
   }
+
+
+
+
 
 
 
@@ -86,11 +102,10 @@ class BinarySearchTree {
 
 const tree = new BinarySearchTree();
 tree.insert(10);
-tree.insert(5);
-tree.insert(13);
-tree.insert(11);
-tree.insert(2);
-tree.insert(16);
-tree.insert(7);
-console.log(tree.contains(8));
-console.log(tree);
+tree.insert(6);
+tree.insert(15);
+tree.insert(3);
+tree.insert(8);
+tree.insert(20);
+console.log(tree.BFS());          //  [10, 6, 15, 3, 8, 20]
+console.log(tree.DFS_preOrder()); //  [10, 6, 3, 8, 15, 20]
