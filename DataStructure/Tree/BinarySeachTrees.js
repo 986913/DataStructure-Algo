@@ -92,6 +92,22 @@ class BinarySearchTree {
     return visited;
   }
 
+   //Depth-first search: PostOrder
+  DFS_postOrder() {
+    let visited = [];
+
+    const helper = (helperInput) => {
+      // change recussion's input.
+      if (helperInput.left) helper(helperInput.left);
+      if (helperInput.right) helper(helperInput.right);
+
+      // change outside variable
+      visited.push(helperInput.value);
+    };
+    helper(this.root);
+    return visited;
+  }
+
 
 
 
@@ -109,3 +125,4 @@ tree.insert(8);
 tree.insert(20);
 console.log(tree.BFS());          //  [10, 6, 15, 3, 8, 20]
 console.log(tree.DFS_preOrder()); //  [10, 6, 3, 8, 15, 20]
+console.log(tree.DFS_postOrder()); // [3, 8, 6, 20, 15, 10]
