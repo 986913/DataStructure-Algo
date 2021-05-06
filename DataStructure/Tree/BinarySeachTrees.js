@@ -108,11 +108,22 @@ class BinarySearchTree {
     return visited;
   }
 
+  //Depth-first search: InOrder
+  DFS_inOrder() {
+    let visited = [];
 
+    const helper = (helperInput) => {
+      // change recussion's input.
+      if (helperInput.left) helper(helperInput.left);
+      // change outside variable
+      visited.push(helperInput.value);
+      // change recussion's input.
+      if (helperInput.right) helper(helperInput.right);
 
-
-
-
+    };
+    helper(this.root);
+    return visited;
+  }
 
 }
 
@@ -126,3 +137,4 @@ tree.insert(20);
 console.log(tree.BFS());          //  [10, 6, 15, 3, 8, 20]
 console.log(tree.DFS_preOrder()); //  [10, 6, 3, 8, 15, 20]
 console.log(tree.DFS_postOrder()); // [3, 8, 6, 20, 15, 10]
+console.log(tree.DFS_inOrder());   // [3, 6, 8, 10, 15, 20]
