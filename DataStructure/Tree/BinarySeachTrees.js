@@ -125,6 +125,17 @@ class BinarySearchTree {
     return visited;
   }
 
+  //Copy a tree, through DFS
+  CopyTheTree_DFS(root) {
+    if (root == null) return null;
+
+    let newNode = new Node(root.value);
+    newNode.left = this.CopyTheTree_DFS(root.left);
+    newNode.right = this.CopyTheTree_DFS(root.right);
+
+    return newNode;
+  }
+
 }
 
 const tree = new BinarySearchTree();
@@ -138,3 +149,5 @@ console.log(tree.BFS());          //  [10, 6, 15, 3, 8, 20]
 console.log(tree.DFS_preOrder()); //  [10, 6, 3, 8, 15, 20]
 console.log(tree.DFS_postOrder()); // [3, 8, 6, 20, 15, 10]
 console.log(tree.DFS_inOrder());   // [3, 6, 8, 10, 15, 20]
+
+console.log(tree.CopyTheTree_DFS(tree.root));
