@@ -30,4 +30,4 @@ var longestPalindrome = function (s) {
   return result;
 };
 
-/*  */
+/* Soulution2: DP */
