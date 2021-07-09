@@ -26,6 +26,59 @@ class MaxBinaryHeap {
       index = parentIndex;
     }
   }
+
+  removeMax() {
+    //1. get root(max) element  and last element, and replace max with last element
+    let max = this.values[0];
+    let end = this.values.pop();
+
+    if (this.values.length > 0) {
+      this.values[0] = end;
+      //2. sink/bubble down
+      this.sinkDown();
+    }
+
+    //3. return removed element
+    return max;
+  }
+
+  sinkDown() {
+    let idx = 0;
+    const length = this.values.length;
+    const aim = this.values[0];
+
+    while (true) {
+      let leftChildIdx = 2 * idx + 1;
+      let rightChildIdx = 2 * idx + 2;
+      let leftChild, rightChild;
+
+      let swap = null; // for tracking swap index
+
+      if (leftChildIdx < length) {
+        leftChild = this.values[leftChildIdx];
+        if (leftChild > aim) {
+          swap = leftChildIdx;
+        }
+      }
+
+      if (rightChildIdx < length) {
+        rightChild = this.values[rightChildIdx];
+        if (
+          (rightChild > aim && swap === null) ||
+          (rightChild > leftChild && swap !== null)
+        ) {
+          swap = rightChildIdx;
+        }
+      }
+
+      if (swap === null) break; // means there is no children greater than aim element
+
+      this.values[idx] = this.values[swap];
+      this.values[swap] = aim;
+
+      idx = swap;
+    }
+  }
 }
 
 let mbh = new MaxBinaryHeap();
@@ -37,4 +90,5 @@ mbh.insert(27);
 mbh.insert(12);
 mbh.insert(55);
 
-console.log(mbh.values); // [55 39 41 18 27 12 33]
+console.log(mbh.removeMax());
+console.log(mbh);
