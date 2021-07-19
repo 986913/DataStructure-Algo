@@ -29,14 +29,63 @@ class Graph {
       (v) => v !== vertex1
     );
   }
+
+  removeVertex(vertex) {
+    while (this.adjacencyList[vertex].length) {
+      const adjacenctVertex = this.adjacencyList[vertex].pop();
+      this.removeEdge(vertex, adjacenctVertex);
+    }
+    delete this.adjacencyList[vertex];
+  }
+
+  DFS_recursive(start) {
+    const result = [];
+    const visited = {};
+    const adjacencyList = this.adjacencyList;
+
+    function dfs(vertex) {
+      if (!vertex) return null;
+      visited[vertex] = true;
+      result.push(vertex);
+      adjacencyList[vertex].forEach((neighbor) => {
+        if (!visited[neighbor]) {
+          return dfs(neighbor);
+        }
+      });
+    }
+    dfs(start);
+
+    return result;
+  }
 }
 
 let g = new Graph();
-g.addVertex("changan");
-g.addVertex("beijing");
-g.addEdge("changan", "beijing");
-g.addEdge("xian", "detroit");
-g.addEdge("xian", "beijing");
-g.addEdge("xian", "changan");
-g.removeEdge("xian", "changan");
-console.log(g);
+g.addVertex("A");
+g.addVertex("B");
+g.addVertex("C");
+g.addVertex("D");
+g.addVertex("E");
+g.addVertex("F");
+
+g.addEdge("A", "B");
+g.addEdge("A", "C");
+g.addEdge("B", "D");
+g.addEdge("C", "E");
+g.addEdge("D", "E");
+g.addEdge("D", "F");
+g.addEdge("E", "F");
+
+/*
+
+      A
+    /  \
+  B     C
+  \     /
+  D -- E
+  \   / 
+    F
+
+*/
+
+console.log(g.DFS_recursive("A")); // ["A", "B", "D", "E", "C", "F"]
+console.log(g.DFS_recursive("E")); // ["E", "C", "A", "B", "D", "F"]
