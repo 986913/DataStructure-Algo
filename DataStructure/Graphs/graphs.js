@@ -57,6 +57,27 @@ class Graph {
 
     return result;
   }
+
+  DFS_iterative(start) {
+    const result = [];
+    const visited = {};
+    const stack = [start];
+    let currentVertex;
+
+    visited[start] = true;
+    while (stack.length) {
+      currentVertex = stack.pop();
+      result.push(currentVertex);
+      this.adjacencyList[currentVertex].forEach((neighbor) => {
+        if (!visited[neighbor]) {
+          visited[neighbor] = true;
+          stack.push(neighbor);
+        }
+      });
+    }
+
+    return result;
+  }
 }
 
 let g = new Graph();
@@ -89,3 +110,6 @@ g.addEdge("E", "F");
 
 console.log(g.DFS_recursive("A")); // ["A", "B", "D", "E", "C", "F"]
 console.log(g.DFS_recursive("E")); // ["E", "C", "A", "B", "D", "F"]
+
+console.log(g.DFS_iterative("A")); // ["A", "C", "E", "F", "D", "B"]
+console.log(g.DFS_iterative("E")); // ["E", "F", "D", "B", "A", "C"]
