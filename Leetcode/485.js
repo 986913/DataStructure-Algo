@@ -41,3 +41,15 @@ var findMaxConsecutiveOnes = function (nums) {
 
   return Math.max(maxCount, tempCount);
 };
+
+var findMaxConsecutiveOnes = function (nums) {
+  let maxCount = 0;
+  let tempCount = 0;
+
+  for (i = 0; i < nums.length; i++) {
+    if (nums[i] === 1) tempCount += 1;
+    else tempCount = 0;
+    maxCount = Math.max(maxCount, tempCount);
+  }
+  return maxCount;
+};
