@@ -17,6 +17,8 @@ var findErrorNums = function (nums) {
     else if (count == 0) {
       missing = i;
     }
+
+    if (dup > 0 && missing > 0) break;
   }
 
   return [dup, missing];
