@@ -4,6 +4,7 @@
  */
 var maxSubArray = function (nums) {
   let maxSum = -Infinity;
+
   for (let i = 0; i < nums.length; i++) {
     let sum = 0;
     for (let j = i; j < nums.length; j++) {
@@ -11,5 +12,6 @@ var maxSubArray = function (nums) {
       maxSum = Math.max(maxSum, sum);
     }
   }
+
   return maxSum;
 };
