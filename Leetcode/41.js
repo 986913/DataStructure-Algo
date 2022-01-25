@@ -2,6 +2,19 @@
  * @param {number[]} nums
  * @return {number}
  */
+
+var firstMissingPositive = function (nums) {
+  const mySet = new Set(nums);
+
+  let min = 1;
+
+  while (mySet.has(min)) {
+    min++;
+  }
+
+  return min;
+};
+
 var firstMissingPositive = function (nums) {
   let missing = 0;
 
