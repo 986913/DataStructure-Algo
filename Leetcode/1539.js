@@ -10,6 +10,7 @@ var findKthPositive = function (arr, k) {
   let point = 0;
   let missingNumbersArr = [];
 
+  //scan over input arr, then updating missingNumbersArr
   while (point < arr.length) {
     if (target !== arr[point]) {
       missingNumbersArr.push(target);
@@ -20,6 +21,7 @@ var findKthPositive = function (arr, k) {
     }
   }
 
+  //如果K超出了missingNumbersArr长度， 那么把缺失的整数用一个while循环模拟完
   if (k > missingNumbersArr.length) {
     let lastNo = Math.max(
       arr[arr.length - 1],
