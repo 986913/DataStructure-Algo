@@ -38,3 +38,14 @@ var findKthPositive = function (arr, k) {
     return missingNumbersArr[k - 1];
   }
 };
+
+//迭代
+var findKthPositive = function (arr, k) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] - i - 1 >= k) {
+      return k + i;
+    }
+  }
+
+  return k + arr.length;
+};
