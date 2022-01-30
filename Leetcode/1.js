@@ -17,5 +17,14 @@ var twoSum = function (nums, target) {
   return result;
 };
 
+// solution2: hash map
+var twoSum = function (nums, target) {
+  let seen = new Map();
 
-// solution2: 
+  for (let i = 0; i < nums.length; i++) {
+    let diff = target - nums[i];
+
+    if (seen.has(diff)) return [i, seen.get(diff)];
+    seen.set(nums[i], i);
+  }
+};
