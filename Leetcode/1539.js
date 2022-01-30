@@ -49,3 +49,20 @@ var findKthPositive = function (arr, k) {
 
   return k + arr.length;
 };
+
+//二分法
+var findKthPositive = function (arr, k) {
+  let start = 0;
+  let end = arr.length - 1;
+
+  while (start <= end) {
+    let mid = Math.ceil((start + end) / 2);
+    if (arr[mid] - mid - 1 >= k) {
+      end = mid - 1;
+    } else {
+      start = mid + 1;
+    }
+  }
+
+  return k + start;
+};
