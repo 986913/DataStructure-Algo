@@ -1,4 +1,13 @@
 var missingElement = function (nums, k) {
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] - i - nums[0] >= k) {
+      return k + i + nums[0] - 1;
+    }
+  }
+  return k + nums.length + nums[0] - 1;
+};
+
+var missingElement = function (nums, k) {
   let target = nums[0];
   let point = 0;
   let missingarr = [];
