@@ -2,6 +2,13 @@
  * @param {number} k
  * @param {number[]} nums
  */
+
+/**
+ * Your KthLargest object will be instantiated and called as such:
+ * var obj = new KthLargest(k, nums)
+ * var param_1 = obj.add(val)
+ */
+
 var KthLargest = function (k, nums) {
   this.array = nums;
   this.k = k;
@@ -15,106 +22,132 @@ KthLargest.prototype.add = function (val) {
   this.array.push(val);
 
   //return kth max elemenet --> maintain a k size minHeap
-  let minheap = new MinHeap();
-
-  for (let i = 0; i < this.array.length; i++) {
-    minheap.insert(this.array[i]);
-    if (minheap.size() > this.k) {
-      minheap.pop();
-    }
-  }
-
+  let minheap = new MinHeap(this.k);
+  minheap.build(this.array);
   return minheap.peek();
 };
 
-class MinHeap {
-  constructor() {
-    this.values = [];
-  }
-  insert(val) {
-    this.values.push(val);
-    this.bubbleUp();
-  }
-  peek() {
-    return this.values[0];
+class Heap {
+  constructor(size, type) {
+    this.data = new Array(size); // SC: O(k)
+    this.type = type;
   }
   size() {
-    return this.values.length;
+    return this.data.length;
   }
-  //remove min root
-  pop() {
-    //replace the min(root) with last item
-
-    let root = this.values[0];
-    let last = this.values.pop();
-
-    if (this.values.length > 0) {
-      this.values[0] = last;
-      this.bubbleDown();
+  build(arr) {
+    // O(nlogk)
+    let i = 0;
+    for (i = 0; i < this.size(); ++i) {
+      this.data[i] = arr[i]; // O(k)
     }
+    for (let j = Math.floor((this.size() - 2) / 2); j >= 0; --j) {
+      // O(klogk)
+      this._heapify(j);
+    }
+    while (i < arr.length) {
+      // O((n - k) * logk)
+      // if heap top is less than next entry, replace the heap top
+      if (this.compare(this.data[0], arr[i])) {
+        this.data[0] = arr[i];
+        this._heapify(0);
+      }
+      ++i;
+    }
+  }
+  _heapify(idx) {
+    // O(logk)
+    const leftIndex = 2 * idx + 1;
+    const rightIndex = 2 * idx + 2;
+    let p = idx;
 
+    if (
+      leftIndex < this.size() &&
+      this.compare(this.data[leftIndex], this.data[p])
+    ) {
+      p = leftIndex;
+    }
+    if (
+      rightIndex < this.size() &&
+      this.compare(this.data[rightIndex], this.data[p])
+    ) {
+      p = rightIndex;
+    }
+    if (p !== idx) {
+      // swap
+      [this.data[p], this.data[idx]] = [this.data[idx], this.data[p]];
+      this._heapify(p);
+    }
+  }
+  compare(a, b) {
+    // O(1)
+    switch (this.type) {
+      case 'MIN': // MinHeap
+        if (typeof a !== 'object' && typeof b !== 'object') {
+          // a,b are number, string etc..
+          return a < b;
+        } else {
+          // a and b structor is {key: '' , priority: 1}
+          // if freq of a < freq of b OR if freq is same but a is lexicographically greater than b then a should be the parent node
+          return (
+            a.priority < b.priority ||
+            (a.priority === b.priority && a.key > b.key)
+          );
+        }
+      case 'MAX': //MaxHeap
+        if (typeof a !== 'object' && typeof b !== 'object') {
+          return a > b;
+        } else {
+          return (
+            // if freq of a > freq of b OR if freq is same but a is lexicographically smaller than b then a should be the parent node
+            a.priority > b.priority ||
+            (a.priority === b.priority && a.key < b.key)
+          );
+        }
+      default:
+        return '';
+    }
+  }
+  get() {
+    // until the heap is empty, create the resultant array by removing elements from the top
+    const result = [];
+    while (this.size()) {
+      const top = this.data[0];
+      [this.data[0], this.data[this.size() - 1]] = [
+        this.data[this.size() - 1],
+        this.data[0],
+      ];
+      this.data.pop();
+      this._heapify(0);
+      result.push(top);
+    }
+    return result;
+  }
+  insert(item) {
+    this.data.push(item);
+    this.build(this.data);
+  }
+  removeRoot() {
+    let root = this.data[0];
+    let last = this.data.pop();
+
+    if (this.data.length > 0) {
+      this.data[0] = last;
+      this.build(this.data);
+    }
     return root;
   }
-  bubbleUp() {
-    let index = this.values.length - 1;
-    let parentVal;
-
-    while (index > 0) {
-      let currVal = this.values[index];
-      let parentIndex = Math.floor((index - 1) / 2);
-      let parentVal = this.values[parentIndex];
-
-      if (currVal < parentVal) {
-        //swap parent and current
-        this.values[parentIndex] = currVal;
-        this.values[index] = parentVal;
-      }
-      index = parentIndex;
-    }
-  }
-  bubbleDown() {
-    let index = 0;
-    let curr = this.values[0];
-    let length = this.values.length;
-
-    while (true) {
-      let leftchildIndex = index * 2 + 1;
-      let rightChildIndex = index * 2 + 2;
-      let leftChildValue, rightChildValue;
-
-      let swap = null; // for tracking swap index
-
-      if (leftchildIndex < length) {
-        leftChildValue = this.values[leftchildIndex];
-
-        if (curr > leftChildValue) {
-          swap = leftchildIndex;
-        }
-      }
-
-      if (rightChildIndex < length) {
-        rightChildValue = this.values[rightChildIndex];
-
-        if (
-          (curr > rightChildValue && swap === null) ||
-          (leftChildValue > rightChildValue && swap !== null)
-        ) {
-          swap = rightChildIndex;
-        }
-      }
-
-      if (swap === null) break;
-
-      this.values[index] = this.values[swap];
-      this.values[swap] = curr;
-
-      index = swap;
-    }
+  peek() {
+    return this.data[0];
   }
 }
-
-/**
- * Your KthLargest object will be instantiated and called as such:
- * var obj = new KthLargest(k, nums)
- * var param_1 = obj.add(val)
- */
+class MinHeap extends Heap {
+  constructor(size) {
+    super(size, 'MIN');
+  }
+}
+class MaxHeap extends Heap {
+  constructor(size) {
+    super(size, 'MAX');
+  }
+}
