@@ -1,153 +1,135 @@
-/**
- * @param {number[]} nums
- * @param {number} k
- * @return {number}
- */
-
-// solution1:  use js build in .sort function
-var findKthLargest = function (nums, k) {
-  let sorted = nums.sort((a, b) => a - b);
-  return sorted[sorted.length - k];
-};
-
-//solution2：  MIN HEAP
 /*** @param {number[]} nums
  * @param {number} k
  * @return {number}
  */
 
 const findKthLargest = function (nums, k) {
-  let minHeap = new MinBinaryHeap();
-  for (let i = 0; i < nums.length; i++) {
-    minHeap.insert(nums[i]);
-    if (minHeap.size() > k) {
-      minHeap.removeMin();
-    }
-  }
-
+  let minHeap = new MinHeap(k);
+  minHeap.build(nums);
   return minHeap.peek();
 };
-class MinBinaryHeap {
-  constructor() {
-    this.values = []; //注意是数组
-  }
-  insert(val) {
-    // 1. add to the end of array
-    this.values.push(val);
-    // 2. compare the new added value with partent value, if(newvalue < parentvalue),then bubule the value up to the correct spot(switch current with parent)
-    this.bubleUp();
-  }
-  bubleUp() {
-    let index = this.values.length - 1;
-    let ele = this.values[index];
 
-    while (index > 0) {
-      let parentIndex = Math.floor((index - 1) / 2);
-      let parentEle = this.values[parentIndex];
-
-      if (ele < parentEle) {
-        //swap parent and new value
-        this.values[parentIndex] = ele;
-        this.values[index] = parentEle;
-      }
-      index = parentIndex;
-    }
-  }
-  peek() {
-    return this.values[0];
-  }
-  removeMin() {
-    //1. get root(min) element  and last element, and replace root with last element
-    const min = this.values[0];
-    const end = this.values.pop();
-
-    if (this.values.length > 0) {
-      this.values[0] = end; //and replace root with last element
-      // 2. bubleDown
-      this.bubleDown();
-    }
-    return min;
-  }
-
-  bubleDown() {
-    let index = 0;
-    const length = this.values.length;
-    const aim = this.values[0];
-
-    while (true) {
-      let leftChildIndex = index * 2 + 1;
-      let rightChildIndex = index * 2 + 2;
-      let leftChild, rightChild;
-
-      let swap = null; // for tracking swap index
-
-      if (leftChildIndex < length) {
-        leftChild = this.values[leftChildIndex];
-        if (aim > leftChild) {
-          swap = leftChildIndex;
-        }
-      }
-      if (rightChildIndex < length) {
-        rightChild = this.values[rightChildIndex];
-        if (
-          (aim > rightChild && swap === null) ||
-          (leftChild > rightChild && swap !== null)
-        ) {
-          swap = rightChildIndex;
-        }
-      }
-      if (swap === null) break; // means there is no children smaller than aim element
-
-      //swap the postion here
-      this.values[index] = this.values[swap];
-      this.values[swap] = aim;
-
-      index = swap;
-    }
+class Heap {
+  constructor(size, type) {
+    this.data = new Array(size); // SC: O(k)
+    this.type = type;
   }
   size() {
-    return this.values.length;
+    return this.data.length;
+  }
+  build(arr) {
+    // O(nlogk)
+    let i = 0;
+    for (i = 0; i < this.size(); ++i) {
+      this.data[i] = arr[i]; // O(k)
+    }
+    for (let j = Math.floor((this.size() - 2) / 2); j >= 0; --j) {
+      // O(klogk)
+      this._heapify(j);
+    }
+    while (i < arr.length) {
+      // O((n - k) * logk)
+      // if heap top is less than next entry, replace the heap top
+      if (this.compare(this.data[0], arr[i])) {
+        this.data[0] = arr[i];
+        this._heapify(0);
+      }
+      ++i;
+    }
+  }
+  _heapify(idx) {
+    // O(logk)
+    const leftIndex = 2 * idx + 1;
+    const rightIndex = 2 * idx + 2;
+    let p = idx;
+
+    if (
+      leftIndex < this.size() &&
+      this.compare(this.data[leftIndex], this.data[p])
+    ) {
+      p = leftIndex;
+    }
+    if (
+      rightIndex < this.size() &&
+      this.compare(this.data[rightIndex], this.data[p])
+    ) {
+      p = rightIndex;
+    }
+    if (p !== idx) {
+      // swap
+      [this.data[p], this.data[idx]] = [this.data[idx], this.data[p]];
+      this._heapify(p);
+    }
+  }
+  compare(a, b) {
+    // O(1)
+    switch (this.type) {
+      case 'MIN': // MinHeap
+        if (typeof a !== 'object' && typeof b !== 'object') {
+          // a,b are number, string etc..
+          return a < b;
+        } else {
+          // a and b structor is {key: '' , priority: 1}
+          // if freq of a < freq of b OR if freq is same but a is lexicographically greater than b then a should be the parent node
+          return (
+            a.priority < b.priority ||
+            (a.priority === b.priority && a.key > b.key)
+          );
+        }
+      case 'MAX': //MaxHeap
+        if (typeof a !== 'object' && typeof b !== 'object') {
+          return a > b;
+        } else {
+          return (
+            // if freq of a > freq of b OR if freq is same but a is lexicographically smaller than b then a should be the parent node
+            a.priority > b.priority ||
+            (a.priority === b.priority && a.key < b.key)
+          );
+        }
+      default:
+        return '';
+    }
+  }
+  get() {
+    // until the heap is empty, create the resultant array by removing elements from the top
+    const result = [];
+    while (this.size()) {
+      const top = this.data[0];
+      [this.data[0], this.data[this.size() - 1]] = [
+        this.data[this.size() - 1],
+        this.data[0],
+      ];
+      this.data.pop();
+      this._heapify(0);
+      result.push(top);
+    }
+    return result;
+  }
+  insert(item) {
+    this.data.push(item);
+    this.build(this.data);
+  }
+  removeRoot() {
+    let root = this.data[0];
+    let last = this.data.pop();
+
+    if (this.data.length > 0) {
+      this.data[0] = last;
+      this.build(this.data);
+    }
+    return root;
+  }
+  peek() {
+    return this.data[0];
   }
 }
-
-/*
-solution3: quick select:
-
-  Quick Select 类似快排，选取pivot，把小于pivot的元素都移到pivot之前，这样pivot所在位置就是第pivot index 小的元素。 
-  但是不需要完全给数组排序，只要找到当前pivot的位置是否是在第(n-k)小的位置，如果是，找到第k大的数直接返回。
-
-  这个方法的理论依据是 partition 得到的点的下标就是最终排序之后的下标，根据这个下 标，我们可以判断第 K 大的数在哪里
- */
-const findKthLargest = function (nums, k) {
-  k = nums.length - k;
-  return quickselect(0, nums.length - 1);
-
-  function quickselect(left, right) {
-    if (left === right) return nums[left];
-    let randomIdx = left + Math.floor(Math.random() * (right - left));
-    let pivotIdx = partition(left, right, randomIdx);
-    if (k < pivotIdx) return quickselect(left, pivotIdx);
-    else if (k > pivotIdx) return quickselect(pivotIdx + 1, right);
-    return nums[k];
+class MinHeap extends Heap {
+  constructor(size) {
+    super(size, 'MIN');
   }
-
-  function partition(left, right, randomIdx) {
-    const pivot = nums[randomIdx];
-    swap(randomIdx, right);
-    let pointer = left;
-    for (let idx = left; idx <= right; idx++) {
-      if (nums[idx] < pivot) {
-        swap(pointer, idx);
-        pointer++;
-      }
-    }
-    swap(pointer, right);
-    return pointer;
+}
+class MaxHeap extends Heap {
+  constructor(size) {
+    super(size, 'MAX');
   }
-
-  function swap(idx1, idx2) {
-    let temp = nums[idx1];
-    nums[idx1] = nums[idx2];
-    nums[idx2] = temp;
-  }
-};
+}
