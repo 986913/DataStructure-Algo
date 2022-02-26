@@ -3,234 +3,152 @@
  * @param {number} k
  * @return {number[]}
  */
-
-// solution 1: hash -table
 var topKFrequent = function (nums, k) {
-  let map = new Map();
-  let result = [];
-
-  nums.forEach((item) => {
-    map.set(item, map.get(item) + 1 || 1);
-  });
-
-  let sortedMap = new Map([...map].sort((a, b) => b[1] - a[1]));
-
-  let times = 0;
-
-  sortedMap.forEach((value, key) => {
-    if (times < k) {
-      result.push(key);
-    }
-    times++;
-  });
-  return result;
-};
-
-//solution 2: Heap
-/**
- * @param {number[]} nums
- * @param {number} k
- * @return {number[]}
- */
-var topKFrequent = function (nums, k) {
-  /* hash map :  { 1 => 3, 2 => 2, 3 => 1 } */
+  /* 1. build hash map {key => frequency}:  { 1 => 3, 2 => 2, 3 => 1 } */
   let map = new Map();
   nums.forEach((n) => map.set(n, map.get(n) + 1 || 1));
 
-  let result = [];
+  //2. build minHeap (maintain k length)
+  let minheap = new MinHeap(k);
 
-  //build min-heap (k length)  [3] [2,3] [2,3]
-  let heap = new MinHeap();
+  let arr = [];
   map.forEach((value, key) => {
-    heap.insert(value);
-    if (heap.size() > k) {
-      heap.pop();
-    }
-    // console.log(heap.all());
-  });
-
-  // update result
-  let values = heap.all();
-  map.forEach((value, key) => {
-    values.forEach((val) => {
-      if (val === value && result.indexOf(key) === -1) {
-        result.push(key);
-      }
+    arr.push({
+      key: key,
+      priority: value,
     });
   });
+  minheap.build(arr);
 
-  return result;
+  //3. klenght min-heap is ready, log result
+  return minheap
+    .get()
+    .map((item) => item.key)
+    .reverse();
 };
 
-class MinHeap {
-  constructor() {
-    this.values = [];
-  }
-  all() {
-    return this.values;
-  }
-  peek() {
-    return this.values[0];
+class Heap {
+  constructor(size, type) {
+    this.data = new Array(size); // SC: O(k)
+    this.type = type;
   }
   size() {
-    return this.values.length;
+    return this.data.length;
   }
-  insert(val) {
-    this.values.push(val);
-    this.bubbleUp();
-  }
-  bubbleUp() {
-    let currIndex = this.values.length - 1;
-
-    while (currIndex > 0) {
-      let curr = this.values[currIndex];
-      let parentIndex = Math.floor((currIndex - 1) / 2);
-      let parent = this.values[parentIndex];
-
-      if (curr < parent) {
-        this.values[parentIndex] = curr;
-        this.values[currIndex] = parent;
+  build(arr) {
+    // O(nlogk)
+    let i = 0;
+    for (i = 0; i < this.size(); ++i) {
+      this.data[i] = arr[i]; // O(k)
+    }
+    for (let j = Math.floor((this.size() - 2) / 2); j >= 0; --j) {
+      // O(klogk)
+      this._heapify(j);
+    }
+    while (i < arr.length) {
+      // O((n - k) * logk)
+      // if heap top is less than next entry, replace the heap top
+      if (this.compare(this.data[0], arr[i])) {
+        this.data[0] = arr[i];
+        this._heapify(0);
       }
-      currIndex = parentIndex;
+      ++i;
     }
   }
-  pop() {
-    let root = this.values[0];
-    if (this.values.length > 0) {
-      let last = this.values.pop();
-      this.values[0] = last;
-      this.bubbleDown();
+  _heapify(idx) {
+    // O(logk)
+    const leftIndex = 2 * idx + 1;
+    const rightIndex = 2 * idx + 2;
+    let p = idx;
+
+    if (
+      leftIndex < this.size() &&
+      this.compare(this.data[leftIndex], this.data[p])
+    ) {
+      p = leftIndex;
+    }
+    if (
+      rightIndex < this.size() &&
+      this.compare(this.data[rightIndex], this.data[p])
+    ) {
+      p = rightIndex;
+    }
+    if (p !== idx) {
+      // swap
+      [this.data[p], this.data[idx]] = [this.data[idx], this.data[p]];
+      this._heapify(p);
+    }
+  }
+  compare(a, b) {
+    // O(1)
+    switch (this.type) {
+      case 'MIN': // MinHeap
+        if (typeof a !== 'object' && typeof b !== 'object') {
+          // a,b are number, string etc..
+          return a < b;
+        } else {
+          // a and b structor is {key: '' , priority: 1}
+          // if freq of a < freq of b OR if freq is same but a is lexicographically greater than b then a should be the parent node
+          return (
+            a.priority < b.priority ||
+            (a.priority === b.priority && a.key > b.key)
+          );
+        }
+      case 'MAX': //MaxHeap
+        if (typeof a !== 'object' && typeof b !== 'object') {
+          return a > b;
+        } else {
+          return (
+            // if freq of a > freq of b OR if freq is same but a is lexicographically smaller than b then a should be the parent node
+            a.priority > b.priority ||
+            (a.priority === b.priority && a.key < b.key)
+          );
+        }
+      default:
+        return '';
+    }
+  }
+  get() {
+    // until the heap is empty, create the resultant array by removing elements from the top
+    const result = [];
+    while (this.size()) {
+      const top = this.data[0];
+      [this.data[0], this.data[this.size() - 1]] = [
+        this.data[this.size() - 1],
+        this.data[0],
+      ];
+      this.data.pop();
+      this._heapify(0);
+      result.push(top);
+    }
+    return result;
+  }
+  insert(item) {
+    this.data.push(item);
+    this.build(this.data);
+  }
+  removeRoot() {
+    let root = this.data[0];
+    let last = this.data.pop();
+
+    if (this.data.length > 0) {
+      this.data[0] = last;
+      this.build(this.data);
     }
     return root;
   }
-  bubbleDown() {
-    let currIndex = 0;
-    let aim = this.values[0];
-    let len = this.values.length;
-
-    while (true) {
-      let swap = null; // for tracking swap index
-      let leftChildIndex = currIndex * 2 + 1;
-      let rightChildIndex = currIndex * 2 + 2;
-      let leftChild = this.values[leftChildIndex];
-      let rightChild = this.values[rightChildIndex];
-
-      if (leftChildIndex < len) {
-        if (aim > leftChild) swap = leftChildIndex;
-      }
-
-      if (rightChildIndex < len) {
-        if (
-          (aim > rightChild && swap === null) ||
-          (rightChild < leftChild && swap !== null)
-        ) {
-          swap = rightChildIndex;
-        }
-      }
-
-      if (swap === null) break;
-
-      this.values[currIndex] = this.values[swap];
-      this.values[swap] = aim;
-
-      currIndex = swap;
-    }
+  peek() {
+    return this.data[0];
   }
 }
 
-// solution 2.5  still using min-heap, but each item in heap, is array instead of single value
-/**
- * @param {number[]} nums
- * @param {number} k
- * @return {number[]}
- */
-var topKFrequent = function (nums, k) {
-  /* 1. build hash map : { 1 => 3, 2 => 2, 3 => 1 }*/
-  let map = new Map();
-  nums.forEach((n) => map.set(n, map.get(n) + 1 || 1));
-
-  //2. build max-heap (k length)  [ [3,1]]    [[3,1],[2,2]]   [[3,1],[2,2]]
-  let heap = new MinHeap();
-  map.forEach((value, key) => {
-    heap.insert([value, key]);
-    if (heap.size() > k) heap.pop();
-  });
-
-  return heap.showValues().map((value) => value[1]);
-};
-
-class MinHeap {
-  constructor() {
-    this.values = [];
+class MinHeap extends Heap {
+  constructor(size) {
+    super(size, 'MIN');
   }
-  showValues() {
-    return this.values;
-  }
-  peek() {
-    return this.values[0];
-  }
-  size() {
-    return this.values.length;
-  }
-  insert(pair) {
-    this.values.push(pair);
-    this.bubbleUp();
-  }
-  bubbleUp() {
-    let currIndex = this.values.length - 1;
-
-    while (currIndex > 0) {
-      let curr = this.values[currIndex];
-      let parentIndex = Math.floor((currIndex - 1) / 2);
-      let parent = this.values[parentIndex];
-
-      if (curr[0] < parent[0]) {
-        this.values[parentIndex] = curr;
-        this.values[currIndex] = parent;
-      }
-      currIndex = parentIndex;
-    }
-  }
-  pop() {
-    let root = this.values[0];
-    if (this.values.length > 0) {
-      let last = this.values.pop();
-      this.values[0] = last;
-      this.bubbleDown();
-    }
-    return root;
-  }
-  bubbleDown() {
-    let currIndex = 0;
-    let aim = this.values[0];
-    let len = this.values.length;
-
-    while (true) {
-      let swap = null; // for tracking swap index
-      let leftChildIndex = currIndex * 2 + 1;
-      let rightChildIndex = currIndex * 2 + 2;
-      let leftChild = this.values[leftChildIndex];
-      let rightChild = this.values[rightChildIndex];
-
-      if (leftChildIndex < len) {
-        if (aim[0] > leftChild[0]) swap = leftChildIndex;
-      }
-
-      if (rightChildIndex < len) {
-        if (
-          (aim[0] > rightChild[0] && swap === null) ||
-          (rightChild[0] < leftChild[0] && swap !== null)
-        ) {
-          swap = rightChildIndex;
-        }
-      }
-
-      if (swap === null) break;
-
-      this.values[currIndex] = this.values[swap];
-      this.values[swap] = aim;
-
-      currIndex = swap;
-    }
+}
+class MaxHeap extends Heap {
+  constructor(size) {
+    super(size, 'MAX');
   }
 }
