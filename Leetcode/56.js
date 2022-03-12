@@ -13,13 +13,11 @@ var merge = function (intervals) {
     } else {
       let last = result[result.length - 1];
 
-      if (item[0] > last[1]) {
-        result.push(item);
-      }
-
       if (item[0] <= last[1]) {
         last[0] = Math.min(last[0], item[0]);
         last[1] = Math.max(last[1], item[1]);
+      } else {
+        result.push(item);
       }
     }
   });
