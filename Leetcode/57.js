@@ -3,6 +3,8 @@
  * @param {number[]} newInterval
  * @return {number[][]}
  */
+
+/*  Solution 1---------------------------------------------- */
 const insert = function (intervals, newInterval) {
   let arrays = [...intervals, newInterval];
   return merge(arrays);
@@ -29,4 +31,36 @@ const merge = function (intervals) {
   });
 
   return result;
+};
+
+/* Solution 2 ------------------------------------------------ */
+
+const insert = function (intervals, newInterval) {
+  if (intervals.length == 0) return [newInterval];
+
+  let left = [],
+    right = [],
+    merged = [];
+
+  let min, max;
+
+  intervals.forEach((item) => {
+    if (newInterval[0] > item[1]) {
+      left.push(item);
+    } else if (newInterval[1] < item[0]) {
+      right.push(item);
+    } else {
+      if (min == undefined) min = Math.min(newInterval[0], item[0]);
+      else min = Math.min(min, item[0]);
+      max = Math.max(newInterval[1], item[1]);
+    }
+  });
+
+  if (min !== undefined && max !== undefined) merged = [min, max];
+  else right.push(newInterval);
+
+  const result =
+    merged.length === 0 ? [...left, ...right] : [...left, merged, ...right];
+
+  return result.sort((a, b) => a[0] - b[0]);
 };
