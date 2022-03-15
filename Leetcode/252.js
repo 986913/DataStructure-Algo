@@ -11,15 +11,28 @@ Input: [[7,10],[2,4]]
 Output: true
 */
 
-const canAttendAll = (arr) => {
-  arr.sort((a,b)=>a[0]-b[0]);
+var canAttendMeetings = function (intervals) {
+  intervals.sort((a, b) => a[0] - b[0]);
 
-  for(let i=0; i<arr.length-1; i++){
-    if(arr[i][1]>arr[i+1][1])
-      return false
+  for (let i = 1; i < intervals.length; i++) {
+    if (intervals[i][0] < intervals[i - 1][1]) {
+      return false;
+    }
   }
-  return true
-}
 
-console.log(canAttendAll([[0,30],[5,10],[15,20]])) // false
-console.log(canAttendAll([[7,10],[2,4]]))    // true
+  return true;
+};
+
+console.log(
+  canAttendAll([
+    [0, 30],
+    [5, 10],
+    [15, 20],
+  ])
+); // false
+console.log(
+  canAttendAll([
+    [7, 10],
+    [2, 4],
+  ])
+); // true
