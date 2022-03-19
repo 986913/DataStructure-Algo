@@ -3,6 +3,10 @@
  * @param {number} k
  * @return {number}
  */
+
+/**
+  force brute --------------------------------------------------------------------------------------
+ */
 var findMaxAverage = function (nums, k) {
   let max = -Infinity;
 
@@ -14,7 +18,6 @@ var findMaxAverage = function (nums, k) {
 
   return max;
 };
-
 var findMaxAverage = function (nums, k) {
   let max = -Infinity;
 
@@ -24,6 +27,28 @@ var findMaxAverage = function (nums, k) {
       sum += nums[j];
     }
     max = Math.max(max, sum / k);
+  }
+
+  return max;
+};
+
+/**
+  Sliding window --------------------------------------------------------------------------------------
+ */
+var findMaxAverage = function (nums, k) {
+  let max = -Infinity;
+
+  let windowSum = 0,
+    windowStartIdx = 0;
+
+  for (let windowEndIdx = 0; windowEndIdx < nums.length; windowEndIdx++) {
+    windowSum += nums[windowEndIdx]; // add the next element
+    // slide the window, we don't need to slide if we've not hit the required window size of 'k'
+    if (windowEndIdx >= k - 1) {
+      max = Math.max(max, windowSum / k);
+      windowSum -= nums[windowStartIdx]; // subtract the element going out
+      windowStartIdx += 1; // slide the window ahead
+    }
   }
 
   return max;
