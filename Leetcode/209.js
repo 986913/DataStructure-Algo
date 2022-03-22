@@ -37,26 +37,18 @@ const minSubArrayLen = (arr, n) => {
 };
 
 // 双指针/sliding window 解法:
-const minSubArrayLenV2 = (arr, n) => {
-  let total = 0;
-  let start = 0;
-  let end = 0;
+var minSubArrayLen = function (n, arr) {
+  let windowSum = 0;
+  let windowStartIdx = 0;
   let minLen = Infinity;
 
-  while (start < arr.length) {
-    // if current window doesn't add up to the given number, then move the window to right
-    if (total < n && end < arr.length) {
-      total += arr[end];
-      end++;
-    }
-    // if current window adds up at least the sunm given then shrink the window
-    else if (total >= n) {
-      minLen = Math.min(minLen, end - start);
-      total -= arr[start];
-      start++;
-    } else {
-      // current total less than required total but we reach the end, need this or else we'll be in an infinite loop
-      break;
+  for (let windowEndIdx = 0; windowEndIdx < arr.length; windowEndIdx++) {
+    windowSum += arr[windowEndIdx];
+
+    while (windowSum >= n) {
+      minLen = Math.min(minLen, windowEndIdx - windowStartIdx + 1);
+      windowSum -= arr[windowStartIdx];
+      windowStartIdx += 1;
     }
   }
   return minLen === Infinity ? 0 : minLen;
