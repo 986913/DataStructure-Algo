@@ -2,6 +2,7 @@
  * @param {number[]} nums
  * @return {number}
  */
+/*2 pointers */
  var arrayPairSum = function(nums) {
   let sum = 0;
   let left = 0;
