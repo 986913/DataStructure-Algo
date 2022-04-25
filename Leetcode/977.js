@@ -20,12 +20,12 @@ var sortedSquares = function(arr) {
 
    if(leftSquare>rightSquare){
      squares[highestSquareIdx] = leftSquare;
-     left++
+     left++;
    }else{
      squares[highestSquareIdx] = rightSquare;
-     right--
+     right--;
    }
 
-   highestSquareIdx--
-
+   highestSquareIdx--;
  }
+}
