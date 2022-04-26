@@ -17,38 +17,38 @@ const threeSum = function (nums) {
   return setResult.map((item) => item.split(' '));
 };
 
-//转换为2sum
-v;
-/**
- * @param {number[]} nums
- * @return {number[][]}
- */
-var threeSum = function (nums) {
+/*---------------------------------- 转换为2sum --------------------------------------- */
+
+ var threeSum = function(nums) {
   let result = [];
-  nums.sort((a, b) => a - b);
+  nums.sort((a,b)=>a-b);  //1. sort array first.
 
-  if (nums.length < 3) return result;
+  if(nums.length<3) return result;
 
-  for (let i = 0; i < nums.length - 2; i++) {
-    if (i > 0 && nums[i] === nums[i - 1]) continue; //skip dupcated
-
-    let low = i + 1;
-    let high = nums.length - 1;
-
-    while (low < high) {
-      if (nums[i] + nums[low] + nums[high] === 0) {
-        result.push([nums[i], nums[low], nums[high]]);
-
-        while (low < high && nums[low] === nums[low + 1]) low++; //remove aLL dupcated
-        while (low < high && nums[high] === nums[high - 1]) high--; //remove aLL dupcated
-        low++;
-        high--;
-      } else if (nums[i] + nums[low] + nums[high] < 0) {
-        low++;
-      } else {
-        high--;
-      }
-    }
+  for(let i=0; i<nums.length-2; i++ ){ //2. lock one pointer
+    if(i>0 && nums[i]===nums[i-1]) continue; //skip dupcated
+    twoSum(i, 0, nums, result);   //2. then do 2sum for other 2 pointer
   }
   return result;
 };
+
+const twoSum = (first, target, nums, tripeArr) => {
+  let low = first+1;
+  let high = nums.length-1;
+  
+  while(low<high){
+    let sum = nums[first]+nums[low]+nums[high];
+          
+    if(sum===target){
+      tripeArr.push([nums[first],nums[low],nums[high]]);
+      while(low<high && nums[low]===nums[low+1]) low++;   //remove aLL dupcated
+      while(low<high && nums[high]===nums[high-1]) high--; //remove aLL dupcated
+      low++;
+      high--;
+    }else if(sum<target){
+      low++;
+    }else{
+      high--;
+    }
+  }
+}
