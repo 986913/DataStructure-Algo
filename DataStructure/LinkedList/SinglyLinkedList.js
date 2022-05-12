@@ -156,6 +156,7 @@ class SinglyLinkedList {
     https://www.youtube.com/watch?v=O0By4Zq0OFc&ab_channel=BackToBackSWE
   */
   reverse() {
+    // initial prev, current, next
     let prev = null;
     let current = this.head;
     let next = null;
@@ -164,9 +165,9 @@ class SinglyLinkedList {
     this.tail = current;
 
     while (current) {
-      next = current.next;
-      current.next = prev;
-      prev = current;
+      next = current.next;  // save next
+      current.next = prev;  // reverse here
+      prev = current;       // update prev and current
       current = next;
     }
 
