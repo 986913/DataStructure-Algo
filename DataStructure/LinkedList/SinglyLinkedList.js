@@ -1,45 +1,39 @@
 class Node {
-  constructor(value) {
-    this.value = value; // value
-    this.next = null; // pointer
+  constructor(val) {
+    this.value = val; //value
+    this.next = null; //pointer
   }
 }
 
 class SinglyLinkedList {
   constructor() {
-    this.length = 0;
     this.head = null;
     this.tail = null;
+    this.length = 0;
   }
 
+  // insert a new node to the end
   push(val) {
-    let newNode = new Node(val);
+    const node = new Node(val);
     if (!this.head) {
-      this.head = newNode;
-      this.tail = this.head;
+      this.head = node;
+      this.tail = node;
     } else {
-      this.tail.next = newNode;
-      this.tail = newNode;
+      this.tail.next = node;
+      this.tail = node;
     }
     this.length++;
   }
 
-  // traverse() {
-  //   let current = this.head;
-  //   while (current) {
-  //     console.log(current.value);
-  //     current = current.next;
-  //   }
-  // }
-
+  // remove the last node (tail)
   pop() {
     if (!this.head) return undefined;
 
-    let current = this.head;
-    let newTail = current; // notice here
-    while (current.next) {
-      newTail = current;
-      current = current.next;
+    let curr = this.head;
+    let newTail = curr;
+    while (curr.next) {
+      newTail = curr;
+      curr = curr.next;
     }
     this.tail = newTail;
     this.tail.next = null;
@@ -49,52 +43,65 @@ class SinglyLinkedList {
       this.head = null;
       this.tail = null;
     }
-    return current;
+
+    return curr; // return the old tail which has removed
   }
 
+  // insert a new node to the start
+  unshift(val) {
+    let node = new Node(val);
+
+    if (!this.head) {
+      this.head = node;
+      this.tail = node;
+    } else {
+      node.next = this.head;
+      this.head = node;
+    }
+
+    this.length++;
+  }
+
+  // remove the start node(head)
   shift() {
     if (!this.head) return undefined;
-    let currentHead = this.head;
-    this.head = currentHead.next;
+
+    let oldHead = this.head;
+    this.head = oldHead.next;
     this.length--;
+
     if (this.length === 0) {
       this.tail = null;
       this.head = null;
     }
-    return currentHead;
+    return oldHead;
   }
 
-  unshift(val) {
-    let newNode = new Node(val);
-    if (!this.head) {
-      this.head = newNode;
-      this.tail = this.head;
-    } else {
-      newNode.next = this.head;
-      this.head = newNode;
-    }
-    this.length++;
-  }
-
+  // get a node based on index(index based 0)
   get(index) {
-    // index is 0 based
-    if (index < 0 || index > this.length) return null;
+    if (index < 0 || index >= this.length) return undefined;
+
     let count = 0;
-    let current = this.head;
-    while (index !== count) {
-      current = current.next;
+    let curr = this.head;
+
+    while (count !== index) {
+      curr = curr.next;
       count++;
     }
-    return current;
+
+    return curr;
   }
-  set(index, val) {
+
+  // set a node based on index
+  set(index, newVal) {
     let foundNode = this.get(index);
     if (foundNode) {
-      foundNode.value = val;
+      foundNode.value = newVal;
       return true;
     } else return false;
   }
 
+  // insert a new node based on index (index is 0 based)
   insert(index, val) {
     // index is 0 based
     if (index < 0 || index > this.length) return false;
@@ -103,16 +110,16 @@ class SinglyLinkedList {
     else if (index === this.length) return this.push(val);
     else {
       let newNode = new Node(val);
-      let accessNode = this.get(index - 1);
-      let prevNextNode = accessNode.next;
-      accessNode.next = newNode;
+      let prevNode = this.get(index - 1);
+      let prevNextNode = prevNode.next;
+      prevNode.next = newNode;
       newNode.next = prevNextNode;
     }
-
     this.length++;
     return true;
   }
 
+  // remove a node based on index
   remove(index) {
     if (index < 0 || index >= this.length) return undefined;
     if (index === this.length - 1) return this.pop();
@@ -125,6 +132,15 @@ class SinglyLinkedList {
     return removedNode;
   }
 
+  // traverse() {
+  //   let current = this.head;
+  //   while (current) {
+  //     console.log(current.value);
+  //     current = current.next;
+  //   }
+  // }
+
+  // print all node (head --> trail)
   print() {
     let arr = [];
     let current = this.head;
@@ -136,10 +152,10 @@ class SinglyLinkedList {
     console.log(arr);
   }
 
+  /* reverse linked list: 
+    https://www.youtube.com/watch?v=O0By4Zq0OFc&ab_channel=BackToBackSWE
+  */
   reverse() {
-    // 原理：
-    //https://www.youtube.com/watch?v=O0By4Zq0OFc&ab_channel=BackToBackSWE
-
     let prev = null;
     let current = this.head;
     let next = null;
@@ -158,9 +174,8 @@ class SinglyLinkedList {
   }
 }
 
-let list = new SinglyLinkedList();
-list.push("ming");
-list.push("yue");
-list.push("liu");
-list.push("jessica");
-console.log(list);
+const test = new SinglyLinkedList();
+test.push("ming");
+test.push("yue");
+test.push("liuu");
+console.log(test.reverse());
