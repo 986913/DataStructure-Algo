@@ -37,7 +37,7 @@ var getIntersectionNode = function (headA, headB) {
 };
 
 // https://www.youtube.com/watch?v=DpjpPo5SpgY&t=297s&ab_channel=%E8%80%81%E6%AF%95JS
-
+/*方法2： 分段双指针！！！ */
 var getIntersectionNode = function (headA, headB) {
   let n1 = headA;
   let n2 = headB;
