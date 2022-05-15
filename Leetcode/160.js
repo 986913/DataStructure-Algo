@@ -42,10 +42,10 @@ var getIntersectionNode = function (headA, headB) {
   let n1 = headA;
   let n2 = headB;
   while (n1 !== n2) {
-    if (!n1) n1 = headB;
+    if (!n1) n1 = headB; //当n1走完headA链表后，把n1指到headB链表上
     else n1 = n1.next;
 
-    if (!n2) n2 = headA;
+    if (!n2) n2 = headA; //当n2走完headB链表后，把n2指到headA链表上
     else n2 = n2.next;
   }
   return n1;
