@@ -24,6 +24,7 @@ var isPalindrome = function (head) {
 };
 
 //解法2： Slow & Fast pointer
+// https://leetcode.cn/problems/palindrome-linked-list/solution/tu-jie-kuai-man-zhi-zhen-pan-duan-hui-we-huhu/
 var isPalindrome = function (head) {
   let slow = head;
   let fast = head;
