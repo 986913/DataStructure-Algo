@@ -11,6 +11,10 @@
  * @return {ListNode}
  */
 
+/* 
+  解法1: Brute force:  不推荐🙅🏻‍♀️   
+  find len of linked list first, then find the len-n th node , then delete it.
+*/
 var removeNthFromEnd = function (head, n) {
   // find the length of linked list
   const len = findLenOfLinkedList(head);
@@ -52,4 +56,32 @@ const findThenDeleteNode = (index, head, len) => {
     prev.next = curr.next;
     return head;
   }
+};
+
+/* 解法2: Fast & Slow pointer      */
+var removeNthFromEnd = function (head, n) {
+  let fast = head;
+  let slow = head;
+
+  while (n > 0) {
+    // make the distance between fast and slow pointer is n.
+    fast = fast.next;
+    n--;
+  }
+
+  if (fast === null) {
+    // edge case
+    head = head.next;
+    return head;
+  }
+
+  while (fast.next) {
+    // then move fast and slow both, until fast pointer reach to the end.
+    fast = fast.next;
+    slow = slow.next;
+  }
+
+  slow.next = slow.next.next; // actually delete here
+
+  return head;
 };
