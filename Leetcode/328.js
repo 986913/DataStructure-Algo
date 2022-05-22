@@ -13,9 +13,9 @@
 var oddEvenList = function (head) {
   if (!head) return null;
 
-  let odd = head;
-  let even = head.next;
-  let evenHead = even;
+  let odd = head; // 相当于odd list
+  let even = head.next; //相当于even list
+  let evenHead = even; //even list的头儿
 
   while (even && even.next) {
     odd.next = even.next;
@@ -25,6 +25,6 @@ var oddEvenList = function (head) {
     even = even.next;
   }
 
-  odd.next = evenHead;
+  odd.next = even; //在这把odd list的尾和even list的头儿街上
   return head;
 };
