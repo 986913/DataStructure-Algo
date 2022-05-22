@@ -25,6 +25,6 @@ var oddEvenList = function (head) {
     even = even.next;
   }
 
-  odd.next = even; //在这把odd list的尾和even list的头儿街上
+  odd.next = evenHead; //在这把odd list的尾和even list的头儿街上
   return head;
 };
