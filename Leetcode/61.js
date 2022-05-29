@@ -20,36 +20,43 @@ const lenOfList = (head) => {
   return len;
 };
 
-const rotateRightByIndex = (index, head, length) => {
+const getListAfterIndex = (index, head) => {
   let count = 0;
-  let rest = head;
+  let curr = head;
   while (count !== index) {
     count++;
-    rest = rest.next;
+    curr = curr.next;
   }
+  return curr;
+};
 
-  let count2 = 0;
-  let curr2 = head;
-  while (count2 !== index) {
-    if (count2 === index - 1) {
-      curr2.next = null;
+const getListBeforeIndex = (index, head) => {
+  let count = 0;
+  let curr = head;
+  while (count !== index) {
+    if (count === index - 1) {
+      curr.next = null;
     }
-    count2++;
-    curr2 = curr2.next;
+    count++;
+    curr = curr.next;
   }
+  return head;
+};
 
-  // console.log(rest, head) // rest 是 Index之后的， head是INDEx之前的
-  let tmp = rest;
+const rotateRightByIndex = (index, head) => {
+  const listA = getListAfterIndex(index, head);
+  const listB = getListBeforeIndex(index, head);
+
+  let tmp = listA;
   let connacted = false;
   while (tmp && !connacted) {
     if (!tmp.next) {
-      tmp.next = head;
+      tmp.next = listB;
       connacted = true;
     }
     tmp = tmp.next;
   }
-
-  return rest;
+  return listA;
 };
 
 var rotateRight = function (head, k) {
@@ -58,10 +65,9 @@ var rotateRight = function (head, k) {
   const length = lenOfList(head);
   if (k % length == 0) return head;
 
-  if (k < length) {
-    return rotateRightByIndex(length - k, head, length);
-  } else {
+  if (k < length) return rotateRightByIndex(length - k, head);
+  else {
     let reminder = k % length;
-    return rotateRightByIndex(length - reminder, head, length);
+    return rotateRightByIndex(length - reminder, head);
   }
 };
