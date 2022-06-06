@@ -12,11 +12,14 @@
 
 // https://www.youtube.com/watch?v=-Dveb0lya0g&ab_channel=%E8%80%81%E6%AF%95JS
 
-var middleNode = function(head) {
-  slow = fast = head;
-  while (fast && fast.next) { // fast--> even ; fast.next--> odd
-      slow = slow.next;
-      fast = fast.next.next;
+var middleNode = function (head) {
+  let slow = head;
+  let fast = head;
+
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
   }
+
   return slow;
 };
