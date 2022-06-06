@@ -35,7 +35,7 @@ var reorderList = function (head) {
   //2.reverse the second part of the list: slow
   slow = reverse(slow);
 
-  //3. reset fast: 这时候fast就是LIST前半段了
+  //3. reset fast: 这时候fast就是list前半段了
   fast = head;
   // console.log(fast, slow)
 
