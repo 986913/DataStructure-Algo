@@ -4,25 +4,23 @@ var insert = function (head, insertVal) {
     newNode.next = newNode;
     return newNode;
   }
-
-  let node = head.next;
   let prev = head;
+  let curr = head.next;
 
   while (true) {
     if (
-      (insertVal <= node.val && prev.val < insertVal) ||
-      (insertVal <= node.val && prev.val > node.val) ||
-      (insertVal >= prev.val && prev.val > node.val) ||
-      node === head
+      curr === head ||
+      (insertVal <= curr.val && insertVal >= prev.val) ||
+      (insertVal <= curr.val && curr.val < prev.val) ||
+      (insertVal > prev.val && curr.val < prev.val)
     ) {
-      // 在这儿插入
-      newNode.next = node;
+      newNode.next = curr;
       prev.next = newNode;
       break;
     }
 
-    prev = node;
-    node = node.next;
+    prev = curr;
+    curr = curr.next;
   }
 
   return head;
