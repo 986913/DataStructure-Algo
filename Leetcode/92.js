@@ -12,6 +12,7 @@
  * @return {ListNode}
  */
 
+// https://www.bilibili.com/video/BV17a4y1Y78g?from=search&seid=2286935634385189056
 var reverseBetween = function (head, left, right) {
   /*reverse 套路四步走需要的3指针*/
   let prev = null;
