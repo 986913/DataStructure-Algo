@@ -10,14 +10,14 @@
  * @return {ListNode}
  */
 
- // https://www.youtube.com/watch?v=aBEm9ByKzBo&ab_channel=%E8%80%81%E6%AF%95JS
+// https://www.youtube.com/watch?v=aBEm9ByKzBo&ab_channel=%E8%80%81%E6%AF%95JS
 
- // 1.  迭代法 四步走
-var reverseList = function(head) {
+// 1.  迭代法 四步走
+var reverseList = function (head) {
   let current = head;
   let next = head;
   let prev = null;
-  while(current){
+  while (current) {
     next = current.next;
     current.next = prev;
     prev = current;
@@ -26,4 +26,16 @@ var reverseList = function(head) {
   return prev;
 };
 
-// 递归
+// 2. Recurrsion:
+var reverseList = function (head) {
+  if (!head || !head.next) return head;
+
+  const temp = head.next;
+  head.next = null;
+
+  const p = reverseList(temp);
+
+  temp.next = head;
+
+  return p;
+};
