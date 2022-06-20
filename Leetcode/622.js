@@ -1,32 +1,34 @@
 class MyCircularQueue {
   constructor(k) {
-    this.list = new Array(k);
-    this.head = 0;
-    this.tail = -1;
+    this.queue = new Array(k);
+    this.headIdx = 0;
+    this.tailIdx = -1;
     this.size = 0;
   }
 
   enQueue(val) {
     if (this.isFull()) return false;
-    this.tail = (this.tail + 1) % this.list.length;
-    this.list[this.tail] = val;
+
+    this.tailIdx = (this.tailIdx + 1) % this.queue.length;
+    this.queue[this.tailIdx] = val;
     this.size++;
     return true;
   }
 
   deQueue() {
     if (this.isEmpty()) return false;
-    this.head = (this.head + 1) % this.list.length;
+
+    this.headIdx = (this.headIdx + 1) % this.queue.length;
     this.size--;
     return true;
   }
 
   Front() {
-    return this.isEmpty() ? -1 : this.list[this.head];
+    return this.isEmpty() ? -1 : this.queue[this.headIdx];
   }
 
   Rear() {
-    return this.isEmpty() ? -1 : this.list[this.tail];
+    return this.isEmpty() ? -1 : this.queue[this.tailIdx];
   }
 
   isEmpty() {
@@ -34,6 +36,6 @@ class MyCircularQueue {
   }
 
   isFull() {
-    return this.size === this.list.length;
+    return this.size === this.queue.length;
   }
 }
