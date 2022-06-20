@@ -1,67 +1,39 @@
-/**
- * @param {number} k
- */
-var MyCircularQueue = function (k) {
-  this.queue = [];
-  this.size = k;
-};
+class MyCircularQueue {
+  constructor(k) {
+    this.list = new Array(k);
+    this.head = 0;
+    this.tail = -1;
+    this.size = 0;
+  }
 
-/**
- * @param {number} value
- * @return {boolean}
- */
-MyCircularQueue.prototype.enQueue = function (value) {
-  if (this.size === this.queue.length) return false;
-  this.queue.push(value);
-  return true;
-};
+  enQueue(val) {
+    if (this.isFull()) return false;
+    this.tail = (this.tail + 1) % this.list.length;
+    this.list[this.tail] = val;
+    this.size++;
+    return true;
+  }
 
-/**
- * @return {boolean}
- */
-MyCircularQueue.prototype.deQueue = function () {
-  if (this.queue.length === 0) return false;
-  this.queue.shift();
-  return true;
-};
+  deQueue() {
+    if (this.isEmpty()) return false;
+    this.head = (this.head + 1) % this.list.length;
+    this.size--;
+    return true;
+  }
 
-/**
- * @return {number}
- */
-MyCircularQueue.prototype.Front = function () {
-  if (this.queue.length === 0) return -1;
-  return this.queue[0];
-};
+  Front() {
+    return this.isEmpty() ? -1 : this.list[this.head];
+  }
 
-/**
- * @return {number}
- */
-MyCircularQueue.prototype.Rear = function () {
-  if (this.queue.length === 0) return -1;
-  return this.queue[this.queue.length - 1];
-};
+  Rear() {
+    return this.isEmpty() ? -1 : this.list[this.tail];
+  }
 
-/**
- * @return {boolean}
- */
-MyCircularQueue.prototype.isEmpty = function () {
-  return this.queue.length === 0;
-};
+  isEmpty() {
+    return this.size === 0;
+  }
 
-/**
- * @return {boolean}
- */
-MyCircularQueue.prototype.isFull = function () {
-  return this.queue.length === this.size;
-};
-
-/**
- * Your MyCircularQueue object will be instantiated and called as such:
- * var obj = new MyCircularQueue(k)
- * var param_1 = obj.enQueue(value)
- * var param_2 = obj.deQueue()
- * var param_3 = obj.Front()
- * var param_4 = obj.Rear()
- * var param_5 = obj.isEmpty()
- * var param_6 = obj.isFull()
- */
+  isFull() {
+    return this.size === this.list.length;
+  }
+}
