@@ -9,65 +9,176 @@ class Node {
 class BinarySearchTree {
   constructor() {
     this.root = null;
+    this.size = 0;
   }
 
-  insert(val) {
-    const newNode = new Node(val);
+  /* BST的插入元素: 迭代和递归两种方式---------------------------------- */
+  insert_iteration_way(val) {
+    let newNode = new Node(val);
+
     if (!this.root) {
       this.root = newNode;
+      this.size++;
       return this;
     } else {
-      let current = this.root;
-      while (true) {
-        if (val === current.value) return undefined;
+      let curr = this.root;
 
-        if (val < current.value) {
-          if (current.left === null) {
-            current.left = newNode;
+      while (true) {
+        if (val < curr.value) {
+          // left side
+          if (curr.left === null) {
+            curr.left = newNode;
+            this.size++;
             return this;
           }
-          current = current.left;
+          curr = curr.left;
         } else {
-          // val > current.value
-          if (current.right === null) {
-            current.right = newNode;
+          // right side
+          if (curr.right === null) {
+            curr.right = newNode;
+            this.size++;
             return this;
           }
-          current = current.right;
+          curr = curr.right;
         }
       }
     }
   }
 
-  contains(val) {
-    if (!this.root) return false;
+  insert_recurrsion_way(val) {
+    const helper = (node, val) => {
+      if (node == null) {
+        this.size++;
+        return new Node(val);
+      }
 
-    let current = this.root;
-    while (current) {
-      if (val < current.value) {
-        current = current.left;
-      } else if (val > current.value) {
-        current = current.right;
+      if (val < node.value) {
+        //left side
+        node.left = helper(node.left, val);
+      } else if (val > node.value) {
+        //right side
+        node.right = helper(node.right, val);
+      }
+
+      return node;
+    };
+
+    this.root = helper(this.root, val);
+  }
+
+  /* BST的查询-： 迭代和递归两种方式----------------------------------- */
+  contains_iteration_way(val) {
+    if (!this.root) return false;
+    let curr = this.root;
+    while (curr) {
+      if (val < curr.value) {
+        curr = curr.left;
+      } else if (val > curr.value) {
+        curr = curr.right;
       } else {
-        // val === current.value
+        // found the val
         return true;
       }
     }
-
     return false;
   }
 
-  //Breadth-first search
+  contains_recurrsion_way(val) {
+    const helper = (node, val) => {
+      if (!node) return false;
+
+      if (val < node.value) {
+        return helper(node.left, val);
+      } else if (val > node.value) {
+        return helper(node.right, val);
+      } else {
+        return true;
+      }
+    };
+
+    return helper(this.root, val);
+  }
+
+  /* DFS: PreOrder: 迭代(Stack)和递归两种方式----------------------------------------------*/
+  DFS_preOrder_recurrsion() {
+    let visited = [];
+
+    const helper = (node) => {
+      // change outside variable
+      visited.push(node.value);
+
+      // change recussion's input.
+      if (node.left) helper(node.left);
+      if (node.right) helper(node.right);
+    };
+
+    helper(this.root);
+    return visited;
+  }
+  DFS_preOrder_iteration() {
+    // use Stack : https://coding.imooc.com/lesson/207.html#mid=13469
+    let stack = [];
+    let visited = [];
+
+    stack.push(this.root);
+
+    while (stack.length) {
+      let curr = stack.pop(); // push + pop combo
+      visited.push(curr.value);
+
+      //先右后左：
+      if (curr.right) stack.push(curr.right);
+      if (curr.left) stack.push(curr.left);
+    }
+    return visited;
+  }
+
+  /* DFS: PostOrder: 递归 ----------------------------------------------------*/
+  DFS_postOrder() {
+    let visited = [];
+
+    const helper = (node) => {
+      // change recussion's input.
+      if (node.left) helper(node.left);
+      if (node.right) helper(node.right);
+
+      // change outside variable
+      visited.push(node.value);
+    };
+
+    helper(this.root);
+    return visited;
+  }
+
+  /* DFS: InOrder： 递归 ----------------------------------------------------*/
+  DFS_inOrder() {
+    let visited = [];
+
+    const helper = (node) => {
+      // change recussion's input.
+      if (node.left) helper(node.left);
+      // change outside variable
+      visited.push(node.value);
+      // change recussion's input.
+      if (node.right) helper(node.right);
+    };
+
+    helper(this.root);
+    return visited;
+  }
+
+  /* BFS：迭代 use Queue------------------------------------------ */ // https://coding.imooc.com/lesson/207.html#mid=13471
   BFS() {
     let queue = [];
     let visited = [];
-    let node = this.root;
 
-    queue.push(node);
+    queue.push(this.root);
 
     while (queue.length) {
-      node = queue.shift();
+      let node = queue.shift(); // push + shift combo
       visited.push(node.value);
+
+      //先左后右：
       if (node.left) queue.push(node.left);
       if (node.right) queue.push(node.right);
     }
@@ -75,57 +186,7 @@ class BinarySearchTree {
     return visited;
   }
 
-  //Depth-first search: PreOrder
-  DFS_preOrder() {
-    let visited = [];
-
-    const helper = (helperInput) => {
-      // change outside variable
-      visited.push(helperInput.value);
-
-      // change recussion's input.
-      if (helperInput.left) helper(helperInput.left);
-      if (helperInput.right) helper(helperInput.right);
-    };
-
-    helper(this.root);
-    return visited;
-  }
-
-   //Depth-first search: PostOrder
-  DFS_postOrder() {
-    let visited = [];
-
-    const helper = (helperInput) => {
-      // change recussion's input.
-      if (helperInput.left) helper(helperInput.left);
-      if (helperInput.right) helper(helperInput.right);
-
-      // change outside variable
-      visited.push(helperInput.value);
-    };
-    helper(this.root);
-    return visited;
-  }
-
-  //Depth-first search: InOrder
-  DFS_inOrder() {
-    let visited = [];
-
-    const helper = (helperInput) => {
-      // change recussion's input.
-      if (helperInput.left) helper(helperInput.left);
-      // change outside variable
-      visited.push(helperInput.value);
-      // change recussion's input.
-      if (helperInput.right) helper(helperInput.right);
-
-    };
-    helper(this.root);
-    return visited;
-  }
-
-  //Copy a tree, through DFS
+  /* Copy a tree, through DFS ------------------------------*/
   CopyTheTree_DFS(root) {
     if (root == null) return null;
 
@@ -135,19 +196,24 @@ class BinarySearchTree {
 
     return newNode;
   }
-
 }
 
-const tree = new BinarySearchTree();
-tree.insert(10);
-tree.insert(6);
-tree.insert(15);
-tree.insert(3);
-tree.insert(8);
-tree.insert(20);
-console.log(tree.BFS());          //  [10, 6, 15, 3, 8, 20]
-console.log(tree.DFS_preOrder()); //  [10, 6, 3, 8, 15, 20]
-console.log(tree.DFS_postOrder()); // [3, 8, 6, 20, 15, 10]
-console.log(tree.DFS_inOrder());   // [3, 6, 8, 10, 15, 20]
+const tree1 = new BinarySearchTree();
+tree1.insert_iteration_way(10);
+tree1.insert_iteration_way(6);
+tree1.insert_iteration_way(15);
+tree1.insert_iteration_way(3);
+tree1.insert_iteration_way(8);
+tree1.insert_iteration_way(20);
+console.log(tree1.DFS_preOrder_recurrsion());
+console.log(tree1.DFS_preOrder_iteration());
+console.log(tree1.BFS());
 
-console.log(tree.CopyTheTree_DFS(tree.root));
+// const tree2 = new BinarySearchTree();
+// tree2.insert_recurrsion_way(10);
+// tree2.insert_recurrsion_way(6);
+// tree2.insert_recurrsion_way(15);
+// tree2.insert_recurrsion_way(3);
+// tree2.insert_recurrsion_way(8);
+// tree2.insert_recurrsion_way(20);
+// console.log(tree2.DFS_preOrder());
