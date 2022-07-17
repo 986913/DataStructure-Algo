@@ -376,39 +376,39 @@ tree1.insert_iteration_way(3);
 tree1.insert_iteration_way(8);
 tree1.insert_iteration_way(20);
 tree1.insert_iteration_way(13);
-// console.log(tree1.DFS_preOrder_iteration()); //前序遍历： 根结点 ---> 左子树 ---> 右子树
-// console.log(tree1.DFS_inOrder()); //中序遍历： 左子树---> 根结点 ---> 右子树
-// console.log(tree1.DFS_postOrder()); //后序遍历： 左子树 ---> 右子树 ---> 根结点
+console.log(tree1.DFS_preOrder_iteration()); //前序遍历： 根结点 ---> 左子树 ---> 右子树
+console.log(tree1.DFS_inOrder()); //中序遍历： 左子树---> 根结点 ---> 右子树
+console.log(tree1.DFS_postOrder()); //后序遍历： 左子树 ---> 右子树 ---> 根结点
 console.log(tree1.BFS());
-// console.log(
-//   tree1.findMax_iteration_way(tree1.root),
-//   tree1.findMax_recurrsion_way(tree1.root)
-// );
-// console.log(
-//   tree1.findMin_iteration_way(tree1.root),
-//   tree1.findMin_recurrsion_way(tree1.root)
-// );
+console.log(
+  tree1.findMax_iteration_way(tree1.root),
+  tree1.findMax_recurrsion_way(tree1.root)
+);
+console.log(
+  tree1.findMin_iteration_way(tree1.root),
+  tree1.findMin_recurrsion_way(tree1.root)
+);
 
-// console.log(tree1.deleteMin_iteration_way(tree1.root));
-// console.log(tree1.DFS_preOrder_iteration());
-// console.log(tree1.BFS());
+console.log(tree1.deleteMin_iteration_way(tree1.root));
+console.log(tree1.DFS_preOrder_iteration());
+console.log(tree1.BFS());
 
-// console.log(tree1.deleteMin_iteration_way(tree1.root));
-// console.log(tree1.DFS_preOrder_iteration());
-// console.log(tree1.BFS());
+console.log(tree1.deleteMin_iteration_way(tree1.root));
+console.log(tree1.DFS_preOrder_iteration());
+console.log(tree1.BFS());
 
-// console.log(tree1.deleteMax_iteration_way(tree1.root));
-// console.log(tree1.DFS_preOrder_iteration());
-// console.log(tree1.BFS());
+console.log(tree1.deleteMax_iteration_way(tree1.root));
+console.log(tree1.DFS_preOrder_iteration());
+console.log(tree1.BFS());
 
-// console.log(tree1.deleteMax_iteration_way(tree1.root));
-// console.log(tree1.DFS_preOrder_iteration());
-// console.log(tree1.BFS());
+console.log(tree1.deleteMax_iteration_way(tree1.root));
+console.log(tree1.DFS_preOrder_iteration());
+console.log(tree1.BFS());
 
-// console.log(tree1.remove(tree1.root, 10));
-// console.log(tree1.BFS());
+console.log(tree1.remove(tree1.root, 10));
+console.log(tree1.remove(tree1.root, 13));
 
-// console.log(tree1.size);
+console.log(tree1.size);
 
 console.log('-------------------------------------------');
 
