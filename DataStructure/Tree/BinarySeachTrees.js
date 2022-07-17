@@ -346,12 +346,11 @@ class BinarySearchTree {
           return leftNode;
         }
         //删除有左子树和右子树的node
-
-        /* 找到比待删除节点大的最小node ==> 就是待删除节点的右子树中最小的node */
+        /* 1.找到比待删除节点大的最小node ==> 就是待删除节点的右子树中最小的node */
         let successor = this.findMin_iteration_way(nodee.right);
         // console.log(successor); // successor就是用来代替即将删除的节点的
 
-        /* 用这个节点顶替待删除节点的位置 */
+        /* 2.用这个节点顶替待删除节点的位置 */
         successor.right = this.deleteMin_iteration_way(nodee.right);
         successor.left = nodee.left;
 
@@ -366,6 +365,51 @@ class BinarySearchTree {
     const theRootAfterRemove = helper(node, val);
     return theRootAfterRemove;
   }
+
+  /* floor:   find the node's maximumn value < val (based on when node is the root)------------------------------------------------------------------ ------------------------------------ */
+  floor(node, inputVal) {
+    // Base case
+    if (node === null) {
+      return -1;
+    }
+
+    // We found equal key
+    if (node.value === inputVal) return node.value;
+
+    // If node's key is larger, floor must be in left subtree
+    if (node.value > inputVal) return this.floor(node.left, inputVal);
+
+    // Else, either right subtree or root has the floor value
+    let floorValue = this.floor(node.right, inputVal);
+
+    return floorValue <= inputVal && floorValue !== -1
+      ? floorValue
+      : node.value;
+  }
+
+  /* find ceil:  find the node's minimun value > val(based on when node is the root) --------------------------------------------------------------- ------ */
+  ceil(node, inputVal) {
+    // Base case
+    if (node === null) return -1;
+
+    // We found equal key
+    if (node.value === inputVal) return node.value;
+
+    // If root's key is smaller, ceil must be in right subtree
+    if (node.value < inputVal) {
+      return this.ceil(node.right, inputVal);
+    }
+
+    // Else, either left subtree or root has the ceil value
+    let ceil = this.ceil(node.left, inputVal);
+
+    return ceil >= inputVal ? ceil : node.value;
+  }
+
+  /* rank */
+  rank() {}
+  /* select */
+  select() {}
 }
 
 const tree1 = new BinarySearchTree();
@@ -376,39 +420,47 @@ tree1.insert_iteration_way(3);
 tree1.insert_iteration_way(8);
 tree1.insert_iteration_way(20);
 tree1.insert_iteration_way(13);
-console.log(tree1.DFS_preOrder_iteration()); //前序遍历： 根结点 ---> 左子树 ---> 右子树
-console.log(tree1.DFS_inOrder()); //中序遍历： 左子树---> 根结点 ---> 右子树
-console.log(tree1.DFS_postOrder()); //后序遍历： 左子树 ---> 右子树 ---> 根结点
-console.log(tree1.BFS());
-console.log(
-  tree1.findMax_iteration_way(tree1.root),
-  tree1.findMax_recurrsion_way(tree1.root)
-);
-console.log(
-  tree1.findMin_iteration_way(tree1.root),
-  tree1.findMin_recurrsion_way(tree1.root)
-);
-
-console.log(tree1.deleteMin_iteration_way(tree1.root));
-console.log(tree1.DFS_preOrder_iteration());
+// console.log(tree1.DFS_preOrder_iteration()); //前序遍历： 根结点 ---> 左子树 ---> 右子树
+// console.log(tree1.DFS_inOrder()); //中序遍历： 左子树---> 根结点 ---> 右子树
+// console.log(tree1.DFS_postOrder()); //后序遍历： 左子树 ---> 右子树 ---> 根结点
 console.log(tree1.BFS());
 
-console.log(tree1.deleteMin_iteration_way(tree1.root));
-console.log(tree1.DFS_preOrder_iteration());
-console.log(tree1.BFS());
+// console.log(
+//   tree1.findMax_iteration_way(tree1.root),
+//   tree1.findMax_recurrsion_way(tree1.root)
+// );
+// console.log(
+//   tree1.findMin_iteration_way(tree1.root),
+//   tree1.findMin_recurrsion_way(tree1.root)
+// );
 
-console.log(tree1.deleteMax_iteration_way(tree1.root));
-console.log(tree1.DFS_preOrder_iteration());
-console.log(tree1.BFS());
+// console.log(tree1.deleteMin_iteration_way(tree1.root));
+// console.log(tree1.DFS_preOrder_iteration());
+// console.log(tree1.BFS());
 
-console.log(tree1.deleteMax_iteration_way(tree1.root));
-console.log(tree1.DFS_preOrder_iteration());
-console.log(tree1.BFS());
+// console.log(tree1.deleteMin_iteration_way(tree1.root));
+// console.log(tree1.DFS_preOrder_iteration());
+// console.log(tree1.BFS());
 
-console.log(tree1.remove(tree1.root, 10));
-console.log(tree1.remove(tree1.root, 13));
+// console.log(tree1.deleteMax_iteration_way(tree1.root));
+// console.log(tree1.DFS_preOrder_iteration());
+// console.log(tree1.BFS());
 
-console.log(tree1.size);
+// console.log(tree1.deleteMax_iteration_way(tree1.root));
+// console.log(tree1.DFS_preOrder_iteration());
+// console.log(tree1.BFS());
+
+// console.log(tree1.remove(tree1.root, 10));
+// console.log(tree1.BFS());
+// console.log(tree1.remove(tree1.root, 13));
+
+console.log(tree1.floor(tree1.root, 14)); //13
+// console.log(tree1.floor(tree1.root, 7)); //6
+// console.log(tree1.floor(tree1.root, 17)); //15
+// console.log(tree1.ceil(tree1.root, 14)); //15
+// console.log(tree1.ceil(tree1.root, 5)); //6
+
+// console.log(tree1.size);
 
 console.log('-------------------------------------------');
 
