@@ -2,6 +2,8 @@
  * @param {number[]} nums
  * @return {number}
  */
+
+//解法1： Linear search
 var findPeakElement = function (nums) {
   let len = nums.length;
   if (len === 1) return 0;
@@ -25,4 +27,23 @@ var findPeakElement = function (nums) {
 
   // console.log(peakIndexs);
   return peakIndexs[0]; // return any from peakIndexs
+};
+
+//2. Binary search
+var findPeakElement = function (nums) {
+  let left = 0;
+  let right = nums.length - 1;
+
+  if (nums.length === 1) return 0;
+
+  while (left < right) {
+    let mid = left + Math.floor((right - left) / 2);
+
+    if (nums[mid] > nums[mid + 1]) {
+      right = mid;
+    } else if (nums[mid] < nums[mid + 1]) {
+      left = mid + 1;
+    }
+  }
+  return left;
 };
