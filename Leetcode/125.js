@@ -12,7 +12,7 @@ const isPalindrome = (s) => {
   let left = 0;
   let right = modifiedStr.length - 1;
 
-  while (left <= right) {
+  while (left < right) {
     // console.log(modifiedStr[left], modifiedStr[right])
     if (modifiedStr[left] !== modifiedStr[right]) {
       return false;
