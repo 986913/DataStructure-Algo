@@ -9,8 +9,8 @@ const validPalindrome = (s) => {
 
   while (left < right) {
     if (s[left] !== s[right]) {
-      console.log(s[left + 1], s[right]);
-      console.log(s[left], s[right - 1]);
+      // console.log(s[left + 1], s[right]);
+      // console.log(s[left], s[right - 1]);
       return (
         isPalindrome(s, left + 1, right) || isPalindrome(s, left, right - 1)
       );
