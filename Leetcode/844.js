@@ -12,7 +12,7 @@
 从后往前遍历 S，所遇情况有三，如下所示：
 1 若当前字符是 #，  则 skipS 自增 1；
 2 若当前字符不是 #，且 skipS 不为 0，则 skipS 自减 1；
-3 若当前字符不是 #，且 skipS 为0，则代表当前字符不会被消除，我们可以用来和 T 中的当前字符作比较。
+3 若当前字符不是 #，且 skipS 为0，则代表当前字符不会被消除，我们可以用来和T中的当前字符作比较。
 若对比过程出现 S, T当前字符不匹配，则遍历结束，返回 false，若 S，T都遍历结束，且都能一一匹配，则返回 true
 
 */
@@ -20,8 +20,8 @@ var backspaceCompare = function (s, t) {
   let i = s.length - 1; // for s
   let j = t.length - 1; // for t
 
-  let skipS = 0; //存放 S,T 字符串中的 # 数量。
-  let skipT = 0; //存放 S,T 字符串中的 # 数量。
+  let skipS = 0; //存放 S 字符串中的 # 数量。
+  let skipT = 0; //存放 T 字符串中的 # 数量。
 
   while (i >= 0 || j >= 0) {
     //loop s
