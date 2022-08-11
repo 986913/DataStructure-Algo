@@ -7,25 +7,23 @@ var sortedSquares = function (nums) {
 };
 
 /* 2 pointers */
-var sortedSquares = function (arr) {
-  let len = arr.length;
-  let squares = Array(len).fill(0);
-  let highestSquareIdx = len - 1;
+var sortedSquares = function (nums) {
+  let result = [];
   let left = 0;
-  let right = len - 1;
+  let right = nums.length - 1;
 
   while (left <= right) {
-    let leftSquare = Math.pow(arr[left], 2);
-    let rightSquare = Math.pow(arr[right], 2);
+    const leftSquared = Math.pow(nums[left], 2);
+    const rightSquared = Math.pow(nums[right], 2);
 
-    if (leftSquare > rightSquare) {
-      squares[highestSquareIdx] = leftSquare;
-      left++;
-    } else {
-      squares[highestSquareIdx] = rightSquare;
+    if (leftSquared <= rightSquared) {
+      result.unshift(rightSquared);
       right--;
+    } else {
+      result.unshift(leftSquared);
+      left++;
     }
-
-    highestSquareIdx--;
   }
+
+  return result;
 };
