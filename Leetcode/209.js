@@ -10,31 +10,27 @@ minSubArrayLen([3,1,7,11,2,9,8,21,62,33,19],    52)         1 --> because [62] i
 */
 
 // 1. simple solution: doueble for-loop:  O(n^2)
-const minSubArrayLen = (arr, n) => {
-  /*
-  if (!arr.length) return 0
-  window increases from 1 to arr.length - 1
-  for each window,
-     sum = 0;
-     sum initial window
-     check that sum >= n, if so return window;
-     loop from j = window to arr.length
-         add arr[j], subtract arr[j - window] to sum
-         check that sum >= n, if so return window;
-  return 0
-  */
-  // if (!arr.length) return null;
-  // let sum = 0;
-  // for (let window = 1; window < arr.length; window++) {
-  //   for (let i = 0; i < window; i++) sum += arr[i];
-  //   if (sum >= n) return window;
-  //   for (let j = window; j < arr.length; j++) {
-  //     sum = sum + arr[j] - arr[j - window];
-  //     if (sum >= n) return window;
-  //   }
-  // }
-  // return 0;
-};
+/*
+const minSubArrayLen = (s, nums) => {
+  let result = Infinity; // 最终的结果
+  let sum = 0; // 子序列的数值之和
+  let subLength = 0; // 子序列的长度
+
+  for (let i = 0; i < nums.length; i++) { // 设置子序列起点为i
+      sum = 0;
+      for (let j = i; j < nums.length; j++) { // 设置子序列终止位置为j
+          sum += nums[j];
+          if (sum >= s) { // 一旦发现子序列和超过了s，更新result
+              subLength = j - i + 1; // 取子序列的长度
+              result = Math.min(result, subLength);
+              break; // 因为我们是找符合条件最短的子序列，所以一旦符合条件就break
+          }
+      }
+  }
+  // 如果result没有被赋值的话，就返回0，说明没有符合条件的子序列
+  return result == Infinity ? 0 : result;
+}
+*/
 
 // 双指针/sliding window 解法:
 var minSubArrayLen = function (n, arr) {
@@ -45,9 +41,10 @@ var minSubArrayLen = function (n, arr) {
   for (let windowEndIdx = 0; windowEndIdx < arr.length; windowEndIdx++) {
     windowSum += arr[windowEndIdx];
 
+    //注意是while
     while (windowSum >= n) {
       minLen = Math.min(minLen, windowEndIdx - windowStartIdx + 1);
-      windowSum -= arr[windowStartIdx];
+      windowSum -= arr[windowStartIdx]; // 别忘了update sum
       windowStartIdx += 1;
     }
   }
