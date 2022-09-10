@@ -1,3 +1,4 @@
+/** 需要根据最新的Singly Linked List的规格来更新， */
 class Node {
   constructor(value) {
     this.value = value;
@@ -77,7 +78,7 @@ class DoublyLinkedList {
   get(index) {
     if (index < 0 || index >= this.length) return null;
     if (index <= this.length / 2) {
-      console.log("working from begin");
+      console.log('working from begin');
       let count = 0;
       let current = this.head;
       while (count !== index) {
@@ -86,7 +87,7 @@ class DoublyLinkedList {
       }
       return current;
     } else {
-      console.log("working from end");
+      console.log('working from end');
       let count = this.length - 1;
       let current = this.tail;
       while (count !== index) {
@@ -130,7 +131,6 @@ class DoublyLinkedList {
     this.length--;
   }
 
-  
   reverse() {
     if (this.head === null) return null;
     let currentNode = this.head;
@@ -152,8 +152,8 @@ class DoublyLinkedList {
 }
 
 let list = new DoublyLinkedList();
-list.push("ming");
-list.push("yue");
-list.push("liu");
+list.push('ming');
+list.push('yue');
+list.push('liu');
 list.reverse();
 console.log(list);

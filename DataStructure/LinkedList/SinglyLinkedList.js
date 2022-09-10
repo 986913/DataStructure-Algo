@@ -1,7 +1,7 @@
 class Node {
-  constructor(val) {
+  constructor(val, next) {
     this.value = val; //value
-    this.next = null; //pointer
+    this.next = next; //pointer
   }
 }
 
@@ -12,149 +12,163 @@ class SinglyLinkedList {
     this.length = 0;
   }
 
-  // insert a new node to the end
+  // insert a new node to the end （addAtTail）  ---------------------------------------------------------------------------------
   push(val) {
-    const node = new Node(val);
+    const newNode = new Node(val);
     if (!this.head) {
-      this.head = node;
-      this.tail = node;
+      this.head = newNode;
+      this.tail = newNode;
     } else {
-      this.tail.next = node;
-      this.tail = node;
+      this.tail.next = newNode;
+      this.tail = newNode;
     }
     this.length++;
   }
 
-  // remove the last node (tail)
-  pop() {
-    if (!this.head) return undefined;
-
-    let curr = this.head;
-    let newTail = curr;
-    while (curr.next) {
-      newTail = curr;
-      curr = curr.next;
-    }
-    this.tail = newTail;
-    this.tail.next = null;
-    this.length--;
-
-    if (this.length === 0) {
-      this.head = null;
-      this.tail = null;
-    }
-
-    return curr; // return the old tail which has removed
-  }
-
-  // insert a new node to the start
+  // insert a new node to the start （addAtHead） ---------------------------------------------------------------------------------
   unshift(val) {
-    let node = new Node(val);
+    let newNode = new Node(val);
 
     if (!this.head) {
-      this.head = node;
-      this.tail = node;
+      this.head = newNode;
+      this.tail = newNode;
     } else {
-      node.next = this.head;
-      this.head = node;
+      newNode.next = this.head;
+      this.head = newNode;
     }
 
     this.length++;
   }
 
-  // remove the start node(head)
-  shift() {
-    if (!this.head) return undefined;
+  // get the index-th node, index based 0 (getNode)  ---------------------------------------------------------------------------------
+  getNode(index) {
+    if (index < 0 || index >= this.length) return null;
 
-    let oldHead = this.head;
-    this.head = oldHead.next;
-    this.length--;
-
-    if (this.length === 0) {
-      this.tail = null;
-      this.head = null;
-    }
-    return oldHead;
-  }
-
-  // get a node based on index(index based 0)
-  get(index) {
-    if (index < 0 || index >= this.length) return undefined;
-
-    let count = 0;
-    let curr = this.head;
-
-    while (count !== index) {
+    /* 创建虚拟头节点 类似于：
+        let dummyHead = new ListNode(-1);
+        dummyHead.next = this.head;
+        let curr = dummyHead;
+     */
+    let curr = new Node(-1, this.head); // 创建虚拟头节点
+    while (index >= 0) {
       curr = curr.next;
-      count++;
+      index--;
     }
 
     return curr;
   }
 
-  // set a node based on index
+  // remove the last node (delete the Tail Node)  ---------------------------------------------------------------------------------
+  pop() {
+    if (!this.head) return null;
+
+    if (this.length === 1) {
+      let oldTail = this.head;
+      this.head = this.tail = null;
+      this.length--;
+      return oldTail; // return the old tail which has removed.
+    }
+
+    /* When linkedList length >=2 : */
+    let last2ndNode = this.getNode(this.length - 2);
+    let lastNode = last2ndNode.next;
+    last2ndNode.next = null; // del tail here
+    this.length--;
+
+    if (this.length === 0) {
+      this.tail = null;
+      this.head = null;
+    }
+    return lastNode; // return the old tail which has removed.
+  }
+
+  // remove the start node (delete the Head Node)  ---------------------------------------------------------------------------------
+  shift() {
+    if (!this.head) return null;
+
+    let oldHead = this.head;
+    this.head = oldHead.next; // del head here
+    this.length--;
+
+    if (this.length === 0) {
+      this.tail = null;
+      this.head = null;
+    }
+
+    return oldHead; // return the old head which has removed.
+  }
+
+  // set a node based on index  ---------------------------------------------------------------------------------
   set(index, newVal) {
-    let foundNode = this.get(index);
+    let foundNode = this.getNode(index);
+
     if (foundNode) {
       foundNode.value = newVal;
       return true;
     } else return false;
   }
 
-  // insert a new node based on index (index is 0 based)
+  // insert a new node based before the n-th node, index is 0 based (addAtIndex)  ---------------------------------------------------------------------------------
   insert(index, val) {
-    // index is 0 based
     if (index < 0 || index > this.length) return false;
 
     if (index === 0) return this.unshift(val);
     else if (index === this.length) return this.push(val);
     else {
-      let newNode = new Node(val);
-      let prevNode = this.get(index - 1);
-      let prevNextNode = prevNode.next;
-      prevNode.next = newNode;
-      newNode.next = prevNextNode;
+      // 获取目标节点的上一个的节点
+      const prevNode = this.getNode(index - 1);
+      prevNode.next = new Node(val, prevNode.next);
     }
     this.length++;
     return true;
   }
 
-  // remove a node based on index
+  // remove the n-th node, index is 0 based (deleteAtIndex)  ---------------------------------------------------------------------------------
   remove(index) {
-    if (index < 0 || index >= this.length) return undefined;
-    if (index === this.length - 1) return this.pop();
+    if (index < 0 || index > this.length - 1) return null;
+
     if (index === 0) return this.shift();
 
-    let prevNode = this.get(index - 1);
-    let removedNode = prevNode.next;
-    prevNode.next = removedNode.next;
+    // 获取目标节点的上一个的节点
+    const prevNode = this.getNode(index - 1);
+    const removedNode = prevNode.next;
+    prevNode.next = prevNode.next.next; // del node here
+
+    // 处理尾节点
+    if (index === this.length - 1) this.tail = prevNode;
+
     this.length--;
-    return removedNode;
+    return removedNode; // return the node which has removed.
   }
 
-  // traverse() {
-  //   let current = this.head;
-  //   while (current) {
-  //     console.log(current.value);
-  //     current = current.next;
-  //   }
-  // }
+  // (traverse) ---------------------------------------------------------------------------------
+  traverse() {
+    let dummyHead = new Node(-1, this.head); // created dummyHead;
+    let curr = dummyHead.next;
+    while (curr) {
+      //注意这里是curr 不是curr.next
+      console.log(curr.value);
+      curr = curr.next;
+    }
 
-  // print all node (head --> trail)
+    console.log(dummyHead.next); // traverse同时不会影响list
+  }
+
+  // print all node (head --> trail)  ---------------------------------------------------------------------------------
   print() {
     let arr = [];
-    let current = this.head;
-    while (current) {
-      //注意点：while条件是current，而不是current.next
-      arr.push(current.value);
-      current = current.next;
+    let dummyHead = new Node(-1, this.head); // created dummyHead;
+    let curr = dummyHead.next;
+    while (curr) {
+      //注意这里是curr 不是curr.next
+      arr.push(curr.value);
+      curr = curr.next;
     }
+
     console.log(arr);
   }
 
-  /* reverse linked list: 
-    https://www.youtube.com/watch?v=O0By4Zq0OFc&ab_channel=BackToBackSWE
-  */
+  /* reverse linked list:  https://www.youtube.com/watch?v=O0By4Zq0OFc&ab_channel=BackToBackSWE */
   reverse() {
     // initial prev, current, next
     let prev = null;
@@ -165,9 +179,9 @@ class SinglyLinkedList {
     this.tail = current;
 
     while (current) {
-      next = current.next;  // save next
-      current.next = prev;  // reverse here
-      prev = current;       // update prev and current
+      next = current.next; // save next
+      current.next = prev; // reverse here
+      prev = current; // update prev and current
       current = next;
     }
 
@@ -176,7 +190,7 @@ class SinglyLinkedList {
 }
 
 const test = new SinglyLinkedList();
-test.push("ming");
-test.push("yue");
-test.push("liuu");
+test.push('ming');
+test.push('yue');
+test.push('liuu');
 console.log(test.reverse());
