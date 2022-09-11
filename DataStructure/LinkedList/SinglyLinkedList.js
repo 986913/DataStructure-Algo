@@ -45,6 +45,13 @@ class SinglyLinkedList {
   }
 
   /**
+   * ----------------------------------  get the index-th node's value, index based 0 (get)----------------------------------
+   */
+  get(index) {
+    if (index < 0 || index >= this.length) return null;
+    return this.getNode(index).value;
+  }
+  /**
    * ----------------------------------  get the index-th node, index based 0 (getNode)----------------------------------
    */
   getNode(index) {
@@ -188,7 +195,7 @@ class SinglyLinkedList {
   }
 
   /**
-   * ----------------------------------  reverse linked list:  https://www.youtube.com/watch?v=O0By4Zq0OFc&ab_channel=BackToBackSWE ----------------------------------
+   * ----------------------------------  reverse Singly linked list:  https://www.youtube.com/watch?v=O0By4Zq0OFc&ab_channel=BackToBackSWE ----------------------------------
    */
   reverse() {
     // initial prev, current, next
