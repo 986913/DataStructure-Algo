@@ -12,7 +12,9 @@ class SinglyLinkedList {
     this.length = 0;
   }
 
-  // insert a new node to the end （addAtTail）  ---------------------------------------------------------------------------------
+  /**
+   * ---------------------------------- insert a new node to the end （addAtTail）----------------------------------
+   */
   push(val) {
     const newNode = new Node(val);
     if (!this.head) {
@@ -25,7 +27,9 @@ class SinglyLinkedList {
     this.length++;
   }
 
-  // insert a new node to the start （addAtHead） ---------------------------------------------------------------------------------
+  /**
+   * ---------------------------------- insert a new node to the start （addAtHead）----------------------------------
+   */
   unshift(val) {
     let newNode = new Node(val);
 
@@ -40,7 +44,9 @@ class SinglyLinkedList {
     this.length++;
   }
 
-  // get the index-th node, index based 0 (getNode)  ---------------------------------------------------------------------------------
+  /**
+   * ----------------------------------  get the index-th node, index based 0 (getNode)----------------------------------
+   */
   getNode(index) {
     if (index < 0 || index >= this.length) return null;
 
@@ -58,7 +64,9 @@ class SinglyLinkedList {
     return curr;
   }
 
-  // remove the last node (delete the Tail Node)  ---------------------------------------------------------------------------------
+  /**
+   * ----------------------------------  remove the last node (delete the Tail Node)----------------------------------
+   */
   pop() {
     if (!this.head) return null;
 
@@ -82,7 +90,9 @@ class SinglyLinkedList {
     return lastNode; // return the old tail which has removed.
   }
 
-  // remove the start node (delete the Head Node)  ---------------------------------------------------------------------------------
+  /**
+   * ----------------------------------  remove the start node (delete the Head Node)----------------------------------
+   */
   shift() {
     if (!this.head) return null;
 
@@ -98,7 +108,9 @@ class SinglyLinkedList {
     return oldHead; // return the old head which has removed.
   }
 
-  // set a node based on index  ---------------------------------------------------------------------------------
+  /**
+   * ----------------------------------  set a node based on index (set the n-th node)----------------------------------
+   */
   set(index, newVal) {
     let foundNode = this.getNode(index);
 
@@ -108,7 +120,9 @@ class SinglyLinkedList {
     } else return false;
   }
 
-  // insert a new node based before the n-th node, index is 0 based (addAtIndex)  ---------------------------------------------------------------------------------
+  /**
+   * ---------------------------------- insert a new node based before the n-th node, index is 0 based (addAtIndex) ----------------------------------
+   */
   insert(index, val) {
     if (index < 0 || index > this.length) return false;
 
@@ -123,7 +137,9 @@ class SinglyLinkedList {
     return true;
   }
 
-  // remove the n-th node, index is 0 based (deleteAtIndex)  ---------------------------------------------------------------------------------
+  /**
+   * ---------------------------------- remove the n-th node, index is 0 based (deleteAtIndex)  ----------------------------------
+   */
   remove(index) {
     if (index < 0 || index > this.length - 1) return null;
 
@@ -141,7 +157,9 @@ class SinglyLinkedList {
     return removedNode; // return the node which has removed.
   }
 
-  // (traverse) ---------------------------------------------------------------------------------
+  /**
+   * ---------------------------------- traverse ----------------------------------
+   */
   traverse() {
     let dummyHead = new Node(-1, this.head); // created dummyHead;
     let curr = dummyHead.next;
@@ -153,8 +171,9 @@ class SinglyLinkedList {
 
     console.log(dummyHead.next); // traverse同时不会影响list
   }
-
-  // print all node (head --> trail)  ---------------------------------------------------------------------------------
+  /**
+   * ----------------------------------  print all node (head --> trail)  ----------------------------------
+   */
   print() {
     let arr = [];
     let dummyHead = new Node(-1, this.head); // created dummyHead;
@@ -168,7 +187,9 @@ class SinglyLinkedList {
     console.log(arr);
   }
 
-  /* reverse linked list:  https://www.youtube.com/watch?v=O0By4Zq0OFc&ab_channel=BackToBackSWE */
+  /**
+   * ----------------------------------  reverse linked list:  https://www.youtube.com/watch?v=O0By4Zq0OFc&ab_channel=BackToBackSWE ----------------------------------
+   */
   reverse() {
     // initial prev, current, next
     let prev = null;
