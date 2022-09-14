@@ -37,7 +37,7 @@ var helper = function (pre, head) {
   const temp = head.next; //1.用这个temp临时指针存current.next值
   head.next = pre; //2.实际改变curr指针指向
   pre = head; //3. 改变指向后，移动prev
-  return reverse(pre, temp); //4. 改变指向后，移动curr
+  return helper(pre, temp); //4. 改变指向后，移动curr
 };
 
 var reverseList = function (head) {
