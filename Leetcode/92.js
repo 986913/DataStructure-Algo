@@ -17,7 +17,8 @@ var reverseBetween = function (head, left, right) {
   /*reverse 套路四步走需要的3指针*/
   let prev = null;
   let curr = head;
-  let next = head;
+
+  let next = head; //next就是临时指针
 
   //for loop until to left
   for (let i = 1; i < left; i++) {
