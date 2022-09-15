@@ -60,28 +60,24 @@ const findThenDeleteNode = (index, head, len) => {
 
 /* 解法2: Fast & Slow pointer      */
 var removeNthFromEnd = function (head, n) {
-  let fast = head;
-  let slow = head;
+  let dummyHead = new ListNode(-1, head);
+
+  let fast = dummyHead;
+  let slow = dummyHead;
 
   while (n > 0) {
-    // make the distance between fast and slow pointer is n.
+    // 先让fast指针走n+1步
     fast = fast.next;
     n--;
   }
 
-  if (fast === null) {
-    // edge case
-    head = head.next;
-    return head;
-  }
-
   while (fast.next) {
-    // then move fast and slow both, until fast pointer reach to the end.
+    // 然后同时移动fast, slow指针 , 直到fast指针reach to the end
     fast = fast.next;
     slow = slow.next;
   }
 
-  slow.next = slow.next.next; // actually delete here
+  slow.next = slow.next.next; // actually delete slow.next here
 
-  return head;
+  return dummyHead.next;
 };
