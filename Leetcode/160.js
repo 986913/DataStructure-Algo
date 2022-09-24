@@ -47,6 +47,7 @@ var getIntersectionNode = function (headA, headB) {
 var getIntersectionNode = function (headA, headB) {
   let n1 = headA;
   let n2 = headB;
+
   while (n1 !== n2) {
     if (!n1) n1 = headB; //当n1走完headA链表后，那么就切换到headB链表走
     else n1 = n1.next;

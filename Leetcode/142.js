@@ -6,61 +6,36 @@
  * }
  */
 
+//  https://www.bilibili.com/video/BV1if4y1d7ob/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
+
 /**
  * @param {ListNode} head
  * @return {ListNode}
  */
 
-const findLengthOfLoop = (slow) => {
-  let len = 0;
-  let curr = slow;
-  while (true) {
-    curr = curr.next;
-    len++;
-    if (slow === curr) {
-      break;
-    }
-  }
+var detectCycle = function (head) {
+  if (!head || !head.next) return null;
 
-  return len;
-};
-
-const findStart = (head, cycle_length) => {
-  let pointer1 = head;
-  let pointer2 = head;
-
-  if (cycle_length === 0) return null; // no loop found, return null
-
-  // move pointer2 ahead 'cycle_length' nodes
-  while (cycle_length > 0) {
-    pointer2 = pointer2.next;
-    cycle_length--;
-  }
-  // increment both pointers until they meet at the start of the cycle
-  while (pointer1 !== pointer2) {
-    pointer1 = pointer1.next;
-    pointer2 = pointer2.next;
-  }
-
-  return pointer1;
-};
-
-/* this is the main function here: */
-const detectCycle = (head) => {
   let slow = head;
   let fast = head;
-  let loopLen = 0;
 
   while (fast && fast.next) {
     slow = slow.next;
     fast = fast.next.next;
 
-    if (slow === fast) {
-      // found a loop
-      loopLen = findLengthOfLoop(slow);
-      break;
+    // detect Cycle: fast和slow指针相遇了
+    if (fast == slow) {
+      slow = head; // fast保持原地，让slow到head的位置， 开始新的move
+
+      //当他们再次相遇时 就是环形入口处
+      while (fast !== slow) {
+        slow = slow.next;
+        fast = fast.next;
+      }
+
+      return slow;
     }
   }
 
-  return findStart(head, loopLen);
+  return null;
 };
