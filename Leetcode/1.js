@@ -23,12 +23,12 @@ var twoSum = function (nums, target) {
     如果没有找到，就将当前的元素放入 Hash 表中，以方便后面的元素来配对。
 */
 var twoSum = function (nums, target) {
-  let seen = new Map();
+  let seen = new Map(); // seen用来存放遍历过得元素
 
   for (let i = 0; i < nums.length; i++) {
     let diff = target - nums[i];
 
-    if (seen.has(diff)) return [i, seen.get(diff)]; // 判断diff是否被遍历过， 被遍历过得话就直接返回了
+    if (seen.has(diff)) return [i, seen.get(diff)]; // 先判断diff是否被遍历过， 被遍历过得话就直接返回了
     seen.set(nums[i], i);
   }
 };
