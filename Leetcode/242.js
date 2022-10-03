@@ -11,7 +11,7 @@ var isAnagram = function (s, t) {
   return sortedS === sortedT;
 };
 
-// Solution2: use map
+// Solution2: use map - hashtable
 /**
  * @param {string} s
  * @param {string} t
@@ -29,4 +29,22 @@ var isAnagram = function (s, t) {
   }
 
   return map.size === 0;
+};
+
+// Solution3: use array - hashtable
+var isAnagram = function (s, t) {
+  if (s.length !== t.length) return false;
+
+  const arr = new Array(26).fill(0);
+  const base = 'a'.charCodeAt(); //97
+
+  for (const i of s) {
+    arr[i.charCodeAt() - base]++;
+  }
+  for (const i of t) {
+    if (!arr[i.charCodeAt() - base]) return false; // 代表t中含有s没有的单词
+    arr[i.charCodeAt() - base]--;
+  }
+
+  return true;
 };
