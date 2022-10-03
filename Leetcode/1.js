@@ -28,7 +28,7 @@ var twoSum = function (nums, target) {
   for (let i = 0; i < nums.length; i++) {
     let diff = target - nums[i];
 
-    if (seen.has(diff)) return [i, seen.get(diff)];
+    if (seen.has(diff)) return [i, seen.get(diff)]; // 判断diff是否被遍历过， 被遍历过得话就直接返回了
     seen.set(nums[i], i);
   }
 };
