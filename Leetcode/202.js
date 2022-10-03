@@ -22,7 +22,7 @@ var isHappy = function (n) {
 
   while (n !== 1 && !sumSet.has(n)) {
     sumSet.add(n);
-    n = squareSum(n); //更新输入n
+    n = squareSum(n); //更新输入参数n
   }
 
   return n === 1;
