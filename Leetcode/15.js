@@ -37,6 +37,7 @@ const threeSum = (nums) => {
 
     // 去重iNum !!!!!!
     if (iNum == nums[i - 1]) continue;
+    /* 错误去重a方法，将会漏掉-1,-1,2 这种情况: if (iNum == nums[i + 1]) continue;*/
 
     while (left < right) {
       let threeSum = iNum + nums[left] + nums[right];
@@ -46,13 +47,15 @@ const threeSum = (nums) => {
       else if (threeSum > 0) right--;
       else {
         result.push([iNum, nums[left], nums[right]]);
-        // 去重nums[left] + 去重nums[right];
+        // 去重逻辑应该放在找到一个三元组之后，对nums[left]和nums[right]去重
         while (left < right && nums[left] == nums[left + 1]) {
           left++;
         }
         while (left < right && nums[right] == nums[right - 1]) {
           right--;
         }
+
+        // 找到答案时，双指针同时收缩
         left++;
         right--;
       }
