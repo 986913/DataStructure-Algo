@@ -19,36 +19,44 @@ const threeSum = function (nums) {
 
 /*---------------------------------- 转换为2sum --------------------------------------- */
 
- var threeSum = function(nums) {
-  let result = [];
-  nums.sort((a,b)=>a-b);  //1. sort array first.
+// https://www.bilibili.com/video/BV1GW4y127qo/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
 
-  if(nums.length<3) return result;
+const threeSum = (nums) => {
+  const result = [];
 
-  for(let i=0; i<nums.length-2; i++ ){ //2. lock one pointer
-    if(i>0 && nums[i]===nums[i-1]) continue; //skip dupcated
-    twoSum(i, 0, nums, result);   //2. then do 2sum for other 2 pointer
+  // 1. 将数组排序
+  nums.sort((a, b) => a - b);
+
+  // 2.
+  for (let i = 0; i < nums.length; i++) {
+    let left = i + 1,
+      right = nums.length - 1,
+      iNum = nums[i];
+    // 数组排过序，如果第一个数大于0直接返回res
+    if (iNum > 0) return result;
+
+    // 去重iNum !!!!!!
+    if (iNum == nums[i - 1]) continue;
+
+    while (left < right) {
+      let threeSum = iNum + nums[left] + nums[right];
+
+      // 三数之和小于0，则左指针向右移动
+      if (threeSum < 0) left++;
+      else if (threeSum > 0) right--;
+      else {
+        result.push([iNum, nums[left], nums[right]]);
+        // 去重nums[left] + 去重nums[right];
+        while (left < right && nums[left] == nums[left + 1]) {
+          left++;
+        }
+        while (left < right && nums[right] == nums[right - 1]) {
+          right--;
+        }
+        left++;
+        right--;
+      }
+    }
   }
   return result;
 };
-
-const twoSum = (first, target, nums, tripeArr) => {
-  let low = first+1;
-  let high = nums.length-1;
-  
-  while(low<high){
-    let sum = nums[first]+nums[low]+nums[high];
-          
-    if(sum===target){
-      tripeArr.push([nums[first],nums[low],nums[high]]);
-      while(low<high && nums[low]===nums[low+1]) low++;   //remove aLL dupcated
-      while(low<high && nums[high]===nums[high-1]) high--; //remove aLL dupcated
-      low++;
-      high--;
-    }else if(sum<target){
-      low++;
-    }else{
-      high--;
-    }
-  }
-}
