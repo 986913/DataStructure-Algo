@@ -18,17 +18,19 @@ var isAnagram = function (s, t) {
  * @return {boolean}
  */
 var isAnagram = function (s, t) {
+  if (s.length !== t.length) return false;
   let map = new Map();
 
-  for (let i = 0; i < s.length; i++) {
-    map.set(s[i], map.get(s[i]) + 1 || 1);
-  }
-  for (let i = 0; i < t.length; i++) {
-    map.set(t[i], map.get(t[i]) - 1);
-    if (map.get(t[i]) <= 0) map.delete(t[i]);
+  for (let i of s) {
+    map.set(i, map.get(i) + 1 || 1);
   }
 
-  return map.size === 0;
+  for (let i of t) {
+    if (!map.get(i)) return false;
+    map.set(i, map.get(i) - 1);
+  }
+
+  return true;
 };
 
 // Solution3: use array - hashtable
