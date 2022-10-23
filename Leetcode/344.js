@@ -15,7 +15,7 @@ var reverseString = function (s) {
   let right = s.length - 1;
 
   while (left < right) {
-    swap(s, left, right);
+    swap(s, left, right); // [s[left], s[right]] = [s[right], s[left]]
     left++;
     right--;
   }
