@@ -2,7 +2,7 @@
  * @param {string} s
  * @return {string}
  */
-//解法1: 直接使用array build in method
+//解法1:👎 直接使用array build in method
 var reverseWords = function (s) {
   let arr = s
     .trim()
@@ -11,7 +11,7 @@ var reverseWords = function (s) {
   return arr.reverse().join(' ');
 };
 
-//解法2：  2 Pointer:
+//解法2:👍  2Pointer:
 var reverseWords = function (s) {
   const arr = s.trim().split(/ +/);
 
@@ -26,6 +26,3 @@ var reverseWords = function (s) {
 
   return arr.join(' ');
 };
-
-/*--------- 不要使用辅助空间，空间复杂度要求为O(1)。------------ */
-//3.
