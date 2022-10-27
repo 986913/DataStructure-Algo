@@ -1,41 +1,27 @@
 /**
- * @param {character[]} s
- * @return {void} Do not return anything, modify s in-place instead.
+ * @param {string} s
+ * @return {string}
  */
 
-const swap = (str, a, b) => {
-  let tmp = str[a];
-  str[a] = str[b];
-  str[b] = tmp;
+const reverseWords = (s) => {
+  let arr = s.split(' ');
+  let result = [];
+
+  arr.forEach((word) => result.push(reveseString(word)));
+  return result.join(' ');
 };
 
-/*2 pointers */
-var reverseString = function (s) {
+//reverseString by using 2 pointer
+const reveseString = (str) => {
   let left = 0;
-  let right = s.length - 1;
+  let right = str.length - 1;
+  let arr = str.split('');
 
   while (left < right) {
-    swap(s, left, right); // [s[left], s[right]] = [s[right], s[left]]
+    [arr[left], arr[right]] = [arr[right], arr[left]];
     left++;
     right--;
   }
 
-  return s;
-};
-
-/* Recurrsion + 2 pointers*/
-var reverseString = function (s) {
-  helper(0, s.length - 1, s);
-};
-
-const helper = (start, end, str) => {
-  if (start > end) return;
-  swap(str, start, end);
-  helper(start + 1, end - 1, str);
-};
-
-const swap = (str, a, b) => {
-  let tmp = str[a];
-  str[a] = str[b];
-  str[b] = tmp;
+  return arr.join('');
 };
