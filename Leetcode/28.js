@@ -21,7 +21,7 @@ var strStr = function (haystack, needle) {
   return -1;
 };
 
-/* 2. KMP算法--------------------没看懂， 以后再试------------------------------------------------ */
+/* 2. KMP算法--------------------属于Advance算法 没看懂， 以后再试------------------------------------------------ */
 // https://www.bilibili.com/video/BV1PD4y1o7nd/
 
 const getNext = (needle) => {
