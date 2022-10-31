@@ -3,15 +3,16 @@ var strStr = function (haystack, needle) {
   if (haystack.length < needle.length) return -1;
 
   let windowStartIdx = 0;
-  let result = '';
+  let chars = '';
   const windowSize = needle.length;
 
   for (let windowEndIdx = 0; windowEndIdx < haystack.length; windowEndIdx++) {
-    result += haystack[windowEndIdx];
+    chars += haystack[windowEndIdx];
 
-    if (result.length >= windowSize) {
-      if (result === needle) return windowStartIdx;
-      result = result.substring(1);
+    if (chars.length >= windowSize) {
+      if (chars === needle) return windowStartIdx;
+
+      chars = chars.substring(1);
       windowStartIdx += 1;
     }
   }
