@@ -1,5 +1,6 @@
 // https://www.bilibili.com/video/BV1nY4y1w7VC/
 
+// ------------------------------------------------使用2个stack实现queue---------------------------------------------------------------------
 var MyQueue = function () {
   this.stackIn = [];
   this.stackOut = [];
