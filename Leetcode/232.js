@@ -1,3 +1,5 @@
+// https://www.bilibili.com/video/BV1nY4y1w7VC/
+
 var MyQueue = function () {
   this.stackIn = [];
   this.stackOut = [];
