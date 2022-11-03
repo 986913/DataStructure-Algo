@@ -7,8 +7,6 @@
 - A stack is typically implemented with a dynamic array  or with a singly linked list
 */
 
-
-
 /* 1. build Stacks by using Array */
 class Stack {
   constructor() {
@@ -30,7 +28,7 @@ class Stack {
     return this.items.length === 0;
   }
   print() {
-    let result = "";
+    let result = '';
     this.items.forEach((item) => {
       result += item;
     });
@@ -39,13 +37,11 @@ class Stack {
 }
 
 let s = new Stack();
-s.push("ming");
-s.push("yue");
-s.push("liu");
+s.push('ming');
+s.push('yue');
+s.push('liu');
 s.pop();
 console.log(s.print());
-
-
 
 /* 2. build Stacks by using Single Linked List */
 class Node {
@@ -111,7 +107,7 @@ class Stack2 {
     return this.size === 0;
   }
   print() {
-    let result = "";
+    let result = '';
     let current = this.first;
     while (current) {
       result += current.value;
@@ -121,13 +117,13 @@ class Stack2 {
   }
 }
 
-const s = new Stack2();
-s.push("ming");
-s.push("yue");
-s.push("liu");
-console.log(s.pop()); // liu
-console.log(s.pop()); // yue
-console.log(s.pop()); // ming
-// console.log(s.peek());
-// console.log(s.search("hh"));
-// console.log(s.print());
+const s1 = new Stack2();
+s1.push('ming');
+s1.push('yue');
+s1.push('liu');
+console.log(s1.pop()); // liu
+console.log(s1.pop()); // yue
+console.log(s1.pop()); // ming
+// console.log(s1.peek());
+// console.log(s1.search("hh"));
+// console.log(s1.print());
