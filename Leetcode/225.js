@@ -69,8 +69,9 @@ MyStack.prototype.push = function (x) {
  */
 MyStack.prototype.pop = function () {
   let size = this.queue.length;
-  while (size-- > 1) {
+  while (size > 1) {
     this.queue.push(this.queue.shift());
+    size--;
   }
   return this.queue.shift();
 };
