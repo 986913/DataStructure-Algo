@@ -2,41 +2,34 @@
  * @param {string} s
  * @return {boolean}
  */
-
-/**
- * @param {string} s
- * @return {boolean}
- */
-
 var isValid = function (s) {
   let stack = [];
 
-  for (let i = 0; i < s.length; i++) {
-    if (stack.length > 0) {
-      let top = stack[stack.length - 1];
+  for (let char of s) {
+    if (stack.length === 0) {
+      stack.push(char);
+    } else {
+      const top = stack[stack.length - 1];
       switch (top) {
-        case "(":
-          if (s[i] === ")") stack.pop();
-          else stack.push(s[i]);
+        case '(':
+          if (char == ')') stack.pop();
+          else stack.push(char);
           break;
-        case "[":
-          if (s[i] === "]") stack.pop();
-          else stack.push(s[i]);
+        case '[':
+          if (char == ']') stack.pop();
+          else stack.push(char);
+
           break;
-        case "{":
-          if (s[i] === "}") stack.pop();
-          else stack.push(s[i]);
+        case '{':
+          if (char == '}') stack.pop();
+          else stack.push(char);
           break;
       }
-    } 
-    else {
-      stack.push(s[i])
     }
   }
 
   return stack.length === 0;
 };
 
-
-console.log(isValid('()[]')) //true
-console.log(isValid('([{])}')) //false
+console.log(isValid('()[]')); //true
+console.log(isValid('([{])}')); //false
