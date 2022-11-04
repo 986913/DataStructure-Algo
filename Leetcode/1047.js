@@ -1,20 +1,19 @@
 /**
- * @param {string} S
+ * @param {string} s
  * @return {string}
  */
+var removeDuplicates = function (s) {
+  let stack = [];
 
-var removeDuplicates = function (S) {
-  const stacks = [];
-
-  for (let i = 0; i < S.length; i++) {
-    if (!stacks || (stacks[stacks.length - 1] !== S[i])) {
-      stacks.push(S[i]);
+  for (let char of s) {
+    if (stack.length === 0) {
+      stack.push(char);
     } else {
-      stacks.pop();
+      const top = stack[stack.length - 1];
+      if (top === char) stack.pop();
+      else stack.push(char);
     }
   }
-
-  return stacks.join("");
+  return stack.join('');
 };
-
-console.log(removeDuplicates("abbaca")) //'ca'
+console.log(removeDuplicates('abbaca')); //'ca'
