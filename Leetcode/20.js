@@ -7,6 +7,7 @@ var isValid = function (s) {
   let stack = [];
 
   for (let char of s) {
+    // 碰到左括号，给栈放右括号
     switch (char) {
       case '(':
         stack.push(')');
