@@ -19,11 +19,11 @@ var isValid = function (s) {
         stack.push(']');
         break;
       default:
-        if (char !== stack.pop()) return false;
+        if (char !== stack.pop()) return false; //碰到s中的右括号时，如果不匹配stack pop元素 则就不匹配
     }
   }
 
-  return stack.length === 0;
+  return stack.length === 0; //stack中要有对于元素的话，说明s中有多余的左括号或者右括号
 };
 
 console.log(isValid('()[]')); //true
