@@ -61,7 +61,7 @@ class MonoQueue {
 var maxSlidingWindow = function (nums, k) {
   let result = [];
 
-  let queue = new MonoQueue(); // 这道题中相当于window
+  let queue = new MonoQueue(); // 这道题中相当于window, 这个队列呢，放进去窗口里的元素，然后随着窗口的移动，队列也一进一出，每次移动之后，队列告诉我们里面的最大值是什么。
   let i = 0; //滑动窗口start
   let j = 0; //滑动窗口end
 
