@@ -3,6 +3,8 @@
  * @param {number} k
  * @return {number[]}
  */
+//优先级队列: PriorityQueue,  实现方式是Heap
+
 var topKFrequent = function (nums, k) {
   /* 1. build hash map {key => frequency}:  { 1 => 3, 2 => 2, 3 => 1 } */
   let map = new Map();

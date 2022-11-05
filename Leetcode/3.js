@@ -56,3 +56,30 @@ var lengthOfLongestSubstring = function (s) {
 
   return longestNonRepeatStrLen;
 };
+
+//变形题： https://bigfrontend.dev/problem/longest-substring-with-unique-characters
+function longestUniqueSubstr(str) {
+  if (!str.length) return '';
+
+  const set = new Set();
+  let start = 0;
+  let end = 0;
+  let max = 0;
+  let start_idx = 0;
+
+  while (end < str.length) {
+    if (!set.has(str[end])) {
+      set.add(str[end]);
+      end++;
+    } else {
+      set.delete(str[start]);
+      start++;
+    }
+
+    if (end - start > max) {
+      max = end - start;
+      start_idx = start;
+    }
+  }
+  return str.slice(start_idx, start_idx + max);
+}
