@@ -3,7 +3,7 @@
  * @param {number} k
  * @return {number[]}
  */
-// 1. slding window 解法：
+// 1. slding window 解法： O(n x k)
 var maxSlidingWindow = function (nums, k) {
   let result = [];
 
@@ -52,6 +52,7 @@ class MonoQueue {
       this.queue.shift();
     }
   }
+  // get max value
   front() {
     return this.queue[0];
   }
@@ -59,19 +60,28 @@ class MonoQueue {
 
 // 队列没有必要维护窗口里的所有元素，只需要维护有可能成为窗口里最大值的元素就可以了，同时保证队列里的元素数值是由大到小的。
 var maxSlidingWindow = function (nums, k) {
-  let helperQueue = new MonoQueue();
-  let i = 0,
-    j = 0;
-  let resArr = [];
+  let queue = new MonoQueue();
+  let result = [];
+  let i = 0;
+  let j = 0;
+
+  //移动j到k,入k个元素到queue中
   while (j < k) {
-    helperQueue.enqueue(nums[j++]);
+    queue.enqueue(nums[j]);
+    j++;
   }
-  resArr.push(helperQueue.front());
+  //维护result, result会添加一个最大值
+  result.push(queue.front());
+
+  //继续移动j直到nums末端
   while (j < nums.length) {
-    helperQueue.enqueue(nums[j]);
-    helperQueue.dequeue(nums[i]);
-    resArr.push(helperQueue.front());
-    i++, j++;
+    queue.enqueue(nums[j]); //queue入新元素： nums[j]
+    queue.dequeue(nums[i]); //queue出无用的元素： nums[i]
+
+    result.push(queue.front()); //维护result, result会添加一个最大值
+
+    i++;
+    j++;
   }
-  return resArr;
+  return result;
 };
