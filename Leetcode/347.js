@@ -3,23 +3,26 @@
  * @param {number} k
  * @return {number[]}
  */
-//优先级队列: PriorityQueue,  实现方式是Heap
 
+// top k issues: https://dev.to/986913/top-k-elements-js-13e0
+
+/* ：--------------------------------------use min-heap：--------------------------------------------------------  */
+
+// nums: [1,1,1,2,2,3], k=2 as example:
 var topKFrequent = function (nums, k) {
   /* 1. build hash map {key => frequency}:  { 1 => 3, 2 => 2, 3 => 1 } */
   let map = new Map();
   nums.forEach((n) => map.set(n, map.get(n) + 1 || 1));
 
-  //2. build minHeap (maintain k length)
+  /* 2. build minHeap (maintain k length) */
   let minheap = new MinHeap(k);
-
   let arr = [];
   map.forEach((value, key) => {
     arr.push({
       key: key,
       priority: value,
     });
-  });
+  }); //[ {key: 1, priority:3}, {key: 2, priority:2}, {key: 3, priority:1}]
   minheap.build(arr);
 
   //3. klenght min-heap is ready, log result
