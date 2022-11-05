@@ -25,7 +25,7 @@ var maxSlidingWindow = function (nums, k) {
   return result;
 };
 
-//2。 单调队列：Monotonic queue
+//2。 单调队列：
 /*
   单调队列是一个递增或递减的队列，可以用来维护滑动窗口区间的最值，即RMQ问题
 
@@ -34,7 +34,6 @@ var maxSlidingWindow = function (nums, k) {
   元素性质：队首元素永远是当前区间的最值；元素入队的过程中该元素是当前队列的最值
 */
 class MonoQueue {
-  queue;
   constructor() {
     this.queue = [];
   }
@@ -42,7 +41,7 @@ class MonoQueue {
     let back = this.queue[this.queue.length - 1];
     while (back !== undefined && back < value) {
       this.queue.pop();
-      back = this.queue[this.queue.length - 1];
+      back = this.queue[this.queue.length - 1]; // re-assign back
     }
     this.queue.push(value);
   }
@@ -52,7 +51,7 @@ class MonoQueue {
       this.queue.shift();
     }
   }
-  // get max value
+  //出口处
   front() {
     return this.queue[0];
   }
@@ -60,10 +59,11 @@ class MonoQueue {
 
 // 队列没有必要维护窗口里的所有元素，只需要维护有可能成为窗口里最大值的元素就可以了，同时保证队列里的元素数值是由大到小的。
 var maxSlidingWindow = function (nums, k) {
-  let queue = new MonoQueue();
   let result = [];
-  let i = 0;
-  let j = 0;
+
+  let queue = new MonoQueue(); // 这道题中相当于window
+  let i = 0; //滑动窗口start
+  let j = 0; //滑动窗口end
 
   //移动j到k,入k个元素到queue中
   while (j < k) {
