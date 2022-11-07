@@ -41,13 +41,13 @@ const postorderTraversal = (root) => {
   const visited = [];
 
   while (stack.length) {
-    const curr = stack.pop(); // 出栈： 中 -> 右 -> 左 结果翻转！
-
+    const curr = stack.pop(); // 则出栈为： 中 -> 右 -> 左 结果翻转！
     visited.push(curr.val); //中
+
     // 入栈： 先左 -> 后右
     if (curr.left) stack.push(curr.left);
     if (curr.right) stack.push(curr.right);
   }
 
-  return visited.reverse();
+  return visited.reverse(); //  中 -> 右 -> 左  反转为 ： 左 -> 右 -> 中
 };
