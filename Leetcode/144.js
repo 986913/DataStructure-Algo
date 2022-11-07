@@ -44,7 +44,7 @@ const preorderTraversal = (root) => {
     let curr = stack.pop(); // 出栈： 中 -> 左 -> 右
     visited.push(curr.val);
 
-    //入栈： 右 -> 左
+    //入栈： 先右 -> 后左
     if (curr.right) stack.push(curr.right);
     if (curr.left) stack.push(curr.left);
   }

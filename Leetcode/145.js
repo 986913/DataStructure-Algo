@@ -37,17 +37,17 @@ const postorderTraversal = (root) => {
 const postorderTraversal = (root) => {
   if (!root) return [];
 
-  const visited = [];
   const stack = [root];
+  const visited = [];
 
   while (stack.length) {
-    const curr = stack.pop();
+    const curr = stack.pop(); // 出栈： 中 -> 右 -> 左 结果翻转！
 
-    visited.unshift(curr.val);
-    //先左后右
+    visited.push(curr.val); //中
+    // 入栈： 先左 -> 后右
     if (curr.left) stack.push(curr.left);
     if (curr.right) stack.push(curr.right);
   }
 
-  return visited;
+  return visited.reverse();
 };
