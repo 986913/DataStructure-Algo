@@ -32,22 +32,23 @@ const inorderTraversal = (root) => {
 
 /*Solution 2: ------------------------------------iteration迭代 -----------------------------------------------*/
 const inorderTraversal = (root) => {
-  if (!root) return [];
+  let cur = root; //指针用来访问节点
 
-  var stack = [root];
-  var vistied = [];
+  const stack = [];
+  let visited = [];
 
-  while (stack.length) {
-    if (root) {
-      root = root.left; // 左
-      if (root) stack.push(root);
+  while (stack.length || cur) {
+    //指针用来访问节点,访问到最底层
+    if (cur) {
+      stack.push(cur); // 将访问的节点放进栈
+      cur = cur.left; // 左
     } else {
-      root = stack.pop(); // 中
-      vistied.push(root.val);
+      cur = stack.pop(); // --> 弹出 中
+      visited.push(cur.val);
 
-      root = root.right; // 右
-      if (root) stack.push(root);
+      cur = cur.right; // 右
     }
   }
-  return vistied;
+
+  return visited;
 };
