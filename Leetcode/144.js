@@ -51,3 +51,30 @@ const preorderTraversal = (root) => {
 
   return visited;
 };
+
+// 迭代统一写法:
+// 前序遍历：中左右
+// 压栈顺序：右左中
+var preorderTraversal = function (root) {
+  const visited = [];
+  const stack = [];
+
+  if (root) stack.push(root);
+
+  while (stack.length) {
+    const node = stack.pop();
+
+    if (!node) {
+      visited.push(stack.pop().val);
+      continue;
+    }
+
+    if (node.right) stack.push(node.right); // 右
+
+    if (node.left) stack.push(node.left); // 左
+
+    stack.push(node); // 中
+    stack.push(null);
+  }
+  return visited;
+};

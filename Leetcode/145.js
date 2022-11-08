@@ -34,6 +34,8 @@ const postorderTraversal = (root) => {
 };
 
 /*Solution 2: ------------------------------------iteration迭代 -----------------------------------------------*/
+
+/* 
 const postorderTraversal = (root) => {
   if (!root) return [];
 
@@ -50,4 +52,32 @@ const postorderTraversal = (root) => {
   }
 
   return visited.reverse(); //  中 -> 右 -> 左  反转为 ： 左 -> 右 -> 中
+};
+*/
+// 迭代统一写法:
+// 后续遍历：左右中
+// 压栈顺序：中右左
+var postorderTraversal = function (root) {
+  const visited = [];
+  const stack = [];
+
+  if (root) stack.push(root);
+
+  while (stack.length) {
+    const node = stack.pop();
+
+    if (!node) {
+      visited.push(stack.pop().val);
+      continue;
+    }
+
+    stack.push(node); // 中
+    stack.push(null);
+
+    if (node.right) stack.push(node.right); // 右
+
+    if (node.left) stack.push(node.left); // 左
+  }
+
+  return visited;
 };

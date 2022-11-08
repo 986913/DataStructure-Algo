@@ -52,3 +52,30 @@ const inorderTraversal = (root) => {
 
   return visited;
 };
+
+// 迭代统一写法:
+//  中序遍历：左中右
+//  压栈顺序：右中左
+var inorderTraversal = function (root) {
+  const visited = [];
+  const stack = [];
+
+  if (root) stack.push(root);
+
+  while (stack.length) {
+    const node = stack.pop();
+
+    if (!node) {
+      visited.push(stack.pop().val);
+      continue;
+    }
+
+    if (node.right) stack.push(node.right); // 右
+
+    stack.push(node); // 中
+    stack.push(null);
+
+    if (node.left) stack.push(node.left); // 左
+  }
+  return visited;
+};

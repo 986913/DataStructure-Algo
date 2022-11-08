@@ -96,69 +96,126 @@ class BinarySearchTree {
     return helper(this.root, val);
   }
 
-  /* DFS: PreOrder: 迭代(Stack)和递归两种方式---------根结点 ---> 左子树 ---> 右子树--------------------------------------------------------------- ----------------------------*/
+  /* DFS: PreOrder: ---------中结点 ---> 左子树 ---> 右子树--------------------------------------------------------------- ----------------------------*/
   DFS_preOrder_recurrsion() {
     let visited = [];
 
     const helper = (node) => {
-      // change outside variable
-      visited.push(node.value);
+      if (!node) return;
 
-      // change recussion's input.
-      if (node.left) helper(node.left);
-      if (node.right) helper(node.right);
+      visited.push(node.value); //中， change outside variable
+      /* change recurrsion's input: */
+      if (node.left) helper(node.left); // 左
+      if (node.right) helper(node.right); // 右
     };
 
     helper(this.root);
     return visited;
   }
   DFS_preOrder_iteration() {
-    // use Stack : https://coding.imooc.com/lesson/207.html#mid=13469
-    let stack = [];
-    let visited = [];
+    // 前序遍历：中左右;  压栈顺序：右左中
 
-    stack.push(this.root);
+    const visited = [];
+    const stack = [];
+
+    if (this.root) stack.push(this.root);
 
     while (stack.length) {
-      let curr = stack.pop(); // push + pop combo
-      visited.push(curr.value);
+      const node = stack.pop();
 
-      //先右后左：
-      if (curr.right) stack.push(curr.right);
-      if (curr.left) stack.push(curr.left);
+      if (!node) {
+        visited.push(stack.pop().value);
+        continue;
+      }
+
+      if (node.right) stack.push(node.right); // 右
+
+      if (node.left) stack.push(node.left); // 左
+
+      stack.push(node); // 中
+      stack.push(null);
     }
     return visited;
   }
-  /* DFS: InOrder： 递归 -------------左子树---> 根结点 ---> 右子树--------------------------------------------------------------------------- ------------------*/
-  DFS_inOrder() {
+  /* DFS: InOrder：  -------------左子树---> 中结点 ---> 右子树--------------------------------------------------------------------------- ------------------*/
+  DFS_inOrder_recurrsion() {
     let visited = [];
 
     const helper = (node) => {
-      // change recussion's input.
-      if (node.left) helper(node.left);
-      // change outside variable
-      visited.push(node.value);
-      // change recussion's input.
-      if (node.right) helper(node.right);
+      if (!node) return;
+
+      if (node.left) helper(node.left); // 左
+      visited.push(node.value); // 中
+      if (node.right) helper(node.right); //右;
     };
 
     helper(this.root);
     return visited;
   }
-  /* DFS: PostOrder: 递归 -------------左子树 ---> 右子树 ---> 根结点-------------------------------------------------------------------------- ------------------*/
-  DFS_postOrder() {
+
+  DFS_inOrder_iteration() {
+    //  中序遍历：左中右,  压栈顺序：右中左
+
+    const visited = [];
+    const stack = [];
+
+    if (this.root) stack.push(this.root);
+
+    while (stack.length) {
+      const node = stack.pop();
+
+      if (!node) {
+        visited.push(stack.pop().value);
+        continue;
+      }
+
+      if (node.right) stack.push(node.right); // 右
+
+      stack.push(node); // 中
+      stack.push(null);
+
+      if (node.left) stack.push(node.left); // 左
+    }
+    return visited;
+  }
+  /* DFS: PostOrder:  -------------左子树 ---> 右子树 ---> 中结点-------------------------------------------------------------------------- ------------------*/
+  DFS_postOrder_recurrsion() {
     let visited = [];
 
     const helper = (node) => {
-      // change recussion's input.
-      if (node.left) helper(node.left);
-      if (node.right) helper(node.right);
+      if (!node) return;
 
-      // change outside variable
-      visited.push(node.value);
+      if (node.left) helper(node.left); //左
+      if (node.right) helper(node.right); // 右
+      visited.push(node.value); //中
     };
 
     helper(this.root);
+    return visited;
+  }
+  DFS_postOrder_iteration() {
+    // 后续遍历：左右中,   压栈顺序：中右左
+    const visited = [];
+    const stack = [];
+
+    if (this.root) stack.push(this.root);
+
+    while (stack.length) {
+      const node = stack.pop();
+
+      if (!node) {
+        visited.push(stack.pop().value);
+        continue;
+      }
+
+      stack.push(node); // 中
+      stack.push(null);
+
+      if (node.right) stack.push(node.right); // 右
+
+      if (node.left) stack.push(node.left); // 左
+    }
+
     return visited;
   }
 
@@ -420,10 +477,17 @@ tree1.insert_iteration_way(3);
 tree1.insert_iteration_way(8);
 tree1.insert_iteration_way(20);
 tree1.insert_iteration_way(13);
-// console.log(tree1.DFS_preOrder_iteration()); //前序遍历： 根结点 ---> 左子树 ---> 右子树
-// console.log(tree1.DFS_inOrder()); //中序遍历： 左子树---> 根结点 ---> 右子树
-// console.log(tree1.DFS_postOrder()); //后序遍历： 左子树 ---> 右子树 ---> 根结点
-console.log(tree1.BFS());
+
+console.log('DFS - preOrder(recurrsion)', tree1.DFS_preOrder_recurrsion()); //前序遍历： 根结点 ---> 左子树 ---> 右子树
+console.log('DFS - preOrder(iteration)', tree1.DFS_preOrder_iteration());
+
+console.log('DFS - inOrder(recurrsion)', tree1.DFS_inOrder_recurrsion()); // 中序遍历： 左子树---> 根结点 ---> 右子树
+console.log('DFS - inOrder(iteration)', tree1.DFS_inOrder_iteration());
+
+console.log('DFS - postOrder(recurrsion)', tree1.DFS_postOrder_recurrsion()); //后序遍历： 左子树 ---> 右子树 ---> 根结点
+console.log('DFS - postOrder(iteration)', tree1.DFS_postOrder_iteration());
+
+console.log('BFS - (ONLY iteration - queue)', tree1.BFS()); // BFS
 
 // console.log(
 //   tree1.findMax_iteration_way(tree1.root),
@@ -454,7 +518,7 @@ console.log(tree1.BFS());
 // console.log(tree1.BFS());
 // console.log(tree1.remove(tree1.root, 13));
 
-console.log(tree1.floor(tree1.root, 14)); //13
+// console.log(tree1.floor(tree1.root, 14)); //13
 // console.log(tree1.floor(tree1.root, 7)); //6
 // console.log(tree1.floor(tree1.root, 17)); //15
 // console.log(tree1.ceil(tree1.root, 14)); //15
@@ -462,8 +526,7 @@ console.log(tree1.floor(tree1.root, 14)); //13
 
 // console.log(tree1.size);
 
-console.log('-------------------------------------------');
-
+// console.log('-------------------------------------------');
 // const tree2 = new BinarySearchTree();
 // tree2.insert_recurrsion_way(10);
 // tree2.insert_recurrsion_way(6);
