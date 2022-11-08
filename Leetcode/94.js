@@ -31,6 +31,8 @@ const inorderTraversal = (root) => {
 };
 
 /*Solution 2: ------------------------------------iteration迭代 -----------------------------------------------*/
+/*
+
 const inorderTraversal = (root) => {
   let cur = root; //指针用来访问节点
 
@@ -51,7 +53,8 @@ const inorderTraversal = (root) => {
   }
 
   return visited;
-};
+}
+ */
 
 // 迭代统一写法:
 //  中序遍历：左中右

@@ -54,6 +54,7 @@ const postorderTraversal = (root) => {
   return visited.reverse(); //  中 -> 右 -> 左  反转为 ： 左 -> 右 -> 中
 };
 */
+
 // 迭代统一写法:
 // 后续遍历：左右中
 // 压栈顺序：中右左

@@ -34,6 +34,7 @@ const preorderTraversal = (root) => {
 };
 
 /*Solution 2: ------------------------------------iteration迭代 -----------------------------------------------*/
+/*
 const preorderTraversal = (root) => {
   if (!root) return []; // handle edge case
 
@@ -51,6 +52,7 @@ const preorderTraversal = (root) => {
 
   return visited;
 };
+*/
 
 // 迭代统一写法:
 // 前序遍历：中左右
