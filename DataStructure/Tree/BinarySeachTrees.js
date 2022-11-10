@@ -237,7 +237,7 @@ class BinarySearchTree {
     return visited;
   }
 
-  BFS_V2 = () => {
+  BFS_V2() {
     if (this.root === null) return [];
 
     let visited = [];
@@ -258,7 +258,7 @@ class BinarySearchTree {
     }
 
     return visited;
-  };
+  }
 
   /* Copy a tree, through DFS --------------------------------------------------------------------------- ---------*/
   CopyTheTree_DFS(root) {
@@ -552,35 +552,3 @@ console.log('BFS - (ONLY iteration - queue)', tree1.BFS_V2()); //[ [10], [6，15
 // console.log(tree1.ceil(tree1.root, 5)); //6
 
 // console.log(tree1.size);
-
-// console.log('-------------------------------------------');
-// const tree2 = new BinarySearchTree();
-// tree2.insert_recurrsion_way(10);
-// tree2.insert_recurrsion_way(6);
-// tree2.insert_recurrsion_way(15);
-// tree2.insert_recurrsion_way(3);
-// tree2.insert_recurrsion_way(8);
-// tree2.insert_recurrsion_way(20);
-// tree2.insert_iteration_way(13);
-// console.log(tree2.DFS_preOrder_recurrsion());
-// console.log(tree2.DFS_inOrder());
-// console.log(tree2.DFS_postOrder());
-// console.log(tree2.BFS());
-
-// tree2.deleteMin_recurrsion_way();
-// console.log(tree2.DFS_preOrder_recurrsion());
-// console.log(tree2.BFS());
-
-// tree2.deleteMin_recurrsion_way();
-// console.log(tree2.DFS_preOrder_recurrsion());
-// console.log(tree2.BFS());
-
-// tree2.deleteMax_recurrsion_way();
-// console.log(tree2.DFS_preOrder_recurrsion());
-// console.log(tree2.BFS());
-
-// tree2.deleteMax_recurrsion_way();
-// console.log(tree2.DFS_preOrder_recurrsion());
-// console.log(tree2.BFS());
-
-// console.log(tree2.size);
