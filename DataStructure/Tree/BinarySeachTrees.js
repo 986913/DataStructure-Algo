@@ -221,15 +221,14 @@ class BinarySearchTree {
 
   /* BFS：迭代（use Queue）-----https://coding.imooc.com/lesson/207.html#mid=13471------------------------------------- */
   BFS() {
-    let queue = [];
-    let visited = [];
+    if (this.root === null) return [];
 
-    queue.push(this.root);
+    let visited = [];
+    let queue = [this.root];
 
     while (queue.length) {
       let node = queue.shift();
       visited.push(node.value);
-
       //先左后右：
       if (node.left) queue.push(node.left);
       if (node.right) queue.push(node.right);
@@ -237,6 +236,29 @@ class BinarySearchTree {
 
     return visited;
   }
+
+  BFS_V2 = () => {
+    if (this.root === null) return [];
+
+    let visited = [];
+    let queue = [this.root];
+
+    while (queue.length) {
+      let len = queue.length; // 记录当前层级节点数
+      let curLevel = []; //curLevel用于存放每一层的节点
+
+      for (let i = 0; i < len; i++) {
+        let node = queue.shift();
+        curLevel.push(node.value);
+        if (node.left) queue.push(node.left); // 存放当前层的下一层的节点到queue
+        if (node.right) queue.push(node.right); // 存放当前层的下一层的节点到queue
+      }
+
+      visited.push(curLevel); //把每一层的结果放到结果数组
+    }
+
+    return visited;
+  };
 
   /* Copy a tree, through DFS --------------------------------------------------------------------------- ---------*/
   CopyTheTree_DFS(root) {
@@ -478,16 +500,21 @@ tree1.insert_iteration_way(8);
 tree1.insert_iteration_way(20);
 tree1.insert_iteration_way(13);
 
-console.log('DFS - preOrder(recurrsion)', tree1.DFS_preOrder_recurrsion()); //前序遍历： 根结点 ---> 左子树 ---> 右子树
-console.log('DFS - preOrder(iteration)', tree1.DFS_preOrder_iteration());
+//DFS前序遍历： 根结点 ---> 左子树 ---> 右子树
+console.log('DFS - preOrder(recurrsion)', tree1.DFS_preOrder_recurrsion()); // [10, 6, 3, 8, 15, 13, 20]
+console.log('DFS - preOrder(iteration)', tree1.DFS_preOrder_iteration()); // [10, 6, 3, 8, 15, 13, 20]
 
-console.log('DFS - inOrder(recurrsion)', tree1.DFS_inOrder_recurrsion()); // 中序遍历： 左子树---> 根结点 ---> 右子树
-console.log('DFS - inOrder(iteration)', tree1.DFS_inOrder_iteration());
+//DFS中序遍历： 左子树---> 根结点 ---> 右子树
+console.log('DFS - inOrder(recurrsion)', tree1.DFS_inOrder_recurrsion()); //[3, 6, 8, 10, 13, 15, 20]
+console.log('DFS - inOrder(iteration)', tree1.DFS_inOrder_iteration()); //[3, 6, 8, 10, 13, 15, 20]
 
-console.log('DFS - postOrder(recurrsion)', tree1.DFS_postOrder_recurrsion()); //后序遍历： 左子树 ---> 右子树 ---> 根结点
-console.log('DFS - postOrder(iteration)', tree1.DFS_postOrder_iteration());
+//DFS后序遍历： 左子树 ---> 右子树 ---> 根结点
+console.log('DFS - postOrder(recurrsion)', tree1.DFS_postOrder_recurrsion()); // [3, 8, 6, 13, 20, 15, 10]
+console.log('DFS - postOrder(iteration)', tree1.DFS_postOrder_iteration()); // [3, 8, 6, 13, 20, 15, 10]
 
-console.log('BFS - (ONLY iteration - queue)', tree1.BFS()); // BFS
+//BFS层级便利
+console.log('BFS - (ONLY iteration - queue)', tree1.BFS()); //[10, 6, 15, 3, 8, 13, 20]
+console.log('BFS - (ONLY iteration - queue)', tree1.BFS_V2()); //[ [10], [6，15], [3，8，13，20] ]
 
 // console.log(
 //   tree1.findMax_iteration_way(tree1.root),
