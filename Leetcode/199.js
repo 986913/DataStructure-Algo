@@ -23,12 +23,10 @@ var rightSideView = function (root) {
 
     for (let i = 0; i < len; i++) {
       let node = queue.shift();
-
       if (i === len - 1) {
         //当i===len-1的时候表明到了层级最后一个节点!!
         visited.push(node.val);
       }
-
       if (node.left) queue.push(node.left);
       if (node.right) queue.push(node.right);
     }
