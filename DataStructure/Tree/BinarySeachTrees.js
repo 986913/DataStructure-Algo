@@ -227,7 +227,7 @@ class BinarySearchTree {
     queue.push(this.root);
 
     while (queue.length) {
-      let node = queue.shift(); // push + shift combo
+      let node = queue.shift();
       visited.push(node.value);
 
       //先左后右：
