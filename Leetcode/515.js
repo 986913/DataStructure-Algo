@@ -22,7 +22,7 @@ var largestValues = function (root) {
     let len = queue.length; // 记录当前层级节点数
     let curLevel = []; //curLevel用于存放每一层的节点
 
-    //开始遍历当前层节点
+    //queue弹出(shift)len个, 并且开始加(push)下一层的节点
     for (let i = 0; i < len; i++) {
       let node = queue.shift();
       curLevel.push(node.val);
