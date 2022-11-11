@@ -44,13 +44,14 @@ var maxDepth = function (root) {
 
   while (queue.length) {
     let len = queue.length; // 记录当前层级节点数
+    height++;
+
+    //开始便利每一层节点
     for (let i = 0; i < len; i++) {
       let node = queue.shift();
       if (node.left) queue.push(node.left); // 存放当前层的下一层的节点到queue
       if (node.right) queue.push(node.right); // 存放当前层的下一层的节点到queue
     }
-
-    height++;
   }
 
   return height;

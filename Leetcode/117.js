@@ -21,6 +21,7 @@ var connect = function (root) {
   while (queue.length) {
     let len = queue.length; // 记录当前层级节点数
 
+    //开始遍历当前层节点
     for (let i = 0; i < len; i++) {
       let node = queue.shift();
       if (i < len - 1) {
