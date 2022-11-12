@@ -64,18 +64,17 @@ var preorderTraversal = function (root) {
   if (root) stack.push(root);
 
   while (stack.length) {
-    const node = stack.pop();
+    const curr = stack.pop();
 
-    if (!node) {
-      visited.push(stack.pop().val);
+    if (!curr) {
+      let node = stack.pop();
+      visited.push(node.val);
       continue;
     }
 
-    if (node.right) stack.push(node.right); // 右
-
-    if (node.left) stack.push(node.left); // 左
-
-    stack.push(node); // 中
+    if (curr.right) stack.push(curr.right); // 右
+    if (curr.left) stack.push(curr.left); // 左
+    stack.push(curr); // 中
     stack.push(null);
   }
   return visited;

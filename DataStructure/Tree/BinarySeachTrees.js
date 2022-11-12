@@ -121,18 +121,17 @@ class BinarySearchTree {
     if (this.root) stack.push(this.root);
 
     while (stack.length) {
-      const node = stack.pop();
+      const curr = stack.pop();
 
-      if (!node) {
-        visited.push(stack.pop().value);
+      if (!curr) {
+        let node = stack.pop();
+        visited.push(node.value);
         continue;
       }
 
-      if (node.right) stack.push(node.right); // 右
-
-      if (node.left) stack.push(node.left); // 左
-
-      stack.push(node); // 中
+      if (curr.right) stack.push(curr.right); // 右
+      if (curr.left) stack.push(curr.left); // 左
+      stack.push(curr); // 中
       stack.push(null);
     }
     return visited;
@@ -162,19 +161,18 @@ class BinarySearchTree {
     if (this.root) stack.push(this.root);
 
     while (stack.length) {
-      const node = stack.pop();
+      const curr = stack.pop();
 
-      if (!node) {
-        visited.push(stack.pop().value);
+      if (!curr) {
+        let node = stack.pop();
+        visited.push(node.value);
         continue;
       }
 
-      if (node.right) stack.push(node.right); // 右
-
-      stack.push(node); // 中
+      if (curr.right) stack.push(curr.right); // 右
+      stack.push(curr); // 中
       stack.push(null);
-
-      if (node.left) stack.push(node.left); // 左
+      if (curr.left) stack.push(curr.left); // 左
     }
     return visited;
   }
@@ -201,19 +199,18 @@ class BinarySearchTree {
     if (this.root) stack.push(this.root);
 
     while (stack.length) {
-      const node = stack.pop();
+      const curr = stack.pop();
 
-      if (!node) {
-        visited.push(stack.pop().value);
+      if (!curr) {
+        let node = stack.pop();
+        visited.push(node.value);
         continue;
       }
 
-      stack.push(node); // 中
+      stack.push(curr); // 中
       stack.push(null);
-
-      if (node.right) stack.push(node.right); // 右
-
-      if (node.left) stack.push(node.left); // 左
+      if (curr.right) stack.push(curr.right); // 右
+      if (curr.left) stack.push(curr.left); // 左
     }
 
     return visited;
