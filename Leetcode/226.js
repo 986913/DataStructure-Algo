@@ -42,6 +42,7 @@ var invertTree = function (root) {
       continue;
     }
 
+    /* preorder: 中左右， then入栈顺序为：右坐中 */
     if (curr.right) stack.push(curr.right);
     if (curr.left) stack.push(curr.left);
     stack.push(curr);
