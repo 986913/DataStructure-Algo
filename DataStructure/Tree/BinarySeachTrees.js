@@ -237,6 +237,7 @@ class BinarySearchTree {
     return visited;
   }
 
+  /*上面的BFS重要(实用) */
   BFS_V2() {
     if (this.root === null) return [];
 
