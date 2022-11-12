@@ -27,5 +27,3 @@ var postorder = function (root) {
   helper(root);
   return visited;
 };
-
-//solution1:     BFS - itelation
