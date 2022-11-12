@@ -20,7 +20,7 @@ var isSameTree = function (p, q) {
   else if (p === null && q === null) return true;
   else if (p.val !== q.val) return false;
 
-  //3. 当left.val===right.val, 确定单层递归逻辑:
+  //3. 当p.val===q.val, 确定单层递归逻辑:
   let isLeftSideSame = isSameTree(p.left, q.left);
   let isRightSideSame = isSameTree(p.right, q.right);
 
