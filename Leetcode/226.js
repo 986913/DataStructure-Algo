@@ -32,7 +32,7 @@ var invertTree = function (root) {
   return root;
 };
 
-// solution 2: preorderBFS - 迭代统一模版 - leetcode 144
+// solution 2: preorderDFS - 迭代统一模版 - leetcode 144
 var invertTree = function (root) {
   if (!root) return root;
 
