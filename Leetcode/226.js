@@ -11,7 +11,12 @@
  * @return {TreeNode}
  */
 
-// solution 1: DFS preOrder - 递归模版
+/* 
+  注意只要把每一个节点的左右孩子翻转一下，就可以达到整体翻转的效果
+  这道题目使用preOrder和postOrder遍历都可以，唯独inOrder遍历不方便，因为inOrder遍历会把某些节点的左右孩子翻转了两次！建议拿纸画一画，就理解了 
+*/
+
+// solution 1: DFS preOrder - 递归模版 - leetcode 144
 var invertTree = function (root) {
   if (!root) return root;
 
@@ -27,7 +32,7 @@ var invertTree = function (root) {
   return root;
 };
 
-// solution 2: preorderBFS - 迭代统一模版
+// solution 2: preorderBFS - 迭代统一模版 - leetcode 144
 var invertTree = function (root) {
   if (!root) return root;
 

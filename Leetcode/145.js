@@ -56,8 +56,7 @@ const postorderTraversal = (root) => {
 */
 
 // 迭代统一写法:
-// 后续遍历：左右中
-// 压栈顺序：中右左
+// 后续遍历：左右中  then压栈顺序：中右左
 var postorderTraversal = function (root) {
   const visited = [];
   const stack = [];

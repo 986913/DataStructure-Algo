@@ -55,8 +55,7 @@ const preorderTraversal = (root) => {
 */
 
 // 迭代统一写法:
-// 前序遍历：中左右
-// 压栈顺序：右左中
+// 前序遍历：中左右,   then压栈顺序：右左中
 var preorderTraversal = function (root) {
   const visited = [];
   const stack = [];

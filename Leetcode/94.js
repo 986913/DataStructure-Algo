@@ -57,8 +57,7 @@ const inorderTraversal = (root) => {
  */
 
 // 迭代统一写法:
-//  中序遍历：左中右
-//  压栈顺序：右中左
+//  中序遍历：左中右     then压栈顺序：右中左
 var inorderTraversal = function (root) {
   const visited = [];
   const stack = [];
