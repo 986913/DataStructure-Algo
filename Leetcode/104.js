@@ -11,7 +11,7 @@
  * @return {number}
  */
 
-// 是102的变形题,只是输出visited.length就行
+//BFS: 是102的变形题,只是输出visited.length就行
 var maxDepth = function (root) {
   if (!root) return [];
 
@@ -19,24 +19,23 @@ var maxDepth = function (root) {
   let queue = [root];
 
   while (queue.length) {
-    let len = queue.length; // 记录当前层级节点数
-    let curLevel = []; //curLevel用于存放每一层的节点
+    let len = queue.length;
+    let curLevel = [];
 
-    //queue弹出(shift)len个, 并且开始加(push)下一层的节点
     for (let i = 0; i < len; i++) {
       let node = queue.shift();
       curLevel.push(node.val);
-      if (node.left) queue.push(node.left); // 存放当前层的下一层的节点到queue
-      if (node.right) queue.push(node.right); // 存放当前层的下一层的节点到queue
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
     }
 
-    visited.push(curLevel); //把每一层的结果放到结果数组
+    visited.push(curLevel);
   }
 
-  return visited.length;
+  return visited.length; // return vistied.length instead of visited
 };
 
-//或者这个都行：
+//BFS: 或者这个都行：
 var maxDepth = function (root) {
   if (!root) return [];
 
@@ -44,14 +43,12 @@ var maxDepth = function (root) {
   let queue = [root];
 
   while (queue.length) {
-    let len = queue.length; // 记录当前层级节点数
-    height++;
-
-    //queue弹出(shift)len个, 并且开始加(push)下一层的节点
+    let len = queue.length;
+    height++; /* 层数+1 */
     for (let i = 0; i < len; i++) {
       let node = queue.shift();
-      if (node.left) queue.push(node.left); // 存放当前层的下一层的节点到queue
-      if (node.right) queue.push(node.right); // 存放当前层的下一层的节点到queue
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
     }
   }
 

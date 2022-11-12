@@ -11,7 +11,7 @@
  * @return {number}
  */
 
-// 是102， 104的变形题：
+//BFS:   是102， 104的变形题：
 var minDepth = function (root) {
   if (!root) return [];
 
