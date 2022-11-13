@@ -16,7 +16,7 @@
 // Solution 1: DFS - recursion
 var maxDepth = function (root) {
   //1.确定递归函数的参数和返回值: 参数就是传入树的根节点，返回就返回这棵树的深度
-  let getDepth = (node) => {
+  const getDepth = (node) => {
     if (!node) return 0; //2.确定终止条件：如果为空节点的话，就返回0，表示高度为0
 
     //3. 确定单层递归的逻辑：遍历求它的each child node深度，最后取child node深度最大的数值
