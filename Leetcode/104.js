@@ -11,7 +11,10 @@
  * @return {number}
  */
 
+//https://www.bilibili.com/video/BV1Gd4y1V75u/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
+
 //BFS: 是102的变形题,只是输出visited.length就行
+/*
 var maxDepth = function (root) {
   if (!root) return [];
 
@@ -33,9 +36,10 @@ var maxDepth = function (root) {
   }
 
   return visited.length; // return vistied.length instead of visited
-};
+}; 
+*/
 
-//BFS: 或者这个都行：
+//BFS: 是102的变形题 --- Solution1
 var maxDepth = function (root) {
   if (!root) return [];
 
@@ -53,4 +57,22 @@ var maxDepth = function (root) {
   }
 
   return height;
+};
+
+//post_order DFS  - 使用递归的方法 递归三部曲 - solution2
+
+var maxDepth = function (root) {
+  //1.确定递归函数的参数和返回值: 参数就是传入树的根节点，返回就返回这棵树的深度
+  const getDepth = (node) => {
+    if (node == null) return 0; //2.确定终止条件：如果为空节点的话，就返回0，表示高度为0。
+
+    //3.确定单层递归的逻辑：先求它的左子树的深度，再求的右子树的深度，最后取左右深度最大的数值 再+1 （加1是因为算上当前中间节点）就是目前节点为根节点的树的深度
+    let leftTreeDepth = getDepth(node.left); //左
+    let rightTreeDepth = getDepth(node.right); // 右
+    let depth = 1 + Math.max(leftTreeDepth, rightTreeDepth); //中
+
+    return depth;
+  };
+
+  return getDepth(root);
 };
