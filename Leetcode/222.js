@@ -68,20 +68,23 @@ var countNodes = function (root) {
   //利用完全二叉树的特点
   if (!root) return 0;
 
-  let left = root.left;
-  let right = root.right;
+  let left = root.left; // pointer1 用于统计深度
+  let right = root.right; // pointer2 用于统计深度
   let leftDepth = 0;
   let rightDepth = 0;
 
+  //一直向左
   while (left) {
     left = left.left;
     leftDepth++;
   }
+  //一直向右
   while (right) {
     right = right.right;
     rightDepth++;
   }
 
+  //在Complete binary tree中，如果递归向左遍历的深度等于递归向右遍历的深度，那说明就是满二叉树。
   if (leftDepth == rightDepth) return Math.pow(2, leftDepth + 1) - 1; //2的深度次方-1 --> 就是一个满二叉树的节点数
 
   return countNodes(root.left) + countNodes(root.right) + 1;
