@@ -27,7 +27,7 @@ var removeElements = function (head, val) {
   return head;
 };
 
-//解法2:
+//解法2: 👍👍👍 (dummy head的使用)
 var removeElements = function (head, val) {
   let dummyHead = new ListNode(-1);
   dummyHead.next = head;

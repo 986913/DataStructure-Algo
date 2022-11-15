@@ -3,8 +3,7 @@
  * @return {boolean}
  */
 
-//1. hashtable - set
-
+//1. 👍👍👍 hashtable - set
 const squareSum = (number) => {
   let sum = 0;
 
@@ -29,7 +28,9 @@ var isHappy = function (n) {
 };
 
 //2. 2 pointers
-const squareSum = (number) => {
+/**
+ * 
+ * const squareSum = (number) => {
   let sum = 0;
 
   while (number > 0) {
@@ -54,3 +55,4 @@ var isHappy = function (n) {
 
   return slow === 1;
 };
+ */

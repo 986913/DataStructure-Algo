@@ -4,19 +4,14 @@
  * @return {boolean}
  */
 
-// Solution1：
+// Solution1:
 var isAnagram = function (s, t) {
   const sortedS = s.split('').sort().join('');
   const sortedT = t.split('').sort().join('');
   return sortedS === sortedT;
 };
 
-// Solution2: use map - hashtable
-/**
- * @param {string} s
- * @param {string} t
- * @return {boolean}
- */
+// Solution2: 👍👍👍 use map - hashtable
 var isAnagram = function (s, t) {
   if (s.length !== t.length) return false;
   let map = new Map();
@@ -33,7 +28,7 @@ var isAnagram = function (s, t) {
   return true;
 };
 
-// Solution3: use array - hashtable
+// Solution3: 👍👍👍 use array - hashtable
 var isAnagram = function (s, t) {
   if (s.length !== t.length) return false;
 

@@ -27,7 +27,7 @@ var removeElement = function (nums, val) {
   return len;
 };
 
-//2. 2Pointer: https://www.bilibili.com/video/BV12A4y1Z7LP?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
+//2. 👍👍👍 2Pointer: https://www.bilibili.com/video/BV12A4y1Z7LP?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
 /* fast pointer is use for: loop throgh the whole array. 
     slow pointer is use for: 记录更新所有不重复的 */
 var removeElement = function (nums, val) {

@@ -4,6 +4,7 @@
  * @return {number[][]}
  */
 
+//👍👍👍 2 pointers:
 var fourSum = function (nums, target) {
   let result = [];
   if (nums.length < 4) return result;

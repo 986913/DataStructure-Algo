@@ -3,6 +3,7 @@
  * @return {boolean}
  */
 
+//👍👍👍:  use stack
 var isValid = function (s) {
   let stack = [];
 

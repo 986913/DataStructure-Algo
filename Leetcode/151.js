@@ -11,7 +11,7 @@ var reverseWords = function (s) {
   return arr.reverse().join(' ');
 };
 
-//解法2:👍  2Pointer:
+//解法2:👍👍👍  2Pointer:
 var reverseWords = function (s) {
   const arr = s.trim().split(/ +/);
 

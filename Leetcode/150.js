@@ -3,6 +3,8 @@
  * @return {number}
  */
 
+//👍👍👍 use stack:
+
 var evalRPN = function (tokens) {
   var stack = [];
   var right, left;

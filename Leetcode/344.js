@@ -11,7 +11,7 @@ const reverseWords = (s) => {
   return result.join(' ');
 };
 
-//reverseString by using 2 pointer
+//👍👍👍reverseString by using 2 pointer
 const reveseString = (str) => {
   let left = 0;
   let right = str.length - 1;

@@ -15,50 +15,53 @@
   解法1: Brute force:  不推荐🙅🏻‍♀️   
   find len of linked list first, then find the len-n th node , then delete it.
 */
-var removeNthFromEnd = function (head, n) {
-  // find the length of linked list
-  const len = findLenOfLinkedList(head);
 
-  if (len - n === 0 && len === 1) return null; //edge case
+/*
+  var removeNthFromEnd = function (head, n) {
+    // find the length of linked list
+    const len = findLenOfLinkedList(head);
 
-  // then get the len-n th node, then remove that node
-  return findThenDeleteNode(len - n, head, len);
-};
+    if (len - n === 0 && len === 1) return null; //edge case
 
-const findLenOfLinkedList = (head) => {
-  let len = 0;
-  let curr = head;
+    // then get the len-n th node, then remove that node
+    return findThenDeleteNode(len - n, head, len);
+  };
 
-  while (curr) {
-    len++;
-    curr = curr.next;
-  }
+  const findLenOfLinkedList = (head) => {
+    let len = 0;
+    let curr = head;
 
-  return len;
-};
-const findThenDeleteNode = (index, head, len) => {
-  let count = 0;
-  let curr = head;
-  let prev = null;
-
-  if (index === 0 && len > 1) {
-    //当remove index=0的节点时
-    head = curr.next;
-    return head;
-  } else {
-    while (count !== index) {
-      //当remove index>1的节点时
-      prev = curr;
-      count++;
+    while (curr) {
+      len++;
       curr = curr.next;
     }
-    // console.log(curr);  // curr就是在index上的Node
-    prev.next = curr.next;
-    return head;
-  }
-};
 
-/* 解法2: Fast & Slow pointer      */
+    return len;
+  };
+  const findThenDeleteNode = (index, head, len) => {
+    let count = 0;
+    let curr = head;
+    let prev = null;
+
+    if (index === 0 && len > 1) {
+      //当remove index=0的节点时
+      head = curr.next;
+      return head;
+    } else {
+      while (count !== index) {
+        //当remove index>1的节点时
+        prev = curr;
+        count++;
+        curr = curr.next;
+      }
+      // console.log(curr);  // curr就是在index上的Node
+      prev.next = curr.next;
+      return head;
+    }
+  };
+*/
+
+/* 解法2: 👍👍👍 Fast & Slow pointer      */
 var removeNthFromEnd = function (head, n) {
   let dummyHead = new ListNode(-1, head);
 

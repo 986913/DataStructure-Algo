@@ -12,7 +12,7 @@
 
 // https://www.youtube.com/watch?v=aBEm9ByKzBo&ab_channel=%E8%80%81%E6%AF%95JS
 
-// 1.  双指针法： 四步走
+// 1. 👍👍👍  双指针法： 四步走
 var reverseList = function (head) {
   if (!head || !head.next) return head;
 

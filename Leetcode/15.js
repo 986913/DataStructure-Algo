@@ -17,10 +17,8 @@ const threeSum = function (nums) {
   return setResult.map((item) => item.split(' '));
 };
 
-/*---------------------------------- 转换为2sum --------------------------------------- */
-
 // https://www.bilibili.com/video/BV1GW4y127qo/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
-
+/*---------------- 👍👍👍 2 pointer: 转换为2sum --------------------------------------- */
 const threeSum = (nums) => {
   const result = [];
 

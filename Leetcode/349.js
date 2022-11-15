@@ -17,7 +17,7 @@ var intersection = function (nums1, nums2) {
   return result;
 };
 
-//2. hash table - use set
+//2.👍👍👍 hash table - use set
 var intersection = function (nums1, nums2) {
   let set = new Set();
 
@@ -30,7 +30,7 @@ var intersection = function (nums1, nums2) {
   return Array.from(set);
 };
 
-//3.   2 pointer:
+//3. 👍👍👍 2 pointer:
 var intersection = function (nums1, nums2) {
   let result = [];
   let p1 = 0;

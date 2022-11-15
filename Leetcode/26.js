@@ -12,7 +12,7 @@ var removeDuplicates = function (nums) {
 };
 
 /**
- * 2 pointer
+ * 2 pointer 👍
  */
 var removeDuplicates = function (nums) {
   if (nums == null) return 0;

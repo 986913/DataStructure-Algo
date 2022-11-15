@@ -15,7 +15,7 @@ var reverseWords = function (s) {
   return result.join(' ');
 };
 
-//reverseString by using 2 pointer
+//👍👍👍 reverseString by using 2 pointer
 const reveseString = (str) => {
   let left = 0;
   let right = str.length - 1;
@@ -23,16 +23,10 @@ const reveseString = (str) => {
   let arr = str.split('');
 
   while (left < right) {
-    swap(arr, left, right);
+    [arr[left], arr[right]] = [arr[right], arr[left]];
     left++;
     right--;
   }
 
   return arr.join('');
-};
-
-const swap = (arr, a, b) => {
-  let tmp = arr[a];
-  arr[a] = arr[b];
-  arr[b] = tmp;
 };

@@ -32,7 +32,7 @@ const minSubArrayLen = (s, nums) => {
 }
 */
 
-// 双指针/sliding window 解法:
+// 👍👍👍 双指针/sliding window 解法:
 var minSubArrayLen = function (n, arr) {
   let windowSum = 0;
   let windowStartIdx = 0;

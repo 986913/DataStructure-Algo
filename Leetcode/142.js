@@ -13,6 +13,7 @@
  * @return {ListNode}
  */
 
+//👍👍👍 2 points:
 var detectCycle = function (head) {
   if (!head || !head.next) return null;
 

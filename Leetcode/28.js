@@ -1,4 +1,4 @@
-//1. sliding window:
+//1. 👍👍👍 sliding window:
 var strStr = function (haystack, needle) {
   if (needle === '') return 0;
   if (haystack.length < needle.length) return -1;

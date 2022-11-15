@@ -6,7 +6,7 @@ var sortedSquares = function (nums) {
   return nums.map((n) => Math.pow(n, 2)).sort((a, b) => a - b);
 };
 
-/* 2 pointers */
+/* 2 pointers 👍 */
 var sortedSquares = function (nums) {
   let result = [];
   let left = 0;
