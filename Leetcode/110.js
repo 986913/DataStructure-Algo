@@ -18,7 +18,7 @@
  * @return {boolean}
  */
 
-// --- Solution1 --- BFS迭代: 是102的变形题 ------------------------------------------------
+// --- Solution1 --- BFS迭代: 是102的变形题 -------------------leetcode 102的变形题-------------------------------
 
 /**
  *  --- Solution2 👍 --- post_order DFS使用递归三部曲-----------leetcode 104的变形题-------------------------------
@@ -33,12 +33,12 @@ var isBalanced = function (root) {
 
     //3.确定单层递归的逻辑
     let leftHeight = getHeight(node.left);
-    if (leftHeight === -1) return -1; // 当判定左子树不为平衡二叉树时,即可直接返回-1
+    if (leftHeight === -1) return -1; // 当判定左子树不是平衡二叉树时,即可直接返回-1
     let rightHeight = getHeight(node.right);
-    if (rightHeight === -1) return -1; //当判定右子树不为平衡二叉树时,即可直接返回-1
+    if (rightHeight === -1) return -1; //当判定右子树不是平衡二叉树时,即可直接返回-1
     let heightDiff = Math.abs(leftHeight - rightHeight);
-    if (heightDiff > 1) return -1;
-    else return 1 + Math.max(leftHeight, rightHeight);
+    if (heightDiff > 1) return -1; //返回-1，说明当前子树(node)不是平衡二叉树
+    else return 1 + Math.max(leftHeight, rightHeight); //返回当前子树(node)的高度
   };
 
   return !(getHeight(root) === -1);
