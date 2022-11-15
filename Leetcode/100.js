@@ -12,6 +12,8 @@
  * @return {boolean}
  */
 
+//👍👍👍 DFS post_order - recursion--------------------------------------
+
 // 1. 确定递归的参数:两个tree NODE : p and q.  和返回值boolean: true false
 var isSameTree = function (p, q) {
   //2. 确定终止条件 空的情况

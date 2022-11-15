@@ -12,7 +12,7 @@
  * @return {number[]}
  */
 
-//solution1:     BFS - recursion     preorder: 中左右
+//solution1: 👍👍👍  DFS - recursion     preorder: 中左右
 var preorder = function (root) {
   let visited = [];
 

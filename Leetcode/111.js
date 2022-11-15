@@ -11,7 +11,7 @@
  * @return {number}
  */
 
-//BFS:   是102， 104的变形题：
+//👍👍👍 BFS:   是102， 104的变形题：----------------------------------------------------
 var minDepth = function (root) {
   if (!root) return [];
 
@@ -35,7 +35,7 @@ var minDepth = function (root) {
   return minHeight;
 };
 
-//DFS_postorder - recursion
+//👍👍👍 DFS_postorder - recursion -------------------------------------------------
 var minDepth = function (root) {
   //1. 确定递归函数的参数和返回值: 参数为要传入的二叉树root，返回的是int类型的深度
   const getDepth = (node) => {

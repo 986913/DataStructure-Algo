@@ -12,14 +12,14 @@
  */
 
 /**
+ * https://www.bilibili.com/video/BV1ue4y1Y7Mf/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
  *
  * 什么样的题目一定要使用post order遍历？
  *  - 需要收集孩子的信息，向上一层返回的题目 比如下面这个题
  */
 
-//https://www.bilibili.com/video/BV1ue4y1Y7Mf/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
+//👍👍👍 DFS post_order 使用递归遍历左右子树 递归三部曲 (leetcode 100的变形题)
 
-//(leetcode 100的变形题) 使用递归遍历左右子树 递归三部曲 （这道题只能 post_order:左右中）
 var isSymmetric = function (root) {
   // 1. 确定递归的参数 root.left root.right和返回值true false  （就是判断两个二叉树镜面反转后是否一样/两个二叉树是否镜面对称分别以left和right为root的两个二叉树）
   const isMirrorTree = (left, right) => {

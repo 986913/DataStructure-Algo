@@ -11,7 +11,7 @@
  * @return {number[][]}
  */
 
-//每一层可能有2个以上,所以不再使用node.left node.right (是102的变形题)
+//👍👍👍 每一层可能有2个以上,所以不再使用node.left node.right (是102 BFS 的变形题)
 var levelOrder = function (root) {
   if (!root) return [];
 

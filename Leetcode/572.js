@@ -12,6 +12,7 @@
  * @return {boolean}
  */
 
+//👍👍👍 DFS post_order 使用递归遍历左右子树 递归三部曲 (leetcode 100的变形题)
 var isSubtree = function (root, subRoot) {
   if (!root) return false;
 

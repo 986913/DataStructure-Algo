@@ -11,7 +11,7 @@
  * @return {number[]}
  */
 
-//solution1:     BFS - recursion     postorder: 左右中
+//solution1:     DFS - recursion     postorder: 左右中
 var postorder = function (root) {
   let visited = [];
   const helper = (node) => {

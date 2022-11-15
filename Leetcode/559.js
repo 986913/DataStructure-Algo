@@ -13,7 +13,7 @@
 
 //https://www.bilibili.com/video/BV1Gd4y1V75u/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
 
-// Solution 1: DFS - recursion
+// Solution 1:  👍👍👍 DFS - recursion
 var maxDepth = function (root) {
   //1.确定递归函数的参数和返回值: 参数就是传入树的根节点，返回就返回这棵树的深度
   const getDepth = (node) => {
@@ -31,7 +31,7 @@ var maxDepth = function (root) {
   return getDepth(root);
 };
 
-// Solution2.1 ---  BFS: 是102的变形题
+// Solution2.1 ---  👍👍👍 BFS: 是102的变形题
 var maxDepth = function (root) {
   if (!root) return 0;
 

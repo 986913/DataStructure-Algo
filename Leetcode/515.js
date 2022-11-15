@@ -11,7 +11,7 @@
  * @return {number[]}
  */
 
-//本题就是层序遍历的时候得出每一层的最大值  (是102的变形题)
+//👍👍👍 本题就是层序遍历的时候得出每一层的最大值  (是102 BFS的变形题)
 var largestValues = function (root) {
   if (!root) return [];
 

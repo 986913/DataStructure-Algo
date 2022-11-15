@@ -30,7 +30,7 @@ var countNodes = function (root) {
   return count;
 };
 
-//solution 2.1 --------------------------------------------: DFS遍历 (就把root当成普通的二叉树 binary tree)
+//solution 2.1 ------------------------------👍👍👍--------------: DFS遍历 (就把root当成普通的二叉树 binary tree)
 var countNodes = function (root) {
   // let visited = [];
   let count = 0;
@@ -48,7 +48,7 @@ var countNodes = function (root) {
   return count;
   // return visited.length;
 };
-//solution 2.2 --------------------------------------------: DFS遍历 (就把root当成普通的二叉树 binary tree)
+//solution 2.2 --------------------------------👍👍👍------------: DFS遍历 (就把root当成普通的二叉树 binary tree)
 var countNodes = function (root) {
   const getNodesCount = (node) => {
     if (!node) return 0;
