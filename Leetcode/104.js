@@ -11,8 +11,6 @@
  * @return {number}
  */
 
-//https://www.bilibili.com/video/BV1Gd4y1V75u/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
-
 // --- Solution1.1 --- BFS: 是102的变形题,只是输出visited.length就行 ------------------------------------
 /*
 var maxDepth = function (root) {
@@ -58,6 +56,16 @@ var maxDepth = function (root) {
 
   return height;
 };
+
+/**
+ * https://www.bilibili.com/video/BV1Gd4y1V75u/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
+ *
+ *
+ * 二叉树节点的深度(depth)：指从根节点到该节点的最长简单路径边的条数。 求深度(depth)可以从上到下去查 所以需要pre_order前序遍历（中左右）
+ * 二叉树节点的高度(height)：指从该节点到叶子节点的最长简单路径边的条数。 求高度(height)只能从下到上去查，所以只能post_order后序遍历（左右中）
+ *
+ * 那么,为什么这道题求的是二叉树的最大深度，也用的是后序遍历， 那是因为代码的逻辑其实是求的根节点的高度，而根节点的高度就是这棵树的最大深度，所以才可以使用后序遍历
+ */
 
 // --- Solution2 --- post_order DFS  - 使用递归的方法 递归三部曲------------------------------------------
 var maxDepth = function (root) {
