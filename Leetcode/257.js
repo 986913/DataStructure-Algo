@@ -11,7 +11,8 @@
  * @return {string[]}
  */
 
-//DFS pre_order recursion:
+//👍👍👍 DFS pre_order recursion: -- dfs_preorder模版变形题
+
 var binaryTreePaths = function (root) {
   let res = [];
 
