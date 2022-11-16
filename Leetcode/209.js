@@ -45,10 +45,10 @@ var minSubArrayLen = function (n, arr) {
     while (windowSum >= n) {
       minLen = Math.min(minLen, windowEndIdx - windowStartIdx + 1);
       windowSum -= arr[windowStartIdx]; // 别忘了update sum
-      windowStartIdx += 1;
+      windowStartIdx += 1; // 别忘了update windowStartIdx
     }
   }
-  return minLen === Infinity ? 0 : minLen;
+  return minLen === Infinity ? 0 : minLen; // 如果minLen没有被赋值的话，就返回0，说明没有符合条件的子序列
 };
 
 console.log(minSubArrayLenV2([2, 3, 1, 2, 4, 3], 7));
