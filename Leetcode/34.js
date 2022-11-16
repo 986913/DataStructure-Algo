@@ -16,14 +16,14 @@ const left_bound = (nums, target) => {
     } else if (target < nums[mid]) {
       right = mid - 1;
     } else {
-      right = mid - 1; //别返回，要收缩右边界
+      right = mid - 1; //别返回mid, 要开始收缩右边界
     }
   }
 
-  //最后要检查left越界情况
+  //没找到target, 最后要检查left越界情况
   if (left >= nums.length || nums[left] !== target) return -1;
 
-  return left;
+  return left; //返回的是left index
 };
 const right_bound = (nums, target) => {
   let left = 0;
@@ -37,14 +37,14 @@ const right_bound = (nums, target) => {
     } else if (target < nums[mid]) {
       right = mid - 1;
     } else {
-      left = mid + 1; //别返回，要收缩左边界
+      left = mid + 1; //别返回mid, 要开始收缩左边界
     }
   }
 
-  //最后要检查left越界情况
+  //没找到target（最后要检查right的越界情况）
   if (right < 0 || nums[right] !== target) return -1;
 
-  return right;
+  return right; //返回的是right index
 };
 
 var searchRange = function (nums, target) {
