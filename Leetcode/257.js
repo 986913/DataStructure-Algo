@@ -19,7 +19,7 @@ var binaryTreePaths = function (root) {
   //1. 确定递归函数 函数参数:树的根节点 和 当前的每一条path: curPath, 无返回值
   const getPath = function (node, curPath) {
     //2. 确定终止条件，到叶子节点就终止
-    if (!node.left && node.right) {
+    if (!node.left && !node.right) {
       curPath += node.val;
       res.push(curPath);
       return;
