@@ -41,7 +41,7 @@ var minSubArrayLen = function (n, arr) {
   for (let windowEndIdx = 0; windowEndIdx < arr.length; windowEndIdx++) {
     windowSum += arr[windowEndIdx];
 
-    //注意是while
+    //注意是while, 动态调节窗口的起始位置
     while (windowSum >= n) {
       minLen = Math.min(minLen, windowEndIdx - windowStartIdx + 1);
       windowSum -= arr[windowStartIdx]; // 别忘了update sum
