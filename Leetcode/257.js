@@ -14,14 +14,14 @@
 //👍👍👍 DFS pre_order recursion: -- dfs_preorder模版变形题 (leetcode 144)
 
 var binaryTreePaths = function (root) {
-  let res = [];
+  let allPaths = [];
 
   //1. 确定递归函数 函数参数:树的根节点 和 当前的每一条path: curPath, 无返回值
   const getPath = function (node, curPath) {
-    //2. 确定终止条件，到叶子节点就终止
+    //2. 确定终止条件，到叶子节点就终止, 更新
     if (!node.left && !node.right) {
       curPath += node.val;
-      res.push(curPath);
+      allPaths.push(curPath);
       return;
     }
 
@@ -32,5 +32,5 @@ var binaryTreePaths = function (root) {
   };
 
   getPath(root, '');
-  return res;
+  return reallPathss;
 };
