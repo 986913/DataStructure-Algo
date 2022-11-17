@@ -11,6 +11,8 @@
  * @return {number}
  */
 
+//https://www.bilibili.com/video/BV1GY4y1K7z8/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
+
 // 👍👍👍 DFS post_order recursion, 判断当前节点是不是左叶子是无法判断的，必须要通过节点的父节点来判断其左孩子是不是左叶子。所以要用post order dfs
 var sumOfLeftLeaves = function (root) {
   //1. 递归参数： tree root node,  返回值number：所有left leaf node的和

@@ -15,12 +15,14 @@
 const levelOrder = (root) => {
   if (root === null) return [];
 
+  // let depth=0; //optional: 记录tree总共有多少层。。
   let visited = [];
   let queue = [root];
 
   while (queue.length) {
     let len = queue.length; // 记录当前层级节点数
     let curLevel = []; //curLevel用于存放每一层的节点
+    // depth++  //optional: 每进一次while循环就是进入了新的一层。。
 
     //queue弹出(shift)len个, 并且开始加(push)下一层的节点
     for (let i = 0; i < len; i++) {
