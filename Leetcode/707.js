@@ -106,7 +106,8 @@ MyLinkedList.prototype.addAtIndex = function (index, val) {
 
   // 获取目标节点的上一个的节点： nodeBeforeIndex
   const nodeBeforeIndex = this.getNode(index - 1);
-  nodeBeforeIndex.next = new ListNode(val, nodeBeforeIndex.next);
+  const nodeAtIndex = nodeBeforeIndex.next;
+  nodeBeforeIndex.next = new ListNode(val, nodeAtIndex);
 
   this.length++;
 };
