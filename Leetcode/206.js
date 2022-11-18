@@ -18,7 +18,7 @@ var reverseList = function (head) {
 
   let curr = head;
   let prev = null;
-  let next = null; //next就是临时指针
+  let next = head; //next就是临时指针
 
   while (curr) {
     next = curr.next; //1.用这个next临时指针存current.next值
