@@ -31,9 +31,11 @@ var removeElements = function (head, val) {
 var removeElements = function (head, val) {
   let dummyHead = new ListNode(-1);
   dummyHead.next = head;
+  /* 和上面类似的效果, let dummyhead = new ListNode(-1, head); */
 
   let current = dummyHead;
 
+  // 注意是curren.next
   while (current.next != null) {
     if (current.next.val === val) current.next = current.next.next;
     else current = current.next;
