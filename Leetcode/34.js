@@ -20,7 +20,7 @@ const left_bound = (nums, target) => {
     }
   }
 
-  //没找到target, 最后要检查left越界情况
+  //共2种没找到target的case:  1.left一直往右走，越界了;    2.left一直往左走，到了index=0
   if (left >= nums.length || nums[left] !== target) return -1;
 
   return left; //返回的是left index
@@ -41,7 +41,7 @@ const right_bound = (nums, target) => {
     }
   }
 
-  //没找到target（最后要检查right的越界情况）
+  //共2种没找到target的case:   1.right一直往左走，越界了   2.right一直往右走，到了数组最后一项
   if (right < 0 || nums[right] !== target) return -1;
 
   return right; //返回的是right index
