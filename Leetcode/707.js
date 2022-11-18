@@ -94,6 +94,7 @@ MyLinkedList.prototype.addAtTail = function (val) {
  */
 MyLinkedList.prototype.addAtIndex = function (index, val) {
   if (index < 0 || index > this.length) return;
+  //别忘了对index 0 和 最后一个index特殊处理。。
   if (index === 0) {
     this.addAtHead(val);
     return;
@@ -103,9 +104,9 @@ MyLinkedList.prototype.addAtIndex = function (index, val) {
     return;
   }
 
-  // 获取目标节点的上一个的节点
-  const node = this.getNode(index - 1);
-  node.next = new ListNode(val, node.next);
+  // 获取目标节点的上一个的节点： nodeBeforeIndex
+  const nodeBeforeIndex = this.getNode(index - 1);
+  nodeBeforeIndex.next = new ListNode(val, nodeBeforeIndex.next);
 
   this.length++;
 };
@@ -122,12 +123,12 @@ MyLinkedList.prototype.deleteAtIndex = function (index) {
     return;
   }
 
-  // 获取目标节点的上一个的节点
-  const node = this.getNode(index - 1);
-  node.next = node.next.next;
+  // 获取目标节点的上一个的节点： nodeBeforeIndex
+  const nodeBeforeIndex = this.getNode(index - 1);
+  nodeBeforeIndex.next = nodeBeforeIndex.next.next;
 
-  // 处理尾节点
-  if (index === this.length - 1) this.tail = node;
+  // 别忘了处理尾节点。。
+  if (index === this.length - 1) this.tail = nodeBeforeIndex;
 
   this.length--;
 };
