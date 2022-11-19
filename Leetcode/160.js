@@ -55,5 +55,5 @@ var getIntersectionNode = function (headA, headB) {
     if (!n2) n2 = headA; //同理，当n2走完headB链表后，那么就切换到headA链表走
     else n2 = n2.next;
   }
-  return n1;
+  return n1; // 如果有相交的点就返回相交的点， 没有相交的点就返回null
 };
