@@ -11,7 +11,7 @@ const squareSum = (number) => {
   while (number) {
     let digital = number % 10; //1. 先取number的个位数，       eg:  19 % 10 = 9;
     sum += Math.pow(digital, 2); //2. 算个位数的平方后更新sum   eg:sum = 9^2;
-    number = Math.floor(number / 10); //3. 更新sum(去除个位数) eg: 19 --> 1
+    number = Math.floor(number / 10); //3. 更新number(去除个位数) eg: 19 --> 1
   }
 
   return sum;
