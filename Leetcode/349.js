@@ -46,7 +46,9 @@ var intersection = function (nums1, nums2) {
       p1++;
     } else {
       // nums1[p1] === nums2[p2]
-      if (result.indexOf(nums2[p2]) == -1) result.push(nums2[p2]);
+      if (result.indexOf(nums2[p2]) == -1) {
+        result.push(nums2[p2]);
+      }
       p1++;
       p2++;
     }
