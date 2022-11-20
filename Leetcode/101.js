@@ -37,5 +37,5 @@ var isSymmetric = function (root) {
     return result;
   };
 
-  return compareNode(root.left, root.right);
+  return isMirrorTree(root.left, root.right);
 };
