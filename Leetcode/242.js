@@ -33,7 +33,7 @@ var isAnagram = function (s, t) {
   if (s.length !== t.length) return false;
 
   const arr = new Array(26).fill(0);
-  const base = 'a'.charCodeAt(); //97
+  const base = 'a'.charCodeAt(); //97, 可以直接在单个字符后面用charCodeAt()
 
   for (const i of s) {
     arr[i.charCodeAt() - base]++;
