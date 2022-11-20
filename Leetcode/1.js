@@ -36,7 +36,7 @@ var twoSum = function (nums, target) {
   return [-1, -1];
 };
 
-/* solution3: hash map:  
+/* 👍👍👍solution3: hash map:  
     遍历数组，每访问一个元素，先判断其配对的元素是否在Hash表中，hash table以item为Key, index为value
     如果在的话就说明我们找到了答案，将其输出即可，
     如果没有找到，就将当前的元素放入 Hash 表中，以方便后面的元素来配对。
