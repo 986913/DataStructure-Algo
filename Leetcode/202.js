@@ -3,6 +3,7 @@
  * @return {boolean}
  */
 
+//这道题目使用hashtbale，来判断这个sum是否重复出现，如果重复了就是return false， 否则一直找到sum为1为止
 //1. 👍👍👍 hashtable - set
 const squareSum = (number) => {
   let sum = 0;
