@@ -23,6 +23,11 @@ var isAnagram = function (s, t) {
   for (let i of t) {
     if (!map.get(i)) return false;
     map.set(i, map.get(i) - 1);
+    /* 或者使用map.has达到一样的效果， 但是要map.delete :
+        if (!map.has(i)) return false;
+        map.set(i, map.get(i) - 1);
+        if(map.get(i)===0) map.delete(i)
+    */
   }
 
   return true;
