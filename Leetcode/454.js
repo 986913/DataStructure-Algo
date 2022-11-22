@@ -6,11 +6,11 @@
  * @return {number}
  */
 /*
-  首先定义 一个map, 
-  定义int变量count，用来统计 a+b+c+d = 0 出现的次数。
+  首先定义 一个map, {放a和b两数之和(key): 放a和b两数之和出现的次数(value)} 
 
-  遍历大A和大B数组，统计两个数组元素之和，和元素之和出现的次数，放到map中。
-  在遍历大C和大D数组，找到如果 0-(c+d) 在map中出现过的话，就用count把map中key对应的value也就是出现次数统计出来
+  遍历nums1和nums2数组，统计两个数组元素之和，和元素之和出现的次数，放到map中
+
+  再遍历nums3和大nums4数组，如果在map中有key: 0-(c+d)出现过的话，就用count把map中key对应的value也就是出现次数统计出来
   
   最后返回统计值 count 就可以了
 */
