@@ -22,16 +22,15 @@ const threeSum = function (nums) {
 const threeSum = (nums) => {
   const result = [];
 
-  // 1. 将数组排序
-  nums.sort((a, b) => a - b);
+  nums.sort((a, b) => a - b); // 1. 将数组排序
 
   // 2.
   for (let i = 0; i < nums.length; i++) {
     let left = i + 1,
       right = nums.length - 1,
       iNum = nums[i];
-    // 数组排过序，如果第一个数大于0直接返回res
-    if (iNum > 0) return result;
+
+    if (iNum > 0) return result; // 数组排过序，如果第一个数大于0直接返回res
 
     // 去重iNum !!!!!!
     if (iNum == nums[i - 1]) continue;
@@ -40,7 +39,6 @@ const threeSum = (nums) => {
     while (left < right) {
       let threeSum = iNum + nums[left] + nums[right];
 
-      // 三数之和小于0，则左指针向右移动
       if (threeSum < 0) left++;
       else if (threeSum > 0) right--;
       else {
