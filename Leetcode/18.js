@@ -14,6 +14,7 @@ var fourSum = function (nums, target) {
   for (let i = 0; i < nums.length - 3; i++) {
     let iNum = nums[i];
     if (i > 0 && iNum === nums[i - 1]) continue; // 去重iNum
+    /* 错误去重iNum方法: if (iNum == nums[i + 1]) continue; 将会漏掉-1,-1,2 这种情况*/
 
     for (let j = i + 1; j < nums.length - 2; j++) {
       let left = j + 1,
@@ -32,6 +33,7 @@ var fourSum = function (nums, target) {
         } else {
           result.push([iNum, jNum, nums[left], nums[right]]);
 
+          // 去重逻辑应该放在找到一个三元组之后，对nums[left]和nums[right]去重: for cases like: [0,-1,-1,-1,1,1,1] etc
           // 去重nums[left]
           while (left < right && nums[left] === nums[left + 1]) {
             left++;
