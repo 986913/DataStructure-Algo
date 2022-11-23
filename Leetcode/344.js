@@ -12,16 +12,14 @@ const reverseWords = (s) => {
 };
 
 //👍👍👍reverseString by using 2 pointer
-const reveseString = (str) => {
+const reveseString = (s) => {
   let left = 0;
-  let right = str.length - 1;
-  let arr = str.split('');
+  let right = s.length - 1;
 
   while (left < right) {
-    [arr[left], arr[right]] = [arr[right], arr[left]];
+    [s[left], s[right]] = [s[right], s[left]]; // es6 way to swap s[left], s[right]
+
     left++;
     right--;
   }
-
-  return arr.join('');
 };

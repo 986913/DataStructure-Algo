@@ -14,11 +14,6 @@ function reverseStr(s, k) {
     let right = i + k - 1;
 
     while (left < right) {
-      if (arr[right] === undefined) {
-        right--;
-        continue;
-      }
-
       [arr[left], arr[right]] = [arr[right], arr[left]];
       left++;
       right--;
