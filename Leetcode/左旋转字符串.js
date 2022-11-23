@@ -1,11 +1,14 @@
 //solution 1:  directly use .slice
 var reverseLeftWords = function (s, n) {
   const length = s.length;
-  while (n) {
-    s = s[length - 1] + s; // console.log(s)
-    n--;
+
+  let i = 0;
+  while (i <= n) {
+    s += s[i]; // console.log(s)
+    i++;
   }
-  return s.slice(0, length);
+
+  return s.slice(n, length + n);
 };
 
 // solution 2:  2 pointers
