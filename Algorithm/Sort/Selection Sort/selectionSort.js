@@ -10,11 +10,11 @@
 */
 
 function selectionSort(arr) {
-  //外部循环控制走的轮数(arr.length)
+  /* outer loop control how many round should have (arr.length), i is sorting index */
   for (let i = 0; i < arr.length; i++) {
     let minIndex = i;
 
-    // 内循环负责找出最小值的index.
+    // 内循环负责找出最小值的index (inner loop is for find/updating minumn values's index)
     for (let j = i + 1; j < arr.length; j++) {
       if (arr[j] < arr[minIndex]) minIndex = j;
     }
