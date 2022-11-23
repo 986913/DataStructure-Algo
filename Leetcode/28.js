@@ -13,7 +13,7 @@ var strStr = function (haystack, needle) {
     if (chars.length >= windowSize) {
       if (chars === needle) return windowStartIdx;
 
-      chars = chars.substring(1);
+      chars = chars.substring(1); //  从chars的index1开始截取到结束 eg: mingyue.substring(1) -> ingyue
       windowStartIdx += 1;
     }
   }
