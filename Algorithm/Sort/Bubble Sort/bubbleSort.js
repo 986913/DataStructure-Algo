@@ -12,9 +12,9 @@
 
 /* -----------------------------------bubble sort's dummy version:  ---------------------------------------- */
 function sort(arr) {
-  //外层-->遍历次数
+  //外层-->遍历次数: outer loop control how many round(arr.length-1) should have
   for (let i = 0; i < arr.length - 1; i++) {
-    //内层-->比较次数
+    //内层-->比较次数: inner loop control how may times should compare
     for (let j = 0; j < arr.length - 1 - i; j++) {
       if (arr[j] > arr[j + 1]) {
         [arr[j + 1], arr[j]] = [arr[j], arr[j + 1]]; // swap arr[j+1] and arr[j]
