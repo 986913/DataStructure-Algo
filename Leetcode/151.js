@@ -13,7 +13,7 @@ var reverseWords = function (s) {
 
 //解法2:👍👍👍  2Pointer:
 var reverseWords = function (s) {
-  const arr = s.trim().split(/ +/);
+  const arr = s.trim().split(/ +/); //以至少一个空格为split标准时
 
   let left = 0;
   let right = arr.length - 1;
