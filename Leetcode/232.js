@@ -19,10 +19,9 @@ MyQueue.prototype.push = function (x) {
  */
 MyQueue.prototype.pop = function () {
   const size = this.stackOut.length;
+  if (size) return this.stackOut.pop(); // stackOut有值时 直接return this.stackOut.pop()
 
-  if (size) return this.stackOut.pop();
-
-  //把stackIn所有元素都要放到stackOut中
+  //stackOut无值时 把stackIn所有元素都要放到stackOut中
   while (this.stackIn.length) {
     this.stackOut.push(this.stackIn.pop());
   }
