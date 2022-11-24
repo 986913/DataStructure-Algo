@@ -22,13 +22,13 @@ MyStack.prototype.push = function (x) {
 MyStack.prototype.pop = function () {
   let size = this.queue.length; // 这个size是相当于this.queue.length的定格
 
-  // 之所以while(size>1) 是因为要保留queue最后一个元素要被弹出去
+  // 之所以while(size>1) 是因为要保留queue最后一个元素 将来要成为第一个元素 （要被弹出去）
   while (size > 1) {
     this.queue.push(this.queue.shift()); //把queue的最前面元素放到queue最后头
     size--; //基于之前定格的length--
   }
 
-  return this.queue.shift(); // 最后再把queue中最后一个元素弹出去
+  return this.queue.shift(); // 最后再把queue中第一个元素弹出去
 };
 
 /**
