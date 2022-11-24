@@ -1,51 +1,3 @@
-// ------------------------------------------------使用2个queue实现stack---------------------------------------------------------------------
-var MyStack = function () {
-  this.queue1 = [];
-  this.queue2 = [];
-};
-
-/**
- * Push element x onto stack.
- * @param {number} x
- * @return {void}
- */
-MyStack.prototype.push = function (x) {
-  this.queue1.push(x);
-};
-
-/**
- * Removes the element on top of the stack and returns that element.
- * @return {number}
- */
-MyStack.prototype.pop = function () {
-  // 减少两个队列交换的次数， 只有当queue1为空时，交换两个队列
-  if (!this.queue1.length) {
-    [this.queue1, this.queue2] = [this.queue2, this.queue1];
-  }
-  while (this.queue1.length > 1) {
-    this.queue2.push(this.queue1.shift());
-  }
-  return this.queue1.shift();
-};
-
-/**
- * Get the top element.
- * @return {number}
- */
-MyStack.prototype.top = function () {
-  const x = this.pop();
-  this.queue1.push(x);
-  return x;
-};
-
-/**
- * Returns whether the stack is empty.
- * @return {boolean}
- */
-MyStack.prototype.empty = function () {
-  return !this.queue1.length && !this.queue2.length;
-};
-
 // ----------------------------------------------推荐！： 使用1个queue实现stack---------------------------------------------------------------------
 /**
  * Initialize your data structure here.
@@ -68,12 +20,15 @@ MyStack.prototype.push = function (x) {
  * @return {number}
  */
 MyStack.prototype.pop = function () {
-  let size = this.queue.length;
+  let size = this.queue.length; // 这个size是相当于this.queue.length的定格
+
+  // 之所以while(size>1) 是因为要保留queue最后一个元素要被弹出去
   while (size > 1) {
-    this.queue.push(this.queue.shift());
-    size--;
+    this.queue.push(this.queue.shift()); //把queue的最前面元素放到queue最后头
+    size--; //基于之前定格的length--
   }
-  return this.queue.shift();
+
+  return this.queue.shift(); // 最后再把queue中最后一个元素弹出去
 };
 
 /**
