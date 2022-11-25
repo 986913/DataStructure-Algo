@@ -9,19 +9,20 @@
 //https://www.youtube.com/watch?v=i-SKeOcBwko&ab_channel=mycodeschool
 
 const insertionSort = (arr) => {
+  /*外层for loop控制轮数，范围1到n */
   for (let i = 1; i < arr.length; i++) {
+    let currValue = arr[i]; // save the value that need to be inserted to somewhere
 
-    let currentValue = arr[i];
-
-    while (i > 0 && arr[i - 1] > currentValue) {
-      arr[i] = arr[i - 1];
-      i--;
+    /* while控制shifting */
+    while (arr[i - 1] > currValue) {
+      arr[i] = arr[i - 1]; // use arr[i - 1] to fill up hole, when arr[i - 1] > currValue
+      i--; // continue to move hole to the left
     }
-    arr[i] = currentValue;
-
+    /* 每轮结束会insert value --> fill up hole with currentValue  */
+    arr[i] = currValue;
   }
 
   return arr;
 };
 
-insertionSort([-2, 100, 34, 1, 0, 4, 88, 67]);
+// insertionSort([-2, 100, 34, 1, 0, 4, 88, 67]);
