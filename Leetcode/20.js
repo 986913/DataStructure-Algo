@@ -19,8 +19,9 @@ var isValid = function (s) {
       case '[':
         stack.push(']');
         break;
+      //碰到s中的右括号时，如果不匹配stack pop元素 则就不匹配, 直接返回false
       default:
-        if (char !== stack.pop()) return false; //碰到s中的右括号时，如果不匹配stack pop元素 则就不匹配
+        if (char !== stack.pop()) return false;
     }
   }
 
