@@ -6,11 +6,11 @@
 //👍👍👍 use stack:
 
 var evalRPN = function (tokens) {
-  var stack = [];
-  var right, left;
+  let stack = [];
+  let right, left;
 
-  for (let i = 0; i < tokens.length; i++) {
-    switch (tokens[i]) {
+  for (let char of tokens) {
+    switch (char) {
       case '+':
         stack.push(stack.pop() + stack.pop());
         break;
@@ -27,9 +27,10 @@ var evalRPN = function (tokens) {
         left = stack.pop();
         stack.push((left / right) | 0); //要左边除右边
         break;
-      default:
-        stack.push(parseInt(tokens[i]));
+      default: // when char is number sting, so convert to number and pushed into stack
+        stack.push(parseInt(char));
     }
   }
+
   return stack[0];
 };
