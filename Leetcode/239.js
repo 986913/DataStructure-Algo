@@ -50,7 +50,7 @@ class MonoQueue {
 
   dequeue(value) {
     let front = this.peek();
-    //当要弹出p的value和queue的出口处一样时， 则要实际pop queue top了
+    //当要弹出p的value和queue的出口处一样时,则要实际pop queue的出口元素了
     if (front === value) {
       this.queue.shift();
     }
@@ -62,11 +62,11 @@ class MonoQueue {
   }
 }
 
-// 队列没有必要维护窗口里的所有元素，只需要维护有可能成为窗口里最大值的元素就可以了，同时保证队列里的元素数值是由大到小的。
+/* main function --------------------------------------- */
 var maxSlidingWindow = function (nums, k) {
   let result = [];
 
-  let queue = new MonoQueue(); // 这道题中相当于window, 这个队列呢，放进去窗口里的元素，然后随着窗口的移动，队列也一进一出，每次移动之后，队列告诉我们里面的最大值是什么。
+  let queue = new MonoQueue();
   let windowStartIdx = 0; //滑动窗口start
   let windowEndIdx = 0; //滑动窗口end
 
