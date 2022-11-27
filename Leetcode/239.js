@@ -40,7 +40,7 @@ class MonoQueue {
     let back = this.queue[this.queue.length - 1];
 
     //模拟相继弹出的过程
-    while (back && back < value) {
+    while (back !== undefined && back < value) {
       this.queue.pop();
       back = this.queue[this.queue.length - 1]; // re-assign back
     }
