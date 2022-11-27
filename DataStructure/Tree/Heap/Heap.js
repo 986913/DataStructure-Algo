@@ -121,12 +121,12 @@ class Heap {
   }
 }
 
-class MinHeap extends Heap {
+export class MinHeap extends Heap {
   constructor(size) {
     super(size, 'MIN');
   }
 }
-class MaxHeap extends Heap {
+export class MaxHeap extends Heap {
   constructor(size) {
     super(size, 'MAX');
   }
