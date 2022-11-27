@@ -3,9 +3,11 @@ class Heap {
     this.data = new Array(size); // SC: O(k)
     this.type = type;
   }
+
   size() {
     return this.data.length;
   }
+
   build(arr) {
     // O(nlogk)
     let i = 0;
@@ -26,6 +28,7 @@ class Heap {
       ++i;
     }
   }
+
   _heapify(idx) {
     // O(logk)
     const leftIndex = 2 * idx + 1;
@@ -50,6 +53,7 @@ class Heap {
       this._heapify(p);
     }
   }
+
   compare(a, b) {
     // O(1)
     switch (this.type) {
@@ -79,6 +83,7 @@ class Heap {
         return '';
     }
   }
+
   get() {
     // until the heap is empty, create the resultant array by removing elements from the top
     const result = [];
@@ -94,10 +99,12 @@ class Heap {
     }
     return result;
   }
+
   insert(item) {
     this.data.push(item);
     this.build(this.data);
   }
+
   removeRoot() {
     let root = this.data[0];
     let last = this.data.pop();
@@ -108,6 +115,7 @@ class Heap {
     }
     return root;
   }
+
   peek() {
     return this.data[0];
   }
@@ -118,7 +126,6 @@ class MinHeap extends Heap {
     super(size, 'MIN');
   }
 }
-
 class MaxHeap extends Heap {
   constructor(size) {
     super(size, 'MAX');

@@ -9,6 +9,7 @@ class PriorityQueue {
   constructor() {
     this.values = []; //注意是数组
   }
+
   enqueue(val, priority) {
     let newNode = new Node(val, priority);
     // 1. add to the end of array
@@ -16,6 +17,21 @@ class PriorityQueue {
     // 2. compare the new added value with partent value, if(newvalue > parentvalue),then bubule the value up to the correct spot
     this.bubuleUp();
     // console.log(this.values);
+  }
+
+  dequeue() {
+    //1. get root(max) element  and last element, and replace max with last element
+    let max = this.values[0];
+    let end = this.values.pop();
+
+    if (this.values.length > 0) {
+      this.values[0] = end;
+      //2. sink/bubble down
+      this.sinkDown();
+    }
+
+    //3. return removed element
+    return max;
   }
 
   bubuleUp() {
@@ -33,21 +49,6 @@ class PriorityQueue {
 
       index = parentIndex;
     }
-  }
-
-  dequeue() {
-    //1. get root(max) element  and last element, and replace max with last element
-    let max = this.values[0];
-    let end = this.values.pop();
-
-    if (this.values.length > 0) {
-      this.values[0] = end;
-      //2. sink/bubble down
-      this.sinkDown();
-    }
-
-    //3. return removed element
-    return max;
   }
 
   sinkDown() {
