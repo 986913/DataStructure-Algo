@@ -134,11 +134,11 @@ export class MaxHeap extends Heap {
 
 /*
   测试使用MinHeap/MaxHeap:
-  
-https://leetcode.com/problems/top-k-frequent-elements/
-https://leetcode.com/problems/top-k-frequent-words/
-https://leetcode.com/problems/kth-largest-element-in-an-array/
+  top k issues: https://dev.to/986913/top-k-elements-js-13e0
 
+  https://leetcode.com/problems/top-k-frequent-elements/
+  https://leetcode.com/problems/top-k-frequent-words/
+  https://leetcode.com/problems/kth-largest-element-in-an-array/
 */
 const arr = [34, 1, -3, 100, 0, -4, 200];
 const heap2 = new MinHeap(7);

@@ -26,8 +26,7 @@ var topKFrequent = function (nums, k) {
   return result;
 };
 
-// top k issues: https://dev.to/986913/top-k-elements-js-13e0
-/* ：-------------------------------------- solution1 : hashtbale + Min Heap：--------------------------------------------------------*/
+/* ：-------------------------------------- solution2 : hashtbale + Min Heap：--------------------------------------------------------*/
 import { MinHeap } from '../DataStructure/Tree/Heap/Heap';
 var topKFrequent = function (nums, k) {
   /* 1. build hash map {key => frequency}:  nums[1,1,1,2,2,3] k=2 as example -->   { 1 => 3, 2 => 2, 3 => 1 } */
