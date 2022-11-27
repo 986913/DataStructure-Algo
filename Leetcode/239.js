@@ -3,7 +3,7 @@
  * @param {number} k
  * @return {number[]}
  */
-// 1. slding window 解法： O(n x k)
+/* 1. slding window 解法： O(n x k) ---------------------------------------------------------------------- */
 var maxSlidingWindow = function (nums, k) {
   let result = [];
 
@@ -25,9 +25,7 @@ var maxSlidingWindow = function (nums, k) {
   return result;
 };
 
-//2。 单调队列：
-/*
-  单调队列是一个递增或递减的队列，可以用来维护滑动窗口区间的最值，即RMQ问题
+/* 2。 单调队列:是一个递增或递减的队列，可以用来维护滑动窗口区间的最值，即RMQ问题---------------------------------------------
 
   入队操作：队尾入队，会把前面破坏单调性的元素删除（维护单调性）
   出队操作：如果队首元素超出区间范围，就将队首元素出队
