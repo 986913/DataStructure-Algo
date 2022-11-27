@@ -71,8 +71,8 @@ var maxSlidingWindow = function (nums, k) {
 
   //移动windowEndIdx到k,入k个元素到queue中
   while (windowEndIdx < k) {
-    queue.enqueue(nums[j]);
-    j++;
+    queue.enqueue(nums[windowEndIdx]);
+    windowEndIdx++;
   }
   //维护result, result会添加一个最大值
   result.push(queue.peek());
