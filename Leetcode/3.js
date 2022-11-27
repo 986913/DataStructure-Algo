@@ -19,39 +19,26 @@ var lengthOfLongestSubstring = function (s) {
   return maxSize;
 };
 
-// Slding window
-/**
- * @param {string} s
- * @return {number}
- */
+/*  Slding window
+  解题思路： 使用一个数组来维护滑动窗口
+  遍历字符串，判断字符是否在滑动窗口数组里  
+    不在则 push 进数组
+    在则删除滑动窗口数组里相同字符及相同字符前的字符，然后将当前字符 push 进数组
+    然后将 longestNonRepeatStrLen 更新为当前最长子串的长度
+    遍历完，返回 longestNonRepeatStrLen 即可 
+*/
 var lengthOfLongestSubstring = function (s) {
-  let windowStartIdx = 0;
   let longestNonRepeatStrLen = 0;
-  let charIndexMap = new Map();
+  let window = [];
 
   // try to extend the range [windowStartIdx, windowEndIdx]
   for (let windowEndIdx = 0; windowEndIdx < s.length; windowEndIdx++) {
-    const rightChar = s[windowEndIdx];
-    // if the map already contains the 'rightChar', shrink the window from the beginning so that
-    // we have only one occurrence of 'rightChar'
-
-    if (charIndexMap.has(rightChar)) {
-      // this is tricky; in the current window, we will not have any 'rightChar' after its previous index
-      // and if 'windowStart' is already ahead of the last index of 'rightChar', we'll keep 'windowStart'
-      windowStartIdx = Math.max(
-        windowStartIdx,
-        charIndexMap.get(rightChar) + 1
-      );
+    const index = window.indexOf(s[windowEndIdx]);
+    if (index !== -1) {
+      window.splice(0, index + 1);
     }
-
-    // insert the 'rightChar' into the map
-    charIndexMap.set(rightChar, windowEndIdx);
-
-    // remember the maximum length so far
-    longestNonRepeatStrLen = Math.max(
-      longestNonRepeatStrLen,
-      windowEndIdx - windowStartIdx + 1
-    );
+    window.push(s[windowEndIdx]);
+    longestNonRepeatStrLen = Math.max(longestNonRepeatStrLen, window.length);
   }
 
   return longestNonRepeatStrLen;
