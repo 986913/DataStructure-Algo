@@ -50,6 +50,7 @@ class MonoQueue {
 
   dequeue(value) {
     let front = this.peek();
+    //当要弹出p的value和queue的top一样时， 则要实际pop queue top了
     if (front === value) {
       this.queue.shift();
     }
@@ -79,9 +80,8 @@ var maxSlidingWindow = function (nums, k) {
 
   //继续移动windowEndIdx直到nums末端
   while (windowEndIdx < nums.length) {
-    queue.enqueue(nums[windowEndIdx]); //queue入新元素： nums[windowStartIdx]
+    queue.enqueue(nums[windowEndIdx]); //queue入新元素： nums[windowEndIdx]
     queue.dequeue(nums[windowStartIdx]); //queue出无用的元素： nums[windowStartIdx]
-
     result.push(queue.peek()); //维护result, result会添加一个最大值
 
     windowStartIdx++;
