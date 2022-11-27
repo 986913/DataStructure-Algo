@@ -35,22 +35,28 @@ class MonoQueue {
   constructor() {
     this.queue = [];
   }
+
   enqueue(value) {
     let back = this.queue[this.queue.length - 1];
-    while (back !== undefined && back < value) {
+
+    //模拟相继弹出的过程
+    while (back && back < value) {
       this.queue.pop();
       back = this.queue[this.queue.length - 1]; // re-assign back
     }
+
     this.queue.push(value);
   }
+
   dequeue(value) {
-    let front = this.front();
+    let front = this.peek();
     if (front === value) {
       this.queue.shift();
     }
   }
+
   //出口处
-  front() {
+  peek() {
     return this.queue[0];
   }
 }
@@ -60,26 +66,26 @@ var maxSlidingWindow = function (nums, k) {
   let result = [];
 
   let queue = new MonoQueue(); // 这道题中相当于window, 这个队列呢，放进去窗口里的元素，然后随着窗口的移动，队列也一进一出，每次移动之后，队列告诉我们里面的最大值是什么。
-  let i = 0; //滑动窗口start
-  let j = 0; //滑动窗口end
+  let windowStartIdx = 0; //滑动窗口start
+  let windowEndIdx = 0; //滑动窗口end
 
-  //移动j到k,入k个元素到queue中
-  while (j < k) {
+  //移动windowEndIdx到k,入k个元素到queue中
+  while (windowEndIdx < k) {
     queue.enqueue(nums[j]);
     j++;
   }
   //维护result, result会添加一个最大值
-  result.push(queue.front());
+  result.push(queue.peek());
 
-  //继续移动j直到nums末端
-  while (j < nums.length) {
-    queue.enqueue(nums[j]); //queue入新元素： nums[j]
-    queue.dequeue(nums[i]); //queue出无用的元素： nums[i]
+  //继续移动windowEndIdx直到nums末端
+  while (windowEndIdx < nums.length) {
+    queue.enqueue(nums[windowEndIdx]); //queue入新元素： nums[windowStartIdx]
+    queue.dequeue(nums[windowStartIdx]); //queue出无用的元素： nums[windowStartIdx]
 
-    result.push(queue.front()); //维护result, result会添加一个最大值
+    result.push(queue.peek()); //维护result, result会添加一个最大值
 
-    i++;
-    j++;
+    windowStartIdx++;
+    windowEndIdx++;
   }
   return result;
 };
