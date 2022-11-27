@@ -51,7 +51,9 @@ var minSubArrayLen = function (n, arr) {
   return minLen === Infinity ? 0 : minLen; // 如果minLen没有被赋值的话，就返回0，说明没有符合条件的子序列
 };
 
+/*
 console.log(minSubArrayLenV2([2, 3, 1, 2, 4, 3], 7));
 console.log(minSubArrayLenV2([3, 1, 7, 11, 2, 9, 8, 21, 62, 33, 19], 52));
 console.log(minSubArrayLenV2([3, 1, 7], 100));
 console.log(minSubArrayLenV2([2, 1, 6, 5, 4], 9));
+*/
