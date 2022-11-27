@@ -50,7 +50,7 @@ class MonoQueue {
 
   dequeue(value) {
     let front = this.peek();
-    //当要弹出p的value和queue的top一样时， 则要实际pop queue top了
+    //当要弹出p的value和queue的出口处一样时， 则要实际pop queue top了
     if (front === value) {
       this.queue.shift();
     }
