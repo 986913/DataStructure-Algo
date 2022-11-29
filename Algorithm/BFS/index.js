@@ -25,9 +25,8 @@ const levelOrder = (root) => {
     let curLevel = []; //curLevel用于存放每一层的节点
     // depth++  //optional: 每进一次while循环就是进入了新的一层。。
 
-    //queue弹出(shift)len个, 并且开始加(push)下一层的节点
+    /* queue弹出(shift)len个, 并且开始加(push)下一层的节点 (每进一次forloop就是遍历每一层的node) */
     for (let i = 0; i < len; i++) {
-      //每进一次forloop就是遍历每一层的node
       let node = queue.shift();
       curLevel.push(node.val);
       if (node.left) queue.push(node.left); // 存放当前层的下一层的节点到queue
