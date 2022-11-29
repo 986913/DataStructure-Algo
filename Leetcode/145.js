@@ -22,8 +22,8 @@ const postorderTraversal = (root) => {
     if (!node) return;
 
     // change recurrsion's input:
-    if (node.left) helper(node.left); // 左
-    if (node.right) helper(node.right); // 右
+    helper(node.left); // 左
+    helper(node.right); // 右
 
     // change outside variable
     visted.push(node.val); // 中

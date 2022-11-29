@@ -21,9 +21,9 @@ const inorderTraversal = (root) => {
   const helper = (node) => {
     if (!node) return;
 
-    if (node.left) helper(node.left); // 左
+    helper(node.left); // 左
     visted.push(node.val); // 中
-    if (node.right) helper(node.right); // 右
+    helper(node.right); // 右
   };
 
   helper(root);

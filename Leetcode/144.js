@@ -25,8 +25,8 @@ const preorderTraversal = (root) => {
     visted.push(node.val); // 中
 
     // change recurrsion's input:
-    if (node.left) helper(node.left); // 左
-    if (node.right) helper(node.right); // 右
+    helper(node.left); // 左
+    helper(node.right); // 右
   };
 
   helper(root);
