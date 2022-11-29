@@ -6,8 +6,8 @@ const preorderTraversal = (root) => {
     if (!node) return;
 
     visted.push(node.val); // 中
-    if (node.left) helper(node.left); // 左
-    if (node.right) helper(node.right); // 右
+    helper(node.left); // 左
+    helper(node.right); // 右
   };
 
   helper(root);
@@ -21,9 +21,9 @@ const inorderTraversal = (root) => {
   const helper = (node) => {
     if (!node) return;
 
-    if (node.left) helper(node.left); // 左
+    helper(node.left); // 左
     visted.push(node.val); // 中
-    if (node.right) helper(node.right); // 右
+    helper(node.right); // 右
   };
 
   helper(root);
@@ -37,8 +37,8 @@ const postorderTraversal = (root) => {
   const helper = (node) => {
     if (!node) return;
 
-    if (node.left) helper(node.left); // 左
-    if (node.right) helper(node.right); // 右
+    helper(node.left); // 左
+    helper(node.right); // 右
     visted.push(node.val); // 中
   };
 
