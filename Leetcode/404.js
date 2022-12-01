@@ -11,24 +11,52 @@
  * @return {number}
  */
 
-//https://www.bilibili.com/video/BV1GY4y1K7z8/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
-
-// 👍👍👍 DFS post_order recursion, 判断当前节点是不是左叶子是无法判断的，必须要通过节点的父节点来判断其左孩子是不是左叶子。所以要用post order dfs
+// ------------------solution 1: 👍 DFS 模版变形题而已 -----------------------------------------------
 var sumOfLeftLeaves = function (root) {
-  //1. 递归参数： tree root node,  返回值number：所有left leaf node的和
+  let sum = 0;
+
+  //1. 递归参数：树节点， 无返回值， 递归函数会modify外部的sum
   const helper = (node) => {
+    //2. 递归终止条件
     if (!node) return 0;
-
-    let left_val = helper(node.left); //左
-    let right_val = helper(node.right); //右
-
-    let mid_val = 0; //中
-    //如果该节点的左节点不为空，该节点的左节点的左节点为空，该节点的左节点的右节点为空，则找到了一个左叶子
-    if (node.left && !node.left.left && !node.left.right)
-      mid_val = node.left.val;
-
-    return left_val + right_val + mid_val; //所有left leaf node的和
+    /* 
+      (判断当前节点是不是左叶子是无法判断的，必须要通过节点的父节点来判断其左孩子是不是左叶子)
+      当该节点有左节点，该节点的左节点的左节点为空，该节点的左节点的右节点为空，则就找到了一个左叶子 
+    */
+    if (node.left && !node.left.left && !node.left.right) {
+      sum += node.left.val;
+    }
+    //2. 开始递归单层逻辑
+    helper(node.left);
+    helper(node.right);
   };
 
-  return helper(root);
+  helper(root);
+  return sum;
+};
+
+// ------------------solution 2: 👍 BFS 模版变形题而已：------------------------------------------------
+var sumOfLeftLeaves = function (root) {
+  if (!root) return 0;
+
+  let queue = [root];
+  let sum = 0;
+
+  while (queue.length) {
+    let len = queue.length;
+
+    for (let i = 0; i < len; i++) {
+      let node = queue.shift();
+
+      //证明node.left是个左叶子
+      if (node.left && !node.left.left && !node.left.right) {
+        sum += node.left.val;
+      }
+
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    }
+  }
+
+  return sum;
 };
