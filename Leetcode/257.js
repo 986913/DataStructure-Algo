@@ -32,5 +32,5 @@ var binaryTreePaths = function (root) {
   };
 
   getPath(root, '');
-  return reallPathss;
+  return allPaths;
 };
