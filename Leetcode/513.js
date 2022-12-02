@@ -12,47 +12,41 @@
  */
 
 //  👍👍👍  BFS 模版变形题 ---------------------------------------------------------------------------------
-const findBottomLeftValue = (root) => {
-  if (!root) return 0;
+// bfs
+var findBottomLeftValue = function (root) {
+  if (!root) return null;
 
   let queue = [root];
-  let visited = [];
-  // let depth=0;  //optional: 用来记录tree多少层总共
+  let mostLeftValue;
 
   while (queue.length) {
     let len = queue.length;
-    let curLevel = [];
-    // depth++     //optional: 每进一次while循环就是一层
 
-    //每进一个forloop就是遍历一层中每个节点
     for (let i = 0; i < len; i++) {
       let node = queue.shift();
-
-      curLevel.push(node.val);
+      if (i == 0) mostLeftValue = node.val;
       if (node.left) queue.push(node.left);
       if (node.right) queue.push(node.right);
     }
-
-    visited.push(curLevel);
   }
 
-  return visited[visited.length - 1][0]; // return visited[depth-1][0];
+  return mostLeftValue;
 };
 
 // https://www.bilibili.com/video/BV1424y1Z7pn/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
-// 👍👍 DFS recursion + backtracking - 前后中序都可以  -------------------------------------------------------------------------------
+// 👍👍 DFS recursion + backtracking - 前后中序都可以  ---------leetcode 104 解法2.2的变体----------------------------------------------------------------------
 
 var findBottomLeftValue = function (root) {
   let maxDepth = -Infinity; //用来记录tree的最大深度
-  let resultValue; //存放结果值
+  let mostleftvalue; //存放结果值
 
-  //1.  确定递归的参数,返回值， 这里就不需要返回值了，所以递归函数的返回类型为void。
+  //1.  确定递归的参数, 不需要返回值
   const helper = (node, curDepth) => {
-    //2. 确定终止条件：碰到叶子节点，有必要时更新maxDepth和resultValue
+    //2. 确定终止条件：碰到叶子节点，有必要时更新maxDepth和mostleftvalue
     if (!node.left && !node.right) {
       if (curDepth > maxDepth) {
         maxDepth = curDepth;
-        resultValue = node.val;
+        mostleftvalue = node.val;
       }
       // return;
     }
@@ -74,5 +68,5 @@ var findBottomLeftValue = function (root) {
   };
 
   helper(root, 1);
-  return resultValue;
+  return mostleftvalue;
 };

@@ -56,7 +56,7 @@ var maxDepth = function (root) {
   return height;
 };
 
-/**--- Solution2.1 👍👍👍 --- post_order DFS  - 使用递归三部曲 ------------------------------------------------
+/**--- Solution2.1 👍👍👍 --- post_order DFS使用递归三部曲 ------------------------------------------------
  * https://www.bilibili.com/video/BV1Gd4y1V75u/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
  *
  * 二叉树节点的深度(depth)：指从根节点到该节点的最长简单路径边的条数。 求深度(depth)可以从上到下去查 所以需要pre_order前序遍历（中左右）
@@ -80,13 +80,13 @@ var maxDepth = function (root) {
   return getDepth(root);
 };
 
-/**--- Solution2.1 👍👍👍 --- post_order DFS  - 使用递归三部曲 ------------------------------------------------*/
+/**--- Solution2.2 👍👍👍 --- post_order DFS 使用递归三部曲 + 回溯 -------------------------------------*/
 var maxDepth = function (root) {
   if (!root) return 0;
 
   let maxDepth = -Infinity; //用来记录tree的最大深度
 
-  //1.  确定递归的参数: tree node和 当前深度， 这里就不需要返回值了，所以递归函数的返回类型为void。
+  //1.  确定递归的参数: tree node和 当前深度，不需要返回值了
   const helper = (node, curDepth) => {
     //2. 确定终止条件：碰到叶子节点，有必要时更新maxDepth
     if (!node.left && !node.right) {
