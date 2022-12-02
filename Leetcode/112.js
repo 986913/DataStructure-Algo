@@ -37,7 +37,7 @@ var hasPathSum = function (root, targetSum) {
   return allPathSums.includes(targetSum);
 };
 
-// 👍👍👍---------------------------------------------------------------------------------------------------------------
+// 👍👍👍-----DFS + backtracking---------------------------------------------------------------------------------------------
 // https://www.bilibili.com/video/BV19t4y1L7CR/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
 
 var hasPathSum = function (root, targetSum) {
