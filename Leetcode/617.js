@@ -12,13 +12,14 @@
  * @return {TreeNode}
  */
 
-
+//递归参数是要传入两个二叉树的根节点，返回值就是合并之后二叉树的根节点。
 var mergeTrees = function (root1, root2) {
+  //确定终止条件：
   if (root1 === null) return root2;
   if (root2 === null) return root1;
 
+  // 确定单层递归的逻辑：
   let newRoot = new TreeNode(root1.val + root2.val);
-
   newRoot.left = mergeTrees(root1.left, root2.left);
   newRoot.right = mergeTrees(root1.right, root2.right);
 

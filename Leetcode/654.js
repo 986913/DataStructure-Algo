@@ -12,6 +12,7 @@
  * @return {TreeNode}
  */
 
+// 递归参数就是传入的是存放元素的数组，返回该数组构造的二叉树的头结点：
 var constructMaximumBinaryTree = function (nums) {
   //递归终止条件：当构造到叶子节点时候
   if (nums.length === 1) return new TreeNode(nums[0]); // 注意return是node
