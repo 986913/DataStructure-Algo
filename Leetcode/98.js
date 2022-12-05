@@ -33,7 +33,7 @@ var isValidBST = function (root) {
 
 //----------------------------Solution 2: BFS Inorder traversal without array assistance ---------------------------------------------
 var isValidBST = function (root) {
-  let pre = null;
+  let pre = null; //用pre记录前一个节点
 
   const inOrder = (node) => {
     if (node === null) return true;
