@@ -40,7 +40,7 @@ var isValidBST = function (root) {
 
     let left = inOrder(node.left); // zuo
     if (pre && pre.val >= node.val) return false; // inorder左中右，prev.val要是比现在节点大，那说明不是BST了
-    pre = node; // update pre
+    pre = node; //inorder左中右，prev.val比现在节点小，则继续update pre
     let right = inOrder(node.right); //you
 
     return left && right;
