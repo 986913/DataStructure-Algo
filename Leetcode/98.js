@@ -1,0 +1,50 @@
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+
+//----------------------------Solution 1: BFS Inorder traversal with array assistance ---------------------------------------------
+var isValidBST = function (root) {
+  const visited = [];
+
+  const helper = (node) => {
+    if (!node) return true;
+
+    if (node.left) helper(node.left); //zuo
+    visited.push(node.val); // zhong
+    if (node.right) helper(node.right); // you
+  };
+
+  helper(root);
+
+  for (let i = 0; i < visited.length; i++) {
+    if (visited[i + 1] <= visited[i]) return false;
+  }
+  return true;
+};
+
+//----------------------------Solution 2: BFS Inorder traversal without array assistance ---------------------------------------------
+var isValidBST = function (root) {
+  let pre = null;
+
+  const inOrder = (node) => {
+    if (node === null) return true;
+
+    let left = inOrder(node.left); // zuo
+    if (pre && pre.val >= node.val) return false; // inorder左中右，prev.val要是比现在节点大，那说明不是BST了
+    pre = node; // update pre
+    let right = inOrder(node.right); //you
+
+    return left && right;
+  };
+
+  return inOrder(root);
+};
