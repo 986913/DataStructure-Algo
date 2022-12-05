@@ -11,7 +11,7 @@
  * @return {boolean}
  */
 
-//----------------------------Solution 1: BFS Inorder traversal with array assistance ---------------------------------------------
+//----------------------------Solution 1: DFS Inorder traversal with array assistance ---------------------------------------------
 var isValidBST = function (root) {
   const visited = [];
 
@@ -31,7 +31,7 @@ var isValidBST = function (root) {
   return true;
 };
 
-//----------------------------Solution 2: BFS Inorder traversal without array assistance ---------------------------------------------
+//----------------------------Solution 2: DFS Inorder traversal without array assistance ---------------------------------------------
 var isValidBST = function (root) {
   let pre = null; //用pre记录前一个节点
 
