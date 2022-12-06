@@ -14,7 +14,8 @@
 
 // https://programmercarl.com/0236.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88.html#java
 
-/* 使用recursuib的方法, 需要从下到上，所以使用post order: */
+/* 使用recursuib的方法, 需要从下到上，所以使用 POST_order回溯，题目的tree是正常的二叉树 */
+
 var lowestCommonAncestor = function (root, p, q) {
   // 1.使用递归的方法, 需要从下到上，所以使用post order
   const travelTree = function (node, p, q) {
