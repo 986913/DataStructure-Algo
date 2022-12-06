@@ -52,13 +52,15 @@ var findMode = function (root) {
 
     helper(node.left);
 
-    if (!pre) count = 1;
-    else if (pre && node.val === pre.val) count++;
-    else count = 1;
-    pre = node;
+    if (!pre) count = 1; // 第一个节点
+    else if (pre && node.val === pre.val) count++; // 与前一个节点数值相同
+    else count = 1; // 与前一个节点数值不同
+    pre = node; // 更新上一个节点
     if (count === maxCount) {
+      // 如果和最大值相同，放进result中
       result.push(node.val);
     } else if (count > maxCount) {
+      // 如果计数大于最大值频率，要更新最大频率，要清空result，因为之前result里的元素都失效了， 最后更新result
       maxCount = count;
       result = [];
       result.push(node.val);
