@@ -18,13 +18,13 @@
 */
 
 var sortedArrayToBST = function (nums) {
-  if (nums.length === 0) return null;   //recursion stop here
+  if (nums.length === 0) return null; //recursion stop here
 
   let midIndex = Math.floor(nums.length / 2);
-  let newNode = new TreeNode(nums[midIndex]);
+  let node = new TreeNode(nums[midIndex]);
 
-  newNode.left = sortedArrayToBST(nums.slice(0, midIndex));
-  newNode.right = sortedArrayToBST(nums.slice(midIndex + 1));
+  node.left = sortedArrayToBST(nums.slice(0, midIndex));
+  node.right = sortedArrayToBST(nums.slice(midIndex + 1));
 
-  return newNode;
+  return node;
 };
