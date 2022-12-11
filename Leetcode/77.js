@@ -16,6 +16,28 @@ var combine = function (n, k) {
       return;
     }
 
+    for (let i = startIdx; i <= n; i++) {
+      path.push(i);
+      backtracking(n, k, i + 1);
+      path.pop();
+    }
+  };
+
+  backtracking(n, k, 1);
+  return result;
+};
+
+// -------------剪枝后------------------------------------------------------------
+var combine = function (n, k) {
+  const result = [];
+  const path = [];
+
+  const backtracking = (n, k, startIdx) => {
+    if (path.length === k) {
+      result.push([...path]);
+      return;
+    }
+
     for (let i = startIdx; i <= n - (k - path.length) + 1; i++) {
       path.push(i);
       backtracking(n, k, i + 1);
