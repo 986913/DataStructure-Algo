@@ -38,6 +38,7 @@ var combine = function (n, k) {
       return;
     }
 
+    //剪枝
     for (let i = startIdx; i <= n - (k - path.length) + 1; i++) {
       path.push(i);
       backtracking(n, k, i + 1);
