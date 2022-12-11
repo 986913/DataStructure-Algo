@@ -6,6 +6,7 @@
 
 // https://programmercarl.com/0077.%E7%BB%84%E5%90%88.html#%E5%9B%9E%E6%BA%AF%E6%B3%95%E4%B8%89%E9%83%A8%E6%9B%B2
 
+/* ------------------------------Backtracking 模版 ------------------------------------------ */
 var combine = function (n, k) {
   const result = [];
   const path = [];
@@ -49,3 +50,6 @@ var combine = function (n, k) {
   backtracking(n, k, 1);
   return result;
 };
+
+/* reference */
+// https://www.bilibili.com/video/BV1ti4y1L7cv/?spm_id_from=333.788&vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2

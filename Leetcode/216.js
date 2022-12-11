@@ -4,6 +4,7 @@
  * @return {number[][]}
  */
 
+/* ------------------------------Backtracking 模版 ------------------------------------------ */
 var combinationSum3 = function (k, n) {
   const result = [];
   const path = [];
@@ -58,3 +59,6 @@ var combinationSum3 = function (k, n) {
   backtracking(n, k, 0, 1);
   return result;
 };
+
+/* reference */
+//https://www.bilibili.com/video/BV1wg411873x/?spm_id_from=333.788&vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
