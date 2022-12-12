@@ -30,7 +30,7 @@ var combinationSum2 = function (candidates, target) {
       sum += candidates[i];
       path.push(candidates[i]);
 
-      backtracking(candidates, target, i + 1, sum, used); //关键点: i+1 表示可以不可以重复读取当前的数
+      backtracking(candidates, target, i + 1, sum, used); //关键点: i+1 表示不可以重复读取当前的数
 
       used[i] = false;
       sum -= candidates[i];
