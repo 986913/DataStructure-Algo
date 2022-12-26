@@ -19,7 +19,7 @@ var hanota = function (A, B, C) {
 
     // 将A中的n-1个移动到B
     helper(len - 1, A, C, B);
-    // 将A剩余的一个移动到C
+    // 将 A 底下的那块最大的圆盘移到 C
     C.push(A.pop());
     // 将B中的n-1个移动到C
     helper(len - 1, B, A, C);
