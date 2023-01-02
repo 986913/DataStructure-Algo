@@ -11,16 +11,18 @@ var combine = function (n, k) {
   const result = [];
   const path = [];
 
+  //1.递归函数的返回值void, 参数: n, k, startIdx
   const backtracking = (n, k, startIdx) => {
+    //2.确定递归终止条件
     if (path.length === k) {
-      result.push([...path]);
+      result.push([...path]); //收割结果
       return;
     }
-
+    //3.单层递归的逻辑：递归纵向遍历，for循环横向遍历，
     for (let i = startIdx; i <= n; i++) {
-      path.push(i);
-      backtracking(n, k, i + 1);
-      path.pop();
+      path.push(i); // 处理节点
+      backtracking(n, k, i + 1); // 递归： startIdx变成i+1
+      path.pop(); // 回溯
     }
   };
 
