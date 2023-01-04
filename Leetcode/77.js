@@ -7,6 +7,8 @@
 // https://programmercarl.com/0077.%E7%BB%84%E5%90%88.html#%E5%9B%9E%E6%BA%AF%E6%B3%95%E4%B8%89%E9%83%A8%E6%9B%B2
 
 /* ------------------------------Backtracking 模版👍 ------------------------------------------ */
+// n是树的宽度， k控制树的深度
+
 var combine = function (n, k) {
   const result = [];
   const path = [];
@@ -18,7 +20,7 @@ var combine = function (n, k) {
       result.push([...path]); //收割结果
       return;
     }
-    //3.单层递归的逻辑：递归纵向遍历，for循环横向遍历，
+    //3.单层递归的逻辑：递归纵向遍历，for循环横向遍历（n是树的宽度）
     for (let i = startIdx; i <= n; i++) {
       path.push(i); // 处理节点
       backtracking(n, k, i + 1); // 递归： startIdx变成i+1

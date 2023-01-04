@@ -5,6 +5,7 @@
  */
 
 /* ------------------------------ 用 Backtracking 模版 ------------------------------------------ */
+// 9是树的宽度， k控制树的深度
 var combinationSum3 = function (k, n) {
   const result = [];
   const path = [];
@@ -15,6 +16,7 @@ var combinationSum3 = function (k, n) {
       return;
     }
 
+    // 树的宽度
     for (let i = startIdx; i <= 9; i++) {
       sum += i;
       path.push(i);
