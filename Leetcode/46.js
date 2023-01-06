@@ -17,7 +17,7 @@ var permute = function (nums) {
       return;
     }
 
-    // 注意i从0开始，不是startidx了
+    //不同点：排列雷问题i从0开始，  组合类问题是从startidx开始！！
     for (let i = 0; i < nums.length; i++) {
       if (used[i]) continue; // 树枝上去重
 
