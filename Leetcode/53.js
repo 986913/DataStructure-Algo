@@ -2,12 +2,15 @@
  * @param {number[]} nums
  * @return {number}
  */
+
 //1. brute force: O(n^2) -------------------------------------------------------------------------
 var maxSubArray = function (nums) {
   let maxSum = -Infinity;
 
+  // 设置起始位置
   for (let i = 0; i < nums.length; i++) {
     let sum = 0;
+    // 每次从起始位置i开始遍历寻找最大值
     for (let j = i; j < nums.length; j++) {
       sum += nums[j];
       maxSum = Math.max(maxSum, sum);
@@ -17,11 +20,7 @@ var maxSubArray = function (nums) {
   return maxSum;
 };
 
-//2. 在线处理  O(N) -------------------------------------------------------------------------
-/**
- * @param {number[]} nums
- * @return {number}
- */
+//2. 贪心 -------------------------------------------------------------------------
 var maxSubArray = function (nums) {
   let currSum = 0;
   let maxSum = -Infinity;
@@ -35,6 +34,8 @@ var maxSubArray = function (nums) {
 
   return maxSum;
 };
+
+//3. dp
 
 // -------------------------------------------变形题-------------------------------------------------------
 /* 
