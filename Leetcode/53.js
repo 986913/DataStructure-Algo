@@ -78,11 +78,12 @@ const maxSum = (nums, k) => {
 
   let currSum = maxSum;
 
-  //开始滑动
+  //窗口开始滑动
   for (let i = k; i < nums.length; i++) {
     currSum = currSum + nums[i] - nums[i - k];
     maxSum = Math.max(currSum, maxSum);
   }
+
   return maxSum;
 };
 //console.log(maxSum([100, 200, 300, 400], 2));
