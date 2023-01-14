@@ -12,7 +12,7 @@
 */
 
 var partitionLabels = function (s) {
-  let hash = {};
+  let hash = {}; //统计每一个字符最后出现的位置
   for (let i = 0; i < s.length; i++) {
     hash[s[i]] = i;
   }
@@ -22,10 +22,12 @@ var partitionLabels = function (s) {
   let right = 0;
 
   for (let i = 0; i < s.length; i++) {
-    right = Math.max(right, hash[s[i]]);
+    right = Math.max(right, hash[s[i]]); //找到字符出现的最远边界
+
+    //如果找到字符最远出现位置下标和当前下标相等了，则就找到了分割点
     if (right === i) {
-      result.push(right - left + 1);
-      left = i + 1;
+      result.push(right - left + 1); //更新结果
+      left = i + 1; // 更新left
     }
   }
 
