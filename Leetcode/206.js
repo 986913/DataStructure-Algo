@@ -12,7 +12,7 @@
 
 // https://www.youtube.com/watch?v=aBEm9ByKzBo&ab_channel=%E8%80%81%E6%AF%95JS
 
-// 1. 👍👍👍  双指针法： 四步走
+// ----------------------- 1. 👍👍👍  双指针法： 四步走 -----------------------
 var reverseList = function (head) {
   if (!head || !head.next) return head;
 
@@ -29,7 +29,7 @@ var reverseList = function (head) {
   return prev; //返回翻转后指针head
 };
 
-// 2. Recurrsion:
+// ----------------------- 2. Recurrsion: ----------------------------------------------
 var helper = function (pre, head) {
   // helper第1个参数相当于上面双指针法的prev, 第2个参数相当于上面双指针法的curr
   if (!head) return pre;
