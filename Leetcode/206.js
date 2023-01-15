@@ -16,8 +16,8 @@
 var reverseList = function (head) {
   if (!head || !head.next) return head;
 
-  let curr = head;
   let prev = null;
+  let curr = head;
   let next = head; //next就是临时指针
 
   while (curr) {
