@@ -9,14 +9,14 @@
 var isSubsequence = function (s, t) {
   if (s.length > t.length) return false;
 
-  const t_len = t.length;
-  let j = 0;
-
-  for (let i = 0; i < t_len; i++) {
-    if (s[j] === t[i]) j++; // if it is matching, increment j
+  let sPointerIdx = 0;
+  for (let i = 0; i < t.length; i++) {
+    // if it is matching, increment sPointerIdx
+    if (t[i] === s[sPointerIdx]) {
+      sPointerIdx++;
+    }
   }
 
-  return j === s.length;
+  return sPointerIdx === s.length;
 };
-
 // isSubsequence(abc, ahbgdc) --> true;    isSubsequence(axc, ahbgdc) --> false
