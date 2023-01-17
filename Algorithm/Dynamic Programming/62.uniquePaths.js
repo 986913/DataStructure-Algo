@@ -25,7 +25,6 @@
 var uniquePaths = function (m, n) {
   //dp也是一个mxn的2d数组
   let dp = new Array(m).fill().map((item) => new Array(n));
-  console.log(dp);
   //初始dp最上边一行
   for (let j = 0; j < n; j++) {
     dp[0][j] = 1;
