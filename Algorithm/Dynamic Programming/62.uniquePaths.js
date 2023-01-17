@@ -20,6 +20,8 @@
  * @param {number} n
  * @return {number}
  */
+
+/* ----------------------------------  solution:  DP:  -------------------------------  */
 // m是行，n是列
 
 var uniquePaths = function (m, n) {

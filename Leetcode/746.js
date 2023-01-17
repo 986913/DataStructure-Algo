@@ -1,4 +1,3 @@
-/* -------------------- solution:  DP ------------------  */
 /**
 1. 确定dp数组以及下标的含义:  dp[i]： 爬到第i层楼梯所需要的最小花费
 2. 确定递推公式: 状态转移方程 dp[i] = Min( dp[i-1]+cost[i-1], dp[i-2]+cost[i-2] )
@@ -15,7 +14,7 @@
  * @param {number} n
  * @return {number}
  */
-
+/* ----------------------------------  solution:  DP:  -------------------------------  */
 const minCostClimbingStairs = (cost) => {
   let dp = [0, 0];
 

@@ -9,7 +9,7 @@
 
     dp数组长度会比cost长度多1个。答案输出dp last element就行
  */
-
+/* ----------------------------------  solution:  DP:  -------------------------------  */
 const minCostClimbingStairs = (cost) => {
   let dp = [0, 0];
 
