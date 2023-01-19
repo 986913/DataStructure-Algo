@@ -3,20 +3,13 @@
  * @return {number}
  */
 var longestPalindrome = function (s) {
-  let map = new Map();
-  for (const char of s) {
-    map.set(char, map.get(char) + 1 || 1);
+  const map = new Map();
+  for (let c of s) {
+    map.set(c, map.get(c) + 1 || 1);
   }
 
-  let maxLength = 0;
+  let odds = 0;
+  map.forEach((count) => (odds += count % 2));
 
-  [...map.keys()].forEach((key) => {
-    const currentLength = map.get(key);
-
-    if (currentLength % 2 === 0) maxLength += currentLength;
-    else if (maxLength % 2 === 0) maxLength += currentLength;
-    else maxLength += currentLength - 1;
-  });
-
-  return maxLength;
+  return s.length - odds + !!odds;
 };
