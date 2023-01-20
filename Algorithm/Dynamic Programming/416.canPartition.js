@@ -19,7 +19,7 @@
 
 /* ------------------------------------ DP ------------------------------------  */
 var canPartition = function (nums) {
-  const sum = nums.reduce((p, v) => p + v);
+  const sum = nums.reduce((acc, cur) => acc + cur);
   if (sum & 1) return false;
   const dp = Array(sum / 2 + 1).fill(0);
   for (let i = 0; i < nums.length; i++) {
