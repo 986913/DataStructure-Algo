@@ -1,3 +1,5 @@
+//和lc322一毛一样
+
 // 先遍历物品，再遍历背包
 var numSquares = function (n) {
   let dp = new Array(n + 1).fill(Infinity);
