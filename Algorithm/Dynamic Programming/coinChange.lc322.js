@@ -1,28 +1,32 @@
 /**
+1. 确定dp数组以及下标的含义:dp[j]：凑足总额为j所需钱币的最少个数为dp[j]
+2. 确定递推公式: 状态转移方程 dp[j] = min(dp[j - coins[i]] + 1, dp[j]);    
+3. dp数组如何初始化: dp[0]=0
+4. 确定遍历顺序: 
+    如果求组合数就是外层for循环遍历物品，内层for遍历背包。
+    如果求排列数就是外层for遍历背包，内层for循环遍历物品。
+
+      此题求求钱币最小个数，那么钱币有顺序和没有顺序都可以，都不影响钱币的最小个数，所以本题并不强调集合是组合还是排列
+
+5. 举例推导dp数组: */
+
+/**
  * @param {number[]} coins
  * @param {number} amount
  * @return {number}
  */
 
-//  https://www.bilibili.com/video/BV1xb411e7ww?from=search&seid=16885839030632252657
+const coinChange = (coins, amount) => {
+  if (!amount) return 0;
 
-var coinChange = function (coins, amount) {
-  let F = new Array(amount + 1); //1. 开数组
-  F[0] = 0; //2.初始化 initialization
+  let dp = Array(amount + 1).fill(Infinity);
+  dp[0] = 0;
 
-  //3. F[1],F[2],F[3]....F[27]
-  for (let i = 1; i <= amount; i++) {
-    F[i] = Infinity;
-
-    for (let j = 0; j < coins.length; j++) {
-      //边界条件：
-      if (i >= coins[j] && F[i - coins[j]] != Infinity) {
-        F[i] = Math.min(F[i - coins[j]] + 1, F[i]); //F[i] = Math.min{ F[i-coins[0]]+1, ...., F[i-coins[coins.length-1]]+1 }
-      }
+  for (let i = 0; i < coins.length; i++) {
+    for (let j = coins[i]; j <= amount; j++) {
+      dp[j] = Math.min(dp[j - coins[i]] + 1, dp[j]);
     }
   }
 
-  if (F[amount] == Infinity) F[amount] = -1;
-
-  return F[amount];
+  return dp[amount] === Infinity ? -1 : dp[amount];
 };
