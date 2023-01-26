@@ -5,6 +5,7 @@
  */
 
 // 贪心思路  -- 没明白
+/* ----------- Solution1: Greedy ----------- */
 var maxProfit = function (prices, fee) {
   let result = 0;
   let minPrice = prices[0];

@@ -8,6 +8,7 @@
  * 局部最优： 收集每天的正利润
  * 全局最优:  求的最大利润（每天的正利润加起来）
  */
+/* ----------- Solution1: Greedy ----------- */
 var maxProfit = function (prices) {
   let result = 0;
   for (let i = 1; i < prices.length; i++) {
