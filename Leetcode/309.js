@@ -42,7 +42,7 @@
  * @param {number[]} prices
  * @return {number}
  */
-
+/* ----------------- 👍 Solution: DP (leetcode 122的变形题)-------------------------------- */
 const maxProfit = (prices) => {
   const len = prices.length;
   if (len < 2) return 0;
