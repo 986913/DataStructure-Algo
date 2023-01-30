@@ -62,7 +62,7 @@ const maxSubArray = (nums) => {
   return result;
 };
 
-/* -----------------------------这道题的🟡变形题-------------------------------------------------
+/* ============================ 这道题的🟡变形题 ===============================================
   write a function called maxSubarraySum which accpet an array of integers and a number called n.
   the function should calculate the maximum sum of n consecutve elements in the array
 
