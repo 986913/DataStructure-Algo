@@ -11,7 +11,7 @@
  * @return {number[]}
  */
 
-// 👍👍👍 二叉树右视图 只需要把每一层最后一个节点存储到res数组 (是102 BFS的变形题)
+// 👍👍👍 二叉树右视图 只需要把每一层最后一个节点存储到res数组 (是102 BFS🟡的变形题)
 var rightSideView = function (root) {
   if (!root) return [];
 

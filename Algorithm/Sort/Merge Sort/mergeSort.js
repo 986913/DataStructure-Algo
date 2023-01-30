@@ -52,7 +52,7 @@ function mergeSort(arr) {
 
 console.log(mergeSort([8, 3, 99, 12, 1, 100, 74]));
 
-/**************************************  变形题 -> https://bigfrontend.dev/problem/merge-sorted-arrays *********************************/
+/**************************************  变形题🟡 -> https://bigfrontend.dev/problem/merge-sorted-arrays *********************************/
 function merge2Lists(arr1, arr2) {
   let p1 = 0;
   let p2 = 0;

@@ -20,7 +20,7 @@ var lowestCommonAncestor = function (root, p, q) {
   return travelTree(root, p, q);
 };
 
-// --------------------- Solution 2: Itelartion (类似lc700 Itelartion解法的变形题) -----------------------
+// --------------------- Solution 2: Itelartion (类似lc700 Itelartion解法🟡的变形题) -----------------------
 var lowestCommonAncestor = function (root, p, q) {
   while (root) {
     if (root.val > p.val && root.val > q.val) {

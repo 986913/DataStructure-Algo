@@ -11,7 +11,7 @@
  * @return {number[]}
  */
 
-//👍👍👍 本题就是层序遍历的时候把一层求个总和在取一个均值 (是102 BFS 的变形题)
+//👍👍👍 本题就是层序遍历的时候把一层求个总和在取一个均值 (是102 BFS 🟡的变形题)
 var averageOfLevels = function (root) {
   if (!root) return [];
 

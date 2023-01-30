@@ -11,7 +11,7 @@
  * @return {number}
  */
 
-// --- Solution1.1 --- BFS: 是102的变形题,只是输出visited.length就行 ------------------------------------
+// --- Solution1.1 --- BFS: 🟡是102的变形题,只是输出visited.length就行 ------------------------------------
 /*
 var maxDepth = function (root) {
   if (!root) return [];
@@ -36,7 +36,7 @@ var maxDepth = function (root) {
   return visited.length; // return vistied.length instead of visited
 }; 
 */
-// --- Solution1.2 --- BFS: 👍👍👍 是102的变形题 ------------------------------------------------
+// --- Solution1.2 --- BFS: 👍👍👍 是102的变形题🟡 ------------------------------------------------
 var maxDepth = function (root) {
   if (!root) return [];
 

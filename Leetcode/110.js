@@ -19,7 +19,7 @@
  */
 
 /**
- *  --- Solution1 👍👍👍 --- post_order DFS使用递归三部曲-----------leetcode 104的变形题-------------------------------
+ *  --- Solution1 👍👍👍 --- post_order DFS使用递归三部曲-----------leetcode 104的🟡变形题-------------------------------
  *
  * 二叉树节点的深度(depth)：指从根节点到该节点的最长简单路径边的条数。 求深度(depth)可以从上到下去查 所以需要pre_order前序遍历（中左右）
  * 二叉树节点的高度(height)：指从该节点到叶子节点的最长简单路径边的条数。 求高度(height)只能从下到上去查，所以只能post_order后序遍历（左右中）
@@ -42,7 +42,7 @@ var isBalanced = function (root) {
   return !(getHeight(root) === -1);
 };
 
-// --- Solution2 --- BFS迭代,leetcode 102的变形题---(没看懂❓)---------------------------------------------------------------
+// --- Solution2 --- BFS迭代,leetcode 102的🟡变形题---(没看懂❓)---------------------------------------------------------------
 var isBalanced = function (root) {
   if (!root) return true;
 

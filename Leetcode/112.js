@@ -12,7 +12,7 @@
  * @return {boolean}
  */
 
-//👍👍 DFS pre_order recursion: -- dfs_preorder模版变形题 (leetcode 144 , leetcode 257 变形题) ------------------------------------
+//👍👍 DFS pre_order recursion: -- dfs_preorder模版变形题 (leetcode 144,leetcode 257 🟡变形题) ------------------------------------
 var hasPathSum = function (root, targetSum) {
   if (!root) return 0;
 

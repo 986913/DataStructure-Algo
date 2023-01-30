@@ -44,7 +44,7 @@ var lengthOfLongestSubstring = function (s) {
   return longestNonRepeatStrLen;
 };
 
-//变形题： https://bigfrontend.dev/problem/longest-substring-with-unique-characters
+//🟡变形题： https://bigfrontend.dev/problem/longest-substring-with-unique-characters
 function longestUniqueSubstr(str) {
   if (!str.length) return '';
 

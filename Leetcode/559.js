@@ -31,7 +31,7 @@ var maxDepth = function (root) {
   return getDepth(root);
 };
 
-// Solution2.1 ---  👍👍👍 BFS: 是102的变形题
+// Solution2.1 ---  👍👍👍 BFS: 是102🟡的变形题
 var maxDepth = function (root) {
   if (!root) return 0;
 
@@ -58,7 +58,7 @@ var maxDepth = function (root) {
   return visited.length;
 };
 
-//Solution2.2 --- BFS: 是102的变形题
+//Solution2.2 --- BFS: 是102的🟡变形题
 var maxDepth = function (root) {
   if (!root) return 0;
 

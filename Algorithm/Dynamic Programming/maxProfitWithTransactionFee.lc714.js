@@ -26,7 +26,7 @@
  * @return {number}
  */
 
-/* -----------------  Solution1:👍 DP (leetcode 122的变形题) -------------------------------- */
+/* -----------------  Solution1:👍 DP (leetcode 122的变形题🟡) -------------------------------- */
 const maxProfit = (prices, fee) => {
   const len = prices.length;
   const dp = new Array(len).fill([0, 0]); // 创建dp二维数组
