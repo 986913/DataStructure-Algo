@@ -16,13 +16,10 @@
         情况三：下标i 与 j相差大于1的时候，例如cabac，此时s[i]与s[j]已经相同了，我们看i到j区间是不是回文子串就看aba是不是回文就可以了，那么aba的区间就是 i+1 与 j-1区间，这个区间是不是回文就看dp[i + 1][j - 1]是否为true。
       -------------------------------------------------
       if (s[i] == s[j]) {
-        if (j - i <= 1) { // 情况一 和 情况二
+        if (j - i <= 1 || dp[i + 1][j - 1] ) { // 情况一, 情况二 和 情况三
             count++;
             dp[i][j] = true;
-        } else if (dp[i + 1][j - 1]) { // 情况三
-            count++;
-            dp[i][j] = true;
-        }
+        } 
       }
 
   3. dp数组如何初始化: let dp = Array(len).fill(false).map((x) => Array(len).fill(false));
@@ -39,12 +36,8 @@ const countSubstrings = (s) => {
   for (let j = 0; j < len; j++) {
     for (let i = 0; i <= j; i++) {
       if (s[i] === s[j]) {
-        if (j - i <= 1) {
-          // 情况一 和 情况二
-          count++;
-          dp[i][j] = true;
-        } else if (dp[i + 1][j - 1]) {
-          // 情况三
+        // 情况一,情况二和情况三
+        if (j - i <= 1 || dp[i + 1][j - 1]) {
           count++;
           dp[i][j] = true;
         }
