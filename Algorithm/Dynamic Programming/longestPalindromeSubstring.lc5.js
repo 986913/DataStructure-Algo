@@ -30,7 +30,41 @@ var longestPalindrome = function (s) {
   return result;
 };
 
-/* ------------------------ 👍 Solution 2: DP - lc647🟡变形题 ------------------------------------------- */
+/* ------------------------ 👍 Solution 2: two pointers - lc647🟡变形题  ------------------------------- */
+/*
+  首先确定回文串，就是找中心然后向两边扩散看是不是对称的就可以了。
+  在遍历中心点的时候，要注意中心点有两种情况: 一个元素可以作为中心点，两个元素也可以作为中心点。
+  这两种情况可以放在一起计算，但分别计算思路更清晰，我倾向于分别计算:
+ */
+// main function:
+const longestPalindrome = (s) => {
+  let result = '';
+  for (let i = 0; i < s.length; i++) {
+    let s1 = palindrome(s, i, i); //寻找长度为奇数的回文字串(以i为中心)
+    let s2 = palindrome(s, i, i + 1); //寻找长度为偶数的回文字串(以i和i+1为中心)
+
+    //result = longest(res, s1, s2)
+    result = result.length > s1.length ? result : s1;
+    result = result.length > s2.length ? result : s2;
+  }
+  return result;
+};
+
+/*
+  helper function: 寻找(以str[left]为中心)或者(以str[left]和str[right]为中心)的最长回文串: 
+    - 从str[left]开始向两端扩散，返回以str[left]为中心的最长回文串
+    - 从str[left]和str[right]开始向两端扩散，返回以str[left]和str[right]为中心的最长回文串
+*/
+const palindrome = (str, left, right) => {
+  //防止索引越界
+  while (left >= 0 && right < str.length && str[left] === str[right]) {
+    left--;
+    right++;
+  }
+  return str.substr(left + 1, right - left - 1);
+};
+
+/* ------------------------  Solution 3: DP - lc647🟡变形题 ------------------------------------------- */
 /* 
   维护一个dp维数组,  dp[i][j]的i,j代表string的index, dp[i][j]存的是true/false,代表是不是palindrome
   https://leetcode.com/problems/longest-palindromic-substring/discuss/1167311/JavaScript-solution-Dynamic-Programming-Time-O(n2)-Space-O(n2)-with-Explanation 
@@ -80,39 +114,4 @@ const longestPalindrome = (s) => {
     }
   }
   return palindrome;
-};
-
-/* ------------------------ 👍 Solution 3: two pointers - lc647🟡变形题  ------------------------------- */
-/*
-  首先确定回文串，就是找中心然后向两边扩散看是不是对称的就可以了。
-  在遍历中心点的时候，要注意中心点有两种情况: 一个元素可以作为中心点，两个元素也可以作为中心点。
-  这两种情况可以放在一起计算，但分别计算思路更清晰，我倾向于分别计算:
- */
-
-// main function:
-const longestPalindrome = (s) => {
-  let result = '';
-  for (let i = 0; i < s.length; i++) {
-    let s1 = palindrome(s, i, i); //寻找长度为奇数的回文字串(以i为中心)
-    let s2 = palindrome(s, i, i + 1); //寻找长度为偶数的回文字串(以i和i+1为中心)
-
-    //result = longest(res, s1, s2)
-    result = result.length > s1.length ? result : s1;
-    result = result.length > s2.length ? result : s2;
-  }
-  return result;
-};
-
-/*
-  helper function: 寻找(以str[left]为中心)或者(以str[left]和str[right]为中心)的最长回文串: 
-    - 从str[left]开始向两端扩散，返回以str[left]为中心的最长回文串
-    - 从str[left]和str[right]开始向两端扩散，返回以str[left]和str[right]为中心的最长回文串
-*/
-const palindrome = (str, left, right) => {
-  //防止索引越界
-  while (left >= 0 && right < str.length && str[left] === str[right]) {
-    left--;
-    right++;
-  }
-  return str.substr(left + 1, right - left - 1);
 };
