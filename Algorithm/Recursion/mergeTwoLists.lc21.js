@@ -43,7 +43,7 @@ const mergeTwoLists = (list1, list2) => {
   return dummyhead.next;
 };
 
-/*  ----------------------- 👍 solution 2: recursion  ----------------------- */
+/*  ----------------------- solution 2: recursion  ----------------------- */
 const mergeTwoLists = (list1, list2) => {
   if (!list1) return list2;
   if (!list2) return list1;
