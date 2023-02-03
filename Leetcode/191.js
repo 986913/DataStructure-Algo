@@ -16,7 +16,7 @@ const hammingWeight = (n) => {
   return count;
 };
 
-/* -------------------- 👍 Solution 2: opearation -------------------- */
+/* -------------------- 👍 Solution 2: Bit opearation -------------------- */
 const hammingWeight = (n) => {
   let count = 0;
   while (n !== 0) {
