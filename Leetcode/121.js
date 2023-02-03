@@ -16,41 +16,34 @@ var maxProfit = function (prices) {
   return result;
 };
 
-/* ----------------- 👍👍👍 Solution2: DP -------------------------------- */
+/* ----------------- 👍 Solution2: DP -------------------------------- */
 /**
   1. 确定dp数组以及下标的含义:
     dp[i][0] 表示第i天持有股票所得最多现金 
     dp[i][1] 表示第i天不持有股票所得最多现金
-
   2. 确定递推公式:
     dp[i][0] = max(dp[i - 1][0], -prices[i]);
     dp[i][1] = max(dp[i - 1][1], prices[i] + dp[i - 1][0])
-
   3. dp数组如何初始化:
     dp[0][0] -= prices[0];
     dp[0][1] = 0
-
   4. 确定遍历顺序: 从前向后遍历。
-
   5. 举例推导dp数组:
     输入：[7,1,5,3,6,4]为例，dp数组为：
     [[-7,0], [-1,0], [-1,4],[-1,4], [-1,5], [-1,5]]
  */
 
-const maxProfit = (prices) => {
+var maxProfit = function (prices) {
   const len = prices.length;
   // 创建dp二维数组
   const dp = new Array(len).fill([0, 0]);
   // dp数组初始化
   dp[0] = [-prices[0], 0];
 
-  //遍历从下标1开始：
+  //更新dp[i]
   for (let i = 1; i < len; i++) {
-    //更新dp[i]
-    dp[i] = [
-      Math.max(dp[i - 1][0], -prices[i]),
-      Math.max(dp[i - 1][1], dp[i - 1][0] + prices[i]),
-    ];
+    dp[i][0] = Math.max(dp[i - 1][0], -prices[i]);
+    dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] + prices[i]);
     /* dp[i][0] ----> 如果第i天持有股票，那由两个状态推出来:
           第i-1天就持有股票，那么就保持现状，所得现金就是昨天持有股票的所得现金 即：dp[i - 1][0]
           第i天买入股票，所得现金就是0减去 今天的股票价格 即：0 - prices[i]  因为只买入一次
