@@ -14,7 +14,7 @@
 // --- Solution1.1 --- BFS: 🟡是102的变形题,只是输出visited.length就行 ------------------------------------
 /*
 var maxDepth = function (root) {
-  if (!root) return [];
+  if (!root) return 0;
 
   let visited = [];
   let queue = [root];
@@ -38,7 +38,7 @@ var maxDepth = function (root) {
 */
 // --- Solution1.2 --- BFS: 👍👍👍 是102的变形题🟡 ------------------------------------------------
 var maxDepth = function (root) {
-  if (!root) return [];
+  if (!root) return 0;
 
   let height = 0;
   let queue = [root];
@@ -72,9 +72,7 @@ var maxDepth = function (root) {
     //3.确定单层递归的逻辑：先求它的左子树的深度，再求的右子树的深度，最后取左右深度最大的数值 再+1 （加1是因为算上当前中间节点）就是目前节点为根节点的树的深度
     let leftTreeDepth = getDepth(node.left); //左
     let rightTreeDepth = getDepth(node.right); // 右
-    let depth = 1 + Math.max(leftTreeDepth, rightTreeDepth); //中
-
-    return depth;
+    return 1 + Math.max(leftTreeDepth, rightTreeDepth); //中
   };
 
   return getDepth(root);
