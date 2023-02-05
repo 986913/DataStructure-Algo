@@ -16,22 +16,18 @@
   这道题目使用preOrder和postOrder遍历都可以，唯独inOrder遍历不方便，因为inOrder遍历会把某些节点的左右孩子翻转了两次！建议拿纸画一画，就理解了 
 */
 
-// solution 1: 👍👍👍 DFS preOrder - 递归模版 - leetcode 144 ------------------------------------
+/* -------------- solution 1: 👍👍👍 DFS preOrder - 递归模版 - leetcode 144 ------------------------ */
 var invertTree = function (root) {
   if (!root) return root;
 
-  const helper = (node) => {
-    if (!node) return;
+  if (root.left) invertTree(root.left);
+  if (root.right) invertTree(root.right);
+  [root.left, root.right] = [root.right, root.left]; //invert node 的左右节点
 
-    [node.left, node.right] = [node.right, node.left]; //invert node 的左右节点
-    if (node.left) helper(node.left);
-    if (node.right) helper(node.right);
-  };
-
-  helper(root);
   return root;
 };
-// solution 2:  👍👍👍 DFS preOrder - 迭代统一模版 - leetcode 144 ------------------------------------
+
+/* -------------- solution 2:  👍 DFS preOrder - 迭代统一模版 - leetcode 144 ---------------------- */
 var invertTree = function (root) {
   if (!root) return root;
 
@@ -56,7 +52,7 @@ var invertTree = function (root) {
   return root;
 };
 
-// solution 3: 👍👍👍 套用BFS模版 （leetcode 102）------------------------------------------------------------------------
+/* -------------- solution 3: 👍👍👍 套用BFS模版 （leetcode 102）---------------------------------- */
 var invertTree = function (root) {
   if (!root) return root;
 
