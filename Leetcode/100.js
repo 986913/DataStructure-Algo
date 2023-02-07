@@ -12,7 +12,7 @@
  * @return {boolean}
  */
 
-//👍👍👍 DFS post_order - recursion--------------------------------------
+/* --------- 👍👍👍 DFS post_order - recursion-----------------------------*/
 
 // 1. 确定递归的参数:两个tree NODE : p and q.  和返回值boolean: true false
 var isSameTree = function (p, q) {
@@ -25,6 +25,5 @@ var isSameTree = function (p, q) {
   //3. 当p.val===q.val, 确定单层递归逻辑:
   let isLeftSideSame = isSameTree(p.left, q.left);
   let isRightSideSame = isSameTree(p.right, q.right);
-
   return isLeftSideSame && isRightSideSame;
 };
