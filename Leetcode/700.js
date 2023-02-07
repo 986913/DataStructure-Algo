@@ -12,7 +12,7 @@
  * @return {TreeNode}
  */
 
-//--------------------------Solution1: recursion, 根据BST的顺序特性来搜索的,这里就用不上DFS preorde,postorder,inorder etc了---------------
+/* --------------------------Solution1: recursion, 根据BST的顺序特性来搜索的,这里就用不上DFS preorde,postorder,inorder etc了--------*/
 var searchBST = function (root, val) {
   //确定终止条件
   if (!root || root.val === val) return root;
@@ -23,7 +23,7 @@ var searchBST = function (root, val) {
   if (val > root.val) return searchBST(root.right, val);
 };
 
-//--------------------------Solution2: iteration, 根据BST的顺序特性来搜索的 --------------------------------------------------------------
+/* --------------------------Solution2: iteration, 根据BST的顺序特性来搜索的 -----------------------------------------------------*/
 var searchBST = function (root, val) {
   while (root) {
     if (val < root.val) {
