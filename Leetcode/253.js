@@ -3,7 +3,7 @@
  * @return {number}
  */
 
-/* ---------------------------- Solution 1: lc252🟡变形题 ----------------------------  */
+/* --------------------------Solution 1: use MinPriorityQueue (lc252🟡变形题) ----------------------------  */
 const minMeetingRooms = function (intervals) {
   intervals.sort((a, b) => a[0] - b[0]);
 
