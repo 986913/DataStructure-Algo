@@ -11,11 +11,34 @@
  * @return {ListNode}
  */
 
-/* 
-  解法1: Brute force:  不推荐🙅🏻‍♀️   
-  find len of linked list first, then find the len-n th node , then delete it.
-*/
+/*--------------------------- Solution 1: 👍👍👍 Fast & Slow pointer -------------------- */
+var removeNthFromEnd = function (head, n) {
+  let dummyhead = new ListNode(-1);
+  dummyhead.next = head; //OR ---> let dummyhead = new ListNode(-1, head);
 
+  let slow = dummyhead;
+  let fast = dummyhead;
+
+  //先让fast走n步
+  while (n) {
+    fast = fast.next;
+    n--;
+  }
+
+  //再同时让slow fast走, 直到fast.next===null
+  while (fast.next) {
+    slow = slow.next;
+    fast = fast.next;
+  }
+
+  // actually delete (slow.next) here
+  slow.next = slow.next.next;
+
+  //return 删除节点后的list
+  return dummyhead.next;
+};
+
+/* ----- Solution 2: Brute force🚫不推荐 find len of linked list first, then find the len-n th node, then delete it. ---- */
 /*
   var removeNthFromEnd = function (head, n) {
     // find the length of linked list
@@ -60,27 +83,3 @@
     }
   };
 */
-
-/* 解法2: 👍👍👍 Fast & Slow pointer      */
-var removeNthFromEnd = function (head, n) {
-  let dummyHead = new ListNode(-1, head);
-
-  let fast = dummyHead;
-  let slow = dummyHead;
-
-  while (n > 0) {
-    // 先让fast指针走n+1步
-    fast = fast.next;
-    n--;
-  }
-
-  while (fast.next) {
-    // 然后同时移动fast, slow指针 , 直到fast.next === null
-    fast = fast.next;
-    slow = slow.next;
-  }
-
-  slow.next = slow.next.next; // actually delete slow.next here
-
-  return dummyHead.next;
-};
