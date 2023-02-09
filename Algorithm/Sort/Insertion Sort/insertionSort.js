@@ -1,5 +1,18 @@
 /* 
   Insertion sort：
+  插入排序的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。
+  
+  Big O：
+    best time complexity     O(n)
+    average time complexity  O(n²)
+    worst time complexity    O(n²)
+    space complexity         O(1)
+
+  算法步骤 in general:
+    将第一待排序序列第一个元素看做一个有序序列，把第二个元素到最后一个元素当成是未排序序列。
+    从头到尾依次扫描未排序序列，将扫描到的每个元素插入有序序列的适当位置。（如果待插入的元素与有序序列中的某个元素相等，则将待插入元素插入到相等元素的后面。）
+
+  算法步骤 in details:
     1.把 n 个待排序的元素看成为一个有序表和一个无序表，开始时有序表中只包含一个元素，无序表中包含有n-1个元素
     2.开始寻找插入点： 
       排序过程中每次从无序表中取出第一个元素arr[i]存下来命为currValue，然后对currValue和currValue之前所有的元素进行比对：
