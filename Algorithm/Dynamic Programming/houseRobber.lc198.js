@@ -26,6 +26,7 @@ const rob = (nums) => {
   dp[0] = nums[0];
   dp[1] = Math.max(nums[0], nums[1]);
 
+  //从递推公式中知道i应该从2开始，所以要初始化dp[0]和dp[1]
   for (let i = 2; i < nums.length; i++) {
     dp[i] = Math.max(dp[i - 2] + nums[i], dp[i - 1]);
   }
