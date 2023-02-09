@@ -20,7 +20,7 @@
  * @return {number}
  */
 
-// ---------------------- DP Solution --------------------------------
+/* ---------------------- 👍 DP Solution -------------------------------- */
 const rob = (nums) => {
   const dp = new Array(nums.length);
   dp[0] = nums[0];
