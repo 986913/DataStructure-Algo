@@ -14,7 +14,7 @@
   Space complexity:  O(n)
 */
 
-// Merges two already sorted arrays
+// Merges two already sorted arrays: use 2 pointer
 function merge(arr1, arr2) {
   let results = [];
   let i = 0;
@@ -50,7 +50,7 @@ function mergeSort(arr) {
   return merge(left, right); // helper function
 }
 
-console.log(mergeSort([8, 3, 99, 12, 1, 100, 74]));
+// console.log(mergeSort([8, 3, 99, 12, 1, 100, 74]));
 
 /**************************************  变形题🟡 -> https://bigfrontend.dev/problem/merge-sorted-arrays *********************************/
 function merge2Lists(arr1, arr2) {
