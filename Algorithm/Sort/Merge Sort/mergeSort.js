@@ -6,15 +6,26 @@
         得到n/2个长度为2或1的有序子序列，再两两merge, 如此重复， 直到得到一个长度为n的有序序列为止
         这种方法被称为 2路merge sort
 
-  Time complexity:
-        best:  O(n log n)
-    average:   O(n log n)
-      worst:   O(n log n)
-
-  Space complexity:  O(n)
+  Big O：
+    best time complexity     O(n log n)
+    average time complexity  O(n log n)
+    worst time complexity    O(n log n)
+    space complexity         O(n)
 */
+/* ---------------------------------------- Implemention ------------------------------------------------------ */
 
-// Merges two already sorted arrays: use 2 pointer
+// Main function:
+function mergeSort(arr) {
+  if (arr.length <= 1) return arr;
+
+  let mid = Math.floor(arr.length / 2);
+  let left = mergeSort(arr.slice(0, mid));
+  let right = mergeSort(arr.slice(mid));
+
+  return merge(left, right); // helper function
+}
+
+// helper function: merges two sorted arrays (use 2 pointer)
 function merge(arr1, arr2) {
   let results = [];
   let i = 0;
@@ -39,17 +50,6 @@ function merge(arr1, arr2) {
   }
   return results;
 }
-
-function mergeSort(arr) {
-  if (arr.length <= 1) return arr;
-
-  let mid = Math.floor(arr.length / 2);
-  let left = mergeSort(arr.slice(0, mid));
-  let right = mergeSort(arr.slice(mid));
-
-  return merge(left, right); // helper function
-}
-
 // console.log(mergeSort([8, 3, 99, 12, 1, 100, 74]));
 
 /**************************************  变形题🟡 -> https://bigfrontend.dev/problem/merge-sorted-arrays *********************************/
