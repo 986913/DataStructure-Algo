@@ -7,43 +7,68 @@
 - A stack is typically implemented with a dynamic array  or with a singly linked list
 */
 
-/* 1. build Stacks by using Array */
+/* 1. ---------------------------- build Stacks by using Array ---------------------------- */
 class Stack {
   constructor() {
-    this.items = [];
+    this.stack = [];
   }
-  push(val) {
-    this.items.push(val);
+
+  /**
+   * Pushes an item onto the top of the stack.
+   * @param {*} item The item to be pushed onto the stack.
+   * @return {number} The new length of the stack.
+   */
+  push(item) {
+    this.stack.push(item);
+    return this.stack.length;
   }
+
+  /**
+   * Remove an item at the top of the stack.
+   * @return {*} The item at the top of the stack if it is not empty, `undefined` otherwise.
+   */
   pop() {
-    this.items.pop();
+    if (!this.stack.length) return undefined;
+
+    let top = this.stack.pop();
+    return top;
   }
-  peek() {
-    return this.items[this.items.length - 1];
-  }
-  search(val) {
-    return this.items.indexOf(val);
-  }
+
+  /**
+   * Determines if the stack is empty.
+   * @return {boolean} `true` if the stack has no items, `false` otherwise.
+   */
   isEmpty() {
-    return this.items.length === 0;
+    return this.stack.length === 0;
   }
-  print() {
-    let result = '';
-    this.items.forEach((item) => {
-      result += item;
-    });
-    return result;
+
+  /**
+   * Returns the item at the top of the stack without removing it from the stack.
+   * @return {*} The item at the top of the stack if it is not empty, `undefined` otherwise.
+   */
+  peek() {
+    if (!this.stack) return undefined;
+
+    return this.stack[this.stack.length - 1];
+  }
+
+  /**
+   * Returns the number of items in the stack.
+   * @return {number} The number of items in the stack.
+   */
+  length() {
+    return this.stack.length;
   }
 }
 
-let s = new Stack();
-s.push('ming');
-s.push('yue');
-s.push('liu');
-s.pop();
-console.log(s.print());
+// let s = new Stack();
+// s.push('ming');
+// s.push('yue');
+// s.push('liu');
+// s.pop();
+// console.log(s.print());
 
-/* 2. build Stacks by using Single Linked List */
+/* 2. ---------------------------- build Stacks by using Single Linked List ---------------------------- */
 class Node {
   constructor(val) {
     this.value = val;
@@ -117,13 +142,13 @@ class Stack2 {
   }
 }
 
-const s1 = new Stack2();
-s1.push('ming');
-s1.push('yue');
-s1.push('liu');
-console.log(s1.pop()); // liu
-console.log(s1.pop()); // yue
-console.log(s1.pop()); // ming
+// const s1 = new Stack2();
+// s1.push('ming');
+// s1.push('yue');
+// s1.push('liu');
+// console.log(s1.pop()); // liu
+// console.log(s1.pop()); // yue
+// console.log(s1.pop()); // ming
 // console.log(s1.peek());
 // console.log(s1.search("hh"));
 // console.log(s1.print());
