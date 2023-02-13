@@ -36,7 +36,7 @@ var uniquePaths = function (m, n) {
     dp[i][0] = 1;
   }
 
-  //外层for控制行
+  //外层for控制行，m和n都是从1开始
   for (let i = 1; i < m; i++) {
     //内层for控制列
     for (let j = 1; j < n; j++) {

@@ -20,6 +20,8 @@
  * @param {number} n
  * @return {number}
  */
+
+/* ----------------------------------  solution:  DP:  -------------------------------  */
 // m是行，n是列
 
 var uniquePaths = function (m, n) {
@@ -34,7 +36,7 @@ var uniquePaths = function (m, n) {
     dp[i][0] = 1;
   }
 
-  //外层for控制行
+  //外层for控制行，m和n都是从1开始
   for (let i = 1; i < m; i++) {
     //内层for控制列
     for (let j = 1; j < n; j++) {
