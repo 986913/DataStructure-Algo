@@ -17,62 +17,26 @@
 /* ---------------------------------------- Implemention ------------------------------------------------------ */
 
 /* Main function  */
-function quickSort(arr, left = 0, right = arr.length - 1) {
-  if (left < right) {
-    // left==right is base case to stop recursion, so here condition is left<right
-    let privotIndex = partition(arr, left, right);
-    quickSort(arr, left, privotIndex - 1);
-    quickSort(arr, privotIndex, right); // 注意：是privotIndex而不是privotIndex+1
-  }
-  return arr;
-}
+function quickSort(arr) {
+  if (arr.length <= 1) return arr; // edge case
 
-/* helper function :
-    1. partition helper function responsible arranging elments in an arr on either side of a privot
-    2. given an array, this helper function should designate an element as the privot
-    3. it should then rearrange elements in the array so that all values less than the privot are moved to the left of the pivot,
-        and all values greater than the pivot are moved to the right of the pivot
-    4. the order of elements on either side of the pivot dosen't matter
-    5. the helper should do this in place, it should not create a new array
-    6. when complete, the helper should return the index of the pivot
+  const copiedArr = arr.slice(0, arr.length - 1); //make an copy of arr
+  const pivot = arr[arr.length - 1]; // use last element as pivot
+  const leftArr = []; // to save all elements < pivot
+  const rightArr = []; // to save all elements > pivot
 
-      eg:   partition([5,2,1,8,4,7,6,3])    // 4
-      解释:  把[5,2,1,8,4,7,6,3]第一个元素5当做privot, 下面这些组合都是可以的，共同点就是reArrange后的数组中，5都在index=4的位置上
-            比如： [2，1，4，3，5，8，7，6]
-                  [1，4，3，2，5，7，6，8]
-                  [3，2，1，4，5，7，6，8]
-                  [4，1，3，2，5，6，8，7]
-                  等等...
-*/
-
-function partition(arr, left, right) {
-  let pivot = arr[left]; //将第一个元素作为privot
-  let i = left; //left pointer
-  let j = right; //right pointer
-
-  while (i <= j) {
-    //注意： 是while而不是if
-    while (arr[i] < pivot) {
-      i++;
-    }
-    while (arr[j] > pivot) {
-      j--;
-    }
-    //注意：condition条件
-    if (i <= j) {
-      [arr[i], arr[j]] = [arr[j], arr[i]]; //sawpping two elements: arr[i] and arr[j]
-      i++;
-      j--;
-    }
+  // loop through copiedArr to update leftArr or rightArr
+  for (const ele of copiedArr) {
+    ele < pivot ? leftArr.push(ele) : rightArr.push(ele);
   }
 
-  return i; // 注意： return i 不是j
+  return [...quickSort(leftArr), pivot, ...quickSort(rightArr)]; // recursion here
 }
 
 // var sortedArray = quickSort([100, -3, 2, 300, 4, 6, 9, 1, 2, 5, 3, 23, 200]);
 // console.log(sortedArray);
 
 /* 
-  这个印度叔讲的好 https://www.youtube.com/watch?v=7h1s2SojIRw&ab_channel=AbdulBari
   quick sort思路: https://www.youtube.com/watch?v=5nXrEBhBFpU&ab_channel=%E6%84%9B%E8%93%81AiZhen
+  youtube:        https://www.youtube.com/watch?v=P6XGSKO2RzI&ab_channel=JustinKim
 */
