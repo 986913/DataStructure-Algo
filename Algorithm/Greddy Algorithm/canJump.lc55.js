@@ -11,14 +11,12 @@
  *        整体最优解：最后得到整体最大覆盖范围，看是否能到终点。
  */
 var canJump = function (nums) {
-  let cover = 0;
+  let cover = 0; // 覆盖范围index
   if (nums.length === 1) return true;
 
+  // 注意这里是小于等于cover，在覆盖范围内移动
   for (let i = 0; i <= cover; i++) {
-    // 注意这里是小于等于cover
-    const currSteps = nums[i];
-    cover = Math.max(i + currSteps, cover);
-    console.log(cover);
+    cover = Math.max(i + nums[i], cover);
     if (cover >= nums.length - 1) return true; // 说明可以覆盖到终点了
   }
 
