@@ -22,3 +22,5 @@ var canJump = function (nums) {
 
   return false; // 说明不能覆盖到终点了
 };
+
+// https://www.bilibili.com/video/BV1VG4y1X7kB/?spm_id_from=333.999.0.0&vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
