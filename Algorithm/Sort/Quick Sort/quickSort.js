@@ -18,7 +18,7 @@
 
 /* Main function  */
 function quickSort(arr) {
-  if (arr.length <= 1) return arr; // edge case
+  if (arr.length <= 1) return arr; // recursion end here
 
   const copiedArr = arr.slice(0, arr.length - 1); //make an copy of arr
   const pivot = arr[arr.length - 1]; // use last element as pivot
