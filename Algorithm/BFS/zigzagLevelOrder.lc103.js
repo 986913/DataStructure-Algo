@@ -8,19 +8,20 @@
  */
 /**
  * @param {TreeNode} root
- * @return {number[]}
+ * @return {number[][]}
  */
 
-/* ------- 👍👍👍 本题就是层序遍历的时候把一层求个总和在取一个均值 (是102 BFS 🟡的变形题) ----- */
-var averageOfLevels = function (root) {
+/* --------------- Solution BFS: 🟡是102的变形题 ----------------------*/
+var zigzagLevelOrder = function (root) {
   if (!root) return [];
 
   let visited = [];
   let queue = [root];
+  let level = 0;
 
   while (queue.length) {
-    let len = queue.length;
     let currLevel = [];
+    let len = queue.length;
 
     for (let i = 0; i < len; i++) {
       let node = queue.shift();
@@ -29,10 +30,11 @@ var averageOfLevels = function (root) {
       if (node.right) queue.push(node.right);
     }
 
-    //不同点在这: calculate average
-    const currLevelAverage =
-      currLevel.reduce((acc, cur) => acc + cur) / currLevel.length;
-    visited.push(currLevelAverage);
+    //不同点在这：当前层是奇数层的话就reverse order
+    if (level % 2 !== 0) currLevel.reverse();
+    level++; // 每进一次while就是新的一层 所以level++
+
+    visited.push(currLevel);
   }
 
   return visited;
