@@ -8,30 +8,63 @@ an array-like data structure whose elements follow the FIFO rule: First In, Firs
 A stack is typically implemented with a doubly linked list 
 */
 
-/* 1. build Queues by using Array */
-class Queues {
+/* 1. ---------------------------- build Queue by using Array ---------------------------- */
+class Queue {
   constructor() {
-    this.items = [];
+    this.queue = [];
   }
-  enqueue(val) {
-    this.items.push(val);
+
+  /**
+   * Adds an item to the back of the queue.
+   * @param {*} item The item to be pushed onto the queue.
+   * @return {number} The new length of the queue.
+   */
+  enqueue(item) {
+    this.queue.push(item);
+    return this.queue.length;
   }
+
+  /**
+   * Remove an item from the front of the queue.
+   * @return {*} The item at the front of the queue if it is not empty, `undefined` otherwise.
+   */
   dequeue() {
-    return this.items.shift();
+    if (this.isEmpty()) return undefined;
+    return this.queue.shift();
   }
-  peek() {
-    return this.items[0];
-  }
-  search(val) {
-    return this.items.indexOf(val);
-  }
+
+  /**
+   * Determines if the queue is empty.
+   * @return {boolean} `true` if the queue has no items, `false` otherwise.
+   */
   isEmpty() {
-    return this.items.length === 0;
+    return this.queue.length === 0;
   }
-  print() {
-    let res = "";
-    this.items.forEach((i) => (res += i));
-    return res;
+
+  /**
+   * Returns the item at the front of the queue without removing it from the queue.
+   * @return {*} The item at the front of the queue if it is not empty, `undefined` otherwise.
+   */
+  front() {
+    if (this.isEmpty()) return undefined;
+    return this.queue[0];
+  }
+
+  /**
+   * Returns the item at the back of the queue without removing it from the queue it.
+   * @return {*} The item at the back of the queue if it is not empty, `undefined` otherwise.
+   */
+  back() {
+    if (this.isEmpty()) return undefined;
+    return this.queue[this.queue.length - 1];
+  }
+
+  /**
+   * Returns the number of items in the queue.
+   * @return {number} The number of items in the queue.
+   */
+  length() {
+    return this.queue.length;
   }
 }
 // let q = new Queues();
@@ -40,7 +73,7 @@ class Queues {
 // q.enqueue("liu");
 // q.dequeue();
 
-/* 2. build Queues by using Singly linked List */
+/* 2. ---------------------------- build Queues by using Single Linked List ---------------------------- */
 class Node {
   constructor(val) {
     this.value = val;
@@ -96,7 +129,7 @@ class Queues {
     return this.size === 0;
   }
   print() {
-    let res = "";
+    let res = '';
     let current = this.first;
     while (current) {
       res += current.value;
@@ -107,9 +140,9 @@ class Queues {
 }
 
 let q = new Queues();
-q.enqueue("ming");
-q.enqueue("yue");
-q.enqueue("liu");
+q.enqueue('ming');
+q.enqueue('yue');
+q.enqueue('liu');
 console.log(q.print());
 // console.log(q.dequeue()); // ming
 // console.log(q.dequeue()); //yue
