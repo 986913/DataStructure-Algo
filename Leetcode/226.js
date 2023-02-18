@@ -17,13 +17,19 @@
 */
 
 /* -------------- solution 1: 👍👍👍 DFS preOrder - 递归模版 - leetcode 144 ------------------------ */
-var invertTree = function (root) {
-  if (!root) return root;
+const invertTree = (root) => {
+  // recursion para: treenode,   output: void
+  const helper = (node) => {
+    // end condition
+    if (!node) return;
 
-  if (root.left) invertTree(root.left);
-  if (root.right) invertTree(root.right);
-  [root.left, root.right] = [root.right, root.left]; //invert node 的左右节点
+    // single layer logic
+    if (node.left) helper(node.left);
+    if (node.right) helper(node.right);
+    [[node.left], [node.right]] = [[node.right], [node.left]];
+  };
 
+  helper(root);
   return root;
 };
 
