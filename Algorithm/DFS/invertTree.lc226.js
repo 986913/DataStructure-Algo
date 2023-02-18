@@ -24,9 +24,9 @@ const invertTree = (root) => {
     if (!node) return;
 
     // single layer logic
+    [[node.left], [node.right]] = [[node.right], [node.left]];
     if (node.left) helper(node.left);
     if (node.right) helper(node.right);
-    [[node.left], [node.right]] = [[node.right], [node.left]];
   };
 
   helper(root);
