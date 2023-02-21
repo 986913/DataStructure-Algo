@@ -38,19 +38,19 @@ var minDepth = function (root) {
 /* ------------Solution 2: 👍👍👍 DFS_postorder - recursion ---------------------------------- */
 var minDepth = function (root) {
   //1. 确定递归函数的参数和返回值: 参数为要传入的二叉树root，返回的是int类型的深度
-  const getDepth = (node) => {
+  const getHeight = (node) => {
     if (!node) return 0; //2. 确定终止条件： 终止条件也是遇到空节点返回0，表示当前节点的高度为0
 
     //3. 确定单层递归的逻辑:
-    let leftTreeDepth = getDepth(node.left); // zuo
-    let rightTreeDepth = getDepth(node.right); // you
+    let leftTreeDepth = getHeight(node.left); // zuo
+    let rightTreeDepth = getHeight(node.right); // you
     /* zhong */
     if (node.left === null && node.right !== null) return 1 + rightTreeDepth; //如果左子树为空，右子树不为空，说明最小深度是 1 + 右子树的深度
     if (node.left !== null && node.right === null) return 1 + leftTreeDepth; //右子树为空，左子树不为空，最小深度是 1 + 左子树的深度
     return 1 + Math.min(leftTreeDepth, rightTreeDepth); //左右子树都不为空，返回左右子树深度最小值 + 1
   };
 
-  return getDepth(root);
+  return getHeight(root);
 };
 
 //https://www.bilibili.com/video/BV1QD4y1B7e2/

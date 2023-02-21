@@ -78,7 +78,7 @@ const maxDepth = (root) => {
   return getHeight(root);
 };
 
-/**--- Solution2.2 👍👍👍 --- post_order DFS 使用递归三部曲 + 回溯 -------------------------------------*/
+/**--- Solution2.2 👍 --- post_order DFS 使用递归三部曲 + 回溯 -------------------------------------*/
 var maxDepth = function (root) {
   if (!root) return 0;
 
