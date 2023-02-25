@@ -36,6 +36,7 @@ var maxDepth = function (root) {
   return visited.length; // return vistied.length instead of visited
 }; 
 */
+
 /* --- Solution1.2 --- BFS: 👍👍👍 是102的变形题🟡 --------------------------------------------- */
 var maxDepth = function (root) {
   if (!root) return 0;

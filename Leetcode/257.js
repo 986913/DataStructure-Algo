@@ -11,16 +11,16 @@
  * @return {string[]}
  */
 
-/* -------- 👍👍👍 DFS Pre_order recursion: dfs_preorder模版变形题 (leetcode 144🟡) -------- */
+/* -------- 👍👍👍 DFS Pre_order 模版变形题 (leetcode 144🟡) -------- */
 
 var binaryTreePaths = function (root) {
   const result = [];
 
-  //1. 确定递归函数 函数参数:树的根节点 和 当前的每一条path: curPath, 无返回值
+  //1. 确定递归函数参数:树的根节点 和 当前的每一条path:curPath为数组, 无返回值
   const helper = (node, curPath) => {
     curPath.push(node.val); // 中
 
-    //2. 确定终止条件，到叶子节点就终止, 更新curPath, allPaths
+    //2. 确定终止条件，到叶子节点就终止, 更新result;
     if (!node.left && !node.right) {
       result.push(curPath.join('->'));
       return;
@@ -39,7 +39,7 @@ var binaryTreePaths = function (root) {
     }
   };
 
-  helper(root, []);
+  helper(root, []); // initial curpath is []
   return result;
 };
 
