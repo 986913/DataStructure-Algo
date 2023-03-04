@@ -54,14 +54,12 @@ var findBottomLeftValue = function (root) {
       //左
       curDepth++;
       helper(node.left, curDepth);
-
       curDepth--; // backtracking 回溯！！
     }
     if (node.right) {
       // 右
       curDepth++;
       helper(node.right, curDepth);
-
       curDepth--; // backtracking 回溯！！
     }
   };
