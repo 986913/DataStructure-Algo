@@ -33,7 +33,7 @@ var findBottomLeftValue = function (root) {
 };
 
 // https://www.bilibili.com/video/BV1424y1Z7pn/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
-/* --------- Solution2:  👍👍 DFS + backtracking (前后中序都可以) leetcode 104 解法2.2的变体 */
+/* --------- Solution2:  👍👍 DFS + backtracking (前后中序都可以) leetcode 104🟡解法2.2的变体 */
 
 var findBottomLeftValue = function (root) {
   let maxDepth = -Infinity; //用来记录tree的最大深度
