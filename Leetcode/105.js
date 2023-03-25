@@ -13,15 +13,13 @@
  */
 
 // 👍 https://www.bilibili.com/video/BV1vW4y1i7dn/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
-
+/****************  DFS - Preorder 🟡 lc106变形题*****************************************/
 var buildTree = function (preorder, inorder) {
   if (!preorder.length) return null;
 
   const rootVal = preorder.shift(); // 从前序遍历的数组中获取中间节点的值， 即数组第一个值
-
-  const index = inorder.indexOf(rootVal); // 获取中间节点在中序遍历中的下标
-
   const root = new TreeNode(rootVal); // 创建中间节点
+  const index = inorder.indexOf(rootVal); // 获取中间节点在中序遍历中的下标
 
   //创建左节点
   root.left = buildTree(preorder.slice(0, index), inorder.slice(0, index));
