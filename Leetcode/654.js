@@ -12,31 +12,27 @@
  * @return {TreeNode}
  */
 
+/****************  DFS - Preorder 🟡 类似于lc106*****************************************/
+
 // 递归参数就是传入的是存放元素的数组，返回该数组构造的二叉树的头结点：
 var constructMaximumBinaryTree = function (nums) {
-  //递归终止条件：当构造到叶子节点时候
-  if (nums.length === 1) return new TreeNode(nums[0]); // 注意return是node
+  if (nums.length === 0) return null;
 
   /*构造中间节点*/
-  let maxVal = -Infinity;
-  let maxValIndex = -1;
-  for (let i = 0; i < nums.length; i++) {
-    if (nums[i] > maxVal) {
-      maxVal = nums[i];
-      maxValIndex = i;
+  let maxValue = -Infinity;
+  let maxValueIdx = -1;
+  for (let index = 0; index < nums.length; index++) {
+    if (nums[index] > maxValue) {
+      maxValue = nums[index];
+      maxValueIdx = index;
     }
   }
-  let node = new TreeNode(maxVal); // middle node
+  let rootNode = new TreeNode(maxValue);
 
   /*递归构造左子树：*/
-  if (maxValIndex > 0) {
-    node.left = constructMaximumBinaryTree(nums.slice(0, maxValIndex)); // 切割数组
-  }
-
+  rootNode.left = constructMaximumBinaryTree(nums.slice(0, maxValueIdx));
   /*递归构造右子树：*/
-  if (maxValIndex < nums.length - 1) {
-    node.right = constructMaximumBinaryTree(nums.slice(maxValIndex + 1)); // 切割数组
-  }
+  rootNode.right = constructMaximumBinaryTree(nums.slice(maxValueIdx + 1));
 
-  return node;
+  return rootNode;
 };
