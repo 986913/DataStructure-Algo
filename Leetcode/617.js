@@ -14,6 +14,7 @@
 
 //递归参数是要传入两个二叉树的根节点，返回值就是合并之后二叉树的根节点。
 
+/*----------------- Solution: DFS  preorder, inorder, postorder 都行！--------------- */
 var mergeTrees = function (root1, root2) {
   //确定终止条件：
   if (root1 && !root2) return root1;
