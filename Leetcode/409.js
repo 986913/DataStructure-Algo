@@ -2,14 +2,17 @@
  * @param {string} s
  * @return {number}
  */
+
 var longestPalindrome = function (s) {
-  const map = new Map();
-  for (let c of s) {
-    map.set(c, map.get(c) + 1 || 1);
+  let result = 0;
+  const mem = new Set();
+  for (let i = 0; i < s.length; i++) {
+    if (mem.has(s[i])) {
+      result += 2;
+      mem.delete(s[i]);
+    } else {
+      mem.add(s[i]);
+    }
   }
-
-  let odds = 0;
-  map.forEach((count) => (odds += count % 2));
-
-  return s.length - odds + !!odds;
+  return result + (mem.size > 0 ? 1 : 0);
 };
