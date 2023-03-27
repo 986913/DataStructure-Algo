@@ -11,7 +11,7 @@
  * @return {number}
  */
 
-//------------------👍 Solution 1: bst dfs inorder to create visited array, then find the Minimum Diff of that array -------------
+//------------------👍 Solution 1: bst dfs inorder to create visited array, then find the Minimum Diff of that array 🟡lc98变形题------------
 var getMinimumDifference = function (root) {
   const visited = [];
 
@@ -36,7 +36,7 @@ var getMinimumDifference = function (root) {
   return minAbsDiff;
 };
 
-//-----------------------------👍👍 Solution 2: bst dfs inorder, but no need to create array! ----------------------
+//-----------------------------👍👍 Solution 2: bst dfs inorder, but no need to create array! 🟡lc98变形题----------------------
 var getMinimumDifference = function (root) {
   let pre = null;
   let minDiff = Infinity;
