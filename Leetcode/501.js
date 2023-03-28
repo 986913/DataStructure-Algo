@@ -54,7 +54,9 @@ var findMode = function (root) {
     if (!pre) count = 1; // 第一个节点
     else if (pre && node.val === pre.val) count++; // 与前一个节点数值相同
     else count = 1; // 与前一个节点数值不同
+
     pre = node; // 更新上一个节点
+
     if (count === maxCount) {
       // 如果和最大值相同，放进result中
       result.push(node.val);
