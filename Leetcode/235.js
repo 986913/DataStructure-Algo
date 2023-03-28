@@ -8,12 +8,12 @@ var lowestCommonAncestor = function (root, p, q) {
     //向左去搜索
     if (node.val > p.val && node.val > q.val) {
       left = helper(node.left);
-      if (left) return left; // 标准的搜索一条边的写法，遇到递归函数的返回值，如果不为空，立刻返回
+      if (left) return left; // 标准的搜索一条边的写法，遇到递归函数的返回值，如果不为空说明找到了最近的公共祖先，立刻返回
     }
     //向右去搜索
     if (node.val < p.val && node.val < q.val) {
       right = helper(node.right);
-      if (right) return right; // 标准的搜索一条边的写法，遇到递归函数的返回值，如果不为空，立刻返回
+      if (right) return right; // 标准的搜索一条边的写法，遇到递归函数的返回值，如果不为空说明找到了最近的公共祖先，立刻返回
     }
     //遇到node节点是数值在[p,q]区间中,那么node就是p和q的最近公共祖先
     return node;
