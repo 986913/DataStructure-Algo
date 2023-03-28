@@ -14,6 +14,7 @@
 //------------------👍 Solution 1: dfs inorder to create visited map, then find the most high frequency of that map -------------
 var findMode = function (root) {
   const map = new Map();
+  let result = [];
 
   const helper = (node) => {
     if (!node) return;
@@ -25,13 +26,11 @@ var findMode = function (root) {
   helper(root);
 
   let maxCount = map.get(root.val);
-  let result = [];
   for (let [key, value] of map) {
     if (value === maxCount) {
       result.push(key);
-    }
-    if (value > maxCount) {
-      result = [];
+    } else if (value > maxCount) {
+      result = []; //清空result
       maxCount = value;
       result.push(key);
     }
@@ -51,7 +50,6 @@ var findMode = function (root) {
     if (!node) return;
 
     helper(node.left);
-
     if (!pre) count = 1; // 第一个节点
     else if (pre && node.val === pre.val) count++; // 与前一个节点数值相同
     else count = 1; // 与前一个节点数值不同
@@ -65,7 +63,6 @@ var findMode = function (root) {
       result = [];
       result.push(node.val);
     }
-
     helper(node.right);
   };
 
