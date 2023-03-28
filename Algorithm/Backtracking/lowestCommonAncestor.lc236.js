@@ -26,7 +26,7 @@ var lowestCommonAncestor = function (root, p, q) {
     // 3. 确定递归单层逻辑
     let left = helper(node.left); // left maybe p or q (左子树有没有出现过p或q)
     let right = helper(node.right); // right maybe p or q (右子树有没有出现过p或q)
-
+    //处理中间节点的逻辑（回溯: ）
     if (left && right) return node; //如果left和right都不为空，说明此时node就是p和q的最近公共节点。向上返回node
     if (!left) return right; //如果left为空，就向上继续返回right
     if (!right) return left; //如果right为空, 就向上继续返回left
