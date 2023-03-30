@@ -22,11 +22,10 @@
   case 5. 要删除的node，左子树不为空，右不为空(最复杂的一个case)
 */
 
+/*--------------------------Solution: Recursion -------------------------------------------------------- */
 var deleteNode = function (root, key) {
-  /* 1. 递归函数的终止条件： */
-
-  //case 1. 没找到要删除的node
-  if (!root) return null;
+  /******************** 1.递归函数的终止条件 *******************/
+  if (!root) return null; //case 1. 没找到要删除的node
 
   //找到了要删除的node
   if (root.val === key) {
@@ -36,9 +35,8 @@ var deleteNode = function (root, key) {
     else if (root.left && !root.right) return root.left;
     //case 4. 要删除的node右子树不为空，左为空
     else if (!root.left && root.right) return root.right;
+    //case 5. 要删除的node，左子树不为空，右不为空
     else {
-      //case 5. 要删除的node，左子树不为空，右不为空
-
       //找到root右子树的最小值: curr
       let curr = root.right;
       while (curr.left) {
@@ -50,8 +48,7 @@ var deleteNode = function (root, key) {
       return root.right;
     }
   }
-
-  /* 2. 单层递归逻辑 */
+  /******************** 2.单层递归逻辑 ************************/
   if (key > root.val) root.right = deleteNode(root.right, key);
   if (key < root.val) root.left = deleteNode(root.left, key);
   return root;
