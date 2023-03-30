@@ -12,7 +12,7 @@
  * @return {TreeNode}
  */
 
-/*  -------------------------------------- Solution 1: DFS Recursion ------------------------------------ */
+/*  -------------------------------------- Solution 1: DFS Recursion 🟡lc700变形题------------------------------------ */
 
 var insertIntoBST = function (root, val) {
   if (!root) return new TreeNode(val); //找到了插入位置(叶子节点)，然后创建且返回新节点
@@ -26,7 +26,7 @@ var insertIntoBST = function (root, val) {
   return root;
 };
 
-/*  -------------------------------------- Solution 2: Iteration ------------------------------------ */
+/*  -------------------------------------- Solution 2: Iteration 🟡lc700变形题------------------------------------ */
 var insertIntoBST = function (root, val) {
   if (!root) return new TreeNode(val);
 
