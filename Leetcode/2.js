@@ -12,28 +12,29 @@
  */
 var addTwoNumbers = function (l1, l2) {
   let dummyNode = new ListNode(-1);
-  let tail = dummyNode;
+  let curr = dummyNode;
+  let carry = 0; //进位
 
-  let carry = 0;
+  while (l1 || l2) {
+    //得到当前l1和l2的数字：
+    let n1 = l1 === null ? 0 : l1.val;
+    let n2 = l2 === null ? 0 : l2.val;
 
-  while (l1 || l2 || carry) {
-    let currSum = 0;
+    //求和且更新carry
+    let sum = n1 + n2 + carry;
+    let reminder = sum % 10;
+    curr.next = new ListNode(reminder);
+    carry = sum >= 10 ? 1 : 0;
 
-    if (l1) {
-      currSum += l1.val;
-      l1 = l1.next;
-    }
-    if (l2) {
-      currSum += l2.val;
-      l2 = l2.next;
-    }
-    currSum += carry;
+    //移动到下一个点
+    if (l1) l1 = l1.next;
+    if (l2) l2 = l2.next;
+    curr = curr.next;
+  }
 
-    let reminder = currSum % 10;
-    tail.next = new ListNode(reminder);
-    tail = tail.next;
-
-    carry = currSum >= 10 ? 1 : 0;
+  //不要忘记最后进位!!！
+  if (carry !== 0) {
+    curr.next = new ListNode(carry);
   }
 
   return dummyNode.next;
