@@ -20,7 +20,7 @@ var addTwoNumbers = function (l1, l2) {
     let n1 = l1 === null ? 0 : l1.val;
     let n2 = l2 === null ? 0 : l2.val;
 
-    //求和且更新carry
+    //求和,创建新节点，且更新carry
     let sum = n1 + n2 + carry;
     let reminder = sum % 10;
     curr.next = new ListNode(reminder);
