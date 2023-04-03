@@ -46,3 +46,23 @@ const productExceptSelf = (nums) => {
 
   return result;
 };
+
+/* --------------------------Solution 3: Brute force (double for loop) ---------------------------- */
+var productExceptSelf = function (nums) {
+  let result = [];
+  let leftProduct = 1;
+
+  for (let i = 0; i < nums.length; i++) {
+    let rightProduct = 1;
+
+    for (let j = i + 1; j < nums.length; j++) {
+      rightProduct *= nums[j]; //算出i+1 到 最右边 的乘积
+    }
+
+    result.push(leftProduct * rightProduct); // update result
+
+    leftProduct *= nums[i]; // update leftProduct (也就是 最左边 到 i 的乘积)
+  }
+
+  return result;
+};
