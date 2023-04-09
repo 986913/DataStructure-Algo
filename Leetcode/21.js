@@ -37,6 +37,7 @@ const mergeTwoLists = (list1, list2) => {
     curr = curr.next; // <--- don't forget this line
   }
 
+  //给curr.next直接赋值，不用一个一个赋
   if (list1) curr.next = list1;
   else if (list2) curr.next = list2;
 
