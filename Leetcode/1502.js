@@ -20,5 +20,4 @@ var canMakeArithmeticProgression = function (arr) {
   return true;
 };
 
-
-console.log(canMakeArithmeticProgression([3,5,1]))  //true
+console.log(canMakeArithmeticProgression([3, 5, 1])); //true
