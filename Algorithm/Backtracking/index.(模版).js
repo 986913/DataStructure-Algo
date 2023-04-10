@@ -4,7 +4,7 @@
  * ----------------------- backtracking 抽象模版 -----------------------
  */
 
-// main helper: 
+// main function: 
 const anyFunctionWrapper = () => {
 
   const result = [];
