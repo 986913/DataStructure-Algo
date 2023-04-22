@@ -16,11 +16,8 @@ function findFirstUnique(arr) {
   let j;
 
   for (let i = 0; i < arr.length; i++) {
-    j = 0;
-
-    while (j < arr.length) {
+    for (j = 0; j < arr.length; j++) {
       if (i != j && arr[i] == arr[j]) break;
-      j += 1;
     }
     if (j == arr.length) return arr[i];
   }
