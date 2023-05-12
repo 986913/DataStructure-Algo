@@ -37,7 +37,7 @@ class PriorityQueue {
   bubuleUp() {
     let index = this.values.length - 1;
     let ele = this.values[index];
-    // stop when index = 0
+    // stop when index = 0,compare with parent over and over again
     while (index > 0) {
       let parentIndex = Math.floor((index - 1) / 2);
       let parentEle = this.values[parentIndex];
