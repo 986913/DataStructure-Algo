@@ -62,7 +62,7 @@ function right_bound(arr, target) {
     } else if (arr[middle] > target) {
       right = middle - 1;
     } else {
-      left = middle + 1; //不同点：别返回，要收缩右边界
+      left = middle + 1; //不同点：别返回，要收缩左边界
     }
   }
 
