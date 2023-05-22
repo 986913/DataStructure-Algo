@@ -12,8 +12,8 @@
     worst time complexity    O(n log n)
     space complexity         O(n)
 */
-/* ---------------------------------------- Implemention ------------------------------------------------------ */
 
+/* ---------------------------------------- Solution: (Not in-place) ------------------------------------------------------ */
 // Main function:
 function mergeSort(arr) {
   if (arr.length <= 1) return arr;
@@ -24,7 +24,6 @@ function mergeSort(arr) {
 
   return merge(left, right); // helper function
 }
-
 // helper function: merges two sorted arrays (use 2 pointer)
 function merge(arr1, arr2) {
   let results = [];
@@ -50,9 +49,50 @@ function merge(arr1, arr2) {
   }
   return results;
 }
-// console.log(mergeSort([8, 3, 99, 12, 1, 100, 74]));
 
-/**************************************  变形题🟡 -> https://bigfrontend.dev/problem/merge-sorted-arrays *********************************/
+/* ---------------------------------------- Solution: (In-place) ------------------------------------------------------ */
+function merge(arr, start, mid, end) {
+  let left = arr.slice(start, mid + 1);
+  let right = arr.slice(mid + 1, end + 1);
+
+  let i = 0;
+  let j = 0;
+  let k = start;
+
+  while (i < left.length && j < right.length) {
+    if (left[i] <= right[j]) {
+      arr[k] = left[i];
+      i++;
+    } else {
+      arr[k] = right[j];
+      j++;
+    }
+    k++;
+  }
+
+  while (i < left.length) {
+    arr[k] = left[i];
+    i++;
+    k++;
+  }
+
+  while (j < right.length) {
+    arr[k] = right[j];
+    j++;
+    k++;
+  }
+}
+
+function mergeSort(arr, start = 0, end = arr.length - 1) {
+  if (start >= end) return;
+
+  let mid = Math.floor((start + end) / 2);
+  mergeSort(arr, start, mid);
+  mergeSort(arr, mid + 1, end);
+  merge(arr, start, mid, end);
+}
+
+/*********************  变形题🟡 -> https://bigfrontend.dev/problem/merge-sorted-arrays ******************/
 function merge2Lists(arr1, arr2) {
   let p1 = 0;
   let p2 = 0;
