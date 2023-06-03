@@ -51,45 +51,41 @@ function merge(arr1, arr2) {
 }
 
 /* ---------------------------------------- Solution: (In-place) ------------------------------------------------------ */
-function merge(arr, start, mid, end) {
-  let left = arr.slice(start, mid + 1);
-  let right = arr.slice(mid + 1, end + 1);
+function mergeSort(arr) {
+  if (arr.length <= 1) return arr;
 
+  let mid = Math.floor(arr.length / 2);
+  let left = mergeSort(arr.slice(0, mid));
+  let right = mergeSort(arr.slice(mid));
+
+  let res = merge(left, right);
+  arr.forEach((_, index) => (arr[index] = res[index]));
+
+  return arr;
+}
+// helper function: merges two sorted arrays (use 2 pointer)
+function merge(arr1, arr2) {
+  let results = [];
   let i = 0;
   let j = 0;
-  let k = start;
-
-  while (i < left.length && j < right.length) {
-    if (left[i] <= right[j]) {
-      arr[k] = left[i];
+  while (i < arr1.length && j < arr2.length) {
+    if (arr2[j] > arr1[i]) {
+      results.push(arr1[i]);
       i++;
     } else {
-      arr[k] = right[j];
+      results.push(arr2[j]);
       j++;
     }
-    k++;
   }
-
-  while (i < left.length) {
-    arr[k] = left[i];
+  while (i < arr1.length) {
+    results.push(arr1[i]);
     i++;
-    k++;
   }
-
-  while (j < right.length) {
-    arr[k] = right[j];
+  while (j < arr2.length) {
+    results.push(arr2[j]);
     j++;
-    k++;
   }
-}
-
-function mergeSort(arr, start = 0, end = arr.length - 1) {
-  if (start >= end) return;
-
-  let mid = Math.floor((start + end) / 2);
-  mergeSort(arr, start, mid);
-  mergeSort(arr, mid + 1, end);
-  merge(arr, start, mid, end);
+  return results;
 }
 
 /*********************  变形题🟡 -> https://bigfrontend.dev/problem/merge-sorted-arrays ******************/
