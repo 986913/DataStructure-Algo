@@ -2,7 +2,7 @@
  * @param {number[]} nums
  * @return {number}
  */
-/* 2 pointer 👍   */
+/* 2 pointer 👍 ： 前提nums是sorted好的   */
 
 var removeDuplicates = function (nums) {
   if (nums == null) return 0;
