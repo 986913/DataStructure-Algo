@@ -1,6 +1,9 @@
-// First 10 terms of Fibonacci sequence are:
-// [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+/* --------------------- 用例测试 ----------------------- */
+// fib arr is like [0,1,1,2,3,5,8,13,21,34,55,......]
+fib(4); // [0,1,1,2,3]
+fib(10); // 0,1,1,2,3,5,8,13,21,34,55]
 
+/* --------------------------------- Code solution 1: Recursion ------------------------------- */
 const fib = (n) => {
   if (n === 0) return [0];
   if (n === 1) return [0, 1];
@@ -10,11 +13,6 @@ const fib = (n) => {
 
   return arr;
 };
-
-const result = fib(10);
-console.log(
-  `First, ${result.length}, 'terms of Fibonacci sequence are: ${result}`
-);
 
 /**
   当输入参数为5时，我们来逐步分析递归的每一步及数组arr的变化。
