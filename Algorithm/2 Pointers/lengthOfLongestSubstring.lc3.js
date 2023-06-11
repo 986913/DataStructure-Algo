@@ -46,27 +46,33 @@ var lengthOfLongestSubstring = function (s) {
 
 /* ----- 🟡变形题： https://bigfrontend.dev/problem/longest-substring-with-unique-characters  ----- */
 function longestUniqueSubstr(str) {
-  if (!str.length) return '';
+  if (str.length == 0) return '';
 
-  const set = new Set();
-  let start = 0;
-  let end = 0;
-  let max = 0;
-  let start_idx = 0;
+  let windowStart = 0;
+  let longestSubstr = '';
+  let charFrequency = new Map();
 
-  while (end < str.length) {
-    if (!set.has(str[end])) {
-      set.add(str[end]);
-      end++;
-    } else {
-      set.delete(str[start]);
-      start++;
+  for (let windowEnd = 0; windowEnd < str.length; windowEnd++) {
+    charFrequency.set(
+      str[windowEnd],
+      charFrequency.get(str[windowEnd]) + 1 || 1
+    );
+
+    // until you have unique characters
+    while (charFrequency.get(str[windowEnd]) > 1) {
+      let leftChar = str[windowStart]; // grab the left most character
+      charFrequency.set(leftChar, charFrequency.get(leftChar) - 1); // decremenet by the count by 1
+      if (charFrequency.get(leftChar) === 0) {
+        charFrequency.delete(leftChar); // remove the character form hashmap if it's count is 0
+      }
+      windowStart += 1; // shrink the window
     }
-
-    if (end - start > max) {
-      max = end - start;
-      start_idx = start;
-    }
+    // get the length of characters in charFrequency by substracting the windowEnd from windowStart (1 is added as index is 0 based while we want length)
+    longestSubstr =
+      longestSubstr.length >= windowEnd - windowStart + 1
+        ? longestSubstr
+        : str.substring(windowStart, windowEnd + 1);
   }
-  return str.slice(start_idx, start_idx + max);
+
+  return longestSubstr;
 }
