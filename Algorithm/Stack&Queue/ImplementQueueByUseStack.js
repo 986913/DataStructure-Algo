@@ -1,17 +1,24 @@
-/* you can use this Class which is bundled together with your code
+/*
+  Suppose you have a stack, which has only follow interface:
+    class Stack {
+      push(element) { // add element to stack  }
+      peek() { // get the top element  }
+      pop() { // remove the top element }
+      size() { // count of elements }
+    }
 
-class Stack {
-  push(element) { // add element to stack }
-  peek() { // get the top element }
-  pop() { // remove the top element}
-  size() { // count of element }
-}
+  Could you implement a Queue by using only above Stack? A Queue must have following interface:
+    class Queue {
+      enqueue(element) { // add element to queue, similar to Array.prototype.push  }
+      peek() { // get the head element }
+      dequeue() { // remove the head element, similar to Array.prototype.pop  }
+      size() { // count of elements  }
+    }
+  
+  note: you can only use Stack as provided, Array should be avoided for the purpose of practicing.
 */
 
-/* Array is disabled in your code */
-
-// you need to complete the following Queue Class ----------- Leetcode 232 🟡 原题--------------
-
+/* ---------------------- Solution: Leetcode 232🟡原题(minor difference) -------------------------- */
 class Queue {
   constructor() {
     this.stackIn = new Stack();
