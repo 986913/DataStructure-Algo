@@ -14,7 +14,7 @@ const tree1 = // some tree
 const tree2 = deserialize(serialize(tree1));
 expect(isIdentical(tree1, tree2)).toBe(true);
 
-/* --------------------- Code solution --------------------- */
+/* ------------------------------- Code solution ------------------------------------- */
 /* This is the class for the node, you can use this directly as it is bundled with your code:
   class Node {
     value: number
@@ -32,25 +32,42 @@ expect(isIdentical(tree1, tree2)).toBe(true);
  * @return {string}
  */
 function serialize(root) {
-  if (!root) return '';
-
   let visited = [];
   let queue = [root];
 
   while (queue.length) {
     let node = queue.shift();
-    visited.push(node.value);
-    if (node.left) queue.push(node.left);
-    if (node.right) queue.push(node.right);
+    if (node) {
+      visited.push(node.value);
+      queue.push(node.left);
+      queue.push(node.right);
+    } else {
+      visited.push('null');
+    }
   }
 
-  return visited.join('');
+  return visited.join();
 }
 
 /**
  * @param {string} str
  * @return {Node}
+ * leetcode🟡108 变形题
  */
 function deserialize(str) {
-  let arr = str.split('');
+  const arr = str.split(',');
+  return buildTree(arr);
 }
+// helper function for deserialize:
+const buildTree = (arr) => {
+  if (arr.length === 0) return null;
+
+  let midIdx = Math.floor(arr.length / 2);
+  if (arr[midIdx] === 'null') return null;
+
+  let node = new Node(arr[midIdx]);
+  node.left = buildTree(arr.slice(0, midIdx));
+  node.right = buildTree(arr.slice(midIdx + 1));
+
+  return node;
+};
