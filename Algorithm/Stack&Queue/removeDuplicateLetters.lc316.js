@@ -27,37 +27,37 @@ removeDuplicateLetters('baceaced'); // "baced"
 removeDuplicateLetters('cbacba'); // "acb"
 removeDuplicateLetters('xyzbab'); // "xyzab"
 
-/* ------------------------------------ Solution : use Stack (leetcode 🟡 316) -------------------------------------------- */
-//使用stack来维护一个最小的唯一子串。它通过比较字符的大小和最后出现位置来判断是否需要从栈中弹出元素，并保持栈中的元素按字典序递增。这样，最终栈中的元素就是最小的唯一子串
-/**
- * @param {string} str
- * @return {string}
- */
-function removeDuplicateLetters(str) {
+/* ------------------------------ Solution: Stack + greedy -------------------------------------- */
+const removeDuplicateLetters = (s) => {
   let stack = [];
-  let visited = new Set();
-  let occurance = new Map(); //记录str中每个字符的最后出现位置
-
-  for (let i = 0; i < str.length; i++) {
-    occurance.set(str[i], i);
-  }
-
-  for (let i = 0; i < str.length; i++) {
-    let char = str[i];
-
-    if (!visited.has(char)) {
-      while (
-        stack.length &&
-        stack[stack.length - 1] > char &&
-        occurance.get(stack[stack.length - 1]) > i
-      ) {
-        visited.delete(stack.pop());
-      }
-
-      visited.add(char);
-      stack.push(char);
+  for (let i = 0; i < s.length; i++) {
+    let char = s[i];
+    if (stack.indexOf(char) > -1) continue;
+    // 使用indexOf(xx, i)取代 lastIndexOf(xx)减少遍历次数会更快
+    while (
+      stack.length > 0 &&
+      stack[stack.length - 1] > char &&
+      s.indexOf(stack[stack.length - 1], i) > i
+    ) {
+      stack.pop();
     }
+    stack.push(char);
   }
 
   return stack.join('');
-}
+};
+
+/**
+ * @think 利用栈和贪心算法的思想
+ *        1. 维护一个栈stack，对字符串进行正序遍历
+ *        2. 对每个字符char，首先判断stack中是否存在，
+ *          2.1 若stack栈顶值比char大且后续还存在此值，则将栈顶弹出；
+ *            2.1.1 使用indexOf(xx, i)取代 lastIndexOf(xx)减少遍历次数会更快
+ *        3. 入栈每个char
+ *        4. 打印栈底到栈顶即为结果
+
+ * @time O(nlogn)
+ * @space 0(1) 只需借用一个栈
+ * @param {string} s
+ * @return {string}
+ */
