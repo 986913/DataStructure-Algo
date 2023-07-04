@@ -17,7 +17,7 @@ var intersection = function (nums1, nums2) {
   return result;
 };
 
-//2.👍👍👍 hash table - use set --- but no fit for dupcacted case input
+//2.👍👍👍 hash table - use set
 var intersection = function (nums1, nums2) {
   let set = new Set();
 
@@ -30,7 +30,7 @@ var intersection = function (nums1, nums2) {
   return Array.from(set);
 };
 
-//3. 👍👍👍 2 pointer: -- 通用解法
+//3. 👍👍👍 2 pointer:
 var intersection = function (nums1, nums2) {
   let result = [];
   let p1 = 0;
