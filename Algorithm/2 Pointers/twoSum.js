@@ -15,7 +15,7 @@ function findSum(arr, target) {
     if (seen.has(diff)) {
       return [diff, arr[i]];
     }
-    seen.set(arr[i], arr[i]);
+    seen.set(arr[i], i); //或者seen.set(arr[i], arr[i]);  因为这里给key设置什么value不重要， 反正用不到
   }
   return false;
 }
