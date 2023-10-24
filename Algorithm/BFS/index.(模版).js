@@ -44,10 +44,10 @@ const levelOrder = (root) => {
 /* ------ BFS - 结果是1维数组时 ---------------------------------------------------- */
 
 const levelOrder = (root) => {
-  if (this.root === null) return [];
+  if (root === null) return [];
 
   let visited = [];
-  let queue = [this.root];
+  let queue = [root];
 
   while (queue.length) {
     let node = queue.shift();
