@@ -20,3 +20,26 @@ function findAllAncestors(root, k) {
     }
   }
 }
+
+/* --------------------- Solution: Recursion ----------------------- */
+/* This solution uses a recursive helper function which traverses from the root to the input node 
+  and backtracks to append the ancestors that led to the node. */
+function findAllAncestors(root, k) {
+  const result = [];
+  recfindAncestors(root, k, result);
+  return result;
+}
+
+function recfindAncestors(root, k, result) {
+  if (root == null) return false;
+  else if (root.val == k) return true;
+  else if (
+    recfindAncestors(root.leftChild, k, result) ||
+    recfindAncestors(root.rightChild, k, result)
+  ) {
+    result.push(root.val);
+    return true;
+  }
+
+  return false;
+}
