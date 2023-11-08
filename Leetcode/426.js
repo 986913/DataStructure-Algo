@@ -43,6 +43,8 @@ const convertToLinkedList = (root) => {
   };
 
   helper(root);
+
+  //这个时候pre就到最后了，然后头head 尾pre连接
   head.right.left = pre;
   pre.right = head.right;
 
