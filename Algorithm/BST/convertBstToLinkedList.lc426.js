@@ -18,7 +18,7 @@
      }
  };
  */
-
+/*  ------------------------  Solution: DFS_InOrder  ------------------------------- */
 const convertToLinkedList = (root) => {
   let pre = null;
   let head = null;
@@ -36,7 +36,6 @@ const convertToLinkedList = (root) => {
     } else {
       node.left = pre;
       pre.right = node;
-      node.left = pre;
     }
     pre = node;
 
