@@ -17,7 +17,7 @@
         25 75    350
  */
 
-/*------------------------ Solution -------------------------- */
+/*------------------------ Solution: Same as lc297 -------------------------- */
 /**
  * Definition for a binary tree node.
  * function TreeNode(val) {
