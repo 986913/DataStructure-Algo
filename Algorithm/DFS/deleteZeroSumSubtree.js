@@ -24,7 +24,7 @@ let deleteZeroSumSubtree = function (root) {
     if (sumRight === 0) node.right = null;
     if (sumLeft === 0) node.left = null;
     // single layer recurrsion:
-    return sumLeft + sumRight + node.data;
+    return sumLeft + sumRight + node.val;
   };
 
   helper(root);
