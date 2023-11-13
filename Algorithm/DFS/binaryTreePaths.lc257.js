@@ -11,7 +11,7 @@
  * @return {string[]}
  */
 
-/* -------- 👍👍👍 DFS Pre_order 模版变形题 (leetcode 144🟡) -------- */
+/* -------- 👍👍👍 DFS Pre_order 模版变形题 (leetcode 144, lc129变形题🟡) -------- */
 
 var binaryTreePaths = function (root) {
   const result = [];
