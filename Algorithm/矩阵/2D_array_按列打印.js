@@ -11,10 +11,11 @@
 
 const printByCol = (mx) => {
   const result = [];
-  const len = mx.length;
+  const rows = mx.length;
+  const cols = mx.length;
 
-  for (let i = 0; i < len; i++) {
-    for (let j = 0; j < len; j++) {
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
       result.push(mx[j][i]); // <----- 不同点在这
     }
   }
