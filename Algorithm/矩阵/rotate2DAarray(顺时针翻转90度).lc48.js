@@ -19,27 +19,32 @@
  *          ]                         ]
  */
 
-var rotate = function (matrix) {
-  let m = matrix.length; // row
-  let n = matrix[0].length; // column
+/**
+ * @param {number[][]} matrix
+ * @return {void} Do not return anything, modify matrix in-place instead.
+ */
+var rotate = function (mx) {
+  let len = mx.length;
 
-  // step1:
-  for (let i = 0; i < m; i++) {
-    for (let j = i; j < n; j++) {
+  /* step 1: 根据对角线反转  */
+  for (let i = 0; i < len; i++) {
+    // 注意：j等于i开始， 因为不能做多余的翻转
+    for (let j = i; j < len; j++) {
       if (i === j) continue; // no need to swap if element is on 对角线上
-      [matrix[i][j], matrix[j][i]] = [matrix[j][i], matrix[i][j]];
+      [mx[i][j], mx[j][i]] = [mx[j][i], mx[i][j]];
     }
   }
 
-  // step2:
-  for (let i = 0; i < m; i++) {
+  /* step 2: reverse 每一行   */
+  mx.forEach((row) => {
     let left = 0;
-    let right = n - 1;
-
+    let right = len - 1;
     while (left <= right) {
-      [matrix[i][left], matrix[i][right]] = [matrix[i][right], matrix[i][left]];
+      [row[left], row[right]] = [row[right], row[left]];
       left++;
       right--;
     }
-  }
+  });
+
+  return mx;
 };
