@@ -4,8 +4,12 @@
  * @return {Array<Array<number>>}
  */
 
-/**************************** LC 59变形题 ************************************************/
-
+/*
+  ************************** Solution: 类似于L54螺旋数组, LC59 变形题 **************************
+    解题的核心思路是按照右、下、左、上的顺序遍历数组，
+    并使用四个变量圈定未遍历元素的边界, 
+    随着螺旋遍历，相应的边界会收缩，直到snail遍历完整个数组
+ */
 Array.prototype.snail = function (rowsCount, colsCount) {
   if (rowsCount * colsCount !== this.length) return [];
 
