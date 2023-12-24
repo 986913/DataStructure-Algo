@@ -10,6 +10,13 @@
  * @return {number[]}
  */
 
+/*
+  ************************** Solution: **************************
+    解题的核心思路是按照右、下、左、上的顺序遍历数组，
+    并使用四个变量圈定未遍历元素的边界, 
+    随着螺旋遍历，相应的边界会收缩，直到螺旋遍历完整个数组
+ */
+
 var spiralOrder = function (matrix) {
   const m = matrix.length; // row of matrix
   const n = matrix[0].length; // column of matrix
