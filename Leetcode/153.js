@@ -11,7 +11,7 @@ var findMin = function (nums) {
 
   while (left < right) {
     let mid = left + Math.floor((right - left) / 2);
-    //注意是和nums[right]比较
+    //difference is here: 注意是和nums[right]比较
     if (nums[mid] > nums[right]) {
       left = mid + 1;
     } else {
@@ -19,5 +19,5 @@ var findMin = function (nums) {
     }
   }
 
-  return nums[left];
+  return nums[left]; // difference
 };

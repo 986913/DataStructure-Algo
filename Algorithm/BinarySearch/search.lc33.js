@@ -14,27 +14,45 @@ var search = function (nums, target) {
 };
 
 /* ------------ Solution 2: 👍 Binary search, lc153🟡变形题（lc153就是此题的helper function..)------------------ */
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
 
-/* Main function:
-  1. find the smallest element's index by using binary search
-  2. once you find the pivot idx, then decide search range, neither 0---privotIdx,  OR privotIdx----nums.length-1
-  3. after search range confirmed then apply regular binary search again
-*/
-var search = function (nums, target) {
-  if (!nums.length) return -1;
-
-  let start = findPivot(nums); //1;
-
+const findSmallestEleIndex = (nums) => {
   let left = 0;
   let right = nums.length - 1;
 
-  if (nums[start] <= target && target <= nums[right]) {
-    left = start; //2;  search range: privotIdx----nums.length-1
-  } else {
-    right = start; //2;  search range:  0---privotIdx
+  while (left < right) {
+    let mid = left + Math.floor((right - left) / 2);
+    if (nums[mid] > nums[right]) {
+      left = mid + 1;
+    } else {
+      //nums[mid]<= nums[right]
+      right = mid;
+    }
   }
 
-  //3.  regular binary search agian
+  return left;
+};
+
+var search = function (nums, target) {
+  if (!nums.length) return -1;
+
+  /* 1. find the smallest element's index by using binary search */
+  let privotIdx = findSmallestEleIndex(nums);
+  let left = 0;
+  let right = nums.length - 1;
+
+  /* 2. once you find the pivot idx, then decide search range, neither 0---privotIdx or privotIdx----nums.length-1 */
+  if (nums[privotIdx] <= target && target <= nums[right]) {
+    left = privotIdx; // privotIdx ----> nums.length-1
+  } else {
+    right = privotIdx; // 0 ---> privotIdx
+  }
+
+  /* 3. after search range confirmed then apply regular binary search again */
   while (left <= right) {
     let mid = left + Math.floor((right - left) / 2);
     if (nums[mid] < target) {
@@ -45,25 +63,5 @@ var search = function (nums, target) {
       return mid;
     }
   }
-
   return -1;
-};
-
-// helper function: use binary search to find smallest element's index
-const findPivot = (nums) => {
-  let left = 0;
-  let right = nums.length - 1;
-
-  while (left < right) {
-    let mid = left + Math.floor((right - left) / 2);
-
-    //注意是和nums[right]比较
-    if (nums[mid] > nums[right]) {
-      left = mid + 1;
-    } else {
-      right = mid; //nums[mid]<= nums[right]
-    }
-  }
-
-  return left;
 };
