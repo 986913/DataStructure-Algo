@@ -46,7 +46,7 @@ var search = function (nums, target) {
     }
 
     //1.2: mid在下半区
-    if (nums[mid] < nums[right]) {
+    if (nums[mid] <= nums[right]) {
       // 2.3: target处于下半区内，且target处于mid和right之间
       if (nums[mid] <= target && target <= nums[right]) {
         left = mid + 1;
