@@ -13,55 +13,51 @@ var search = function (nums, target) {
   return -1;
 };
 
-/* ------------ Solution 2: 👍 Binary search, lc153🟡变形题（lc153就是此题的helper function..)------------------ */
+/* ------------ Solution 2: 👍 Binary search LC153, 81变形题 ------------------ */
+/*  
+  https://www.jiakaobo.com/leetcode/33.%20Search%20in%20Rotated%20Sorted%20Array
+    1. 第1步判断mid在哪个区？ 
+    2. 第2步判断target在哪个位置？ 
+    3. 第3步返回结果 
+*/
 /**
  * @param {number[]} nums
  * @param {number} target
  * @return {number}
  */
-
-const findSmallestEleIndex = (nums) => {
-  let left = 0;
-  let right = nums.length - 1;
-
-  while (left < right) {
-    let mid = left + Math.floor((right - left) / 2);
-    if (nums[mid] > nums[right]) {
-      left = mid + 1;
-    } else {
-      //nums[mid]<= nums[right]
-      right = mid;
-    }
-  }
-
-  return left;
-};
-
 var search = function (nums, target) {
-  if (!nums.length) return -1;
-
-  /* 1. find the smallest element's index by using binary search */
-  let privotIdx = findSmallestEleIndex(nums);
   let left = 0;
   let right = nums.length - 1;
 
-  /* 2. once you find the pivot idx, then decide search range, neither 0---privotIdx or privotIdx----nums.length-1 */
-  if (nums[privotIdx] <= target && target <= nums[right]) {
-    left = privotIdx; // privotIdx ----> nums.length-1
-  } else {
-    right = privotIdx; // 0 ---> privotIdx
-  }
-
-  /* 3. after search range confirmed then apply regular binary search again */
   while (left <= right) {
     let mid = left + Math.floor((right - left) / 2);
-    if (nums[mid] < target) {
-      left = mid + 1;
-    } else if (nums[mid] > target) {
-      right = mid - 1;
-    } else {
-      return mid;
+
+    if (nums[mid] === target) return mid;
+
+    // 1.1: mid在上半区
+    if (nums[left] <= nums[mid]) {
+      // 2.1: target处于上半区内，且target处于left和mid之间
+      if (nums[left] <= target && target <= nums[mid]) {
+        right = mid - 1;
+      } else {
+        // 2.2: target处于上半区内，且target处于mid和right之间
+        left = mid + 1;
+      }
+    }
+
+    //1.2: mid在下半区
+    if (nums[mid] < nums[right]) {
+      // 2.3: target处于下半区内，且target处于mid和right之间
+      if (nums[mid] <= target && target <= nums[right]) {
+        left = mid + 1;
+      } else {
+        // 2.4: target处于下半区内，且target处于left和mid之间
+        right = mid - 1;
+      }
     }
   }
-  return -1;
+
+  if (nums[left] == target) return left;
+  else if (nums[right] == target) return right;
+  else return -1;
 };
