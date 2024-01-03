@@ -9,7 +9,6 @@ var mySqrt = function (x) {
 
   while (left <= right) {
     let mid = left + Math.floor((right - left) / 2);
-
     // difference is here: condition changed
     if (mid * mid < x) {
       left = mid + 1;
