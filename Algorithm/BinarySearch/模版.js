@@ -27,16 +27,18 @@ const left_bound = (nums, target) => {
 
   while (left <= right) {
     let mid = left + Math.floor((right - left) / 2);
-    // 不断收缩右边界:  >变成>=
-    if (target <= nums[mid]) {
+    if (target < nums[mid]) {
       right = mid - 1;
-    } else {
+    } else if (target > nums[mid]) {
       left = mid + 1;
+    } else if (target === nums[mid]) {
+      // 别返回。不断向左收缩,达到锁定左边界的目的
+      right = mid - 1;
     }
   }
 
   /*
-    arr中没找到target:
+    arr中没找到target：（判断left越界情况）
 		  case 1: left一直往右走，越界了: [1,3,3,5,5,6]中找10;
 		  case 2: left一直往左走，走到了arr的第1项且还不等于target: [1,3,3,5,5,6]中找0;
    */
@@ -54,16 +56,18 @@ const right_bound = (nums, target) => {
 
   while (left <= right) {
     let mid = left + Math.floor((right - left) / 2);
-    // 不断收缩左边界:  >变成>=
-    if (target >= nums[mid]) {
-      left = mid + 1;
-    } else {
+    if (target < nums[mid]) {
       right = mid - 1;
+    } else if (target > nums[mid]) {
+      left = mid + 1;
+    } else if (target === nums[mid]) {
+      // 别返回。不断向右收缩,达到锁定右边界的目的
+      left = mid + 1;
     }
   }
 
   /*
-    arr中没找到target:
+    arr中没找到target：（判断right越界情况）
 		  case 1: right一直往左走，越界了: [1,3,3,5,5,6]中找0;
 		  case 2: right一直往右走，走到了arr最后一项且还不等于target: [1,3,3,5,5,6]中找10;
   */
