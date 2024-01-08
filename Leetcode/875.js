@@ -17,7 +17,7 @@ var minEatingSpeed = function (piles, h) {
   return max;
 };
 
-/* ------------------Solution2(Sol1的优化版)：2分扫描 ------------------------------------------------------- */
+/* ------------------Solution2(Sol1的优化版)：2分扫描 （LC1011变形题） ------------------------------------------------------- */
 const canFinish = (piles, speed, h) => {
   let time = 0;
   piles.forEach((n) => {
