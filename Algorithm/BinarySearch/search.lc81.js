@@ -14,12 +14,13 @@ var search = function (nums, target) {
 
     if (nums[mid] === target) return true;
 
-    // 去重：
+    // 与33题不同点在这 ---> 去重：
     if (nums[mid] === nums[right]) {
       right--;
     } else if (nums[mid] === nums[left]) {
       left++;
     }
+
     // 1.1: mid在上半区
     else if (nums[left] <= nums[mid]) {
       // 2.1: target处于上半区内，且target处于left和mid之间
