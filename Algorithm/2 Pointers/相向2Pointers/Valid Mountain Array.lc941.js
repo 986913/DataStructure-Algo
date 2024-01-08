@@ -22,7 +22,7 @@ var validMountainArray = function (arr) {
     right--;
   }
 
-  //如果left和right在中间相遇，且left和right都不是在开始的位置 那说明就是山峰
+  //如果left和right在中间相遇，且left和right都不是在开始的位置 那说明就是山峰, 比如[0,3,2,1]： left=right=1
   if (left == right && left !== 0 && right !== arr.length - 1) return true;
 
   /* case like these all return false, 不符合山峰
