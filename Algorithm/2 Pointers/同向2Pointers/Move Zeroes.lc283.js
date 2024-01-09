@@ -42,9 +42,8 @@ var moveZeroes = function (nums) {
 function moveZeros(list) {
   let slow = 0;
   let fast = 0;
-  let len = list.length;
 
-  while (fast < len) {
+  while (fast < list.length) {
     //只有当list[fast]不等于0时候，才会swap和slow++
     if (list[fast] !== 0) {
       [list[fast], list[slow]] = [list[slow], list[fast]];

@@ -28,15 +28,14 @@ var removeElement = function (nums, val) {
 };
 
 /***
-  👍👍👍 2Pointer: 
-  https://www.bilibili.com/video/BV12A4y1Z7LP?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
-  https://www.jiakaobo.com/leetcode/27.%20Remove%20Element.html
-***/
-/* 
-  这题解法的核心就是遍历数据过程中遇到等于目标值就直接跳过，不等于目标值就赋值，这样就能过滤掉（也就是删除掉）目标值
+  👍👍👍 Solution2.1: Two Pointer - forLoop
+    https://www.bilibili.com/video/BV12A4y1Z7LP?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
+    https://www.jiakaobo.com/leetcode/27.%20Remove%20Element.html
+
+    这题解法的核心就是遍历数据过程中遇到等于目标值就直接跳过，不等于目标值就赋值，这样就能过滤掉（也就是删除掉）目标值
     fast pointer is use for: loop throgh the whole array. 寻找新数组的元素,新数组就是不含有目标元素的数组
     slow pointer is use for: 记录更新所有不重复的, 指向更新 新数组下标的位置
-*/
+***/
 
 var removeElement = function (nums, val) {
   let slow = 0;
@@ -48,5 +47,22 @@ var removeElement = function (nums, val) {
       slow++;
     }
   }
+  return slow;
+};
+
+/******************** 👍👍👍 Solution2.2: Two Pointer - whileLopp ************************/
+var removeElement = function (nums, val) {
+  let slow = 0;
+  let fast = 0;
+
+  while (fast < nums.length) {
+    //只有当nums[fast]不等于val时候，才会swap和slow++
+    if (nums[fast] !== val) {
+      nums[slow] = nums[fast];
+      slow++;
+    }
+    fast++; // fast是持续++的
+  }
+
   return slow;
 };
