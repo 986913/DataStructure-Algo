@@ -48,13 +48,13 @@ var sortArrayByParityII = function (nums) {
   let oddIndex = 1;
 
   while (evenIdx < nums.length) {
-    // 在偶数位遇到了奇数
+    // 当偶数位是奇数时：
     if (nums[evenIdx] % 2 === 1) {
-      while (nums[oddIndex] % 2 !== 0) oddIndex += 2; //在奇数位找一个偶数
-      [nums[oddIndex], nums[evenIdx]] = [nums[evenIdx], nums[oddIndex]]; // swap
+      while (nums[oddIndex] % 2 !== 0) oddIndex += 2; //持续的在奇数位找一个偶数， 得到oddIndex
+      [nums[oddIndex], nums[evenIdx]] = [nums[evenIdx], nums[oddIndex]]; // 然后进行swap
     }
 
-    evenIdx += 2;
+    evenIdx += 2; // evenIdx是持续+2的
   }
 
   return nums;
