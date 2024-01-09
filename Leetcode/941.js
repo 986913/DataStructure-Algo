@@ -3,7 +3,7 @@
  * @return {boolean}
  */
 
-/***********************Solution 1: Two pointer *********************************/
+/***********************Solution 1: 👍 Two pointer *********************************/
 /**
  * @param {number[]} arr
  * @return {boolean}
