@@ -24,6 +24,9 @@ var search = function (nums, target) {
  * @param {number[]} nums
  * @param {number} target
  * @return {number}
+ * 要记住：
+    1. 如何判断mid在上下区的条件：  nums[left] <= nums[mid]  nums[mid] <= nums[right]
+    2. 第三步记得额外检查
  */
 var search = function (nums, target) {
   let left = 0;
@@ -32,7 +35,7 @@ var search = function (nums, target) {
   while (left <= right) {
     let mid = left + Math.floor((right - left) / 2);
 
-    if (nums[mid] === target) return mid;
+    if (nums[mid] === target) return mid; // 找到了
 
     // 1.1: mid在上半区
     if (nums[left] <= nums[mid]) {
@@ -57,7 +60,8 @@ var search = function (nums, target) {
     }
   }
 
+  //有可能在退出循环后, left或right其中一个指向target，需要额外的检查来确定返回哪个索引
   if (nums[left] == target) return left;
   else if (nums[right] == target) return right;
-  else return -1;
+  else return -1; // 没找到
 };
