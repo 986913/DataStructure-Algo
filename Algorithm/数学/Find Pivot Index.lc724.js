@@ -15,7 +15,7 @@ var pivotIndex = function (nums) {
 
 const sum = (arr) => arr.reduce((prev, curr) => prev + curr, 0);
 
-/*------------------------解法2: Math / Two Pointer 👍 ------------------------ */
+/*------------------------解法2: Math  ------------------------ */
 
 var pivotIndex = function (nums) {
   let allSum = nums.reduce((acc, cur) => acc + cur);

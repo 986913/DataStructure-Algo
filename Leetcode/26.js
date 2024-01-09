@@ -18,7 +18,7 @@ var removeDuplicates = function (nums) {
 };
 
 /******************************** Solution2.2: Two pointers👍 while循环 ********************************************/
-var removeDuplicates = function (nums, val) {
+var removeDuplicates = function (nums) {
   let slow = 1;
   let fast = 1;
 

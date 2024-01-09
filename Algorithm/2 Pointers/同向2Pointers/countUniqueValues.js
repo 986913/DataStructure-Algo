@@ -12,10 +12,7 @@ countUniqueValues([])                               0
 countUniqueValues([-2,-1,-1,0,1])                   4
 */
 
-
-
-
-/* frequency counter 解法： V1和V2 */
+/************************* Solution1: Hash table ******************************/
 const countUniqueValuesV1 = (arr) => {
   let lookUp = {};
   for (let val of arr) {
@@ -23,6 +20,7 @@ const countUniqueValuesV1 = (arr) => {
   }
   return Object.keys(lookUp).length;
 };
+
 const countUniqueValuesV2 = (arr) => {
   let obj = new Map();
   for (let val of arr) {
@@ -32,20 +30,24 @@ const countUniqueValuesV2 = (arr) => {
   return obj.size;
 };
 
-
-
-/* multiple pointers解法： */
+/************************* Solution2: Two pointers👍 while循环 (Same to LC26)******************************/
 const countUniqueValuesV3 = (arr) => {
   if (arr.length === 0) return 0;
-  var i = 0;
-  for (var j = 1; j < arr.length; j++) {
-    if (arr[i] !== arr[j]) {
-      i++;
-      arr[i] = arr[j];
+
+  let slow = 1;
+  let fast = 1;
+
+  while (fast < arr.length) {
+    //只有当nums[fast]不等于nums[slow - 1]时候，才会swap和slow++
+    if (arr[fast] !== arr[slow - 1]) {
+      [arr[slow], arr[fast]] = [arr[fast], arr[slow]];
+      slow++;
     }
-    // console.log(i, j);
+
+    fast++; // fast是持续++的
   }
-  return i + 1;
+
+  return slow;
 };
 
 console.log(countUniqueValuesV3([1, 2, 3, 7, 7, 7, 12, 12, 13, 14, 15]));
