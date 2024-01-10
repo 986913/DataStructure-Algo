@@ -50,11 +50,11 @@ var minSubArrayLen = function (target, nums) {
   while (fast < nums.length) {
     curSum += nums[fast];
 
-    //注意是while, 动态调节窗口的起始位置
+    //精髓就是动态调节窗口的起始位置：注意是while
     while (curSum >= target) {
       minLen = Math.min(minLen, fast - slow + 1);
       curSum -= nums[slow]; // 别忘了update curSum
-      slow++; // 别忘了update slow
+      slow++; // 别忘了update slow (起始位置)
     }
 
     fast++; // fast是持续++的

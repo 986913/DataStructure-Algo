@@ -9,7 +9,7 @@
   minSubArrayLen([3,1,7,11,2,9,8,21,62,33,19],    52)         1 --> because [62] is the smallest subarray
 */
 
-/***********************simple solution: doueble for-loop:  O(n^2) *****************************/
+/*********************** simple solution: doueble for-loop:  O(n^2) *****************************/
 const minSubArrayLen = (s, nums) => {
   let result = Infinity; // 最终的结果
   let sum = 0; // 子序列的数值之和
@@ -50,11 +50,11 @@ var minSubArrayLen = function (target, nums) {
   while (fast < nums.length) {
     curSum += nums[fast];
 
-    //注意是while, 动态调节窗口的起始位置
+    //精髓就是动态调节窗口的起始位置：注意是while
     while (curSum >= target) {
       minLen = Math.min(minLen, fast - slow + 1);
       curSum -= nums[slow]; // 别忘了update curSum
-      slow++; // 别忘了update slow
+      slow++; // 别忘了update slow (起始位置)
     }
 
     fast++; // fast是持续++的
