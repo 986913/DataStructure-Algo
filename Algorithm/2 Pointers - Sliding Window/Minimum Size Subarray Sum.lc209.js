@@ -9,7 +9,7 @@
   minSubArrayLen([3,1,7,11,2,9,8,21,62,33,19],    52)         1 --> because [62] is the smallest subarray
 */
 
-/***********************simple solution: doueble for-loop:  O(n^2) *****************************/
+/*********************** simple solution: doueble for-loop:  O(n^2) *****************************/
 const minSubArrayLen = (s, nums) => {
   let result = Infinity; // 最终的结果
   let sum = 0; // 子序列的数值之和
