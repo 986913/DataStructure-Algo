@@ -3,6 +3,7 @@
  * @return {number}
  */
 
+/**************************注意：这道题是arr[mid]和arr[mid-1],arr[mid+1]进行比较**********************************/
 var peakIndexInMountainArray = function (arr) {
   let left = 0;
   let right = arr.length - 1;

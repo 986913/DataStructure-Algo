@@ -17,15 +17,15 @@ var findMin = function (nums) {
   while (left < right) {
     let mid = left + Math.floor((right - left) / 2);
 
-    // 1.1: mid在上半区
+    // mid在上半段, 那么最小值肯定在下半段， 那就缩小scope
     if (nums[mid] > nums[right]) {
       left = mid + 1;
-    } else if (nums[mid] < nums[right]) {
-      // 1.2: mid在下半区
+    }
+    // mid在下半段, 那么最小值肯定在下半段， 那就缩小scope
+    else {
       right = mid;
     }
   }
 
-  //2: 得到left, right后，比较得出小的那个
-  return Math.min(nums[left], nums[right]);
+  return nums[left];
 };
