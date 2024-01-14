@@ -1,23 +1,29 @@
-//1. 👍👍👍 sliding window:
-var strStr = function (haystack, needle) {
-  if (needle === '') return 0;
-  if (haystack.length < needle.length) return -1;
+/**
+ * @param {string} haystack
+ * @param {string} needle
+ * @return {number}
+ */
+/************************** 👍👍👍 Sliding Window ************************************/
+const strStr = (haystack, needle) => {
+  let slow = 0;
+  let fast = 0;
+  let windowSize = needle.length;
+  let curStr = '';
 
-  let windowStartIdx = 0;
-  let chars = '';
-  const windowSize = needle.length;
+  // fast指针用来遍历；
+  while (fast < haystack.length) {
+    curStr += haystack[fast];
 
-  for (let windowEndIdx = 0; windowEndIdx < haystack.length; windowEndIdx++) {
-    chars += haystack[windowEndIdx];
+    if (curStr.length >= windowSize) {
+      // 比对curStr和needle，如果一样，则找到了, 就返回slow下标
+      if (curStr === needle) return slow;
 
-    if (chars.length >= windowSize) {
-      // 比对chars和needle，如果一样，则找到了, 就返回left下标
-      if (chars === needle) return windowStartIdx;
-
-      // 比对chars和needle，如果不一样，那继续找，就更新chars,向右移动窗口
-      chars = chars.substring(1); //  从chars的index1开始截取到结束 eg: mingyue.substring(1) -> ingyue
-      windowStartIdx += 1;
+      // 比对curStr和needle，如果不一样，那继续找，就更新curStr,向右移动窗口
+      curStr = curStr.substring(1); // 从curStr的index1开始截取到结束 eg: mingyue.substring(1) -> ingyue
+      slow++; // 更新slow
     }
+
+    fast++; // fast 是持续增加的
   }
 
   return -1;
