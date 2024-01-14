@@ -1,6 +1,6 @@
 /****************************** 相向 Two-Pointers ********************************/
 
-const 相向2Pointers = (arr) => {
+const 常见相向2Pointers = (arr) => {
   let left = 0;
   let right = arr.length - 1;
 
