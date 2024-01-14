@@ -7,6 +7,7 @@ const 相向2Pointers = (arr) => {
   while (left < right) {
     if (条件A) left++;
     else if (条件B) right--;
+    // OR swap arr[left]和arr[right]
   }
 
   return left; // or return boolean，按照题目来

@@ -1,3 +1,4 @@
+/***************************Binary search 求left bound的变种 ******************************************/
 /**
  * @param {character[]} letters
  * @param {character} target
@@ -15,7 +16,7 @@ var nextGreatestLetter = function (letters, target) {
     } else if (target > letters[mid]) {
       left = mid + 1;
     } else {
-      left = mid + 1;
+      left = mid + 1; // difference is here
     }
   }
 
