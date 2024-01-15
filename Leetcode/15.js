@@ -27,10 +27,10 @@ const threeSum = (nums) => {
   // Step2. 单层for循环套上2sum
   for (let i = 0; i < nums.length; i++) {
     let iNum = nums[i]; //forloop的当前指针，包围2sum的指针
-    if (iNum === nums[i - 1]) continue; // 🟡去重iNum🟡
+    if (iNum === nums[i - 1]) continue; // 🟡去重iNum🟡   错误去重iNum方法if(iNum==nums[i + 1])continue; 将会漏掉-1,-1,2 这种情况
 
-    // Step3. 套用2sum
-    let left = i + 1;
+    /******************Step3: 套用2sum***********************/
+    let left = i + 1; //注意left赋值不再是0了
     let right = nums.length - 1;
     while (left < right) {
       let threeSum = nums[left] + nums[right] + iNum;
@@ -55,6 +55,7 @@ const threeSum = (nums) => {
         right--;
       }
     }
+    /*******************************************************/
   }
 
   return result;
