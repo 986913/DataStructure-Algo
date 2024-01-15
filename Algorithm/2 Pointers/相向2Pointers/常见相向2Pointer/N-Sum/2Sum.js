@@ -7,7 +7,7 @@
  *   findSum( [-2,3],     10)            ---> false
  */
 
-/*------------ Solution1: hash map -------------------------------------------------------- */
+/* -------------------------------- Solution1:👍👍👍 Hash Map ---------------------------------------------- */
 function findSum(arr, target) {
   let seen = new Map();
   for (let i = 0; i < arr.length; i++) {
@@ -20,7 +20,7 @@ function findSum(arr, target) {
   return false;
 }
 
-/*------------ Solution2: sort + 2pointer -------------------------------------------------------- */
+/* -------------------------------- Solution2:👍👍👍 Sort+2pointer ---------------------------------------- */
 function findSum(arr, target) {
   arr.sort((a, b) => a - b);
 
@@ -41,7 +41,7 @@ function findSum(arr, target) {
   return false;
 }
 
-/*------------ Solution3: Brute Force -------------------------------------------------------- */
+/* -------------------------------- Solution3:  Brute Force ---------------------------------------- */
 function findSum(arr, value) {
   for (var j = 0; j < arr.length; j++) {
     for (var k = j + 1; k < arr.length; k++) {

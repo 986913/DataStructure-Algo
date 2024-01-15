@@ -17,9 +17,8 @@ const threeSum = function (nums) {
   return setResult.map((item) => item.split(' '));
 };
 
-/*---------------- Solution 1 : 👍👍👍 2 pointer 转换为2sum --------------------------------------- */
-
-var threeSum = function (nums) {
+/*---------------- Solution 2 : 👍👍👍 2 pointer 转换为2sum --------------------------------------- */
+const threeSum = (nums) => {
   const result = [];
 
   // Step1. 将数组排序
@@ -27,14 +26,12 @@ var threeSum = function (nums) {
 
   // Step2. 单层for循环套上2sum
   for (let i = 0; i < nums.length; i++) {
+    let iNum = nums[i]; //forloop的当前指针，包围2sum的指针
+    if (iNum === nums[i - 1]) continue; // 🟡去重iNum🟡
+
     // Step3. 套用2sum
-    let iNum = nums[i];
     let left = i + 1;
     let right = nums.length - 1;
-
-    if (iNum > 0) return result; // 数组排过序，如果第一个数大于0直接返回res
-    if (iNum === nums[i - 1]) continue; // 去重iNum🔵
-
     while (left < right) {
       let threeSum = nums[left] + nums[right] + iNum;
 
@@ -44,11 +41,11 @@ var threeSum = function (nums) {
         result.push([nums[left], nums[right], iNum]); // 找到答案, 更新result
 
         // 去重逻辑应该放在找到一个三元组之后, for cases like: [0,-1,-1,-1,1,1,1] etc
-        // 去重num[left]🔵
+        // 🟡去重num[left]🟡
         while (left < right && nums[left] === nums[left + 1]) {
           left++;
         }
-        // 去重num[right]🔵
+        // 🟡去重num[right]🟡
         while (left < right && nums[right] === nums[right - 1]) {
           right--;
         }

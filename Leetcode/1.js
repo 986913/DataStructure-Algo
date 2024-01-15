@@ -4,19 +4,6 @@
  * @return {number[]}
  */
 
-/* ----------------  Solution1:  brute force  ---------------- */
-var twoSum = function (nums, target) {
-  let result = [];
-  for (let i = 0; i < nums.length; i++) {
-    let j = i + 1;
-    while (j < nums.length) {
-      if (nums[i] + nums[j] === target) result = [i, j];
-      j++;
-    }
-  }
-  return result;
-};
-
 /* ----------- Solution2: 👍👍👍 hash map:  --------------------------------------------------------
     遍历数组，每访问一个元素，先判断其配对的元素是否在Hash表中，hash table以item为Key, index为value
     如果在的话就说明我们找到了答案，将其输出即可，
