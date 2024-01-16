@@ -32,7 +32,7 @@ function maxMin(arr) {
 
   return result;
 }
-/*----------- solution 2:  ----------------------- */
+/*********************  Solution2: Two pointers 👍 **********************/
 function maxMin(arr) {
   var maxIdx = arr.length - 1;
   var minIdx = 0;

@@ -2,7 +2,7 @@
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
  */
-
+/*********************  Solution: Two pointers 👍 **********************/
 var sortColors = function (nums) {
   let p0 = 0; // p0指针左边都是0
   let p2 = nums.length - 1; // p2指针右边都是2
