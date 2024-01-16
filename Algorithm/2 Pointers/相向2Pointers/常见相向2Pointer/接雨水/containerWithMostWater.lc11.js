@@ -16,7 +16,7 @@ var maxArea = function (height) {
 
 /* ----------- Solution2: 👍 two pointer ---------------------- */
 var maxArea = function (height) {
-  let maxArea = 0;
+  let maxArea = -Infinity;
 
   let left = 0;
   let right = height.length - 1;
@@ -24,7 +24,7 @@ var maxArea = function (height) {
     let shortHeight = Math.min(height[left], height[right]);
     maxArea = Math.max(maxArea, (right - left) * shortHeight);
 
-    //重点在这：什么时候移动left和right:
+    //重点在这：什么时候移动left和right (Always move the pointer that points to the lower line.)
     if (height[left] < height[right]) {
       left++;
     } else {

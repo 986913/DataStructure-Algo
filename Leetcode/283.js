@@ -17,24 +17,7 @@ var moveZeroes = function (nums) {
   }
 };
 
-/******************************** Solution2: Two pointers for循环 ********************************************/
-/**
- * @param {number[]} nums
- * @return {void} Do not return anything, modify nums in-place instead.
- */
-var moveZeroes = function (nums) {
-  let slow = 0;
-  let fast = 0;
-
-  for (fast; fast < nums.length; fast++) {
-    if (nums[fast] !== 0) {
-      [nums[left], nums[fast]] = [nums[fast], nums[slow]];
-      left++;
-    }
-  }
-};
-
-/******************************** Solution2: Two pointers: while循环 ********************************************/
+/******************************** Solution2: 👍👍👍 Two pointers ********************************************/
 /**
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.

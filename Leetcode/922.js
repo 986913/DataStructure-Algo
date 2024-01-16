@@ -59,18 +59,3 @@ var sortArrayByParityII = function (nums) {
 
   return nums;
 };
-
-/* while loop version - 道理是一样的:
-
-  var sortArrayByParityII = function (nums) {
-    let oddIndex = 1;
-    for (let evenIdx = 0; evenIdx < nums.length; evenIdx += 2) {
-      if (nums[evenIdx] % 2 === 1) {
-        while (nums[oddIndex] % 2 !== 0) oddIndex += 2; 
-        [nums[oddIndex], nums[evenIdx]] = [nums[evenIdx], nums[oddIndex]]; 
-      }
-    }
-    return nums;
-  };
-
-*/
