@@ -2,22 +2,26 @@
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
  */
+
 /*********************  Solution: Two pointers 👍 **********************/
 var sortColors = function (nums) {
-  let p0 = 0; // p0指针左边都是0
-  let p2 = nums.length - 1; // p2指针右边都是2
-  let curr = 0; // p0-p2之间的用curr表示，都是1
+  let left = 0; // left指针左边都是0
+  let right = nums.length - 1; // right指针右边都是2
+  let curr = 0; //left-right之间的用curr表示，都是1
 
-  while (curr <= p2) {
+  while (curr <= right) {
     if (nums[curr] === 0) {
-      [nums[curr], nums[p0]] = [nums[p0], nums[curr]];
+      // 换回来的一定不是2, 因为之前left已经遍历过了
+      [nums[curr], nums[left]] = [nums[left], nums[curr]];
+
+      left++;
       curr++;
-      p0++;
     } else if (nums[curr] === 1) {
       curr++;
-    } else {
-      [nums[curr], nums[p2]] = [nums[p2], nums[curr]];
-      p2--;
+    } else if (nums[curr] === 2) {
+      // 有可能换回来的是0, 所以不能left++
+      [nums[curr], nums[right]] = [nums[right], nums[curr]];
+      right--;
     }
   }
 };

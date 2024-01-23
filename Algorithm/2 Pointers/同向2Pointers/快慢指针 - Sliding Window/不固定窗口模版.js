@@ -11,16 +11,16 @@ const nonFixedSlidingWindow = (strA, strB) => {
 
   let slow = 0;
   let fast = 0;
-  let valid = 0;
+  let helperVariable = 0; 
 
 
   while (fast < strA.length) {
 
     /* 增大窗口： c是将移入窗口的字符 */
     let c = strA[fast];
-    //右移窗口
     fast++;
-    //进行窗口内数据的一系列更新
+
+    //进行窗口内数据的一系列更新, 比如更新map和helperVariables
     ...
 
     /*** debug 输出的位置 ***/
@@ -28,11 +28,14 @@ const nonFixedSlidingWindow = (strA, strB) => {
 
     /* 缩小窗口：判断左侧窗口是否要收缩 */
     while(window needs shrink){
+
+      update helperVariable;
+
       //d是将移出窗口的字符
       let d = strA[slow];
-      //左移窗口
       slow++
-      //进行窗口内数据的一系列更新
+
+      //进行窗口内数据的一系列更新，比如更新map和helperVariables
       ...
     }
     
