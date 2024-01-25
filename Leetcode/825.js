@@ -36,19 +36,17 @@ const numFriendRequests = (ages) => {
     // 使用二分查找找到符合条件的年龄范围
     let left = i;
     let right = ages.length - 1;
-    let temp = 0; //temp 记录了右边界的位置，后续计算了满足条件的年龄范围的长度，即 temp - i
     while (left <= right) {
       const mid = left + Math.floor((right - left) / 2);
       if (notFriend(ages[i], ages[mid])) {
         right = mid - 1;
       } else {
         left = mid + 1;
-        if (mid !== i) temp = mid;
       }
     }
 
     // 计算满足条件的年龄范围的长度
-    const tp = temp - i < 0 ? 0 : temp - i;
+    const tp = right - i < 0 ? 0 : right - i;
 
     // 处理相同年龄的情况，因为根据题意，相同年龄的人也可以发送好友请求。
     while (i + 1 < ages.length && ages[i] === ages[i + 1]) {
