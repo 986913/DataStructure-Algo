@@ -13,30 +13,24 @@ const nonFixedSlidingWindow = (s) => {
     let fast = 0;
     while (fast < s.length) {
         // c 是将移入窗口的字符
-        let c = s[fast];
+        let c = s[fast]
+        // 进行窗口内数据的一系列更新。。。
         window.set(c, window.get(c)+1||1);
-
         // 增大窗口
         fast++;
 
-        // 进行窗口内数据的一系列更新
-        ...
-
         /*** debug 输出的位置 ***/
-        console.log(`window: [${slow},${fast}]`);
+        // console.log(`window: [${slow},${fast}]`);
         /********************/
         
         // 判断左侧窗口是否要收缩
         while (slow < fast && window needs shrink) {
             // d 是将移出窗口的字符
             let d = s[slow];
+            // 进行窗口内数据的一系列更新。。。
             window.set(d, window.get(d) - 1);
-
             // 缩小窗口
             slow++;
-
-            // 进行窗口内数据的一系列更新
-            ...
         }
     }
 }
