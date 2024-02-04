@@ -14,7 +14,7 @@ const lengthOfLongestSubstring = function (s) {
   return maxLen;
 };
 
-/* ------------------------ Solution2: 👍 Slding window ------------------------*/
+/* ------------------------ Solution2: 👍 Slding window - LC567变形题 ------------------------*/
 //https://labuladong.github.io/algo/di-ling-zh-bfe1b/wo-xie-le--f02cd/#%E4%B8%80%E3%80%81%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2
 
 var minWindow = function (s, t) {
