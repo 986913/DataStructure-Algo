@@ -4,7 +4,7 @@
  */
 
 /* ------------------------ Solution1: 暴力法： ------------------------ */
-var lengthOfLongestSubstring = function (s) {
+const lengthOfLongestSubstring = function (s) {
   let maxLen = 0;
 
   for (let i = 0; i < s.length; i++) {
@@ -20,27 +20,25 @@ var lengthOfLongestSubstring = function (s) {
 };
 
 /* ------------------------ Solution2: 👍 Slding window ------------------------*/
-/*
-  解题思路：
-  遍历字符串，判断字符是否在map里  
-    在则: 更新window的start index (确保windowStartIdx只能增加不能减少) <--- 重点
-    不在: 则存进map里，(字符 as key, index as value)
-  然后将maxLen更新为当前最长子串的长度
-  遍历完，返回maxLen即可 
-*/
-var lengthOfLongestSubstring = function (s) {
+const lengthOfLongestSubstring = function (s) {
+  const window = new Map();
+
+  let slow = 0;
+  let fast = 0;
   let maxLen = 0;
+  while (fast < s.length) {
+    const c = s[fast]; // c 是将移入窗口的字符
+    window.set(c, window.get(c) + 1 || 1); // update window
+    fast++; // 增大窗口
 
-  let map = new Map(); //key is element, value is index
-  let windowStartIdx = 0;
-  for (let windowEndIdx = 0; windowEndIdx < s.length; windowEndIdx++) {
-    if (map.has(s[windowEndIdx])) {
-      windowStartIdx = Math.max(windowStartIdx, map.get(s[windowEndIdx]) + 1); // <--- 重点
+    while (window.get(c) > 1) {
+      const d = s[slow]; // d 是将移出窗口的字符
+      window.set(d, window.get(d) - 1); // update window
+      slow++; // 缩小窗口
     }
-    maxLen = Math.max(maxLen, windowEndIdx - windowStartIdx + 1);
-    map.set(s[windowEndIdx], windowEndIdx);
-  }
 
+    maxLen = Math.max(maxLen, fast - slow); // update maxLen
+  }
   return maxLen;
 };
 
