@@ -10,7 +10,7 @@
  * @param {number} val
  * @return {ListNode}
  */
-//解法1：
+/****************************** 解法1 **********************************/
 var removeElements = function (head, val) {
   let curr = head;
 
@@ -26,18 +26,19 @@ var removeElements = function (head, val) {
   }
   return head;
 };
-
-//解法2: 👍👍👍 (dummy head的使用)
+/****************************** 解法2: 👍👍👍 (dummy head的使用) **********************************/
 var removeElements = function (head, val) {
-  let dummyHead = new ListNode(-1);
-  dummyHead.next = head;
-  /* 和上面类似的效果, let dummyhead = new ListNode(-1, head); */
+  /* 和下面类似的效果 
+    let dummyHead = new ListNode(-1);
+    dummyHead.next = head;
+  */
+  let dummyHead = new ListNode(-1, head);
 
   let current = dummyHead;
-
   // 注意是curren.next
   while (current.next != null) {
-    if (current.next.val === val) current.next = current.next.next;
+    if (current.next.val === val)
+      current.next = current.next.next; // delete here
     else current = current.next;
   }
   return dummyHead.next;
