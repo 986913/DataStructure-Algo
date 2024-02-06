@@ -14,7 +14,7 @@ const lengthOfLongestSubstring = function (s) {
   return maxLen;
 };
 
-/* ------------------------ Solution2: 👍 Slding window - LC567变形题 ------------------------*/
+/* ------------------------ Solution2: 👍 Slding window - LC567, 438变形题 ------------------------*/
 //https://labuladong.github.io/algo/di-ling-zh-bfe1b/wo-xie-le--f02cd/#%E4%B8%80%E3%80%81%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2
 
 var minWindow = function (s, t) {
@@ -34,13 +34,13 @@ var minWindow = function (s, t) {
   let len = Infinity; // 记录最小覆盖子串的长度
 
   while (fast < s.length) {
-    let c = s[fast]; // c是将移入窗口的字符
+    let moveIn = s[fast]; // c是将移入窗口的字符
     fast++; // 扩大窗口
     // 进行窗口内数据的一系列更新
-    if (needs.has(c)) {
-      window.set(c, window.get(c) + 1 || 1);
+    if (needs.has(moveIn)) {
+      window.set(moveIn, window.get(moveIn) + 1 || 1);
       //key is here:
-      if (window.get(c) === needs.get(c)) {
+      if (window.get(moveIn) === needs.get(moveIn)) {
         valid++;
       }
     }
@@ -53,13 +53,13 @@ var minWindow = function (s, t) {
         start = slow;
       }
 
-      let d = s[slow]; // d 是将移出窗口的字符
+      let moveOut = s[slow]; // moveOut 是将移出窗口的字符
       slow++; // 缩小窗口
       // 进行窗口内数据的一系列更新
-      if (needs.has(d)) {
+      if (needs.has(moveOut)) {
         //key is here:
-        if (window.get(d) === needs.get(d)) valid -= 1;
-        window.set(d, window.get(d) - 1);
+        if (window.get(moveOut) === needs.get(moveOut)) valid -= 1;
+        window.set(moveOut, window.get(moveOut) - 1);
       }
     }
   }

@@ -27,13 +27,14 @@ const lengthOfLongestSubstring = function (s) {
   let fast = 0;
   let maxLen = 0;
   while (fast < s.length) {
-    const c = s[fast]; // c 是将移入窗口的字符
-    window.set(c, window.get(c) + 1 || 1); // update window
+    const moveIn = s[fast]; // moveIn 是将移入窗口的字符
+    window.set(moveIn, window.get(moveIn) + 1 || 1); // update window
     fast++; // 增大窗口
 
-    while (window.get(c) > 1) {
-      const d = s[slow]; // d 是将移出窗口的字符
-      window.set(d, window.get(d) - 1); // update window
+    // 判断左侧窗口是否要收缩: 当新进来的data重复出现时
+    while (window.get(moveIn) > 1) {
+      const moveOut = s[slow]; // moveOut 是将移出窗口的字符
+      window.set(moveOut, window.get(moveOut) - 1); // update window
       slow++; // 缩小窗口
     }
 

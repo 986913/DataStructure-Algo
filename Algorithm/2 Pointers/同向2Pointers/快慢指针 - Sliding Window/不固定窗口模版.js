@@ -12,10 +12,10 @@ const nonFixedSlidingWindow = (s) => {
     let slow = 0;
     let fast = 0;
     while (fast < s.length) {
-        // c 是将移入窗口的字符
-        let c = s[fast]
+        // moveIn 是将移入窗口的字符
+        let moveIn = s[fast]
         // 进行窗口内数据的一系列更新。。。
-        window.set(c, window.get(c)+1||1);
+        window.set(moveIn, window.get(moveIn)+1||1);
         // 增大窗口
         fast++;
 
@@ -25,10 +25,10 @@ const nonFixedSlidingWindow = (s) => {
         
         // 判断左侧窗口是否要收缩
         while (slow < fast && window needs shrink) {
-            // d 是将移出窗口的字符
-            let d = s[slow];
+            // moveOut 是将移出窗口的字符
+            let moveOut = s[slow];
             // 进行窗口内数据的一系列更新。。。
-            window.set(d, window.get(d) - 1);
+            window.set(moveOut, window.get(moveOut) - 1);
             // 缩小窗口
             slow++;
         }

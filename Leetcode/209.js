@@ -40,24 +40,27 @@ const minSubArrayLen = (s, nums) => {
  * @return {number}
  */
 
-var minSubArrayLen = function (target, nums) {
-  let slow = 0;
-  let fast = 0;
+const minSubArrayLen = (target, nums) => {
   let curSum = 0;
   let minLen = Infinity;
 
+  let slow = 0;
+  let fast = 0;
   //fast指针负责遍历：
   while (fast < nums.length) {
-    curSum += nums[fast];
+    let moveIn = nums[fast]; // moveIn 是将移入窗口的数字
+    curSum += moveIn; //进行窗口内数据的一系列更新。。。
+    fast++; // 增大窗口
 
-    //精髓就是动态调节窗口的起始位置：注意是while
+    /*判断左侧窗口是否要收缩: 已经找到和>=target的子数组了*/
     while (curSum >= target) {
-      minLen = Math.min(minLen, fast - slow + 1);
-      curSum -= nums[slow]; // 别忘了update curSum
-      slow++; // 别忘了update slow (起始位置)
-    }
+      // update helper variable minLen
+      minLen = Math.min(minLen, fast - slow);
 
-    fast++; // fast是持续++的
+      let moveOut = nums[slow]; // moveOut 是将移出窗口的字符
+      curSum -= moveOut; // 进行窗口内数据的一系列更新。。。
+      slow++; // 缩小窗口
+    }
   }
 
   return minLen === Infinity ? 0 : minLen; // 如果minLen没有被赋值的话，就返回0，说明没有符合条件的子序列

@@ -78,22 +78,22 @@ var checkInclusion = function (t, s) {
   let fast = 0;
   let valid = 0;
   while (fast < s.length) {
-    let c = s[fast];
+    let moveIn = s[fast];
     fast++;
-    if (needs.has(c)) {
-      window.set(c, window.get(c) + 1 || 1);
-      if (window.get(c) === needs.get(c)) valid += 1;
+    if (needs.has(moveIn)) {
+      window.set(moveIn, window.get(moveIn) + 1 || 1);
+      if (window.get(moveIn) === needs.get(moveIn)) valid += 1;
     }
 
     //不同点：缩小窗口的时机是窗口>= t.length 时，因为排列嘛，显然长度应该是一样的。
     while (fast - slow >= t.length) {
       if (valid === needs.size) return true;
 
-      let d = s[slow];
+      let moveOut = s[slow];
       slow++;
-      if (needs.has(d)) {
-        if (window.get(d) === needs.get(d)) valid -= 1;
-        window.set(d, window.get(d) - 1);
+      if (needs.has(moveOut)) {
+        if (window.get(moveOut) === needs.get(moveOut)) valid -= 1;
+        window.set(moveOut, window.get(moveOut) - 1);
       }
     }
   }
