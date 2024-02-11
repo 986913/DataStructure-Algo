@@ -13,7 +13,7 @@
  * @return {ListNode}
  */
 
-//👍👍👍 2 points:
+/* --------------- 👍👍👍 2 pointers:  --------------- */
 var detectCycle = function (head) {
   if (!head || !head.next) return null;
 
@@ -25,7 +25,8 @@ var detectCycle = function (head) {
     slow = slow.next; // slow每移动1步
     fast = fast.next.next; // fast每移动2步
 
-    /* 2. fast和slow指针相遇了（相遇点），说明有环, 接下来进行第2步：得出环入口处 */
+    /* 2. fast和slow指针相遇了（相遇点），说明有环, 
+    重点在这：接下来进行第2步：得出环入口处 */
     if (fast === slow) {
       slow = head; //fast保持原地，让slow到head的位置 开始新的move
 
