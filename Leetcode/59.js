@@ -1,3 +1,9 @@
+/*
+  ************************** Solution: 类似于L54 螺旋数组变形题 **************************
+    解题的核心思路是按照右、下、左、上的顺序遍历数组，
+    并使用四个变量圈定未遍历元素的边界, 
+    随着螺旋遍历，相应的边界会收缩，直到螺旋遍历完整个数组
+ */
 /**
  * @param {number} n
  * @return {number[][]}
@@ -15,13 +21,13 @@ var generateMatrix = function (n) {
   let left = 0; // 0   -> n;
   let right = n - 1; // n-1 -> 0
 
-  let curr = 1;
+  let curr = 1; //初始值是1奥
   while (curr <= n * n) {
     //forloop topBorder (left -> right) then update topBorder
     if (top <= bottom) {
       for (let i = left; i <= right; i++) {
         twoD_arr[top][i] = curr;
-        curr++;
+        curr++; // 💡 update curr after assign value each time
       }
       top++;
     }
@@ -29,7 +35,7 @@ var generateMatrix = function (n) {
     if (left <= right) {
       for (let i = top; i <= bottom; i++) {
         twoD_arr[i][right] = curr;
-        curr++;
+        curr++; // 💡 update curr after assign value each time
       }
       right--;
     }
@@ -37,7 +43,7 @@ var generateMatrix = function (n) {
     if (top <= bottom) {
       for (let i = right; i >= left; i--) {
         twoD_arr[bottom][i] = curr;
-        curr++;
+        curr++; // 💡 update curr after assign value each time
       }
       bottom--;
     }
@@ -45,7 +51,7 @@ var generateMatrix = function (n) {
     if (left <= right) {
       for (let i = bottom; i >= top; i--) {
         twoD_arr[i][left] = curr;
-        curr++;
+        curr++; // 💡 update curr after assign value each time
       }
       left++;
     }
