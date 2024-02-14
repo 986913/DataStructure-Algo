@@ -28,3 +28,16 @@ const reverseList = (head) => {
   }
   return prev; //返回翻转后指针head
 };
+
+// ----------------------- 2. 👍 Recurrsion: ----------------------------------------------
+var reverseList = (head) => helper(null, head);
+
+// helper第1个参数相当于上面双指针法的prev (初始为null), 第2个参数相当于上面双指针法的curr(初始值为head)
+const helper = (prev, curr) => {
+  if (!curr) return prev;
+
+  const temp = curr.next; //1.用这个temp临时指针存current.next值
+  curr.next = prev; //2.实际改变curr指针指向
+  prev = curr; //3. 改变指向后，移动prev
+  return helper(prev, temp); //4. 改变指向后，移动curr
+};
