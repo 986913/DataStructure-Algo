@@ -1,4 +1,4 @@
-/************************ Recursion: DFS *********************************/
+/************************ Solution1: Recursion - DFS *********************************/
 const findTarget = (root, k) => {
   let visited = new Map();
   let exist = false; // differece is here
@@ -8,14 +8,31 @@ const findTarget = (root, k) => {
 
     //左
     if (node.left) helper(node.left);
+    //右
+    if (node.right) helper(node.right);
     //中
     let diff = k - node.val;
     if (visited.has(diff)) exist = true; // update exist
     visited.set(node.val, true);
-    //右
-    if (node.right) helper(node.right);
   };
 
   helper(root);
   return exist;
+};
+
+/************************ Solution2: Recursion - DFS *********************************/
+const findTarget = (root, k) => {
+  let visited = new Map();
+
+  const helper = (node) => {
+    if (!node) return false;
+    if (visited.has(k - node.val)) return true;
+    visited.set(node.val, true);
+
+    const isLeftHasDiffVal = helper(node.left); //左
+    const isRightHasDiffVal = helper(node.right); //右
+    return isLeftHasDiffVal || isRightHasDiffVal; //中
+  };
+
+  return helper(root);
 };
