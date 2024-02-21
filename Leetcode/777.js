@@ -38,7 +38,7 @@ var canTransform = function (start, end) {
     let [sItem, sIdx] = s[i];
     let [eItem, eIdx] = e[i];
 
-    if (sItem !== eItem) return false; //for cases like:  start="LLR", end="RRL"
+    if (sItem !== eItem) return false; //for cases like:  start="LLR", end="RRL"  (start与end中L和R的相对位置及数量要一致)
     if (sItem === 'R' && sIdx > eIdx) return false; // 因为R只能向右移动
     if (sItem === 'L' && sIdx < eIdx) return false; // 因为L只能向左移动
   }

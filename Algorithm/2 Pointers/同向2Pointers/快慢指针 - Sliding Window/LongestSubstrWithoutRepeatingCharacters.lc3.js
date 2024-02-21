@@ -38,7 +38,7 @@ const lengthOfLongestSubstring = function (s) {
       slow++; // 缩小窗口
     }
 
-    maxLen = Math.max(maxLen, fast - slow); // update maxLen
+    maxLen = Math.max(maxLen, fast - slow); // update maxLen inside outer while loop
   }
   return maxLen;
 };

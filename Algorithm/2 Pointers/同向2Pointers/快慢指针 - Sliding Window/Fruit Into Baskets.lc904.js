@@ -53,7 +53,7 @@ var totalFruit = function (fruits) {
       slow++;
     }
 
-    maxLen = Math.max(maxLen, fast - slow);
+    maxLen = Math.max(maxLen, fast - slow); // update maxLen inside outer while loop
   }
 
   return maxLen;

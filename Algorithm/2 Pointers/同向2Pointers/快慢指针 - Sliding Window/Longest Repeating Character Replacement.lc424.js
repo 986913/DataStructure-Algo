@@ -26,7 +26,7 @@ const characterReplacement = (str, k) => {
       slow++;
     }
 
-    maxLen = Math.max(maxLen, fast - slow); // update maxLen
+    maxLen = Math.max(maxLen, fast - slow); // update maxLen inside outer while loop
   }
 
   return maxLen;
