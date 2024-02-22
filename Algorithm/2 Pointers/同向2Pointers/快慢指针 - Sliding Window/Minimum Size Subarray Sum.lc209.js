@@ -57,6 +57,8 @@ const minSubArrayLen = (target, nums) => {
       // update helper variable minLen
       minLen = Math.min(minLen, fast - slow);
 
+      //console.log(slow, fast, minLen); //  for bebug use
+
       let moveOut = nums[slow]; // moveOut 是将移出窗口的字符
       curSum -= moveOut; // 进行窗口内数据的一系列更新。。。
       slow++; // 缩小窗口
