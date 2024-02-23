@@ -47,5 +47,7 @@ var removeElement = function (nums, val) {
     fast++; // fast是持续++的
   }
 
-  return slow;
+  // console.log(nums.slice(0, slow));
+
+  return slow; // return the number of elements in nums which are not equal to val.
 };

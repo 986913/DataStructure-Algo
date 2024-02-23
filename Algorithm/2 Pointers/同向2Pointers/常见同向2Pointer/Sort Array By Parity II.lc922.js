@@ -22,7 +22,7 @@ var sortArrayByParityII = function (nums) {
 };
 // console.log(sortArrayByParityII([3, 1, 4, 2])); //[2,1,4,3]
 
-/************************* Solution 2.1:  two pointer with 辅助数组  *****************************/
+/************************* Solution 2.1  👍 two pointer with 辅助数组  *****************************/
 var sortArrayByParityII = function (nums) {
   let evenIdx = 0;
   let oddIdx = 1;
