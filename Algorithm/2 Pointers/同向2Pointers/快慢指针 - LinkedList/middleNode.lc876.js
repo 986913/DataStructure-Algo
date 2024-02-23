@@ -10,6 +10,7 @@
  * @return {ListNode}
  */
 
+/*********************************  Solution: Fast & slow pointer *************************************/
 // https://www.youtube.com/watch?v=-Dveb0lya0g&ab_channel=%E8%80%81%E6%AF%95JS
 
 var middleNode = function (head) {
