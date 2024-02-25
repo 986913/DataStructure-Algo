@@ -10,7 +10,7 @@
  * @return {void} Do not return anything, modify head in-place instead.
  */
 
-/********************** 解法2： Slow & Fast pointer:  LC 21, 234变形题 **************************************
+/********************** 解法： Slow & Fast pointer:  LC 21, 234变形题 **************************************
 This problem is a combination of these three easy problems:
   Find a middle node of the linked list. If there are two middle nodes, return the second middle node. 
     (Example: for the list 1->2->3->4->5->6, the middle element is 4.)
@@ -21,27 +21,27 @@ This problem is a combination of these three easy problems:
  */
 var reorderList = function (head) {
   let midNode = getMid(head); //1.find the middle node
-  let reversed = reverse(midNode.next); // reverse the second part of the list: reversed
+  let reversedMidNext = reverse(midNode.next); // reverse the second part of the list: reversedMidNext
 
   /* break list here: now 1->2->3->4->5 list break into two part: 
         head:     1->2->3
-        reversed: 5->4
+        reversedMidNext: 5->4
     */
   midNode.next = null;
 
   let dummyHead = new ListNode(-1, head);
   // loop后半段reversed:
-  while (reversed) {
+  while (reversedMidNext) {
     // 暂存下
     let tmp1 = head.next;
-    let tmp2 = reversed.next;
+    let tmp2 = reversedMidNext.next;
 
     //开始实际改变指针方向:
-    head.next = reversed;
-    reversed.next = tmp1;
+    head.next = reversedMidNext;
+    reversedMidNext.next = tmp1;
 
     head = tmp1; // update前半段
-    reversed = tmp2; // update后半段
+    reversedMidNext = tmp2; // update后半段
   }
 
   return dummyHead.next;
