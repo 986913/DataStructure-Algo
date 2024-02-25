@@ -29,14 +29,17 @@ var isPalindrome = function (head) {
 // https://www.jiakaobo.com/leetcode/234.%20Palindrome%20Linked%20List.html
 var isPalindrome = function (head) {
   let mid = getMid(head);
-  let midNext = reverse(mid.next); //翻转Mid之后的list为midNext
+  let reversedMidNext = reverse(mid.next); //Note1: 翻转Mid之后的list(mid.next)为midNext
 
-  //遍历翻转后的后半段， 然后一一比较后半段和前半段，值不一样就false
-  while (midNext) {
-    if (midNext.val !== head.val) return false;
+  /*Note2: 
+    遍历翻转后的后半段(reversedMidNext), 而不是遍历head
+    然后一一比较后半段和head，值不一样就false
+  */
+  while (reversedMidNext) {
+    if (reversedMidNext.val !== head.val) return false;
 
     head = head.next;
-    midNext = midNext.next;
+    reversedMidNext = reversedMidNext.next;
   }
 
   return true;
