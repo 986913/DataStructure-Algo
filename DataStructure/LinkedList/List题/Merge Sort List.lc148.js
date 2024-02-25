@@ -55,7 +55,7 @@ const mergeLinkedList = (left, right) => {
       right = right.next;
     }
 
-    current = current.next;
+    current = current.next; // <--- don't forget this line
   }
 
   // Attach the remaining nodes of either list, if any
