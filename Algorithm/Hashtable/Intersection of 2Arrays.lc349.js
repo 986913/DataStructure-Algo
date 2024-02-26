@@ -4,7 +4,7 @@
  * @return {number[]}
  */
 
-//暴力法 :
+/******************************************* 暴力法 *************************************************/
 var intersection = function (nums1, nums2) {
   let result = [];
   for (let i = 0; i < nums1.length; i++) {
@@ -17,7 +17,7 @@ var intersection = function (nums1, nums2) {
   return result;
 };
 
-//2.👍👍👍 hash table - use set
+/********************* 👍👍👍 hash table - Set (but no fit for dupcacted case input)****************/
 var intersection = function (nums1, nums2) {
   let set = new Set();
 
@@ -27,10 +27,10 @@ var intersection = function (nums1, nums2) {
     if (set1.has(n)) set.add(n);
   }
 
-  return Array.from(set);
+  return Array.from(set); // return [...set]
 };
 
-//3. 👍👍👍 2 pointer:
+/********************* 👍👍👍 2 pointer: -- 通用解法,记得排序先 ************************************************/
 var intersection = function (nums1, nums2) {
   let result = [];
   let p1 = 0;
@@ -49,6 +49,7 @@ var intersection = function (nums1, nums2) {
       if (result.indexOf(nums2[p2]) == -1) {
         result.push(nums2[p2]);
       }
+
       p1++;
       p2++;
     }
