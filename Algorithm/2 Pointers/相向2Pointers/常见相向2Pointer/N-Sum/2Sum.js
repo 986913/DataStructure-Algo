@@ -10,13 +10,14 @@
 /* -------------------------------- Solution1:👍👍👍 Hash Map ---------------------------------------------- */
 function findSum(arr, target) {
   let seen = new Map();
-  for (let i = 0; i < arr.length; i++) {
-    let diff = target - arr[i];
-    if (seen.has(diff)) {
-      return [diff, arr[i]];
-    }
-    seen.set(arr[i], i); //或者seen.set(arr[i], arr[i]);  因为这里给key设置什么value不重要， 反正用不到
+
+  for (let i = 0; i < nums.length; i++) {
+    let diff = target - nums[i];
+
+    if (seen.has(diff)) return [i, seen.get(diff)];
+    seen.set(nums[i], i);
   }
+
   return false;
 }
 

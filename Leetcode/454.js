@@ -5,16 +5,15 @@
  * @param {number[]} nums4
  * @return {number}
  */
+
+/************************************Solution: Hash table *******************************************/
 /*
-  首先定义 一个map, {放a和b两数之和(key): 放a和b两数之和出现的次数(value)} 
+  首先定义一个map, 遍历nums1和nums2数组，统计两个数组元素之和，和元素之和出现的次数，放到map中
+  {放a和b两数之和(key): 放a和b两数之和出现的次数(value)} 
 
-  遍历nums1和nums2数组，统计两个数组元素之和，和元素之和出现的次数，放到map中
-
-  再遍历nums3和大nums4数组，如果在map中有key: 0-(c+d)出现过的话，就用count把map中key对应的value也就是出现次数统计出来
-  
+  再遍历nums3和nums4数组，如果在map中有key: 0-(c+d)出现过的话，就用count把map中key对应的value也就是出现次数统计出来
   最后返回统计值 count 就可以了
 */
-
 var fourSumCount = function (nums1, nums2, nums3, nums4) {
   let twoSumMap = new Map();
   let count = 0;
