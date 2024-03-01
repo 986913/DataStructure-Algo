@@ -36,7 +36,7 @@ var detectCycle = function (head) {
         fast = fast.next; // fast每移动1步
       }
 
-      return slow;
+      return slow; // slow和fast在次相遇时 就是环入口！
     }
   }
 
