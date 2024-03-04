@@ -3,6 +3,7 @@
  * @param {string} t
  * @return {boolean}
  */
+
 /************************************  hashtable : LC 290 变形题  ************************************************/
 var isIsomorphic = function (s, t) {
   if (s.length !== t.length) return false;
@@ -29,6 +30,7 @@ var isIsomorphic = function (s, t) {
 
   return true;
 };
+
 /* 
 return false case:
             已 s = foo, t = bar为例
