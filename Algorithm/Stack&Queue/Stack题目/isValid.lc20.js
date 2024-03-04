@@ -1,6 +1,8 @@
 /**
  * @param {string} s
  * @return {boolean}
+   isValid('()[]');    // true
+   isValid('([{])}');  // false
  */
 
 /* --------------------------- 👍👍👍:  use stack ------------------ */
@@ -27,6 +29,3 @@ var isValid = function (s) {
 
   return stack.length === 0; //stack中要有对于元素的话，说明s中有多余的左括号或者右括号
 };
-
-console.log(isValid('()[]')); //true
-console.log(isValid('([{])}')); //false
