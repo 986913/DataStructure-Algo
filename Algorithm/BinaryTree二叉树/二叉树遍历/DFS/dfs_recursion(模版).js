@@ -1,11 +1,21 @@
+/**
+  Steps:
+    1. 确定递归函数的 参数 和 返回值
+    2. 确定终止条件
+    3. 确定单层递归的逻辑
+ **/
+
 /** ----------------------------- pre order: 中左右 ----------------------------- */
 const preorderTraversal = (root) => {
   let visted = [];
 
+  /*递归函数的 参数 和 返回值 */
   const helper = (node) => {
+    /*终止条件 */
     if (!node) return;
 
-    visted.push(node.val); // 中
+    /* 单层递归的逻辑 */
+    visted.push(node.val); // 🀄️
     helper(node.left); // 左
     helper(node.right); // 右
   };
@@ -22,7 +32,7 @@ const inorderTraversal = (root) => {
     if (!node) return;
 
     helper(node.left); // 左
-    visted.push(node.val); // 中
+    visted.push(node.val); // 🀄️
     helper(node.right); // 右
   };
 
@@ -39,7 +49,7 @@ const postorderTraversal = (root) => {
 
     helper(node.left); // 左
     helper(node.right); // 右
-    visted.push(node.val); // 中
+    visted.push(node.val); // 🀄️
   };
 
   helper(root);
