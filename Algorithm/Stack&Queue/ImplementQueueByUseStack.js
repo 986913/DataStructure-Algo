@@ -32,6 +32,10 @@ class Queue {
   size() {
     return this.stackIn.size() + this.stackOut.size();
   }
+  // return boolean
+  empty() {
+    return this.stackOut.length === 0 && this.stackIn.length === 0;
+  }
   // remove the head element
   dequeue() {
     if (this.stackOut.size()) {

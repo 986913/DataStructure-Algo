@@ -1,6 +1,6 @@
 // https://www.bilibili.com/video/BV1nY4y1w7VC/
 
-// ------------------------------------------------使用2个stack实现queue---------------------------------------------------------------------
+// ---------------------------------使用2个stack实现queue----------------------------------------
 var MyQueue = function () {
   this.stackIn = []; // 存储进入队列的元素
   this.stackOut = []; // 存储弹出队列的元素
@@ -20,7 +20,7 @@ MyQueue.prototype.push = function (x) {
  */
 // 从队列的开头删除元素（从 stackOut 中弹出）
 MyQueue.prototype.pop = function () {
-  // stackOut有值时 直接return this.stackOut.pop()
+  //! stackOut有值时 直接return this.stackOut.pop()
   if (this.stackOut.length) {
     return this.stackOut.pop();
   }
@@ -47,7 +47,7 @@ MyQueue.prototype.peek = function () {
  * @return {boolean}
  */
 MyQueue.prototype.empty = function () {
-  return !this.stackIn.length && !this.stackOut.length;
+  return this.stackOut.length === 0 && this.stackIn.length === 0;
 };
 
 /**

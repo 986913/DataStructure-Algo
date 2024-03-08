@@ -47,7 +47,7 @@ MyQueue.prototype.peek = function () {
  * @return {boolean}
  */
 MyQueue.prototype.empty = function () {
-  return !this.stackIn.length && !this.stackOut.length;
+  return this.stackOut.length === 0 && this.stackIn.length === 0;
 };
 
 /**
