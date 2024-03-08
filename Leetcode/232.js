@@ -20,12 +20,12 @@ MyQueue.prototype.push = function (x) {
  */
 // 从队列的开头删除元素（从 stackOut 中弹出）
 MyQueue.prototype.pop = function () {
-  //! stackOut有值时 直接return this.stackOut.pop()
+  /* stackOut有值时 直接return this.stackOut.pop() */
   if (this.stackOut.length) {
     return this.stackOut.pop();
   }
 
-  //stackOut无值时 把stackIn所有元素都要放到stackOut中
+  /* stackOut无值时 把stackIn所有元素都要放到stackOut中 */
   while (this.stackIn.length) {
     this.stackOut.push(this.stackIn.pop());
   }
