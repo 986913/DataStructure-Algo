@@ -46,5 +46,5 @@ MyStack.prototype.top = function () {
  * @return {boolean}
  */
 MyStack.prototype.empty = function () {
-  return !this.queue.length;
+  return this.queue.length === 0;
 };
