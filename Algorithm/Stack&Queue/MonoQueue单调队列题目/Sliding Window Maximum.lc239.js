@@ -29,6 +29,8 @@ var maxSlidingWindow = function (nums, k) {
   入队操作：队尾入队，会把前面破坏单调性的元素删除（维护单调性）
   出队操作：如果队首元素超出区间范围，就将队首元素出队
   元素性质：队首元素永远是当前区间的最值；元素入队的过程中该元素是当前队列的最值
+
+  https://www.bilibili.com/video/BV1XS4y1p7qj/?vd_source=8b5297d974f6a5e72c60ec8ea33f2ff6
 */
 
 //自定义单调队列：
