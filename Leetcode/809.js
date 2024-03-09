@@ -3,7 +3,7 @@
  * @param {string[]} words
  * @return {number}
  */
-/************************** 👍👍👍 2 Pointer ************************************/
+/************************** 👍👍👍 2 Pointer: LC925 变形题 ************************************/
 const expressiveWords = (S, words) => {
   let ans = 0;
   words.forEach((word) => {
