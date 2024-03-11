@@ -3,7 +3,7 @@
  * @param {string} needle
  * @return {number}
  */
-/************************** 👍👍👍 Sliding Window ************************************/
+/************************** 👍👍👍 Sliding Window: LC 209变形题 ************************************/
 const strStr = (haystack, needle) => {
   let windowSize = needle.length;
   let curStr = ''; //相当于窗口

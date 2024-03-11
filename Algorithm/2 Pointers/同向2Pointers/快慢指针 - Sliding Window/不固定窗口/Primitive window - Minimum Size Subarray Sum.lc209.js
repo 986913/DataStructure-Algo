@@ -33,7 +33,7 @@ const minSubArrayLen = (s, nums) => {
   return result == Infinity ? 0 : result;
 };
 
-/*********************************** 👍👍👍 sliding window - 同向2Pointers ***********************************/
+/*********************************** 👍👍👍 sliding window - LC 28,713变形题 ***********************************/
 /**
  * @param {number} target
  * @param {number[]} nums
@@ -41,7 +41,7 @@ const minSubArrayLen = (s, nums) => {
  */
 
 const minSubArrayLen = (target, nums) => {
-  let curSum = 0;
+  let curSum = 0; //相当于窗口
   let minLen = Infinity;
 
   let slow = 0;
