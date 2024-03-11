@@ -5,19 +5,19 @@
  */
 /**************************** Solution1:  slding window 解法： O(n x k) *********************************************/
 var maxSlidingWindow = function (nums, k) {
-  let window = [];
+  let window = []; //窗口
 
   let result = [];
   let slow = 0;
   let fast = 0;
   while (fast < nums.length) {
     let moveIn = nums[fast];
-    window.push(moveIn);
+    window.push(moveIn); //窗口内数据的更新
     fast++;
 
     if (window.length >= k) {
       result.push(Math.max.apply(Math, window));
-      window.shift();
+      window.shift(); //窗口内数据的更新
       slow++;
     }
   }
@@ -64,8 +64,7 @@ class MonoQueue {
     return this.queue[0];
   }
 }
-
-/********************* main function ***********************/
+// main function:
 var maxSlidingWindow = function (nums, k) {
   let result = [];
 

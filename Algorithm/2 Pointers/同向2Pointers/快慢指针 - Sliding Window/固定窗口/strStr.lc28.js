@@ -5,21 +5,21 @@
  */
 /************************** 👍👍👍 Sliding Window ************************************/
 const strStr = (haystack, needle) => {
+  let windowSize = needle.length;
+  let curStr = ''; //相当于窗口
+
   let slow = 0;
   let fast = 0;
-  let windowSize = needle.length;
-  let curStr = '';
-
   // fast指针用来遍历；
   while (fast < haystack.length) {
-    curStr += haystack[fast];
+    curStr += haystack[fast]; //窗口内数据的更新
 
     if (curStr.length >= windowSize) {
       // 比对curStr和needle，如果一样，则找到了, 就返回slow下标
       if (curStr === needle) return slow;
 
       // 比对curStr和needle，如果不一样，那继续找，就更新curStr,向右移动窗口
-      curStr = curStr.substring(1); // 从curStr的index1开始截取到结束 eg: mingyue.substring(1) -> ingyue
+      curStr = curStr.substring(1); //窗口内数据的更新, 从curStr的index1开始截取到结束 eg: mingyue.substring(1) -> ingyue
       slow++; // 更新slow
     }
 

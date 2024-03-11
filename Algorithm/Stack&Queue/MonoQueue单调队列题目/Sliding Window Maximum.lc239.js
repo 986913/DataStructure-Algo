@@ -64,8 +64,7 @@ class MonoQueue {
     return this.queue[0];
   }
 }
-
-/********************* main function ***********************/
+// main function:
 var maxSlidingWindow = function (nums, k) {
   let result = [];
 
