@@ -20,18 +20,41 @@ var largestValues = function (root) {
 
   while (queue.length) {
     let len = queue.length;
-    let curLevel = [];
-
+    let max = -Infinity; //不同点在这：给每一层定义一个Max
     for (let i = 0; i < len; i++) {
       let node = queue.shift();
-      curLevel.push(node.val);
+      max = Math.max(max, node.val); //不同点在这: update max
       if (node.left) queue.push(node.left);
       if (node.right) queue.push(node.right);
     }
-    //不同点在这： calculate max value of each level
-    const curLevelMaxValue = Math.max.apply(Math, curLevel);
-    visited.push(curLevelMaxValue);
+
+    visited.push(max); // 不同点在这: update visited
   }
 
   return visited;
 };
+/* 
+  var largestValues = function (root) {
+    if (!root) return [];
+
+    let visited = [];
+    let queue = [root];
+
+    while (queue.length) {
+      let len = queue.length;
+      let curLevel = [];
+
+      for (let i = 0; i < len; i++) {
+        let node = queue.shift();
+        curLevel.push(node.val);
+        if (node.left) queue.push(node.left);
+        if (node.right) queue.push(node.right);
+      }
+      //不同点在这： calculate max value of each level
+      const curLevelMaxValue = Math.max.apply(Math, curLevel);
+      visited.push(curLevelMaxValue);
+    }
+
+    return visited;
+  };
+*/
