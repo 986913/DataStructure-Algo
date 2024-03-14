@@ -23,7 +23,7 @@ var connect = function (root) {
 
     for (let i = 0; i < len; i++) {
       let node = queue.shift();
-      //在单层遍历的时候记录一下本层的头部节点，然后在遍历的时候让前一个节点指向本节点就可以了
+      //在单层遍历的时候 让弹出的节点node 指向 本层的头部节点queue[0]
       if (i < len - 1) {
         node.next = queue[0];
       }
