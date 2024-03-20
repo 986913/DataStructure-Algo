@@ -96,14 +96,14 @@ var maxDepth = function (root) {
     if (node.left) {
       //左
       curDepth++;
-      helper(node.left, curDepth);
-      curDepth--; // backtracking 回溯！！
+      helper(node.left, curDepth); // <--- 递归
+      curDepth--; // <--- backtracking 回溯！！
     }
     if (node.right) {
       // 右
       curDepth++;
-      helper(node.right, curDepth);
-      curDepth--; // backtracking 回溯！！
+      helper(node.right, curDepth); // <--- 递归
+      curDepth--; // <--- backtracking 回溯！！
     }
   };
 

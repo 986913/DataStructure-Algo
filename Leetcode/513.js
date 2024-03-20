@@ -23,7 +23,7 @@ var findBottomLeftValue = function (root) {
 
     for (let i = 0; i < len; i++) {
       let node = queue.shift();
-      if (i == 0) mostLeftValue = node.val;
+      if (i == 0) mostLeftValue = node.val; // difference is here
       if (node.left) queue.push(node.left);
       if (node.right) queue.push(node.right);
     }
@@ -32,8 +32,8 @@ var findBottomLeftValue = function (root) {
   return mostLeftValue;
 };
 
-// https://www.bilibili.com/video/BV1424y1Z7pn/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
-/* --------- Solution2:  👍👍 DFS + backtracking (前后中序都可以) leetcode 🟡104 解法2.2的变体 */
+/**************** Sol2 : 👍👍 DFS + backtracking (前后中序都可以) LC🟡104解法2.2的变体 ****************/
+// https://www.bilibili.com/video/BV1424y1Z7pn/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2s
 
 var findBottomLeftValue = function (root) {
   let maxDepth = -Infinity; //用来记录tree的最大深度
@@ -49,18 +49,19 @@ var findBottomLeftValue = function (root) {
       }
       // return;
     }
+
     //3. 确定单层递归逻辑:
     if (node.left) {
       //左
       curDepth++;
-      helper(node.left, curDepth);
-      curDepth--; // backtracking 回溯！！
+      helper(node.left, curDepth); // <--- 递归
+      curDepth--; // <--- backtracking 回溯！！
     }
     if (node.right) {
       // 右
       curDepth++;
-      helper(node.right, curDepth);
-      curDepth--; // backtracking 回溯！！
+      helper(node.right, curDepth); // <--- 递归
+      curDepth--; // <--- backtracking 回溯！！
     }
   };
 
