@@ -11,25 +11,38 @@
  * @return {number}
  */
 
-/*********************** Solution 1: 👍 DFS PostOrder 模版变形题 ***********************/
+/*********************** Solution 1.1: 👍 DFS PostOrder 模版变形题 ***********************/
 var sumOfLeftLeaves = function (root) {
-  let sum = 0;
-
   //1. 递归参数：树节点， 无返回值， 递归函数会modify外部的sum
   const helper = (node) => {
     //2. 递归终止条件
     if (!node) return 0;
 
     //3. 开始递归单层逻辑
-    if (node.left) helper(node.left); //左
-    if (node.right) helper(node.right); // 右
-    /* 中：
-      (判断当前节点是不是左叶子是无法判断的，必须要通过节点的父节点来判断其左孩子是不是左叶子)
-      当该节点有左节点，该节点的左节点的左节点为空，该节点的左节点的右节点为空，则就找到了一个左叶子 
-    */
-    if (node.left && !node.left.left && !node.left.right) {
-      sum += node.left.val;
+    //左
+    let sumOfLeft = 0;
+    /* (判断当前节点是不是左叶子是无法判断的，必须要通过节点的父节点来判断其左孩子是不是左叶子)
+       当该节点有左节点，该节点的左节点的左节点为空，该节点的左节点的右节点为空，则就找到了一个左叶子 */
+    if (node.left) {
+      if (!node.left.left && !node.left.right) sumOfLeft += node.left.val;
+      else sumOfLeft += helper(node.left); // Traverse left subtree recursively.
     }
+    const sumOfRight = helper(node.right); // 右
+    return sumOfLeft + sumOfRight; // 中
+  };
+
+  return helper(root);
+};
+
+/*********************** Solution 1.2: 👍 DFS PostOrder 模版变形题 ***********************/
+var sumOfLeftLeaves = function (root) {
+  let sum = 0;
+  if (!root) return sum;
+
+  const helper = (node) => {
+    if (node.left && !node.left.left && !node.left.right) sum += node.left.val;
+    if (node.left) helper(node.left);
+    if (node.right) helper(node.right);
   };
 
   helper(root);
