@@ -12,7 +12,7 @@
  */
 // https://www.bilibili.com/video/BV1ZG411G7Dh/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
 
-/***************** Solution1: 👍 DFS PreOrder + backtracking (LC144, 129变形题🟡) *****************s*/
+/***************** Solution1: 👍 DFS PreOrder (LC144, 129变形题🟡) *****************s*/
 var binaryTreePaths = function (root) {
   const visited = [];
 
@@ -48,13 +48,13 @@ var binaryTreePaths = function (root) {
 
     // curPath.push(node.val); // 🚫中不能写在这里,写在这里会落下叶子结点的val, 因为上面终止条件直接就return了
     //3. 确定单层递归逻辑
+    //左
     if (node.left) {
-      //左
       helper(node.left, curPath); // <-- 递归
       curPath.pop(); // <-- backtracking
     }
+    //右
     if (node.right) {
-      //右
       helper(node.right, curPath); // <-- 递归
       curPath.pop(); // <-- backtracking
     }

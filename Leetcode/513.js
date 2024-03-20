@@ -37,7 +37,7 @@ var findBottomLeftValue = function (root) {
 
 var findBottomLeftValue = function (root) {
   let maxDepth = -Infinity; //用来记录tree的最大深度
-  let mostleftvalue; //存放结果值 <--- diff is here
+  let mostleftvalue; //存放结果值
 
   //1.  确定递归的参数, 不需要返回值
   const helper = (node, curDepth) => {
@@ -45,7 +45,7 @@ var findBottomLeftValue = function (root) {
     if (!node.left && !node.right) {
       if (curDepth > maxDepth) {
         maxDepth = curDepth;
-        mostleftvalue = node.val; // <--- diff is here
+        mostleftvalue = node.val;
       }
       // return;
     }
@@ -68,3 +68,28 @@ var findBottomLeftValue = function (root) {
   helper(root, 1);
   return mostleftvalue;
 };
+
+/*
+  等同于上面Sol2:
+  ---------------------------------------------
+  var findBottomLeftValue = function (root) {
+    let maxDepth = -Infinity;
+    let mostleftvalue;
+
+    const helper = (node, curDepth) => {
+      if (!node.left && !node.right) {
+        if (curDepth > maxDepth) {
+          maxDepth = curDepth;
+          mostleftvalue = node.val;
+        }
+      }
+
+      curDepth++; // <--- diff is here
+      if (node.left) helper(node.left, curDepth); 
+      if (node.right) helper(node.right, curDepth); 
+    };
+
+    helper(root, 1);
+    return mostleftvalue;
+  };
+*/

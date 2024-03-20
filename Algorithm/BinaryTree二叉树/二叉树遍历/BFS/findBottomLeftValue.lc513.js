@@ -68,3 +68,28 @@ var findBottomLeftValue = function (root) {
   helper(root, 1);
   return mostleftvalue;
 };
+
+/*
+  等同于上面Sol2:
+  ---------------------------------------------
+  var findBottomLeftValue = function (root) {
+    let maxDepth = -Infinity;
+    let mostleftvalue;
+
+    const helper = (node, curDepth) => {
+      if (!node.left && !node.right) {
+        if (curDepth > maxDepth) {
+          maxDepth = curDepth;
+          mostleftvalue = node.val;
+        }
+      }
+
+      curDepth++; // <--- diff is here
+      if (node.left) helper(node.left, curDepth); 
+      if (node.right) helper(node.right, curDepth); 
+    };
+
+    helper(root, 1);
+    return mostleftvalue;
+  };
+*/
