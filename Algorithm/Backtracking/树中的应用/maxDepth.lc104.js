@@ -96,17 +96,23 @@ var maxDepth = function (root) {
     if (node.left) {
       //左
       curDepth++;
-      helper(node.left, curDepth);
-      curDepth--; // backtracking 回溯！！
+      helper(node.left, curDepth); // <--- 递归
+      curDepth--; // <--- backtracking 回溯！！
     }
     if (node.right) {
       // 右
       curDepth++;
-      helper(node.right, curDepth);
-      curDepth--; // backtracking 回溯！！
+      helper(node.right, curDepth); // <--- 递归
+      curDepth--; // <--- backtracking 回溯！！
     }
   };
 
   helper(root, 1);
   return maxDepth;
 };
+
+/*
+  Solution 2.1 VS Solution 2.2:
+    - Solution 2.2 使用了一个全局变量 maxDepth来记录树的最大深度，并且在递归结束后进行了回溯，以确保maxDepth和递归参数(curDepth)的值被正确更新。
+    - Solution 2.1 则是通过递归函数自身的返回值来传递和计算深度，不需要使用全局变量。这使得在逻辑上更加简洁和直接。
+*/
