@@ -12,40 +12,39 @@
  * @return {number[][]}
  */
 
-/* -------- Solution 1:  👍👍👍 DFS + backtracking(lc112🟡变形题) ------------------------- */
+/********************** Solution1: 👍👍👍 DFS + backtracking (LC112🟡变形题) ***************************/
 var pathSum = function (root, targetSum) {
   if (!root) return [];
-  let paths = [];
+  let result = [];
 
-  // recursion params: node, count, curPath,   no return value
-  const helper = (node, count, curPath) => {
-    if (!node.left && !node.right && count === 0) {
+  // recursion params: node, curPath, curPathSum,  no return value
+  const helper = (node, curPath, curPathSum) => {
+    if (!node.left && !node.right) {
+      curPath.push(node.val);
+      curPathSum += node.val;
       //收集结果：
-      curPath = [...curPath, node.val];
-      paths.push(curPath);
+      if (curPathSum === targetSum) {
+        result.push([...curPath]); // 使用副本
+        return;
+      }
     }
 
     if (node.left) {
-      count -= node.left.val;
-      curPath = [...curPath, node.val];
-
-      helper(node.left, count, curPath);
-
-      count += node.left.val; // backtracking
-      curPath.pop(); // backtracking
+      curPath.push(node.val);
+      curPathSum += node.val;
+      helper(node.left, [...curPath], curPathSum); // <--- 递归, 使用副本
+      curPath.pop(); // <--- backtracking
+      curPathSum -= node.val; // <--- backtracking
     }
-
     if (node.right) {
-      count -= node.right.val;
-      curPath = [...curPath, node.val];
-
-      helper(node.right, count, curPath);
-
-      count += node.right.val; // backtracking
-      curPath.pop(); // backtracking
+      curPath.push(node.val);
+      curPathSum += node.val;
+      helper(node.right, [...curPath], curPathSum); // <--- 递归, 使用副本
+      curPath.pop(); // <--- backtracking
+      curPathSum -= node.val; // <--- backtracking
     }
   };
 
-  helper(root, targetSum - root.val, []);
-  return paths;
+  helper(root, [], 0);
+  return result;
 };
