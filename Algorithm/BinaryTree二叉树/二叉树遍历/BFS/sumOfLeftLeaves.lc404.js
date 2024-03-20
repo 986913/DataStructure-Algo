@@ -11,7 +11,7 @@
  * @return {number}
  */
 
-// ------------------solution 1: 👍 DFS 模版变形题而已 -----------------------------------------------
+/*********************** Solution 1: 👍 DFS PostOrder 模版变形题 ***********************/
 var sumOfLeftLeaves = function (root) {
   let sum = 0;
 
@@ -21,9 +21,9 @@ var sumOfLeftLeaves = function (root) {
     if (!node) return 0;
 
     //3. 开始递归单层逻辑
-    helper(node.left);
-    helper(node.right);
-    /* 
+    if (node.left) helper(node.left); //左
+    if (node.right) helper(node.right); // 右
+    /* 中：
       (判断当前节点是不是左叶子是无法判断的，必须要通过节点的父节点来判断其左孩子是不是左叶子)
       当该节点有左节点，该节点的左节点的左节点为空，该节点的左节点的右节点为空，则就找到了一个左叶子 
     */
@@ -36,7 +36,7 @@ var sumOfLeftLeaves = function (root) {
   return sum;
 };
 
-// ------------------solution 2: 👍 BFS 模版变形题而已：------------------------------------------------
+/*************************** Solution 2: 👍 BFS 模版变形题 ****************************/
 var sumOfLeftLeaves = function (root) {
   if (!root) return 0;
 
@@ -48,7 +48,6 @@ var sumOfLeftLeaves = function (root) {
 
     for (let i = 0; i < len; i++) {
       let node = queue.shift();
-
       //证明node.left是个左叶子
       if (node.left && !node.left.left && !node.left.right) {
         sum += node.left.val;
