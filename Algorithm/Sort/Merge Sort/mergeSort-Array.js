@@ -14,6 +14,7 @@
 */
 
 /* ---------------------------------------- Solution: (In-place) ------------------------------------------------------ */
+// Main function:
 function mergeSort(arr) {
   if (arr.length <= 1) return arr;
 
@@ -51,8 +52,8 @@ function merge(arr1, arr2) {
   return results;
 }
 
-/*********************  变形题🟡 -> https://bigfrontend.dev/problem/merge-sorted-arrays ******************/
-function merge2Lists(arr1, arr2) {
+/*********************  变形题🟡 https://bigfrontend.dev/problem/merge-sorted-arrays ******************/
+function merge2Arrays(arr1, arr2) {
   let p1 = 0;
   let p2 = 0;
 
@@ -82,11 +83,11 @@ function merge2Lists(arr1, arr2) {
 function merge(arrList) {
   if (arrList.length === 0) return [];
   if (arrList.length === 1) return arrList[0];
-  if (arrList.length === 2) return merge2Lists(arrList[0], arrList[1]);
+  if (arrList.length === 2) return merge2Arrays(arrList[0], arrList[1]);
 
   let mid = Math.floor(arrList.length / 2);
   let left = merge(arrList.slice(0, mid));
   let right = merge(arrList.slice(mid));
 
-  return merge2Lists(left, right);
+  return merge2Arrays(left, right);
 }
