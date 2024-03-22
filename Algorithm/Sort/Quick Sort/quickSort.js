@@ -46,6 +46,7 @@ function partition(arr, low, high) {
 
   // 在遍历完成后，i的位置就是pivot在排好序的数组中的位置, so need Swap pivot-->arr[high] to its correct position-->arr[i+1]
   [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
+
   return i + 1; // Return the partition index, 即pivot的新位置，这个位置也是分区的索引
 }
 
