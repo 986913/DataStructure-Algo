@@ -11,7 +11,7 @@
  * @return {boolean}
  */
 
-//----------------------------👍 Solution 1: DFS Inorder traversal with array assistance ---------------------------------------------
+/******************** Solution1: 👍 DFS Inorder with array assistance: 将BST转变成一个数组  ********************/
 var isValidBST = function (root) {
   const visited = [];
 
@@ -32,19 +32,23 @@ var isValidBST = function (root) {
   return true;
 };
 
-//----------------------------👍👍 Solution 2: DFS Inorder traversal without array assistance ---------------------------------------------
+/******************** Solution2: 👍👍 DFS Inorder without array assistance  ********************/
 var isValidBST = function (root) {
-  let pre = null; //用pre记录前一个节点
+  let pre = null; //<--- diff is here, 用pre记录前一个节点
 
   const helper = (node) => {
     if (!node) return true;
 
-    let left = helper(node.left); // zuo
-    if (pre && pre.val >= node.val) return false; // inorder左中右，prev.val要是比现在节点大，那说明不是BST了
-    pre = node; //inorder左中右，prev.val比现在节点小，则继续update pre
-    let right = helper(node.right); //you
+    let isLeftValidBST = helper(node.left); // 左
+    //diff is here: 中序位置：
+    if (pre && pre.val >= node.val) {
+      return false; // prev.val要是比现在节点node.val大，那说明不是BST了
+    } else {
+      pre = node; //prev.val比现在节点node.val小，则继续update pre
+    }
+    let isRightValidBST = helper(node.right); //右
 
-    return left && right;
+    return isLeftValidBST && isRightValidBST;
   };
 
   return helper(root);
