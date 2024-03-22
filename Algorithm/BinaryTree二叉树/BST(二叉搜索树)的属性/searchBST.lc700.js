@@ -12,18 +12,30 @@
  * @return {TreeNode}
  */
 
-/* --------------------------Solution1: recursion, 根据BST的顺序特性来搜索的,这里就用不上DFS preorde,postorder,inorder etc了--------*/
+/******************** Solution1: Recursion, 👍👍 根据BST的顺序特性来搜索的,不用DFS pre,post,inorder了 ********************/
 var searchBST = function (root, val) {
   //确定终止条件
-  if (!root || root.val === val) return root;
+  if (!node) return null;
+  if (node.val === val) return node;
 
-  //说明val有可能在左子树里
-  if (val < root.val) return searchBST(root.left, val);
-  //说明val有可能在右子树里
-  if (val > root.val) return searchBST(root.right, val);
+  if (val < root.val) return searchBST(root.left, val); //说明val有可能在左子树里s
+  if (val > root.val) return searchBST(root.right, val); //说明val有可能在右子树里
 };
 
-/* --------------------------Solution2: iteration, 根据BST的顺序特性来搜索的 -----------------------------------------------------*/
+/******************** Solution2: Recursion, 用DFS Postorder ********************/
+var searchBST = function (root, val) {
+  const helper = (node, val) => {
+    if (!node) return null;
+    if (node.val === val) return node;
+
+    const searchOnLeft = helper(node.left, val);
+    const searchOnRight = helper(node.right, val);
+    return searchOnLeft || searchOnRight;
+  };
+  return helper(root, val);
+};
+
+/******************** Solution2: Iteration, 👍👍根据BST的顺序特性来搜索的  ********************/
 var searchBST = function (root, val) {
   while (root) {
     if (val < root.val) {
