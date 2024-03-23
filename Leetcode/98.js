@@ -32,7 +32,7 @@ var isValidBST = function (root) {
   return true;
 };
 
-/******************** Solution2: 👍👍 DFS Inorder without array assistance  ********************/
+/******************** Solution2: 👍👍 DFS Inorder without array assistance, LC 94,230,530变形题  ********************/
 var isValidBST = function (root) {
   let pre = null; //<--- diff is here, 用pre记录前一个节点
 

@@ -11,7 +11,7 @@
  * @return {number}
  */
 
-/********* Solution 1: BST DFS Inorder - Recursion, need array assistance 🟡LC98变形题 ******************/
+/********* Solution 1: BST DFS Inorder - Recursion, need array assistance LC98变形题 ******************/
 var minDiffInBST = function (root) {
   const visited = [];
 
@@ -36,7 +36,7 @@ var minDiffInBST = function (root) {
   return minAbsDiff;
 };
 
-/************** 👍👍 Solution 2: BST DFS Inorder - Recursion, no array assistance 🟡LC98变形题 ************/
+/************** 👍👍 Solution 2: BST DFS Inorder - Recursion, no array assistance 🟡LC98, 230 变形题 ************/
 var minDiffInBST = function (root) {
   let pre = null; //<--- diff is here, 用pre记录前一个节点
   let minDiff = Infinity;
