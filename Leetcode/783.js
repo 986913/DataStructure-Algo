@@ -11,8 +11,8 @@
  * @return {number}
  */
 
-//------------------👍 Solution 1: bst dfs inorder to create visited array, then find the Minimum Diff of that array -------------
-var getMinimumDifference = function (root) {
+/********* Solution 1: BST DFS Inorder - Recursion, need array assistance 🟡LC98变形题 ******************/
+var minDiffInBST = function (root) {
   const visited = [];
 
   const helper = (node) => {
@@ -36,24 +36,51 @@ var getMinimumDifference = function (root) {
   return minAbsDiff;
 };
 
-//-----------------------------👍👍 Solution 2: bst dfs inorder, but no need to create array! ----------------------
-var getMinimumDifference = function (root) {
-  let pre = null;
+/************** 👍👍 Solution 2: BST DFS Inorder - Recursion, no array assistance 🟡LC98变形题 ************/
+var minDiffInBST = function (root) {
+  let pre = null; //<--- diff is here, 用pre记录前一个节点
   let minDiff = Infinity;
 
   const helper = (node) => {
-    if (!node) return 0;
+    if (!node) return;
 
     if (node.left) helper(node.left);
-
+    //中序位置
     if (pre) {
-      const currDiff = Math.abs(pre.val - node.val);
-      minDiff = Math.min(minDiff, currDiff);
+      minDiff = Math.min(minDiff, Math.abs(pre.val - node.val));
     }
-    pre = node;
+    pre = node; // <--- remember to update pre
     if (node.right) helper(node.right);
   };
 
   helper(root);
+  return minDiff;
+};
+
+/************** Solution 3: DFS Inorder - Iteration LC94 🟡 模版变形题 ****************/
+var minDiffInBST = function (root) {
+  let cur = root;
+
+  const stack = [];
+  let minDiff = Infinity;
+  let pre = null;
+
+  while (stack.length || cur) {
+    if (cur) {
+      stack.push(cur);
+      cur = cur.left;
+    } else {
+      cur = stack.pop();
+
+      // difference is here
+      if (pre) {
+        minDiff = Math.min(minDiff, Math.abs(pre.val - cur.val));
+      }
+      pre = cur; // remember to update pre
+
+      cur = cur.right;
+    }
+  }
+
   return minDiff;
 };
