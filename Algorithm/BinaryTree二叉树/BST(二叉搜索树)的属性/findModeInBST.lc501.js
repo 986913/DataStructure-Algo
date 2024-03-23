@@ -11,7 +11,7 @@
  * @return {number[]}
  */
 
-/*------------👍 Solution 1: dfs inorder to create visited map, then find the most high frequency of that map  🟡lc530变形题-------------*/
+/**************** 👍 Solution 1: dfs inorder to create visited map, then find the most high frequency of that map  🟡lc530变形题 ***********/
 var findMode = function (root) {
   const map = new Map();
   let result = [];
