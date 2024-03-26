@@ -45,10 +45,10 @@ const invertTree = (root) => {
     // end condition
     if (!node) return;
 
-    // single layer logic
-    [[node.left], [node.right]] = [[node.right], [node.left]];
-    if (node.left) helper(node.left);
-    if (node.right) helper(node.right);
+    // 前序位置:
+    [[node.left], [node.right]] = [[node.right], [node.left]]; // zhong
+    if (node.left) helper(node.left); // zuo
+    if (node.right) helper(node.right); // you
   };
 
   helper(root);
