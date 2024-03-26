@@ -12,7 +12,7 @@
  * @return {number[][]}
  */
 
-/********************** Solution1: 👍👍👍 DFS + backtracking (LC112🟡变形题) ***************************/
+/********************** Solution1: 👍DFS + backtracking (LC112变形题) ***************************/
 var pathSum = function (root, targetSum) {
   if (!root) return [];
   let result = [];
@@ -46,5 +46,32 @@ var pathSum = function (root, targetSum) {
   };
 
   helper(root, [], 0);
+  return result;
+};
+
+/********************** Solution2: 👍👍👍 DFS + Backtracking (LC112变形题) ***************************/
+var pathSum = function (root, targetSum) {
+  let result = [];
+  if (!root) return result;
+
+  const traverse = (node, curPath, curSum) => {
+    if (!node) return;
+
+    //前序位置
+    curPath.push(node.val);
+    curSum += node.val;
+    if (!node.left && !node.right) {
+      if (curSum === targetSum) {
+        result.push([...curPath]);
+      }
+    }
+    traverse(node.left, [...curPath], curSum); // 数组使用副本
+    traverse(node.right, [...curPath], curSum); // 数组使用副本
+    //后序位置，backtracking
+    curPath.pop();
+    curSum -= node.val;
+  };
+
+  traverse(root, [], 0);
   return result;
 };
