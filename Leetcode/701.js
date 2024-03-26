@@ -12,21 +12,45 @@
  * @return {TreeNode}
  */
 
-/*  -------------------------------------- Solution 1: DFS Recursion 🟡lc700变形题------------------------------------ */
-
+/*************************** Solution 1: DFS Recursion - 分解问题思路 LC700变形题 ****************************/
 var insertIntoBST = function (root, val) {
-  if (!root) return new TreeNode(val); //找到了插入位置(叶子节点)，然后创建且返回新节点
+  if (!root) return new TreeNode(val); // 如果树为空，则直接返回新节点作为根节点
 
-  if (val < root.val) {
-    root.left = insertIntoBST(root.left, val); // 在这连接上了新节点和父亲节点，新建节点作为父节点左子树 --> root.left子树
-  } else {
-    root.right = insertIntoBST(root.right, val); //在这连接上了新节点和父亲节点，新建节点作为父节点右子树 --> root.right子树
-  }
+  const helper = (node, value) => {
+    if (!node) return new TreeNode(val); // 如果当前节点为空，则创建一个新节点
 
+    if (value < node.val) {
+      node.left = helper(node.left, value); // 递归调用左子树
+    } else {
+      node.right = helper(node.right, value); // 递归调用右子树
+    }
+    return node;
+  };
+
+  return helper(root, val);
+};
+
+/*************************** Solution 2: DFS Recursion - 遍历思路 🟡LC700变形题 ****************************/
+var insertIntoBST = function (root, val) {
+  if (!root) return new TreeNode(val); // 如果树为空，则直接返回新节点作为根节点
+
+  const traverse = (node) => {
+    if (!node) return; // 如果树为空，则直接返回新节点作为根节点
+
+    let newNode = new TreeNode(val);
+    if (val < node.val) {
+      node.left ? traverse(node.left) : (node.left = newNode); // 如果左子树为空，则将新节点插入左子树, 否则继续遍历左子树
+    }
+    if (val > node.val) {
+      node.right ? traverse(node.right) : (node.right = newNode); // 如果右子树为空，则将新节点插入右子树, 否则继续遍历右子树
+    }
+  };
+
+  traverse(root);
   return root;
 };
 
-/*  -------------------------------------- Solution 2: Iteration 🟡lc700变形题------------------------------------ */
+/*************************** Solution 3: Iteration 🟡LC700变形题 ****************************/
 var insertIntoBST = function (root, val) {
   if (!root) return new TreeNode(val);
 
