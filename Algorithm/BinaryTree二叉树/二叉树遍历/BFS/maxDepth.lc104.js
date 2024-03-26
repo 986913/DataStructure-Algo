@@ -11,7 +11,7 @@
  * @return {number}
  */
 
-/*********** Solution1.1 BFS: 🟡是102的变形题,只是输出visited.length就行 ************/
+/***************************** Solution1.1 BFS: 是102的变形题,只是输出visited.length就行 **************************/
 /*
 var maxDepth = function (root) {
   if (!root) return 0;
@@ -37,7 +37,7 @@ var maxDepth = function (root) {
 }; 
 */
 
-/*********** Solution1.2 BFS 👍👍👍 102的变形题🟡 ************/
+/***************************** Solution1.2 BFS 👍 102的变形题 ************************************************/
 var maxDepth = function (root) {
   if (!root) return 0;
 
@@ -79,7 +79,7 @@ var maxDepth = function (root) {
   return helper(root);
 };
 
-/****************************** Solution2.2 👍👍👍 DFS PostOrder 递归三部曲 + 回溯 ****************************************/
+/****************************** Solution2.2 👍 DFS PostOrder 递归三部曲 + 回溯 ****************************************/
 var maxDepth = function (root) {
   if (!root) return 0;
 
@@ -110,9 +110,29 @@ var maxDepth = function (root) {
   helper(root, 1);
   return maxDepth;
 };
-
 /*
   Solution 2.1 VS Solution 2.2:
     - Solution 2.2 使用了一个全局变量 maxDepth来记录树的最大深度，并且在递归结束后进行了回溯，以确保maxDepth和递归参数(curDepth)的值被正确更新。
     - Solution 2.1 则是通过递归函数自身的返回值来传递和计算深度，不需要使用全局变量。这使得在逻辑上更加简洁和直接。
 */
+
+/****************************** Solution3 👍👍👍 DFS + 回溯 ****************************************/
+var maxDepth = function (root) {
+  let result = -Infinity;
+  if (!root) return 0;
+
+  const traverse = (node, curDepth) => {
+    if (!node) return;
+
+    //前序位置
+    curDepth += 1;
+    result = Math.max(result, curDepth);
+    traverse(node.left, curDepth);
+    traverse(node.right, curDepth);
+    //后序位置
+    curDepth -= 1;
+  };
+
+  traverse(root, 0);
+  return result;
+};

@@ -96,3 +96,26 @@ var hasPathSum = function (root, targetSum) {
   helper(root, 0);
   return allPathSum.includes(targetSum);
 };
+
+/***************** Solution3: 👍👍👍 DFS + backtracking **********************************/
+var hasPathSum = function (root, targetSum) {
+  let found = false;
+  if (!root) return false;
+
+  const traverse = (node, curSum) => {
+    if (!node) return;
+
+    //前序位置
+    curSum += node.val;
+    if (!node.left && !node.right) {
+      if (curSum === targetSum) found = true;
+    }
+    traverse(node.left, curSum);
+    traverse(node.right, curSum);
+    //后序位置，backtracking
+    curSum -= node.val;
+  };
+
+  traverse(root, 0);
+  return found;
+};
