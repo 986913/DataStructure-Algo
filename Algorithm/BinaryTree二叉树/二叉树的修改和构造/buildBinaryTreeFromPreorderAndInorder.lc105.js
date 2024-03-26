@@ -24,8 +24,8 @@
     5. 后切割preorder
     6. 递归处理左区间右区间
 
-                    inorder: 3  9  20  15  7
-                   preorder: 3️⃣  3  15  20  7
+                    inorder: 9  3  15  20   7
+                   preorder: 3️⃣  9  20  15   7
                             / \
                           /    \
                   inorder: 9    inorder : 15  20  7
