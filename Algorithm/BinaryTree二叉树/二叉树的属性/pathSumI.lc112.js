@@ -12,7 +12,7 @@
  * @return {boolean}
  */
 
-/***************** Solution1: 👍👍👍 DFS PostOrder + backtracking **********************************/
+/***************** Solution1: 👍 DFS PostOrder + backtracking **********************************/
 // https://www.bilibili.com/video/BV19t4y1L7CR/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
 
 var hasPathSum = function (root, targetSum) {
@@ -45,7 +45,7 @@ var hasPathSum = function (root, targetSum) {
   return helper(root, 0);
 };
 
-/****************** Solution2.1: 👍👍 DFS PreOrder (LC257 Sol1🟡变形题) ******************/
+/****************** Solution2.1:  DFS PreOrder (LC257 Sol1🟡变形题) ******************/
 var hasPathSum = function (root, targetSum) {
   if (!root) return false;
   let allPathSums = [];
@@ -69,7 +69,7 @@ var hasPathSum = function (root, targetSum) {
   return allPathSums.includes(targetSum);
 };
 
-/****************** Solution2.2: 👍 DFS PreOrder + backtracking (LC257 Sol2🟡变形题) ******************/
+/****************** Solution2.2: DFS PreOrder + backtracking (LC257 Sol2🟡变形题) ******************/
 // 和上述的Solution2.1几乎一样，就是更明显的显示backtracking过程而已
 var hasPathSum = function (root, targetSum) {
   if (!root) return false;
@@ -95,4 +95,27 @@ var hasPathSum = function (root, targetSum) {
   };
   helper(root, 0);
   return allPathSum.includes(targetSum);
+};
+
+/***************** Solution3: 👍👍👍 DFS + backtracking **********************************/
+var hasPathSum = function (root, targetSum) {
+  let found = false;
+  if (!root) return false;
+
+  const traverse = (node, curSum) => {
+    if (!node) return;
+
+    //前序位置
+    curSum += node.val;
+    if (!node.left && !node.right) {
+      if (curSum === targetSum) found = true;
+    }
+    traverse(node.left, curSum);
+    traverse(node.right, curSum);
+    //后序位置，backtracking
+    curSum -= node.val;
+  };
+
+  traverse(root, 0);
+  return found;
 };
