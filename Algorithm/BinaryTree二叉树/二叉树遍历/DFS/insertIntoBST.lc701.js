@@ -12,13 +12,12 @@
  * @return {TreeNode}
  */
 
-/*************************** Solution 1: DFS Recursion - 分解问题思路 LC700变形题 ****************************/
+/*************************** Solution 1: DFS Recursion - 👍分解问题思路 LC700变形题 ****************************/
 var insertIntoBST = function (root, val) {
-  if (!root) return new TreeNode(val); // 如果树为空，则直接返回新节点作为根节点
-
   const helper = (node, value) => {
-    if (!node) return new TreeNode(val); // 如果当前节点为空，则创建一个新节点
+    if (!node) return new TreeNode(val); // 如果当前节点为空，则插入一个新节点。
 
+    //按照二叉搜索树的规则去遍历
     if (value < node.val) {
       node.left = helper(node.left, value); // 递归调用左子树
     } else {
@@ -30,41 +29,50 @@ var insertIntoBST = function (root, val) {
   return helper(root, val);
 };
 
-/*************************** Solution 2: DFS Recursion - 遍历思路 🟡LC700变形题 ****************************/
-var insertIntoBST = function (root, val) {
-  if (!root) return new TreeNode(val); // 如果树为空，则直接返回新节点作为根节点
-
-  const traverse = (node) => {
-    if (!node) return; // 如果树为空，则直接返回新节点作为根节点
-
-    let newNode = new TreeNode(val);
-    if (val < node.val) {
-      node.left ? traverse(node.left) : (node.left = newNode); // 如果左子树为空，则将新节点插入左子树, 否则继续遍历左子树
-    }
-    if (val > node.val) {
-      node.right ? traverse(node.right) : (node.right = newNode); // 如果右子树为空，则将新节点插入右子树, 否则继续遍历右子树
-    }
-  };
-
-  traverse(root);
-  return root;
-};
-
-/*************************** Solution 3: Iteration 🟡LC700变形题 ****************************/
+/*************************** Solution 2: DFS Recursion - 遍历思路 LC700变形题 ****************************/
 var insertIntoBST = function (root, val) {
   if (!root) return new TreeNode(val);
 
-  let parent = null; //记录插入的节点
-  let curr = root; // copy一份root为curr, 遍历curr而不直接遍历root
-  let newNode = new TreeNode(val);
+  let parent = null;
+  const traverse = (node, val) => {
+    if (!node) {
+      //当前节点node为空节点时, 那么给其父节点parent添加新造的节点newNode
+      let newNode = new TreeNode(val);
+      if (val < parent.val) {
+        parent.left = newNode;
+      } else {
+        parent.right = newNode;
+      }
+      return;
+    }
 
-  while (curr) {
-    parent = curr; // update 插入的节点
-
-    if (val > curr.val) {
-      curr = curr.right;
+    parent = node; //<---- 放到前序位置就是parent, 要是放到中序位置就是pre(参考: LC530, 538)
+    if (val < node.val) {
+      traverse(node.left, val);
     } else {
-      curr = curr.left;
+      traverse(node.right, val);
+    }
+    return node;
+  };
+
+  traverse(root, val);
+  return root;
+};
+
+/*************************** Solution 3: Iteration, 👍👍根据BST的顺序特性来搜索的 ****************************/
+var insertIntoBST = function (root, val) {
+  let newNode = new TreeNode(val);
+  if (!root) return new TreeNode(val);
+
+  let parent = null; // <--- 用parent记录要插入的节点
+  let cur = root;
+  while (cur) {
+    parent = cur; //先update插入的节点parent
+
+    if (val > cur.val) {
+      cur = cur.right;
+    } else {
+      cur = cur.left;
     }
   }
 

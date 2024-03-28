@@ -37,13 +37,15 @@ var searchBST = function (root, val) {
 
 /******************** Solution2: Iteration, 👍👍根据BST的顺序特性来搜索的  ********************/
 var searchBST = function (root, val) {
-  while (root) {
-    if (val < root.val) {
-      root = root.left;
-    } else if (val > root.val) {
-      root = root.right;
+  let cur = root;
+
+  while (cur) {
+    if (val < cur.val) {
+      cur = cur.left;
+    } else if (val > cur.val) {
+      cur = cur.right;
     } else {
-      return root;
+      return cur;
     }
   }
 
