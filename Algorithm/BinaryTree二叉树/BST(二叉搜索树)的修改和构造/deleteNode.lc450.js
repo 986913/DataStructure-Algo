@@ -39,7 +39,7 @@ var deleteNode = function (root, key) {
           curr = curr.left;
         }
         curr.left = node.left; //把node(被删节点)的左子树赋值给 node右子树的最小值的左子树
-        return node.right; //node右子树继位，代替node(被删节点)的位置（ie:删除了node）
+        return node.right; //node(被删节点)的右子树继位，代替node(被删节点)的位置（ie:删除了node）
       }
     }
 
