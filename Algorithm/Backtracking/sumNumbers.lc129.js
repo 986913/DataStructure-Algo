@@ -11,30 +11,24 @@
  * @return {number}
  */
 
-/* -------- Solution  👍👍👍 DFS + backtracking(lc113, lc257 🟡变形题) ------------------------- */
-
+/************* Solution  👍👍👍 DFS 遍历思想 + backtracking(LC112,113,257 🟡变形题) **************/
 var sumNumbers = function (root) {
-  const paths = [];
+  let paths = [];
 
-  const backtracking = (node, curPath) => {
+  const traverse = (node, curPath) => {
+    if (!node) return;
+
+    //前序位置
+    curPath.push(node.val);
     if (!node.left && !node.right) {
-      curPath += node.val;
-      paths.push(curPath);
-      return;
+      paths.push(curPath.join(''));
     }
-
-    if (node.left) {
-      curPath += node.val;
-      backtracking(node.left, curPath);
-      curPath = curPath.substring(0, curPath.length - 1); // backtracking
-    }
-    if (node.right) {
-      curPath += node.val;
-      backtracking(node.right, curPath);
-      curPath = curPath.substring(0, curPath.length - 1); // backtracking
-    }
+    traverse(node.left, curPath);
+    traverse(node.right, curPath);
+    //后序位置，backtracking
+    curPath.pop();
   };
 
-  backtracking(root, '');
+  traverse(root, []);
   return paths.reduce((acc, cur) => Number(acc) + Number(cur));
 };
