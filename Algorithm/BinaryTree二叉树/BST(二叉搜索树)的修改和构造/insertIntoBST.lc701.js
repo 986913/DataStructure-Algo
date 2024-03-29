@@ -33,7 +33,7 @@ var insertIntoBST = function (root, val) {
 var insertIntoBST = function (root, val) {
   if (!root) return new TreeNode(val);
 
-  let parent = null;
+  let parent = null; //<---- 用parent记录要被插入的节点
   const traverse = (node, val) => {
     if (!node) {
       //当前节点node为空节点时, 那么给其父节点parent添加新造的节点newNode
