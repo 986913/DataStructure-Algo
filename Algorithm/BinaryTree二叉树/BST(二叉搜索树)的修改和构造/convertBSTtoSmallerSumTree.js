@@ -11,7 +11,7 @@
  * @return {TreeNode}
  */
 
-/****************** Solution1: DFS Recursion - In-order LC538, 530变形题 ********************************/
+/****************** Solution1: DFS Recursion 遍历思想 - In-order LC538, 530变形题 ********************************/
 var convertBST = function (root) {
   let pre = null; //<--- 用pre记录前一个节点
 
