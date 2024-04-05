@@ -12,7 +12,7 @@
  * @return {number[][]}
  */
 
-/********************** Solution2: 👍👍👍 DFS + Backtracking (LC112变形题) ***************************/
+/********************** Solution2: 👍👍👍 DFS + Backtracking 遍历思想 (LC112变形题) ***************************/
 var pathSum = function (root, targetSum) {
   let result = [];
   if (!root) return result;
