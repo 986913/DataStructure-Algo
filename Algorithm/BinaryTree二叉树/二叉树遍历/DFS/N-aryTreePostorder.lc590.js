@@ -21,6 +21,7 @@ var postorder = function (root) {
     for (let child of node.children) {
       helper(child);
     }
+    //后序位置
     visited.push(node.val);
   };
 

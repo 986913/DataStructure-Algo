@@ -19,6 +19,7 @@ var preorder = function (root) {
   const helper = (node) => {
     if (!node) return;
 
+    //前序位置：
     visited.push(node.val);
     //这里不再是nide.left, node.right了， 而是循环node.children
     for (let child of node.children) {
