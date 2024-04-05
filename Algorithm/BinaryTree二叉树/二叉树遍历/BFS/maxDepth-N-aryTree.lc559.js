@@ -11,9 +11,7 @@
  * @return {number}
  */
 
-//https://www.bilibili.com/video/BV1Gd4y1V75u/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
-
-/**************************** Solution1 👍👍👍 DFS PostOrder  ******************************/
+/**************************** Solution1: DFS PostOrder (分解思路) ******************************/
 var maxDepth = function (root) {
   //1.确定递归函数的参数和返回值: 参数就是传入树的根节点，返回就返回这棵树的深度
   const helper = (node) => {
@@ -30,7 +28,29 @@ var maxDepth = function (root) {
   return helper(root);
 };
 
-/**************************** Solution2.1 👍👍👍 BFS 102的🟡变形题 ****************************/
+/****************************** Solution2: DFS（遍历思想）+ 回溯 ********************************/
+var maxDepth = function (root) {
+  if (!root) return 0;
+  let result = -Infinity;
+
+  const traverse = (node, curDepth) => {
+    if (!node) return;
+
+    //前序位置
+    curDepth++;
+    result = Math.max(result, curDepth);
+    for (let child of node.children) {
+      traverse(child, curDepth);
+    }
+    //后序位置
+    curDepth--;
+  };
+
+  traverse(root, 0);
+  return result;
+};
+
+/**************************** Solution3.1 👍👍👍 BFS LC102变形题 ****************************/
 var maxDepth = function (root) {
   if (!root) return 0;
 
@@ -53,30 +73,30 @@ var maxDepth = function (root) {
 
   return depth;
 };
+/*****************************  Solution3.2  BFS 102的变形题 *****************************
+  var maxDepth = function (root) {
+    if (!root) return 0;
 
-/*****************************  Solution2.2  BFS 102的变形题 ******************************/
-var maxDepth = function (root) {
-  if (!root) return 0;
+    let queue = [root];
+    let visited = [];
 
-  let queue = [root];
-  let visited = [];
+    while (queue.length) {
+      let len = queue.length;
+      let currLevel = [];
 
-  while (queue.length) {
-    let len = queue.length;
-    let currLevel = [];
+      for (let i = 0; i < len; i++) {
+        let node = queue.shift();
 
-    for (let i = 0; i < len; i++) {
-      let node = queue.shift();
-
-      currLevel.push(node.val);
-      //这里不再是node.left, node.right了， 变成了遍历node.children
-      for (let child of node.children) {
-        queue.push(child);
+        currLevel.push(node.val);
+        //这里不再是node.left, node.right了， 变成了遍历node.children
+        for (let child of node.children) {
+          queue.push(child);
+        }
       }
+
+      visited.push(currLevel);
     }
 
-    visited.push(currLevel);
-  }
-
-  return visited.length;
-};
+    return visited.length;
+  };
+*/

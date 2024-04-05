@@ -11,7 +11,7 @@
  * @return {number[]}
  */
 
-/*------ solution: DFS  postorder: 左右中 ------*/
+/******************** solution: 👍👍👍  DFS - Recursion 遍历思想  *********************/
 var postorder = function (root) {
   let visited = [];
   const helper = (node) => {

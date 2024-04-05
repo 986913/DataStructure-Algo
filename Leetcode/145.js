@@ -13,8 +13,7 @@
  */
 
 /* Post-order: 左-> 右 -> 中 */
-
-/*Solution 1: -------------------------------👍👍👍------ recurssion递归 ----------------------------------------------- */
+/******************** solution: 👍👍👍  DFS - Recursion 遍历思想  *********************/
 const postorderTraversal = (root) => {
   let visted = [];
 
@@ -33,9 +32,7 @@ const postorderTraversal = (root) => {
   return visted;
 };
 
-/*Solution 2: ----------------------------👍👍👍--------iteration迭代 -----------------------------------------------*/
-
-/* 
+/*************************** Solution 2: 👍👍👍 Iteration 迭代  ----------------------------------------------- */
 const postorderTraversal = (root) => {
   if (!root) return [];
 
@@ -43,8 +40,8 @@ const postorderTraversal = (root) => {
   const visited = [];
 
   while (stack.length) {
-    const curr = stack.pop(); // 则出栈为： 中 -> 右 -> 左 结果翻转！
-    visited.push(curr.val); //中
+    const curr = stack.pop();
+    visited.push(curr.val); // update result before 入栈
 
     // 入栈： 先左 -> 后右
     if (curr.left) stack.push(curr.left);
@@ -52,31 +49,4 @@ const postorderTraversal = (root) => {
   }
 
   return visited.reverse(); //  中 -> 右 -> 左  反转为 ： 左 -> 右 -> 中
-};
-*/
-
-// 迭代统一写法:
-// 后续遍历：左右中  then压栈顺序：中右左
-var postorderTraversal = function (root) {
-  const visited = [];
-  const stack = [];
-
-  if (root) stack.push(root);
-
-  while (stack.length) {
-    const curr = stack.pop();
-
-    if (!curr) {
-      let node = curr.pop();
-      visited.push(node.val);
-      continue;
-    }
-
-    stack.push(curr); // 中
-    stack.push(null);
-    if (curr.right) stack.push(curr.right); // 右
-    if (curr.left) stack.push(curr.left); // 左
-  }
-
-  return visited;
 };

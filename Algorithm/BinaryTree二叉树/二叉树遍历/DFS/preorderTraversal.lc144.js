@@ -14,7 +14,7 @@
 
 /* Pre-order: 中->左-> 右 */
 
-/*************************** Solution 1: 👍👍👍 Recursion 递归模版 ----------------------------------------------- */
+/*************************** Solution 1: 👍👍👍 DFS PreOrder递归模版 遍历思想 ***************************/
 const preorderTraversal = (root) => {
   let visted = [];
 
@@ -33,7 +33,7 @@ const preorderTraversal = (root) => {
   return visted;
 };
 
-/*************************** Solution 2: 👍👍👍 Iteration 迭代  ----------------------------------------------- */
+/*************************** Solution 2: 👍👍👍 Iteration迭代 套用模版  ****************************/
 const preorderTraversal = (root) => {
   if (!root) return []; // handle edge case
 
@@ -51,29 +51,3 @@ const preorderTraversal = (root) => {
 
   return visited;
 };
-
-/* 迭代统一写法: 前序遍历：中左右,   then压栈顺序：右左中
-
-  var preorderTraversal = function (root) {
-    const visited = [];
-    const stack = [];
-
-    if (root) stack.push(root);
-
-    while (stack.length) {
-      const curr = stack.pop();
-
-      if (!curr) {
-        let node = stack.pop();
-        visited.push(node.val);
-        continue;
-      }
-
-      if (curr.right) stack.push(curr.right); // 右
-      if (curr.left) stack.push(curr.left); // 左
-      stack.push(curr); // 中
-      stack.push(null);
-    }
-    return visited;
-  };
-*/

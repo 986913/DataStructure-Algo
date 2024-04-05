@@ -35,7 +35,7 @@ var minDepth = function (root) {
   return minHeight;
 };
 
-/******************** Solution 2: 👍👍👍 DFS PostOrder - Recursion ******************************
+/******************** Solution 2: 👍👍👍 DFS PostOrder - Recursion (分解思想) ******************************
  * https://www.bilibili.com/video/BV1QD4y1B7e2/
  * 求二叉树的最min深度 和 最max深度的差别主要在于: 处理左右孩子不为空的逻辑。
  */

@@ -14,7 +14,7 @@
 
 /* in-order: 左-> 中 -> 右 */
 
-/*************************** Solution 1: 👍👍👍 Recursion 递归模版 ----------------------------------------------- */
+/*************************** Solution 1: 👍👍👍 DFS InOrder递归模版 遍历思想 ***************************/
 const inorderTraversal = (root) => {
   let visted = [];
 
@@ -54,29 +54,3 @@ const inorderTraversal = (root) => {
 
   return visited;
 };
-
-/* 迭代统一写法: 中序遍历：左中右     then压栈顺序：右中左
-
-  var inorderTraversal = function (root) {
-    const visited = [];
-    const stack = [];
-
-    if (root) stack.push(root);
-
-    while (stack.length) {
-      const curr = stack.pop();
-
-      if (!curr) {
-        let node = curr.pop();
-        visited.push(node.val);
-        continue;
-      }
-
-      if (curr.right) stack.push(curr.right); // 右
-      stack.push(curr); // 中
-      stack.push(null);
-      if (curr.left) stack.push(curr.left); // 左
-    }
-    return visited;
-  };
-*/

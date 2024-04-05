@@ -11,7 +11,7 @@
  * @return {TreeNode}
  */
 
-/************************ Solution1: 👍👍👍 DFS preOrder OR postOrder  lc144变形题 ************************
+/***************** Solution1: 👍👍👍 DFS(遍历思路) preOrder OR postOrder  LC144变形题 ****************
 反转二叉树：
   注意只要把每一个节点的左右孩子翻转一下，就可以达到整体翻转的效果
   这道题目使用preOrder和postOrder遍历都可以，
@@ -42,11 +42,10 @@
 const invertTree = (root) => {
   // recursion para: treenode,   output: void
   const helper = (node) => {
-    // end condition
     if (!node) return;
 
     // 前序位置:
-    [[node.left], [node.right]] = [[node.right], [node.left]]; // zhong
+    [[node.left], [node.right]] = [[node.right], [node.left]];
     if (node.left) helper(node.left); // zuo
     if (node.right) helper(node.right); // you
   };
@@ -55,7 +54,7 @@ const invertTree = (root) => {
   return root;
 };
 
-/* ************************ Solution2: 👍 DFS preOrder迭代模版 - leetcode 144 *************************/
+/* ************************ Solution2: 👍 DFS preOrder迭代模版 - LC144 *************************/
 var invertTree = function (root) {
   if (!root) return null;
 
@@ -71,7 +70,7 @@ var invertTree = function (root) {
   return root;
 };
 
-/* -------------- solution 3: 👍👍👍 套用BFS模版 （leetcode 102）---------------------------------- */
+/* -------------- solution 3: 👍👍👍 套用BFS模版 （LC 102）---------------------------------- */
 var invertTree = function (root) {
   if (!root) return root;
 
