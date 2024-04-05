@@ -11,7 +11,7 @@
  * @return {number}
  */
 
-/******************** Solution 1: 👍👍👍 BFS (102, 104的🟡变形题) ******************************/
+/******************** Solution 1: BFS (LC102, 104变形题) ******************************/
 var minDepth = function (root) {
   if (!root) return [];
 
@@ -35,11 +35,10 @@ var minDepth = function (root) {
   return minHeight;
 };
 
-/******************** Solution 2: 👍👍👍 DFS PostOrder - Recursion ******************************
+/******************** Solution 2: DFS PostOrder (分解思想) ******************************
  * https://www.bilibili.com/video/BV1QD4y1B7e2/
  * 求二叉树的最min深度 和 最max深度的差别主要在于: 处理左右孩子不为空的逻辑。
  */
-
 var minDepth = function (root) {
   //1. 确定递归函数的参数和返回值: 参数为要传入的二叉树root，返回的是int类型的深度
   const helper = (node) => {
@@ -55,4 +54,27 @@ var minDepth = function (root) {
   };
 
   return helper(root);
+};
+
+/******************** Solution 3: DFS（遍历思想）+ 回溯  ******************************/
+var minDepth = function (root) {
+  if (!root) return 0;
+  let result = Infinity;
+
+  const traversal = (node, curDepth) => {
+    if (!node) return;
+
+    //前序位置
+    curDepth++;
+    if (!node.left && !node.right) {
+      result = Math.min(result, curDepth); //到叶子节点才更新result
+    }
+    traversal(node.left, curDepth);
+    traversal(node.right, curDepth);
+    //后序位置
+    curDepth--;
+  };
+
+  traversal(root, 0);
+  return result;
 };
