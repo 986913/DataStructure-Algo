@@ -29,6 +29,16 @@ const inorderTraversal = (root) => {
   helper(root);
   return visted;
 };
+/*************************** Solution 2: DFS PreOrder 分解思想 ***********************************/
+const inorderTraversal = (root) => {
+  let visited = [];
+  if (!root) return visited;
+
+  visited = [...visited, ...inorderTraversal(root.left)];
+  visited.push(root.val);
+  visited = [...visited, ...inorderTraversal(root.right)];
+  return visited;
+};
 
 /*************************** Solution 2: 👍👍👍 Iteration 迭代  ----------------------------------------------- */
 // https://www.bilibili.com/video/BV1Zf4y1a77g/?spm_id_from=333.788&vd_source=8b5297d974f6a5e72c60ec8ea33f2ff6

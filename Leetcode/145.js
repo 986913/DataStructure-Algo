@@ -32,6 +32,17 @@ const postorderTraversal = (root) => {
   return visted;
 };
 
+/*************************** Solution 2: DFS PreOrder 分解思想 ***********************************/
+const postorderTraversal = (root) => {
+  let visited = [];
+  if (!root) return visited;
+
+  visited = [...visited, ...postorderTraversal(root.left)];
+  visited = [...visited, ...postorderTraversal(root.right)];
+  visited.push(root.val);
+  return visited;
+};
+
 /*************************** Solution 2: 👍👍👍 Iteration 迭代  ----------------------------------------------- */
 const postorderTraversal = (root) => {
   if (!root) return [];

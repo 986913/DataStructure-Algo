@@ -33,7 +33,18 @@ const preorderTraversal = (root) => {
   return visted;
 };
 
-/*************************** Solution 2: 👍👍👍 Iteration迭代 套用模版  ****************************/
+/*************************** Solution 2: DFS PreOrder 分解思想 ***********************************/
+const preorderTraversal = (root) => {
+  let visited = [];
+  if (!root) return visited;
+
+  visited.push(root.val);
+  visited = [...visited, ...preorderTraversal(root.left)];
+  visited = [...visited, ...preorderTraversal(root.right)];
+  return visited;
+};
+
+/*************************** Solution 3: 👍👍👍 Iteration迭代 套用模版  ****************************/
 const preorderTraversal = (root) => {
   if (!root) return []; // handle edge case
 

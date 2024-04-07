@@ -12,7 +12,7 @@
  * @return {boolean}
  */
 
-/***************** Solution1: DFS PostOrder + backtracking (分解思路) *****************************/
+/***************** Solution1: DFS PostOrder (分解思路) *****************************/
 // 递归函数参数:树的根节点和targetSum, 返回值boolean
 var hasPathSum = function (root, targetSum) {
   if (!root) return false;

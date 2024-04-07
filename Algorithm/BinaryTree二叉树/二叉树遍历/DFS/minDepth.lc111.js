@@ -40,21 +40,15 @@ var minDepth = function (root) {
  * 求二叉树的最min深度 和 最max深度的差别主要在于: 处理左右孩子不为空的逻辑。
  */
 
+//确定递归函数的参数和返回值: 参数为要传入的二叉树root，返回的是int类型的深度
 var minDepth = function (root) {
-  //1. 确定递归函数的参数和返回值: 参数为要传入的二叉树root，返回的是int类型的深度
-  const helper = (node) => {
-    if (!node) return 0; //2. 确定终止条件： 终止条件也是遇到空节点返回0，表示当前节点的高度为0
+  if (!root) return 0; // 终止条件: 遇到空节点返回0，表示当前节点的高度为0
 
-    //3. 确定单层递归的逻辑:
-    let leftTreeDepth = helper(node.left); // zuo
-    let rightTreeDepth = helper(node.right); // you
-    /* zhong */
-    if (node.left === null && node.right !== null) return 1 + rightTreeDepth; //如果左子树为空，右子树不为空，说明最小深度是 1 + 右子树的深度
-    if (node.left !== null && node.right === null) return 1 + leftTreeDepth; //右子树为空，左子树不为空，最小深度是 1 + 左子树的深度
-    return 1 + Math.min(leftTreeDepth, rightTreeDepth); //左右子树都不为空，返回左右子树深度最小值 + 1
-  };
-
-  return helper(root);
+  let leftTreeDepth = minDepth(root.left);
+  let rightTreeDepth = minDepth(root.right);
+  if (!root.left && root.right) return 1 + rightTreeDepth; //如果左子树为空，右子树不为空，说明最小深度是 1 + 右子树的深度
+  if (root.left && !root.right) return 1 + leftTreeDepth; //右子树为空，左子树不为空，最小深度是 1 + 左子树的深度
+  return 1 + Math.min(leftTreeDepth, rightTreeDepth); //左右子树都不为空，返回左右子树深度最小值 + 1
 };
 
 /******************** Solution 3: DFS（遍历思想）+ 回溯  ******************************/

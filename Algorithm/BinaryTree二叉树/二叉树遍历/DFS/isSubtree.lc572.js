@@ -12,8 +12,7 @@
  * @return {boolean}
  */
 
-/* --------------- 👍👍👍 DFS post_order 使用递归遍历左右子树 递归三部曲 (leetcode 100🟡的变形题) --------------- */
-
+/* --------------- 👍👍👍 DFS post_order (分解思路) 使用递归遍历左右子树 (LC100变形题) --------------- */
 //main function:
 const isSubtree = (root, subRoot) => {
   if (!root) return false;
@@ -26,7 +25,6 @@ const isSubtree = (root, subRoot) => {
 };
 
 // helper function:
-// 1. 确定递归的参数:两个tree: nodeA and nodeB.  和返回值boolean
 const isSameTree = (A, B) => {
   //2. 确定终止条件 空的情况
   if (A === null && B !== null) return false;

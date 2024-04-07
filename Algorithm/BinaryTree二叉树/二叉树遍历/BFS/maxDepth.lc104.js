@@ -56,24 +56,21 @@ var maxDepth = function (root) {
 
   return height;
 };
-/*****************************  Solution2 👍👍👍 DFS PostOrder（分解思想） ***************************************
+
+/*****************************  Solution2 👍👍👍 DFS（分解思想） ***************************************
  * https://www.bilibili.com/video/BV1Gd4y1V75u/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2
  * 二叉树节点的深度(depth)：指从根节点到该节点的最长简单路径边的条数。 求深度(depth)可以从上到下去查 所以需要pre_order前序遍历（中左右）
  * 二叉树节点的高度(height)：指从该节点到叶子节点的最长简单路径边的条数。 求高度(height)只能从下到上去查，所以只能post_order后序遍历（左右中）
  * 那么,为什么这道题求的是二叉树的最大深度，也用的是后序遍历， 那是因为代码的逻辑其实是求的根节点的高度，而根节点的高度就是这棵树的最大深度，所以才可以使用后序遍历
  */
+//1.确定递归函数的参数和返回值: 参数就是传入树的根节点，返回就返回这棵树的深度
 var maxDepth = function (root) {
-  //1.确定递归函数的参数和返回值: 参数就是传入树的根节点，返回就返回这棵树的深度
-  const helper = (node) => {
-    if (!node) return 0; //2.确定终止条件：如果为空节点的话，就返回0，表示高度为0。
+  if (!root) return 0; //2.确定终止条件：如果为空节点的话，就返回0，表示高度为0。
 
-    //3.确定单层递归的逻辑：先求它的左子树的深度，再求的右子树的深度，最后取左右深度最大的数值 再+1 （加1是因为算上当前中间节点）就是目前节点为根节点的树的深度
-    const leftTreeHeight = helper(node.left);
-    const rightTreeHeigh = helper(node.right);
-    return 1 + Math.max(leftTreeHeight, rightTreeHeigh);
-  };
-
-  return helper(root);
+  //3.确定单层递归的逻辑：先求它的左子树的深度，再求的右子树的深度，最后取左右深度最大的数值 再+1 （加1是因为算上当前中间节点）就是目前节点为根节点的树的深度
+  let leftTreeDepth = maxDepth(root.left);
+  let rightTreeDepth = maxDepth(root.right);
+  return 1 + Math.max(leftTreeDepth, rightTreeDepth);
 };
 
 /****************************** Solution3 👍👍👍 DFS（遍历思想）+ 回溯 ****************************************/
