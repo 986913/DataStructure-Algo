@@ -13,25 +13,21 @@
 
 /*********************** Solution 1.1: 👍 DFS 分解思想 ***********************/
 var sumOfLeftLeaves = function (root) {
-  //1. 递归参数：树节点， 无返回值， 递归函数会modify外部的sum
-  const helper = (node) => {
-    //2. 递归终止条件
-    if (!node) return 0;
+  if (!root) return 0;
 
-    //3. 开始递归单层逻辑
-    //左
-    let sumOfLeft = 0;
-    /* (判断当前节点是不是左叶子是无法判断的，必须要通过节点的父节点来判断其左孩子是不是左叶子)
-       当该节点有左节点，该节点的左节点的左节点为空，该节点的左节点的右节点为空，则就找到了一个左叶子 */
-    if (node.left) {
-      if (!node.left.left && !node.left.right) sumOfLeft += node.left.val;
-      else sumOfLeft += helper(node.left); // Traverse left subtree recursively.
+  /* (判断当前节点是不是左叶子是无法判断的，必须要通过节点的父节点来判断其左孩子是不是左叶子)
+       当该节点有左节点，该节点的左节点的左右节点都为空，则就找到了一个左叶子 */
+  let sumOfLeft = 0;
+  if (root.left) {
+    if (!root.left.left && !root.left.right) {
+      sumOfLeft += root.left.val; // 找到一个左叶子节点，更新sumOfLeft
+    } else {
+      //继续向左子树找
+      sumOfLeft += sumOfLeftLeaves(root.left);
     }
-    const sumOfRight = helper(node.right); // 右
-    return sumOfLeft + sumOfRight; // 中
-  };
-
-  return helper(root);
+  }
+  const sumOfRight = sumOfLeftLeaves(root.right);
+  return sumOfLeft + sumOfRight;
 };
 
 /*********************** Solution 1.2: 👍 DFS 遍历思想 ***********************/
