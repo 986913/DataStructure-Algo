@@ -11,7 +11,7 @@
  * @return {number}
  */
 
-/*********************** Solution 1.1: 👍 DFS PostOrder 模版变形题 ***********************/
+/*********************** Solution 1.1: 👍 DFS 分解思想 ***********************/
 var sumOfLeftLeaves = function (root) {
   //1. 递归参数：树节点， 无返回值， 递归函数会modify外部的sum
   const helper = (node) => {
@@ -34,7 +34,7 @@ var sumOfLeftLeaves = function (root) {
   return helper(root);
 };
 
-/*********************** Solution 1.2: 👍 DFS PostOrder 模版变形题 ***********************/
+/*********************** Solution 1.2: 👍 DFS 遍历思想 ***********************/
 var sumOfLeftLeaves = function (root) {
   let sum = 0;
   if (!root) return sum;
