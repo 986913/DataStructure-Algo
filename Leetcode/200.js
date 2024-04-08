@@ -33,3 +33,5 @@ var numIslands = function (grid) {
 
   return result;
 };
+
+/*********************** Solution : BFS *************************/

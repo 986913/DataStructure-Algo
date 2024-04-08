@@ -11,28 +11,26 @@
  * @return {number[]}
  */
 
-/* ------- 👍👍👍 本题就是层序遍历的时候把一层求个总和在取一个均值 (是102 BFS 🟡的变形题) ----- */
+/************************** BFS (LC102, 1161 BFS变形题)***************************/
 var averageOfLevels = function (root) {
   if (!root) return [];
 
-  let visited = [];
   let queue = [root];
+  let visited = [];
 
   while (queue.length) {
     let len = queue.length;
-    let currLevel = [];
+    let curLevelSum = 0; //记录当前层所以节点的和
 
     for (let i = 0; i < len; i++) {
       let node = queue.shift();
-      currLevel.push(node.val);
+      curLevelSum += node.val; //update curLevelSum
       if (node.left) queue.push(node.left);
       if (node.right) queue.push(node.right);
     }
-
-    //不同点在这: calculate average
-    const currLevelAverage =
-      currLevel.reduce((acc, cur) => acc + cur) / currLevel.length;
-    visited.push(currLevelAverage);
+    //不同点在这: 算出每一层的平均值
+    let curLevelAvg = curLevelSum / len;
+    visited.push(curLevelAvg);
   }
 
   return visited;

@@ -20,15 +20,15 @@ var largestValues = function (root) {
 
   while (queue.length) {
     let len = queue.length;
-    let max = -Infinity; //不同点在这：给每一层定义一个Max
+    let maxInCurLevel = -Infinity; //不同点在这：给每一层定义一个Max
     for (let i = 0; i < len; i++) {
       let node = queue.shift();
-      max = Math.max(max, node.val); //不同点在这: update max
+      maxInCurLevel = Math.max(maxInCurLevel, node.val); //不同点在这: update max
       if (node.left) queue.push(node.left);
       if (node.right) queue.push(node.right);
     }
 
-    visited.push(max); // 不同点在这: update visited
+    visited.push(maxInCurLevel); // 不同点在这: update visited
   }
 
   return visited;
