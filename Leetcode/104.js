@@ -75,7 +75,7 @@ var maxDepth = function (root) {
 
 /****************************** Solution3 👍👍👍 DFS（遍历思想）+ 回溯 ****************************************/
 var maxDepth = function (root) {
-  let result = -Infinity;
+  let max_depth = -Infinity;
   if (!root) return 0;
 
   const traverse = (node, curDepth) => {
@@ -83,7 +83,7 @@ var maxDepth = function (root) {
 
     //前序位置
     curDepth += 1;
-    result = Math.max(result, curDepth);
+    max_depth = Math.max(max_depth, curDepth);
     traverse(node.left, curDepth);
     traverse(node.right, curDepth);
     //后序位置
@@ -91,5 +91,5 @@ var maxDepth = function (root) {
   };
 
   traverse(root, 0);
-  return result;
+  return max_depth;
 };

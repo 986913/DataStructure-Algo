@@ -32,7 +32,7 @@ var deepestLeavesSum = function (root) {
   return lastRowSum;
 };
 
-/*************************** Solution2: DFS（遍历思想）+ 回溯  LC104变形题 ****************************/
+/*************************** Solution2: DFS（遍历思想）+ 回溯 LC104变形题 ****************************/
 var deepestLeavesSum = function (root) {
   let lastRowSum = 0;
   let maxDepth = -Infinity;
