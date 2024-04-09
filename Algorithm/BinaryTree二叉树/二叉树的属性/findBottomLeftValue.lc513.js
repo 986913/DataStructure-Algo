@@ -32,64 +32,27 @@ var findBottomLeftValue = function (root) {
   return mostLeftValue;
 };
 
-/**************** Sol2 : 👍👍 DFS + backtracking (前后中序都可以) LC🟡104解法2.2的变体 ****************/
-// https://www.bilibili.com/video/BV1424y1Z7pn/?vd_source=2efba544aa6c1bd084ec6ddd7a98c6b2s
-
+/**************** Solution2 : 👍👍 DFS遍历思想 + backtracking  LC104，1302变形题 ****************/
 var findBottomLeftValue = function (root) {
-  let maxDepth = -Infinity; //用来记录tree的最大深度
-  let mostleftvalue; //存放结果值
+  let mostLeftValue;
+  let maxDepth = -Infinity;
 
-  //1.  确定递归的参数, 不需要返回值
-  const helper = (node, curDepth) => {
-    //2. 确定终止条件：碰到叶子节点，有必要时更新maxDepth和mostleftvalue
-    if (!node.left && !node.right) {
-      if (curDepth > maxDepth) {
-        maxDepth = curDepth;
-        mostleftvalue = node.val;
-      }
-      // return;
-    }
+  const traversal = (node, curDepth) => {
+    if (!node) return;
 
-    //3. 确定单层递归逻辑:
-    if (node.left) {
-      //左
-      curDepth++;
-      helper(node.left, curDepth); // <--- 递归
-      curDepth--; // <--- backtracking 回溯！！
+    //前序位置:
+    curDepth += 1;
+    // diff is here
+    if (curDepth > maxDepth) {
+      maxDepth = curDepth;
+      mostLeftValue = node.val;
     }
-    if (node.right) {
-      // 右
-      curDepth++;
-      helper(node.right, curDepth); // <--- 递归
-      curDepth--; // <--- backtracking 回溯！！
-    }
+    traversal(node.left, curDepth);
+    traversal(node.right, curDepth);
+    //后序位置： 回溯！
+    curDepth -= 1;
   };
 
-  helper(root, 1);
-  return mostleftvalue;
+  traversal(root, 0);
+  return mostLeftValue;
 };
-
-/*
-  等同于上面Sol2:
-  ---------------------------------------------
-  var findBottomLeftValue = function (root) {
-    let maxDepth = -Infinity;
-    let mostleftvalue;
-
-    const helper = (node, curDepth) => {
-      if (!node.left && !node.right) {
-        if (curDepth > maxDepth) {
-          maxDepth = curDepth;
-          mostleftvalue = node.val;
-        }
-      }
-
-      curDepth++; // <--- diff is here
-      if (node.left) helper(node.left, curDepth); 
-      if (node.right) helper(node.right, curDepth); 
-    };
-
-    helper(root, 1);
-    return mostleftvalue;
-  };
-*/
