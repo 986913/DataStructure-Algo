@@ -9,7 +9,7 @@
 let buildTree = function (preorder) {
   // preorder is just the preOrder array. so the first item is 中's val
   let val = preorder.shift();
-  if (val == null) return null;
+  if (val == null) return null; // <--- !!! 前提是Preorder数组中有null
 
   let node = new TreeNode(val);
   node.left = buildTree(preorder); // 这里preorder已经是shift之后的了
