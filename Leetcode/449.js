@@ -33,15 +33,15 @@
 /*------------------------ Solution: Same as lc297 -------------------------- */
 /**
  * Encodes a tree to a single string.
- * DFS - Pre order - 遍历思想
+ * 序列化: 这个答案用的前序序列话  DFS-PreOrder-遍历思想
  * @param {TreeNode} root
  * @return {string}
  */
 let serialize = function (root) {
   const visited = [];
   const helper = (node) => {
-    if (!node) {
-      visited.push(null);
+    if (node === null) {
+      visited.push('#');
       return;
     }
 
@@ -51,22 +51,27 @@ let serialize = function (root) {
   };
 
   helper(root);
-  return visited;
+  return visited.join(',');
 };
 
 /**
  * Decodes your encoded data to tree.
- * DFS - 分解思想
+ * 反序列化: 这个答案用的前序反序列话 DFS - 分解思想
  * @param {string} data
  * @return {TreeNode}
  */
 let deserialize = function (data) {
-  // data is just the preOrder array. so the first item is 中's val
-  let val = data.shift();
-  if (val == null) return null;
+  return buildTree(data.split(','));
+};
+
+// helper function:
+const buildTree = (preorder) => {
+  // preorder is just the preOrder array. so the first item is 中节点的值
+  let val = preorder.shift();
+  if (val == '#') return null;
 
   let node = new TreeNode(val);
-  node.left = deserialize(data);
-  node.right = deserialize(data);
+  node.left = buildTree(preorder);
+  node.right = buildTree(preorder);
   return node;
 };
