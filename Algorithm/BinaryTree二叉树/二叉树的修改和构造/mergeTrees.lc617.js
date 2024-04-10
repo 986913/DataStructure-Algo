@@ -12,23 +12,18 @@
  * @return {TreeNode}
  */
 
-/*************** Solution: DFS  preorder, inorder, postorder 都行！****************/
+/*************** Solution: DFS（分解思想） preorder, inorder, postorder都行 ****************/
 
 //递归参数是要传入两个二叉树的根节点，返回值就是合并之后二叉树的根节点。
 var mergeTrees = function (root1, root2) {
   //确定终止条件：
+  if (!root1 && !root2) return null;
   if (root1 && !root2) return root1;
   if (!root1 && root2) return root2;
-  if (!root1 && !root2) return null;
 
   //确定单层递归的逻辑：
-  //中:
-  const nodeVal = root1.val + root2.val;
-  const node = new TreeNode(nodeVal);
-  //左：构造左子树
-  node.left = mergeTrees(root1.left, root2.left);
-  //右：构造右子树
-  node.right = mergeTrees(root1.right, root2.right);
-
-  return node;
+  let newNode = new TreeNode(root1.val + root2.val); //中
+  newNode.left = mergeTrees(root1.left, root2.left); //左：构造左子树
+  newNode.right = mergeTrees(root1.right, root2.right); //右：构造右子树
+  return newNode;
 };

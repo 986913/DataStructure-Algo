@@ -45,12 +45,13 @@
 */
 
 var buildTree = function (preorder, inorder) {
+  // base case:
   if (!preorder.length) return null;
 
-  // 中
-  const rootVal = preorder.shift(); // <-- differe is here, preorder第s一个元素就是中间节点
+  // 中: 先创建中间节点root
+  const rootVal = preorder.shift(); // <-- differe is here, preorder第1个元素就是中间节点
   const root = new TreeNode(rootVal);
-  const rootIndex = inorder.indexOf(rootVal);
+  const rootIndex = inorder.indexOf(rootVal); // <-- diff is here
 
   // 左： 创建左节点
   root.left = buildTree(
