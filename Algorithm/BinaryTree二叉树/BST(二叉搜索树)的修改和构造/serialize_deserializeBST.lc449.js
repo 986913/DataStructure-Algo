@@ -17,7 +17,6 @@
         25 75    350
  */
 
-/*------------------------ Solution: Same as lc297 -------------------------- */
 /**
  * Definition for a binary tree node.
  * function TreeNode(val) {
@@ -27,16 +26,24 @@
  */
 
 /**
+ * Your functions will be called as such:
+ * deserialize(serialize(root));
+ */
+
+/*------------------------ Solution: Same as lc297 -------------------------- */
+/**
  * Encodes a tree to a single string.
- *
+ * DFS - Pre order - 遍历思想
  * @param {TreeNode} root
  * @return {string}
  */
-// DFS : Pre order
 let serialize = function (root) {
   const visited = [];
   const helper = (node) => {
-    if (!node) return visited.push(null);
+    if (!node) {
+      visited.push(null);
+      return;
+    }
 
     visited.push(node.val);
     helper(node.left);
@@ -49,11 +56,12 @@ let serialize = function (root) {
 
 /**
  * Decodes your encoded data to tree.
- *
+ * DFS - 分解思想
  * @param {string} data
  * @return {TreeNode}
  */
 let deserialize = function (data) {
+  // data is just the preOrder array. so the first item is 中's val
   let val = data.shift();
   if (val == null) return null;
 
@@ -62,8 +70,3 @@ let deserialize = function (data) {
   node.right = deserialize(data);
   return node;
 };
-
-/**
- * Your functions will be called as such:
- * deserialize(serialize(root));
- */
