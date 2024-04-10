@@ -72,7 +72,7 @@ const buildTree = (preorder) => {
   if (val == '#') return null;
 
   let node = new TreeNode(val);
-  node.left = buildTree(preorder);
-  node.right = buildTree(preorder);
+  node.left = buildTree(preorder); // 这里preorder已经是shift之后的了
+  node.right = buildTree(preorder); // 这里preorder已经是shift之后的了
   return node;
 };
