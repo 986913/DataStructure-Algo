@@ -31,13 +31,13 @@ const findMin = (root) => {
 const inorderSuccessorBST = (root, val) => {
   if (!root) return null;
 
-  let successor = null;
+  let successor = null; // <--- diff is here
 
   while (root) {
     if (root.val < val) {
       root = root.right;
     } else if (root.val > val) {
-      successor = root;
+      successor = root; // <--- diff is here
       root = root.left;
     } else {
       // when val === root.val （ie:在树中找到了val时, successor就是其右子树中最小的值）
