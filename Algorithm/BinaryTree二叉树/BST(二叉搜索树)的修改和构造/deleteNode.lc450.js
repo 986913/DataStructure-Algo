@@ -24,29 +24,29 @@
 */
 
 var deleteNode = function (root, key) {
-  const helper = (node, key) => {
-    if (!node) return null; //case 1. 没找到要删除的node
-    //找到了要删除的node
-    if (node.val === key) {
-      if (!node.left && !node.right) return null; //case 2. 要删除的node是叶子节点
-      if (node.left && !node.right) return node.left; //case 3. 要删除的node左子树不为空，右为空
-      if (!node.left && node.right) return node.right; //case 4. 要删除的node右子树不为空，左为空
-      //case 5. 要删除的node，左右子树都不为空:
-      if (node.left && node.right) {
-        //找到node右子树的最小值: curr
-        let curr = node.right;
-        while (curr.left) {
-          curr = curr.left;
-        }
-        curr.left = node.left; //把node(被删节点)的左子树赋值给 node右子树的最小值的左子树
-        return node.right; //node(被删节点)的右子树继位，代替node(被删节点)的位置（ie:删除了node）
+  if (!root) return null; //case 1. 没找到要删除的node
+  //找到了要删除的:
+  if (root.val === key) {
+    if (!root.left && !root.right) return null; //case 2. 要删除的node是叶子节点
+    if (root.left && !root.right) return root.left; //case 3. 要删除的node左子树不为空，右为空
+    if (!root.left && root.right) return root.right; //case 4. 要删除的node右子树不为空，左为空
+    //case 5. 要删除的node，左右子树都不为空:
+    if (root.left && root.right) {
+      let L = root.left;
+      let R = root.right;
+
+      //找到root右子树的最小值: curr
+      let cur = root.right;
+      while (cur.left) {
+        cur = cur.left;
       }
+      cur.left = L; //把被删节点的左子树(L)赋值给  roo右子树的最小值的左子树
+
+      return R; //root(被删节点)的右子树继位，代替root(被删节点)的位置（ie:删除了root）
     }
+  }
 
-    if (key > node.val) node.right = helper(node.right, key);
-    if (key < node.val) node.left = helper(node.left, key);
-    return node;
-  };
-
-  return helper(root, key);
+  if (key < root.val) root.left = deleteNode(root.left, key);
+  if (key > root.val) root.right = deleteNode(root.right, key);
+  return root;
 };
