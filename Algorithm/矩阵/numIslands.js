@@ -3,7 +3,7 @@
  * @return {number}
  */
 
-/****************************** Solution : DFS ************************************/
+/****************************** Solution : DFS 遍历思想  LC589， 695 变形题 ************************************/
 var numIslands = function (grid) {
   let m = grid.length;
   let n = grid[0].length;
@@ -20,7 +20,7 @@ var numIslands = function (grid) {
 
   return count;
 };
-// helper function: LC589，DFS遍历思想变形题
+// helper function:
 const dfs = (grid, i, j) => {
   let m = grid.length;
   let n = grid[0].length;
@@ -36,7 +36,7 @@ const dfs = (grid, i, j) => {
   dfs(grid, i, j - 1); // 左
 };
 
-/************************************ Solution : BFS **************************************/
+/************************************ Solution : BFS   LC429，BFS模版变形题 **************************************/
 // 主函数：
 var numIslands = function (grid) {
   let m = grid.length;
@@ -54,7 +54,7 @@ var numIslands = function (grid) {
   return count;
 };
 
-// helper function: LC429，BFS模版 变形题
+// helper function:
 const bfs = (grid, i, j) => {
   let m = grid.length;
   let n = grid[0].length;
