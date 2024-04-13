@@ -14,19 +14,12 @@
 
 /*************************** Solution 1: DFS Recursion - 👍分解问题思路 LC700变形题 ****************************/
 var insertIntoBST = function (root, val) {
-  const helper = (node, value) => {
-    if (!node) return new TreeNode(val); // 如果当前节点为空，则插入一个新节点。
+  if (!root) return new TreeNode(val); // 如果当前节点为空，则插入一个新节点(通过return)
 
-    //按照二叉搜索树的规则去遍历
-    if (value < node.val) {
-      node.left = helper(node.left, value); // 递归调用左子树
-    } else {
-      node.right = helper(node.right, value); // 递归调用右子树
-    }
-    return node;
-  };
-
-  return helper(root, val);
+  //按照二叉搜索树的规则去遍历
+  if (val < root.val) root.left = insertIntoBST(root.left, val); // 递归调用左子树
+  if (val > root.val) root.right = insertIntoBST(root.right, val); // 递归调用右子树
+  return root;
 };
 
 /*************************** Solution 2: DFS Recursion - 遍历思路 LC700变形题 ****************************/
