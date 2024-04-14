@@ -60,7 +60,6 @@ let serialize = function (root) {
  * @param {string} data
  * @return {TreeNode}
  */
-
 let deserialize = function (data) {
   return buildTree(data.split(','));
 };
@@ -69,10 +68,10 @@ let deserialize = function (data) {
 const buildTree = (preorder) => {
   // preorder is just the preOrder array. so the first item is 中节点的值
   let val = preorder.shift();
-  if (val == '#') return null;
+  if (val == '#') return null; // <--- !!! 前提是Preorder数组中有“#”
 
   let node = new TreeNode(val);
-  node.left = buildTree(preorder); // 这里preorder已经是shift之后的了
-  node.right = buildTree(preorder); // 这里preorder已经是shift之后的了
+  node.left = buildTree(preorder);
+  node.right = buildTree(preorder);
   return node;
 };

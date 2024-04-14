@@ -11,7 +11,7 @@
  * @return {boolean}
  */
 
-/******************** Solution1: 👍 DFS Inorder with array assistance: 将BST转变成一个数组  ********************/
+/************************** Solution1: 👍 DFS（遍历思想） 将BST转变成一个数组  **************************/
 var isValidBST = function (root) {
   const visited = [];
 
@@ -32,7 +32,7 @@ var isValidBST = function (root) {
   return true;
 };
 
-/******************** Solution2: 👍👍 DFS Inorder without array assistance, LC 94,230,530变形题  ********************/
+/******************** Solution2: 👍 DFS Inorder（遍历思想) LC 94,230,530变形题 ********************/
 var isValidBST = function (root) {
   let pre = null; //<--- diff is here, 用pre记录前一个节点
 
@@ -52,4 +52,19 @@ var isValidBST = function (root) {
   };
 
   return helper(root);
+};
+
+/***************************** Solution3: 👍👍 DFS（分解思想） **********************************/
+var isValidBST = function (root) {
+  return isValid(root, null, null); // 判断一颗BST的值是否在min和max之间
+};
+// helper function: min和max是Node节点，不是int
+const isValid = (node, min, max) => {
+  if (!node) return true;
+  if (max && node.val >= max.val) return false;
+  if (min && node.val <= min.val) return false;
+
+  const isLeftValid = isValid(node.left, min, node);
+  const isRightValid = isValid(node.right, node, max);
+  return isLeftValid && isRightValid;
 };
