@@ -1,19 +1,19 @@
 /**
- * Decodes your preorder array to tree.
+ * Decodes your postorder array to tree.
  * DFS - 分解思想
- * @param {array} preorder
+ * @param {array} postorder
  * @return {TreeNode}
  */
 
 /*------------------------ Solution: 参见 LC297， 449 -------------------------- */
-let buildTree = function (preorder) {
-  // preorder is just the preOrder array. so the first item is 中's val
-  let val = preorder.shift();
-  if (val == null) return null; // <--- !!! 前提是Preorder数组中有null
+let buildTree = function (postorder) {
+  // postorder is just the postOrder array. so the last item is 中's val
+  let val = postorder.pop();
+  if (val == null) return null; // <--- !!! 前提是Postorder数组中有null
 
   let node = new TreeNode(val);
-  node.left = buildTree(preorder); // 这里preorder已经是shift之后的了
-  node.right = buildTree(preorder); // 这里preorder已经是shift之后的了
+  node.left = buildTree(postorder); // 这里postorder已经是pop之后的了
+  node.right = buildTree(postorder); // 这里postorder已经是pop之后的了
   return node;
 };
 

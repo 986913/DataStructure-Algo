@@ -30,6 +30,7 @@
  * deserialize(serialize(root));
  */
 
+//https://labuladong.online/algo/tree-class/tu-wen-er--762f5/dong-ge-sh-5e472/
 /*------------------------ Solution: Same as LC449 -------------------------- */
 /**
  * Encodes a tree to a single string.
@@ -75,3 +76,17 @@ const buildTree = (preorder) => {
   node.right = buildTree(preorder);
   return node;
 };
+
+/*************************************************************************************************************
+  总结下结论，当二叉树中节点的值不存在重复时：
+
+  1.如果你的序列化结果中不包含空指针的信息，且你只给出1种遍历顺序，那么你无法还原出唯一的一棵二叉树。
+
+  2.如果你的序列化结果中不包含空指针的信息，且你会给出2种遍历顺序，那么分两种情况：
+    2.1. 如果你给出的是preorder和inorder，或者postorder和inorder，那么你可以还原出唯一的一棵二叉树。 (LC105, LC106)
+    2.2. 如果你给出preorder和postorder，那么你无法还原出唯一的一棵二叉树, 但是可以还原出其中一个二叉树  (LC889)
+
+  3.如果你的序列化结果中包含空指针的信息，且你只给出1种遍历顺序，也要分两种情况：
+    3.1. 如果你给出的是preorder或者postorder，那么你可以还原出唯一的一棵二叉树。(LC297,449, buildBinaryTreeFromPostOrder.js, buildBinaryTreeFromPreOrder.js)
+    3.2. 如果你给出的是中序，那么你无法还原出唯一的一棵二叉树。
+*/
