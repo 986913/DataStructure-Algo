@@ -47,5 +47,5 @@ var constructFromPrePost = function (preorder, postorder) {
 
   3.如果你的序列化结果中包含空指针的信息，且你只给出1种遍历顺序，也要分两种情况：
     3.1. 如果你给出的是preorder或者postorder，那么你可以还原出唯一的一棵二叉树。(LC297,449, buildBinaryTreeFromPostOrder.js, buildBinaryTreeFromPreOrder.js)
-    3.2. 如果你给出的是中序，那么你无法还原出唯一的一棵二叉树。
+    3.2. 如果你给出的是中序，那么你无法还原出一棵二叉树。
 */
