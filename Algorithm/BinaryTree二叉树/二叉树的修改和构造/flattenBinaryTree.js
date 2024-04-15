@@ -11,7 +11,7 @@
  * @return {void} Do not return anything, modify root in-place instead.
  */
 
-/*************************** Solution: DFS (分解思路) ****************************
+/*************************** Solution: DFS (分解思路) LC25变形题****************************
                   1                            1                        1
                 /   \                         / \                        \  
               2      5    --Step1-->       (L)2   5(R)    --Step2-->      2

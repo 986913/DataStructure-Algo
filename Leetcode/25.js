@@ -10,7 +10,7 @@
  * @param {number} k
  * @return {ListNode}
  */
-/* -----------------------  👍👍👍 双指针 四步走 + Recursion ----------------------- */
+/* -----------------------  👍👍👍 双指针 四步走 + Recursion  LC114变形题----------------------- */
 var reverseKGroup = function (head, k) {
   let curr = head; // Create a pointer which will traverse the head
   let count = 0; // Create a counter to determine how many nodes we have traversed
