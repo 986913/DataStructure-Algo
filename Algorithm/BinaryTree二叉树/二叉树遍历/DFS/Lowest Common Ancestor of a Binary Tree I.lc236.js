@@ -27,8 +27,8 @@ var lowestCommonAncestor = function (root, p, q) {
 
     //（中处理中间节点的逻辑，回溯）后序位置：
     if (isLeftHasPorQ && isRightHasPorQ) return node; //若找到p和q,此时node就是p和q的最近公共节点。向上返回node
-    if (!isLeftHasPorQ) return isRightHasPorQ; //如果左子树没出现过p或q 就向上继续返回右子树
-    if (!isRightHasPorQ) return isLeftHasPorQ; //如果右子树没出现过p或q 就向上继续返回左子树
+    if (!isLeftHasPorQ) return isRightHasPorQ; //如果左子树没出现过p或q,右子树出现了p或q, 就向上继续返回右子树
+    if (!isRightHasPorQ) return isLeftHasPorQ; //如果右子树没出现过p或q,左子树出现了p或q  就向上继续返回左子树
     if (!isLeftHasPorQ && !isRightHasPorQ) return null; // 若未找到节点 p 或 q
   };
 
