@@ -22,6 +22,7 @@ function mergeSort(arr) {
   let left = mergeSort(arr.slice(0, mid));
   let right = mergeSort(arr.slice(mid));
 
+  //后序位置:
   let res = merge(left, right);
   arr.forEach((_, index) => (arr[index] = res[index]));
 

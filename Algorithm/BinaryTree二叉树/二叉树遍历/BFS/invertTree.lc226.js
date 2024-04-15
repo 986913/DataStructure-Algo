@@ -41,20 +41,31 @@
 */
 const invertTree = (root) => {
   // recursion para: treenode,   output: void
-  const helper = (node) => {
+  const traversal = (node) => {
     if (!node) return;
 
     // 前序位置:
     [[node.left], [node.right]] = [[node.right], [node.left]];
-    if (node.left) helper(node.left); // zuo
-    if (node.right) helper(node.right); // you
+    if (node.left) traversal(node.left); // zuo
+    if (node.right) traversal(node.right); // you
   };
 
-  helper(root);
+  traversal(root);
   return root;
 };
 
-/* ************************ Solution2: 👍 DFS preOrder迭代模版 - LC144 *************************/
+/********************** Solution2: 👍👍👍 DFS(分解思路) ****************************************/
+var invertTree = function (root) {
+  if (!root) return null;
+
+  root.left = invertTree(root.left);
+  root.right = invertTree(root.right);
+  //后序位置：
+  [[root.left], [root.right]] = [[root.right], [root.left]];
+  return root;
+};
+
+/* ************************ Solution3: DFS preOrder迭代模版 - LC144 *************************/
 var invertTree = function (root) {
   if (!root) return null;
 
@@ -70,7 +81,7 @@ var invertTree = function (root) {
   return root;
 };
 
-/* -------------- solution 3: 👍👍👍 套用BFS模版 （LC 102）---------------------------------- */
+/* -------------- solution 4: 套用BFS模版 （LC 102）---------------------------------- */
 var invertTree = function (root) {
   if (!root) return root;
 

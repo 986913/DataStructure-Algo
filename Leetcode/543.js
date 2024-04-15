@@ -10,20 +10,20 @@
  * @param {TreeNode} root
  * @return {number}
  */
-/********************************* DFS PostOrder, LC104变形题 *************************************************/
+/********************************* DFS PostOrder 遍历思想, LC104变形题 *************************************************/
 var diameterOfBinaryTree = function (root) {
   let maxDiameter = 0;
 
-  const helper = (node) => {
+  const traverse = (node) => {
     if (!node) return 0;
 
-    const leftTreeHeight = helper(node.left);
-    const rightTreeHeigh = helper(node.right);
+    const leftTreeDepth = traverse(node.left);
+    const rightTreeDepth = traverse(node.right);
     // change variable outside (后序位置，顺便计算最大直径: 就是一个节点的左右子树的最大深度之和)
-    maxDiameter = Math.max(maxDiameter, leftTreeHeight + rightTreeHeigh); // <--- diff is here
-    return 1 + Math.max(leftTreeHeight, rightTreeHeigh);
+    maxDiameter = Math.max(maxDiameter, leftTreeDepth + rightTreeDepth); // <--- diff is here
+    return 1 + Math.max(leftTreeDepth, rightTreeDepth);
   };
 
-  helper(root);
+  traverse(root);
   return maxDiameter;
 };

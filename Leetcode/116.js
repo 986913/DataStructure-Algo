@@ -13,7 +13,7 @@
  * @return {Node}
  */
 
-/************* Solution1: 👍👍👍 BFS (是102 BFS的变形题, 和116一毛一样) **********/
+/************* Solution1: 👍👍👍 BFS (是102 BFS的变形题, 和117一毛一样) **********/
 var connect = function (root) {
   if (!root) return root;
   let queue = [root];
@@ -41,18 +41,14 @@ var connect = function (root) {
     if (!node) return;
 
     //前序位置：
-    if (node.left) {
-      node.left.next = node.right;
-    }
+    if (node.left) node.left.next = node.right;
     if (node.right) {
-      if (node.next) {
-        node.right.next = node.next.left;
-      } else {
-        node.right.next = null;
-      }
+      if (node.next) node.right.next = node.next.left;
+      else node.right.next = null;
     }
-    if (node.left) traverse(node.left);
-    if (node.right) traverse(node.right);
+
+    traverse(node.left);
+    traverse(node.right);
   };
 
   traverse(root);

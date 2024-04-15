@@ -41,18 +41,14 @@ var connect = function (root) {
     if (!node) return;
 
     //前序位置：
-    if (node.left) {
-      node.left.next = node.right;
-    }
+    if (node.left) node.left.next = node.right;
     if (node.right) {
-      if (node.next) {
-        node.right.next = node.next.left;
-      } else {
-        node.right.next = null;
-      }
+      if (node.next) node.right.next = node.next.left;
+      else node.right.next = null;
     }
-    if (node.left) traverse(node.left);
-    if (node.right) traverse(node.right);
+
+    traverse(node.left);
+    traverse(node.right);
   };
 
   traverse(root);
