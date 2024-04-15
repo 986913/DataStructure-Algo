@@ -6,14 +6,12 @@
 
 // main function: 
 const anyFunctionWrapper = () => {
-
-  const result = [];
-  const path = [];
+  const result = []; // 二维数组数组结构保存所有路径
+  const path = []; // 一维数组保存单一路径
 
   backtracking(参数)
   return result;
 }
-
 
 // backtracking helper functin:
 void backtracking (参数) {
