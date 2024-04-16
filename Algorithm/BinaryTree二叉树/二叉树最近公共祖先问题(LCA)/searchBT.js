@@ -33,10 +33,11 @@ var searchBT_V1 = function (root, val) {
 // 寻找值为 val1 或 val2 的节点 ----------> ！！！！！ LCA问题的基本模版 ！！！！！
 var searchBT_V2 = function (root, val1, val2) {
   if (!root) return null;
-  if (root.val === val1 || root.val === val2) return root;
 
   const findInLeft = searchBT(root.left, val1, val2);
   const findInRight = searchBT(root.right, val1, val2);
+  const findInMid = root.val === val1 || root.val === val2;
+  if (findInMid) return root;
   return findInLeft || findInRight; // could return findInLeft, findInRight, or null
 };
 

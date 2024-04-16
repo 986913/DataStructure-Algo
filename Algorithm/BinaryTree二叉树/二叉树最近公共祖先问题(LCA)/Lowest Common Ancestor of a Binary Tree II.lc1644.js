@@ -50,3 +50,21 @@ var lowestCommonAncestor = function (root, p, q) {
   searchBT(root);
   return lca;
 };
+
+var lowestCommonAncestor = function (root, p, q) {
+  let lca = null;
+  const searchBT = (node, val1, val2) => {
+    if (!node) return false;
+
+    const findInLeft = searchBT(node.left, val1, val2);
+    const findInRight = searchBT(node.right, val1, val2);
+    let findInMid = node.val === val1 || node.val === val2;
+    if (findInLeft && findInRight) lca = node;
+    if (findInMid && findInLeft) lca = node;
+    if (findInMid && findInRight) lca = node;
+    return findInLeft || findInRight;
+  };
+
+  searchBT(root, p.val, q.val);
+  return lca;
+};
