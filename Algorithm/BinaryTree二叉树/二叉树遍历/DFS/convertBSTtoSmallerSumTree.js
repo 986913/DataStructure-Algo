@@ -15,23 +15,38 @@
 var convertBST = function (root) {
   let pre = null; //<--- 用pre记录前一个节点
 
-  const helper = (node) => {
+  const traversal = (node) => {
     if (!node) return;
 
-    if (node.left) helper(node.left);
-
+    traversal(node.left);
     //中序位置：
     if (pre) node.val += pre.val; // 进行累加
     pre = node; // <--- remember to update pre
-
-    if (node.right) helper(node.right);
+    traversal(node.right);
   };
 
-  helper(root);
+  traversal(root);
+  return root;
+};
+/****************** Solution2: DFS Recursion - In-order LC538, 530变形题 ********************************/
+var bstToSst = function (root) {
+  let curSum = 0; //<--- 用curSum记录当前的累加值
+
+  const traversal = (node) => {
+    if (!node) return 0;
+
+    traversal(node.left);
+    //中序位置：
+    curSum += node.val; // 进行累加
+    node.val = curSum; // update node val
+    traversal(node.right);
+  };
+
+  traversal(root);
   return root;
 };
 
-/****************** Solution2: DFS Inorder Iteration - LC538,LC530, LC94模版变形题 ********************************/
+/****************** Solution3: DFS Inorder Iteration - LC538,LC530, LC94模版变形题 ********************************/
 var convertBST = function (root) {
   if (!root) return null;
 
