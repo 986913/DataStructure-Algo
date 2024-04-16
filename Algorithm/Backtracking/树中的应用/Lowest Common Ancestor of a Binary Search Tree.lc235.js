@@ -1,24 +1,29 @@
 /***********************Solution 1: 👍 Recursion：(从上往下遍历) 不用使用回溯 ***********************
                         根据BST的顺序特性来搜索的,这里就用不上DFS pre,post,inorder了
                         二叉搜索树自带方向性，可以方便的从上向下查找目标区间，遇到目标区间内的节点，直接返回                         */
+
 var lowestCommonAncestor = function (root, p, q) {
-  const travelTree = (node, p, q) => {
-    if (!node) return null;
+  return searchBT(root, p.val, q.val);
+};
 
-    //向左去搜索
-    if (node.val > p.val && node.val > q.val) {
-      left = travelTree(node.left, p, q);
-      if (left) return left; // 标准的搜索一条边的写法，遇到递归函数的返回值，如果不为空，立刻返回
-    }
-    //向右去搜索
-    if (node.val < p.val && node.val < q.val) {
-      right = travelTree(node.right, p, q);
-      if (right) return right; // 标准的搜索一条边的写法，遇到递归函数的返回值，如果不为空，立刻返回
-    }
-    return node; //遇到node节点是数值在[p,q]区间中,那么node就是p和q的最近公共祖先
-  };
+// helper function:
+const searchBT = (node, val1, val2) => {
+  if (!node) return null;
 
-  return travelTree(root, p, q);
+  //向左去搜索
+  if (node.val > val1 && node.val > val2) {
+    // 标准的搜索一条边的写法，遇到递归函数的返回值，如果不为空，立刻返回
+    const findInLeft = searchBT(node.left, val1, val2);
+    if (findInLeft) return findInLeft;
+  }
+  //向右去搜索
+  if (node.val < val1 && node.val < val2) {
+    // 标准的搜索一条边的写法，遇到递归函数的返回值，如果不为空，立刻返回
+    const findInRight = searchBT(node.right, val1, val2);
+    if (findInRight) return findInRight;
+  }
+
+  return node; //遇到node节点是数值在[p,q]区间中,那么node就是p和q的最近公共祖先
 };
 
 /************************ Solution 2: 👍 Itelartion (类似lc700 Itelartion解法🟡的变形题) ************************/
@@ -36,25 +41,30 @@ var lowestCommonAncestor = function (root, p, q) {
   return null; // not found
 };
 
-/*********************** Solution3: DFS PostOrder Recursion - LC236🟡变形题 ************************
+/*********************** Solution3: DFS (分解思想 - LC236🟡一样的解法 ************************
   https://www.bilibili.com/video/BV1jd4y1B7E2/?vd_source=8b5297d974f6a5e72c60ec8ea33f2ff6
 */
 var lowestCommonAncestor = function (root, p, q) {
-  // 1.使用递归的方法, 需要从下到上，所以使用Post order, 找到p或q就输出节点p或q,找不到输出null
-  const helper = (node) => {
-    // 2. 确定递归终止条件
-    if (!node) return null;
-    if (node === p || node === q) return node; // find the p or q node, then return this p or q
+  return searchBT(root, p.val, q.val);
+};
 
-    const isLeftHasPorQ = helper(node.left); // 左， isLeftHasPorQ maybe p or q (左子树有没有出现过p或q)
-    const isRightHasPorQ = helper(node.right); // 右， isRightHasPorQ maybe p or q (右子树有没有出现过p或q)
+// helper function:
+const searchBT = (node, val1, val2) => {
+  if (!node) return null;
 
-    //（中处理中间节点的逻辑，回溯）后序位置：
-    if (isLeftHasPorQ && isRightHasPorQ) return node; //若找到p和q,此时node就是p和q的最近公共节点。向上返回node
-    if (!isLeftHasPorQ) return isRightHasPorQ; //如果左子树没出现过p或q 就向上继续返回右子树
-    if (!isRightHasPorQ) return isLeftHasPorQ; //如果右子树没出现过p或q 就向上继续返回左子树
-    if (!isLeftHasPorQ && !isRightHasPorQ) return null; // 若未找到节点 p 或 q
-  };
+  const findInLeft = searchBT(node.left, val1, val2);
+  const findInRight = searchBT(node.right, val1, val2);
+  //后序位置：回溯
+  const findInMid = node.val === val1 || node.val === val2;
+  if (findInMid) return node; //case 2: 当前节点等于val1或val2的值 那么当前节点是LCA节点
 
-  return helper(root);
+  if (findInLeft && findInRight) return node; //case 1: 当前节点能够在它的左右子树中分别找到p和q，则当前节点也是LCA节点,向上返回node
+  return findInLeft || findInRight;
+
+  /* 
+    以下等价于上面的findInLeft || findInRight
+      if (findInLeft && !findInRight) return findInLeft;  // 左子树找到了val1或val2，就向上继续返回左子树
+      if (!findInLeft && findInRight) return findInRight; // 右子树找到了val1或val2，就向上继续返回右子树
+      return null; // 左右子树中都未找到val1或val2
+  */
 };
