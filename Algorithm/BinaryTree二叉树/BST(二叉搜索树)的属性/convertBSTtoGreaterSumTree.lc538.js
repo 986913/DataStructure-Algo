@@ -15,23 +15,39 @@
 var convertBST = function (root) {
   let pre = null; //<--- 用pre记录前一个节点
 
-  const helper = (node) => {
-    if (!node) return;
+  const traversal = (node) => {
+    if (!node) return 0;
 
-    if (node.right) helper(node.right); // 右 <--- it's not left
-
+    traversal(node.right); // 右 <--- it's not left
     //中序位置：
     if (pre) node.val += pre.val; // 进行累加
     pre = node; // <--- remember to update pre
-
-    if (node.left) helper(node.left); // 左 <--- it's not right
+    traversal(node.left); // 左 <--- it's not right
   };
 
-  helper(root);
+  traversal(root);
   return root;
 };
 
-/****************** Solution2: DFS Inorder Iteration -  但是！是反中序(右中左), LC530, LC94模版变形题 ********************************/
+/****************** Solution2: DFS Recursion 遍历思想 - In-order, 但是！是反中序(右中左) LC530变形题 ********************************/
+var bstToGst = function (root) {
+  let curSum = 0; //<--- 用curSum记录当前的累加值
+
+  const traversal = (node) => {
+    if (!node) return 0;
+
+    traversal(node.right); // 右 <--- it's not left
+    //中序位置：
+    curSum += node.val; // 进行累加
+    node.val = curSum; // update node val
+    traversal(node.left); // 左 <--- it's not right
+  };
+
+  traversal(root);
+  return root;
+};
+
+/****************** Solution3: DFS Inorder Iteration -  但是！是反中序(右中左), LC530, LC94模版变形题 ********************************/
 var convertBST = function (root) {
   if (!root) return null;
 
