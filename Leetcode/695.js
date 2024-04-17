@@ -1,6 +1,7 @@
 /**
  * @param {number[][]} grid
  * @return {number}
+ * 岛屿系列题目的核心考点就是用 DFS/BFS 算法遍历二维数组。
  */
 /****************************** Solution : DFS 分解思想  LC200变形题 ************************************/
 var maxAreaOfIsland = function (grid) {
