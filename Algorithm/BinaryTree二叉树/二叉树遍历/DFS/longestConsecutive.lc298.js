@@ -11,7 +11,7 @@
  * @return {number}
  */
 
-/********************** Solution: 👍👍👍 DFS遍历思想 + Backtracking (LC437变形题) ***************************/
+/********************** Solution: 👍👍👍  DFS遍历思想 + Backtracking (LC112,113,129,257,1457变形题) ***************************/
 
 var longestConsecutive = function (root) {
   let longestLen = 0;
@@ -29,20 +29,6 @@ var longestConsecutive = function (root) {
     curLen -= 1;
   };
 
-  //其实就是多了这一步：dfs
-  const dfs = (node) => {
-    if (!node) return;
-
-    traversal(node, null, 0);
-    dfs(node.left);
-    dfs(node.right);
-  };
-
-  /* 之前是traversal(root, null, 0)得到的结果只是从root开始的.  
-    因为本题目要求不一定是从root开始，leaf结束，所以我们要dfs所有的节点！
-    (ie: 也就是说让每一个节点都当次root)
-  */
-  dfs(root); // <-- differet is here
-
+  traversal(root, null, 0);
   return longestLen;
 };
