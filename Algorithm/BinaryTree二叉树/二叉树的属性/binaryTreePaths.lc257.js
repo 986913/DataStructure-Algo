@@ -20,6 +20,7 @@ var binaryTreePaths = function (root) {
 
     //前序位置
     curPath.push(node.val);
+    //当node是叶子节点时：将当前路径装入paths集合中
     if (!node.left && !node.right) {
       paths.push(curPath.join('->'));
     }
