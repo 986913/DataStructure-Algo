@@ -3,21 +3,20 @@
  * @return {number[][]}
  */
 
-/************************Solution: 图的遍历框架 ***********************************/
+/**********+++*** Solution: DFS 遍历思想 + backtracking (LC112,113,129,257,1475变形题) **************/
 var allPathsSourceTarget = function (graph) {
   let allPaths = [];
 
-  const traversal = (graph, idx, curPath) => {
-    curPath.push(idx);
-    let n = graph.length;
-    if (idx === n - 1) {
+  const traversal = (graph, start, curPath) => {
+    //前序
+    curPath.push(start);
+    if (start === graph.length - 1) {
       allPaths.push([...curPath]);
     }
-
-    for (let node of graph[idx]) {
+    for (let node of graph[start]) {
       traversal(graph, node, curPath);
     }
-
+    //后序
     curPath.pop();
   };
 
