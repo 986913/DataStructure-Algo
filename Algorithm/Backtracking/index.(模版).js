@@ -22,9 +22,9 @@ void backtracking (参数) {
   }
 
   for(选择：本层集合中元素（树中节点孩子的数量就是集合的大小）){
-    处理节点;  // update path etc
+    处理节点;  //在for循环里头 做选择 update path etc
     backtracking(路径，选择列表); // 递归
-    回溯，撤销处理结果 // update path etc
+    回溯，撤销处理结果 //在for循环里头 撤销选择 update path etc
   }
 
 }

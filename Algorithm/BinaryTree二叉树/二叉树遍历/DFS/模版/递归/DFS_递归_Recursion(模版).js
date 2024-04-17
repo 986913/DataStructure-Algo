@@ -55,3 +55,39 @@ const postorderTraversal = (root) => {
   helper(root);
   return visted;
 };
+
+/** -----------------------------   PreOrder: N-ary Tree  ----------------------------- */
+const preorderTraversal_Nary = (root) => {
+  let visted = [];
+
+  const traversal = (node) => {
+    if (!node) return;
+
+    visted.push(node.val); //前序位置, console.log('进入节点 ' + node);
+    for (let child of node.children) {
+      traversal(child);
+    }
+    //console.log('离开节点 ' + node);
+  };
+
+  traversal(root);
+  return visted;
+};
+
+/** -----------------------------   PostOrder: N-ary Tree  ----------------------------- */
+const postorderTraversal_Nary = (root) => {
+  let visted = [];
+
+  const traversal = (node) => {
+    if (!node) return;
+
+    // console.log('进入节点 ' + node);
+    for (let child of node.children) {
+      traversal(child);
+    }
+    visted.push(node.val); //后序位置, console.log('离开节点 ' + node);
+  };
+
+  traversal(root);
+  return visted;
+};
