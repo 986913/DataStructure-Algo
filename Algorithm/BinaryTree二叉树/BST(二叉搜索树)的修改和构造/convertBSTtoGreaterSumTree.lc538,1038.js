@@ -38,8 +38,8 @@ var bstToGst = function (root) {
 
     traversal(node.right); // 右 <--- it's not left
     //中序位置：
-    curSum += node.val; // 进行累加
-    node.val = curSum; // update node val
+    curSum += node.val; // 维护累加和
+    node.val = curSum; // 将 BST 转化成累加树
     traversal(node.left); // 左 <--- it's not right
   };
 

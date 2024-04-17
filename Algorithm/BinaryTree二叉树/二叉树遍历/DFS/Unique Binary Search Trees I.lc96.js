@@ -32,12 +32,12 @@ const numTrees = (n) => {
 };
 
 /*************************** Solution2:  穷举  ************************************/
-// let memo;
+let memo;
 
 var numTrees = function (n) {
-  // memo = Array(n + 1)
-  //   .fill(0)
-  //   .map(() => Array(n + 1).fill(0)); // 备忘录的值初始化为nxn矩阵
+  memo = Array(n + 1)
+    .fill(0)
+    .map(() => Array(n + 1).fill(0)); // 备忘录的值初始化为nxn矩阵
 
   return count(1, n); // 计算闭区间 [1, n] 组成的 BST 个数
 };
@@ -46,7 +46,7 @@ var numTrees = function (n) {
 const count = (low, high) => {
   if (low > high) return 1;
   // 查备忘录
-  // if (memo[low][high] !== 0) return memo[low][high];
+  if (memo[low][high] !== 0) return memo[low][high];
 
   let res = 0;
   for (let i = low; i <= high; i++) {
@@ -58,7 +58,7 @@ const count = (low, high) => {
     res += left * right;
   }
   // 将结果存入备忘录
-  // memo[low][high] = res;
+  memo[low][high] = res;
 
   return res;
 };

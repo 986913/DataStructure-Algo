@@ -15,15 +15,15 @@
 var isValidBST = function (root) {
   const visited = [];
 
-  const helper = (node) => {
+  const traversal = (node) => {
     if (!node) return true;
 
-    if (node.left) helper(node.left); //zuo
+    if (node.left) traversal(node.left); //zuo
     visited.push(node.val); // zhong
-    if (node.right) helper(node.right); // you
+    if (node.right) traversal(node.right); // you
   };
 
-  helper(root);
+  traversal(root);
 
   //BST inorder出来的顺序是一个递增的。。
   for (let i = 0; i < visited.length; i++) {
@@ -36,22 +36,22 @@ var isValidBST = function (root) {
 var isValidBST = function (root) {
   let pre = null; //<--- diff is here, 用pre记录前一个节点
 
-  const helper = (node) => {
+  const traversal = (node) => {
     if (!node) return true;
 
-    let isLeftValidBST = helper(node.left); // 左
+    let isLeftValidBST = traversal(node.left); // 左
     //diff is here: 中序位置：
     if (pre && pre.val >= node.val) {
       return false; // prev.val要是比现在节点node.val大，那说明不是BST了
     } else {
       pre = node; //prev.val比现在节点node.val小，则继续update pre
     }
-    let isRightValidBST = helper(node.right); //右
+    let isRightValidBST = traversal(node.right); //右
 
     return isLeftValidBST && isRightValidBST;
   };
 
-  return helper(root);
+  return helper(traversal);
 };
 
 /***************************** Solution3: 👍👍 DFS（分解思想） **********************************/
@@ -64,6 +64,7 @@ const isValid = (node, min, max) => {
   if (max && node.val >= max.val) return false;
   if (min && node.val <= min.val) return false;
 
+  //限定左子树的最大值是node.val，右子树的最小值是node.val
   const isLeftValid = isValid(node.left, min, node);
   const isRightValid = isValid(node.right, node, max);
   return isLeftValid && isRightValid;
