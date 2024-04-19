@@ -56,7 +56,7 @@ const postorderTraversal = (root) => {
   return visted;
 };
 
-/** -----------------------------   PreOrder: N-ary Tree  ----------------------------- */
+/** ----------------------------- N-aryTree多叉树 PreOrder遍历框架  ----------------------------- */
 const preorderTraversal_Nary = (root) => {
   let visted = [];
 
@@ -74,7 +74,7 @@ const preorderTraversal_Nary = (root) => {
   return visted;
 };
 
-/** -----------------------------   PostOrder: N-ary Tree  ----------------------------- */
+/** ----------------------------- N-aryTree多叉树 PostOrder遍历框架 ----------------------------- */
 const postorderTraversal_Nary = (root) => {
   let visted = [];
 
