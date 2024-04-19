@@ -15,7 +15,7 @@ var solveNQueens = function (n) {
   function traversal(board, curRow) {
     //走到最后一行 说明到了叶子
     if (curRow === n) {
-      result.push(transformChessBoard(board));
+      result.push(flatern2Dboard(board));
       return;
     }
 
@@ -67,7 +67,7 @@ const isValid = (board, row, col) => {
               [ '.', '.', 'Q', '.' ]
             ]
  */
-const transformChessBoard = (board) => {
+const flatern2Dboard = (board) => {
   let result = [];
   board.forEach((row) => {
     result.push(row.join(''));
