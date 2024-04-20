@@ -17,16 +17,20 @@ var permute = function (nums) {
       return;
     }
 
-    //前序位置
-    //不同点：(排列permute)类问题i从0开始，  (组合类combine)问题是从startidx开始！！
+    //前序位置：点
+
+    /* 不同点：(排列permute)类问题i从0开始，        --> i从   0    开始就是为了要重复 
+              (组合类combine)问题是从startidx开始！--> i从startIdx开始就是为了防止重复 
+    */
     for (let i = 0; i < arr.length; i++) {
       if (curPath.includes(arr[i])) continue; // 树枝上去重(排除不合法的选择)，跳过已经在路径中的元素
 
-      curPath.push(arr[i]); //在深度上的变量curPath 做选择
+      curPath.push(arr[i]); //在树枝上做选择 curPath
       traversal(arr, curPath);
-      curPath.pop(); //回溯，在深度上的变量curPath 撤销选择
+      curPath.pop(); //回溯，在树枝上撤销选择 curPath
     }
-    //后序位置
+
+    //后序位置： 点
   };
 
   traversal(nums, []);
