@@ -25,33 +25,31 @@
   ******************************************************************************************/
 
 var permuteUnique = function (nums) {
-  const result = [];
-  const path = [];
+  nums.sort((a, b) => a - b);
+  let result = [];
+  let used = new Array(nums.length).fill(false);
 
-  nums.sort((a, b) => a - b); //<--- diff is here, 记得要sort
-  const used = new Array(nums.length).fill(false);
-
-  const backtracking = (nums, used) => {
+  const traversal = (arr, curPath, used) => {
     //说明到了叶子
-    if (path.length === nums.length) {
-      result.push([...path]);
+    if (curPath.length === arr.length) {
+      result.push([...curPath]);
       return;
     }
-
     //不同点：排列问题i从0开始，  组合类问题是从startidx开始！！
-    for (let i = 0; i < nums.length; i++) {
-      if (used[i]) continue; // 树枝上去重
-      //保证了相同元素在排列中的相对位置保持不变：
-      if (i > 0 && nums[i] === nums[i - 1] && used[i - 1] === false) continue; //<--- diff is here: 树层上去重，如果前面的相邻相等元素没有用过，则跳过
+    for (let i = 0; i < arr.length; i++) {
+      if (used[i] === true) continue; // 树枝上去重
 
-      path.push(nums[i]);
+      //保证了相同元素在排列中的相对位置保持不变：
+      if (i > 0 && arr[i] === arr[i - 1] && used[i - 1] === false) continue; //<--- diff is here: 树层上去重，如果前面的相邻相等元素没有用过，则跳过
+
+      curPath.push(arr[i]);
       used[i] = true;
-      backtracking(nums, used);
-      path.pop();
+      traversal(arr, curPath, used);
+      curPath.pop();
       used[i] = false;
     }
   };
 
-  backtracking(nums, used);
+  traversal(nums, [], used);
   return result;
 };
