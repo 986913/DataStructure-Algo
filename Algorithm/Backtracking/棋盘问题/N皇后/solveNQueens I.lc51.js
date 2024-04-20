@@ -10,7 +10,7 @@
 // 主函数：
 var solveNQueens = function (n) {
   let result = [];
-  let board = new Array(n).fill(0).map(() => new Array(n).fill('.')); //生成nxn的二维数组，内容都是 “.”
+  let matrix = new Array(n).fill(0).map(() => new Array(n).fill('.')); //生成nxn的二维数组，内容都是 “.”
 
   function traversal(board, curRow) {
     //走到最后一行 说明到了叶子
@@ -29,7 +29,7 @@ var solveNQueens = function (n) {
     }
   }
 
-  traversal(board, 0);
+  traversal(matrix, 0);
   return result;
 };
 
