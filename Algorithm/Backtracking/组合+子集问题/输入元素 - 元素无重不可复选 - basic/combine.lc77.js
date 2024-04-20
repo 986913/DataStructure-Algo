@@ -12,7 +12,7 @@ var combine = function (n, k) {
   let result = [];
 
   const traversal = (arr, curPath, startIdx) => {
-    // 前序位置：点,  diff is here:
+    // 前序位置：点,  diff is here: 只收集第K层的子集
     if (curPath.length === k) {
       result.push([...curPath]);
     }
