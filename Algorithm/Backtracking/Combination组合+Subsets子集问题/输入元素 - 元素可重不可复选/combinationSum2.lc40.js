@@ -19,6 +19,38 @@
   上述和等于3的所有组合有: [[1,2], [1',2]], 但是因为题目要求的结果不能有重复，所以结果是[[1,2]]
 ****************************************************************************************************/
 
+var combinationSum2 = function (candidates, target) {
+  candidates.sort((a, b) => a - b); //<--- diff is here
+  let result = [];
+
+  const traversal = (arr, curPath, curSum, startIdx) => {
+    //超过目标和，直接结束
+    if (curSum > target) return;
+    //达到目标和，找到符合条件的组合
+    if (curSum === target) {
+      result.push([...curPath]);
+      return;
+    }
+
+    let set = new Set(); //<--- diff is here
+    for (let i = startIdx; i < arr.length; i++) {
+      if (set.has(arr[i])) continue; //<--- diff is here
+
+      curPath.push(arr[i]);
+      curSum += arr[i];
+      set.add(arr[i]); //<--- diff is here
+
+      traversal(arr, curPath, curSum, i + 1);
+
+      curPath.pop();
+      curSum -= arr[i];
+    }
+  };
+
+  traversal(candidates, [], 0, 0); //<--- diff is here，多了一个curSum参数
+  return result;
+};
+/*********************************************************************************************
 var combinationSum2 = function (nums, target) {
   nums.sort((a, b) => a - b); //<--- diff is here
   let result = [];
@@ -47,3 +79,4 @@ var combinationSum2 = function (nums, target) {
   traversal(nums, [], 0, 0); //<--- diff is here，多了一个curSum参数
   return result;
 };
+*********************************************************************************************/

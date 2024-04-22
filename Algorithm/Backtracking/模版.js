@@ -58,11 +58,13 @@ const wrapper = (nums) => {
       return;
     }
 
+    let set = new Set(); // <-- diff is here
     //组合/子集类问题都是从startIdx开始
     for (let i = startIdx; i < arr.length; i++) {
-      if (i > startIdx && arr[i] === arr[i - 1]) continue; //箭枝逻辑，跳过值相同的相邻树枝
+      if (set.has(arr[i])) continue; // <-- diff is here
 
       curPath.push(arr[i]);
+      set.add(arr[i]); // <-- diff is here
       traversal(arr, curPath, i + 1);
       curPath.pop();
     }
@@ -84,11 +86,13 @@ const wrapper = (nums) => {
       return;
     }
 
+    let set = new Set(); // <-- diff is here
     //排序permute类问题都是从0开始
     for (let i = 0; i < arr.length; i++) {
       if (used[i] === true) continue; //剪枝逻辑
-      if (i > 0 && arr[i] === arr[i - 1]) continue; //箭枝逻辑，固定相同的元素在排列中的相对位置
+      if (set.has(arr[i])) continue; // <-- diff is here：树层去重
 
+      set.add(arr[i]); // <-- diff is here
       curPath.push(arr[i]);
       used[i] = true;
       traversal(arr, curPath, used);
@@ -114,7 +118,7 @@ const wrapper = (nums) => {
     //组合/子集类问题都是从startIdx开始
     for (let i = startIdx; i < arr.length; i++) {
       curPath.push(arr[i]);
-      traversal(arr, curPath, i); // 参数是i，不再是i+1了！
+      traversal(arr, curPath, i); // diff is here <--- 参数是i，不再是i+1了！
       curPath.pop();
     }
   };
@@ -134,7 +138,7 @@ const wrapper = (nums) => {
     }
 
     //排序permute类问题都是从0开始, 这个情况不需要used数组了
-    for (let i = startIdx; i < arr.length; i++) {
+    for (let i = 0; i < arr.length; i++) {
       curPath.push(arr[i]);
       traversal(arr, curPath);
       curPath.pop();

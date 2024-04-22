@@ -20,17 +20,18 @@
 ****************************************************************************************************/
 
 var subsetsWithDup = function (nums) {
-  nums.sort((a, b) => a - b); //<--- diff is here: 先排序让相同的元素靠在一起，如果发现nums[i]==nums[i-1]则跳过
+  nums.sort((a, b) => a - b); //<--- diff is here: 先排序让相同的元素靠在一起
   let result = [];
 
   const traversal = (arr, curPath, startIdx) => {
     result.push([...curPath]);
 
+    let set = new Set(); // <-- diff is here
     for (let i = startIdx; i < arr.length; i++) {
-      //! 注意：i > startIdx
-      if (i > startIdx && arr[i] === arr[i - 1]) continue; //<--- diff is here: 值相同的相邻树枝,只遍历第一条
+      if (set.has(arr[i])) continue; // <-- diff is here
 
       curPath.push(arr[i]);
+      set.add(arr[i]); // <-- diff is here
       traversal(arr, curPath, i + 1);
       curPath.pop();
     }
@@ -39,3 +40,26 @@ var subsetsWithDup = function (nums) {
   traversal(nums, [], 0);
   return result;
 };
+
+/*********************************************************************************************************** 
+  var subsetsWithDup = function (nums) {
+    nums.sort((a, b) => a - b); //<--- diff is here: 先排序让相同的元素靠在一起，如果发现nums[i]==nums[i-1]则跳过
+    let result = [];
+
+    const traversal = (arr, curPath, startIdx) => {
+      result.push([...curPath]);
+
+      for (let i = startIdx; i < arr.length; i++) {
+        //! 注意：i > startIdx
+        if (i > startIdx && arr[i] === arr[i - 1]) continue; //<--- diff is here: 值相同的相邻树枝,只遍历第一条
+
+        curPath.push(arr[i]);
+        traversal(arr, curPath, i + 1);
+        curPath.pop();
+      }
+    };
+
+    traversal(nums, [], 0);
+    return result;
+  };
+**************************************************************************************************************/
