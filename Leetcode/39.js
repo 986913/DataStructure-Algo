@@ -4,30 +4,37 @@
  * @return {number[][]}
  */
 
-/* ----------------------------- 👍 用 Backtracking 模版 ------------------------------------------ */
+/****************************  Backtracking (ie:多叉树遍历框架) LC 216变形题 *****************************
+  输入: nums = [1, 2, 3], target=3
+  输出: [[1,1,1], [1,2], [3]]
 
-var combinationSum = function (candidates, target) {
-  const result = [];
-  const path = [];
+                                            [1,  2,  3]
+                                        /       |       \      
+                                      1         2        3  
+                                    / | \      / \       |
+                                  1   2   3   2   3      3
+                                /| \   /\  | 
+                                12 3  2 3  3
+***********************************************************************************************/
 
-  const backtracking = (candidates, target, startIndex, sum) => {
-    if (sum > target) return;
-    if (sum == target) {
-      result.push([...path]);
+var combinationSum = function (nums, target) {
+  let result = [];
+  const traversal = (arr, curPath, curSum, startIdx) => {
+    if (curSum > target) return;
+    if (curSum === target) {
+      result.push([...curPath]);
       return;
     }
 
-    for (let i = startIndex; i < candidates.length; i++) {
-      sum += candidates[i];
-      path.push(candidates[i]);
-
-      backtracking(candidates, target, i, sum); // 关键点:不用i+1了，表示可以重复读取当前的数
-
-      sum -= candidates[i];
-      path.pop();
+    for (let i = startIdx; i < arr.length; i++) {
+      curPath.push(arr[i]);
+      curSum += arr[i];
+      traversal(arr, curPath, curSum, i); //<--- diff is here. 关键点:这里用i, 不用i+1了! 表示可以重复读取当前的数
+      curPath.pop();
+      curSum -= arr[i];
     }
   };
 
-  backtracking(candidates, target, 0, 0);
+  traversal(nums, [], 0, 0);
   return result;
 };
