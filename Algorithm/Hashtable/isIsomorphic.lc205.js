@@ -3,34 +3,32 @@
  * @param {string} t
  * @return {boolean}
  */
-
 /************************************  hashtable : LC 290 变形题  ************************************************/
 var isIsomorphic = function (s, t) {
   if (s.length !== t.length) return false;
 
-  let map = new Map();
-  let tracker = new Map();
+  let sMap = new Map();
+  let tMap = new Map();
 
   for (let i = 0; i < s.length; i++) {
-    let charS = s[i];
-    let charT = t[i];
+    let sChar = s[i];
+    let tChar = t[i];
 
-    if (!map.has(charS)) {
-      map.set(charS, charT);
+    if (!sMap.has(sChar)) {
+      sMap.set(sChar, tChar);
     } else {
-      if (map.get(charS) !== charT) return false;
+      if (sMap.get(sChar) !== tChar) return false;
     }
 
-    if (!tracker.has(charT)) {
-      tracker.set(charT, charS);
+    if (!tMap.has(tChar)) {
+      tMap.set(tChar, sChar);
     } else {
-      if (tracker.get(charT) !== charS) return false;
+      if (tMap.get(tChar) !== sChar) return false;
     }
   }
 
   return true;
 };
-
 /* 
 return false case:
             已 s = foo, t = bar为例
