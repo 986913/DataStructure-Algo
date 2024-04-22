@@ -1,4 +1,35 @@
-/* -------------------------   完全背包 ------------------------- */
+/**
+ * @param {string} s
+ * @param {string[]} wordDict
+ * @return {boolean}
+ */
+
+/* ------------------------ Solution 1:  backtracking --------------------------- */
+const wordBreak = (s, wordDict) => {
+  const set = new Set();
+  const result = [];
+
+  const traversal = (curStr, curPath) => {
+    if (set.has(curStr)) return;
+    if (!s.startsWith(curStr) || curStr.length > s.length) return;
+    if (s === curStr) {
+      result.push(curPath.join(' '));
+      return;
+    }
+
+    set.add(curStr);
+    for (let i = 0; i < wordDict.length; i++) {
+      curPath.push(wordDict[i]);
+      traversal(curStr + wordDict[i], curPath);
+      curPath.pop();
+    }
+  };
+
+  traversal('', []);
+  return result;
+};
+
+/* ------------------------ solution 2:  DP 完全背包  --------------------------- */
 
 /**
 1. 确定dp数组以及下标的含义:  dp[i] : 字符串长度为i的话，dp[i]为true，表示可以拆分为一个或多个在字典中出现的单词。
