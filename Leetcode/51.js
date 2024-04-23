@@ -10,7 +10,7 @@
 // 主函数：
 var solveNQueens = function (n) {
   let result = [];
-  let board = new Array(n).fill(0).map(() => new Array(n).fill('.')); //生成nxn的二维数组，内容都是 “.”
+  let matrix = new Array(n).fill(0).map(() => new Array(n).fill('.')); //生成nxn的二维数组，内容都是 “.”
 
   function traversal(board, curRow) {
     //走到最后一行 说明到了叶子
@@ -29,7 +29,7 @@ var solveNQueens = function (n) {
     }
   }
 
-  traversal(board, 0);
+  traversal(matrix, 0);
   return result;
 };
 
@@ -37,7 +37,7 @@ var solveNQueens = function (n) {
 const isValid = (board, row, col) => {
   const n = board.length; // 获取棋盘的大小
 
-  //列col是固定的，行row为变量: 检查在当前位置的上方是否有其他皇后，有的话返回 false
+  // 检查在当前位置的上方是否有其他皇后，有的话返回 false。 列col是固定的，行row为变量
   for (let i = 0; i < row; i++) {
     if (board[i][col] === 'Q') return false;
   }

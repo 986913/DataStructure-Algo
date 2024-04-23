@@ -3,33 +3,36 @@
  * @return {void} Do not return anything, modify board in-place instead.
  */
 
-/* ------------Main function is here ----------------------backtracking 模版 ---------------------------- */
+/****************************  Backtracking - 二维递归 (ie:多叉树遍历框架) LC51变形题 *****************************/
+
 var solveSudoku = function (board) {
-  const backTracking = () => {
+  const traversal = () => {
     //不同点在这: 是双层forloop：
     for (let i = 0; i < board.length; i++) {
       for (let j = 0; j < board[0].length; j++) {
         if (board[i][j] !== '.') continue;
+
         for (let val = 1; val <= 9; val++) {
-          if (isValid(i, j, `${val}`, board)) {
+          if (isValid(board, i, j, `${val}`)) {
             board[i][j] = `${val}`;
-            if (backTracking()) return true; //递归
+            if (traversal()) return true; //递归
             board[i][j] = `.`; // 回溯
           }
         }
-        return false;
+
+        return false; // 说明1-9都尝试了 咩有结果
       }
     }
+
     return true;
   };
 
-  backTracking(board);
+  traversal(board);
   return board;
 };
 
-// helper function: ----------------------------
-
-const isValid = (row, col, val, board) => {
+/*---------------- helper function ---------------------*/
+const isValid = (board, row, col, val) => {
   let len = board.length;
   // 行不能重复
   for (let i = 0; i < len; i++) {

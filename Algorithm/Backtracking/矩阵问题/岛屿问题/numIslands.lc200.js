@@ -1,9 +1,11 @@
 /**
  * @param {character[][]} grid
  * @return {number}
+ * 岛屿系列题目的核心考点就是用 DFS/BFS遍历二维数组
  */
 
-/****************************** Solution : DFS 遍历思想  LC589， 695 变形题 ************************************/
+/************************ Solution: DFS遍历思想 - 2D矩阵的DFS框架 （LC589,695变形题） **************************/
+// 主函数：
 var numIslands = function (grid) {
   let m = grid.length;
   let n = grid[0].length;
@@ -20,11 +22,14 @@ var numIslands = function (grid) {
 
   return count;
 };
+
 // helper function:
 const dfs = (grid, i, j) => {
   let m = grid.length;
   let n = grid[0].length;
-  if (i < 0 || i >= m || j < 0 || j >= n || grid[i][j] === '0') return; //base condition: 越界或者当前i,j位置是水时候
+
+  if (i < 0 || i >= m || j < 0 || j >= n) return; //base condition: 越界
+  if (grid[i][j] === '0') return; //base condition: 已遍历过（i,j) / 当前i,j位置已经被淹了
 
   //前序位置：
   grid[i][j] = '0'; //把岛屿淹掉 (1变成0)
