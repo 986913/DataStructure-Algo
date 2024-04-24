@@ -61,7 +61,7 @@ const palindrome = (str, left, right) => {
     left--;
     right++;
   }
-  return str.substr(left + 1, right - left - 1);
+  return str.substr(left + 1, right - left - 1); // return str.substring(left + 1, right);
 };
 
 /* ------------------------  Solution 3: DP - lc647🟡变形题 ------------------------------------------- */

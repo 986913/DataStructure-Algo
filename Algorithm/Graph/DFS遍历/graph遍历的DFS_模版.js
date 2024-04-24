@@ -28,6 +28,8 @@ const traversal = (graph, s) => {
   onPath[s] = false; // 在for循环外头 s撤销选择: 节点s离开路径
 };
 
+// traversal(graph, 0);
+
 /******************* 🟢 无环图（Acyclic) DFS遍历框架******************/
 
 var 遍历AcyclicGraph = function (graph) {
