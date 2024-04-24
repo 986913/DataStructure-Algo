@@ -91,3 +91,26 @@ const postorderTraversal_Nary = (root) => {
   traversal(root);
   return visted;
 };
+
+/*********************************** DFS  vs Backtracking ********************************************/
+// DFS 算法，关注点在节点
+var traverse = function (root) {
+  if (root == null) return;
+
+  printf('进入节点 ' + root);
+  for (let child of node.children) {
+    traversal(child);
+  }
+  printf('离开节点 ' + root);
+};
+
+// 回溯算法，关注点在树枝
+var traverse = function (root) {
+  if (root == null) return;
+
+  for (let child of node.children) {
+    printf('从 ' + root + ' 到 ' + child); // 做选择
+    traverse(child);
+    printf('从 ' + child + ' 到 ' + root); // 撤销选择
+  }
+};
