@@ -19,31 +19,34 @@ class ListNode {
 }
 
 /*  ----------------------- 👍 solution 1:  Iteration   ----------------------- */
-const mergeTwoLists = (list1, list2) => {
+var mergeTwoLists = function (list1, list2) {
   if (!list1) return list2;
   if (!list2) return list1;
 
   let dummyhead = new ListNode(-1);
   let curr = dummyhead;
 
-  while (list1 && list2) {
-    if (list1.val < list2.val) {
-      curr.next = list1;
-      list1 = list1.next;
+  let p1 = list1;
+  let p2 = list2;
+  while (p1 && p2) {
+    if (p1.val <= p2.val) {
+      curr.next = p1;
+      p1 = p1.next;
     } else {
-      curr.next = list2;
-      list2 = list2.next;
+      curr.next = p2;
+      p2 = p2.next;
     }
     curr = curr.next; // <--- don't forget this line
   }
 
-  if (list1) curr.next = list1;
-  else if (list2) curr.next = list2;
+  //给curr.next直接赋值，不用一个一个赋
+  if (p1) curr.next = p1;
+  if (p2) curr.next = p2;
 
   return dummyhead.next;
 };
 
-/*  ----------------------- solution 2: recursion  ----------------------- */
+/*  ----------------------- 👍 solution 2: recursion  ----------------------- */
 const mergeTwoLists = (list1, list2) => {
   if (!list1) return list2;
   if (!list2) return list1;
