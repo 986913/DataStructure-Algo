@@ -5,25 +5,27 @@
  */
 
 /*******************************Solution 1: 前缀和数组 + HashTable *********************************************
-  核心思路: 
+  核心思路: 2 sum hastable 解法的变体而已
 */
 var maxSubArrayLen = function (nums, k) {
   let maxLen = 0;
 
-  let curSum = 0;
-  let map = new Map(); // 存储前缀和 及其对应的下标
+  let prefixSum = 0;
+  let map = new Map(); // key is prefixSum, value is first index that each key was seen.
 
   for (let i = 0; i < nums.length; i++) {
-    curSum += nums[i];
+    prefixSum += nums[i];
 
-    if (curSum === k) {
+    if (prefixSum === k) {
       maxLen = i + 1;
-    } else if (map.has(curSum - k)) {
-      maxLen = Math.max(maxLen, i - map.get(curSum - k));
+    }
+    //means there is a subarray with sum k ending at the current i, the length will be i - map[prefixSum - k]
+    else if (map.has(prefixSum - k)) {
+      maxLen = Math.max(maxLen, i - map.get(prefixSum - k));
     }
 
-    if (!map.has(curSum)) {
-      map.set(curSum, i);
+    if (!map.has(prefixSum)) {
+      map.set(prefixSum, i);
     }
   }
 
