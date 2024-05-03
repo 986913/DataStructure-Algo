@@ -34,15 +34,15 @@ var uniquePaths = function (m, n) {
 
 const dfs = (m, n, i, j, memo) => {
   if (i < 0 || i >= m || j < 0 || j >= n) return 0;
-  if (i === m - 1 && j === n - 1) return 1;
+  if (i === m - 1 && j === n - 1) return 1; //到达bottom-right,更新结果
 
   // 准备递归之前，先去备忘录里查一下，算过了就不用再计算了， 没算就准备递归计算
   if (memo[i][j] !== -1) return memo[i][j];
 
   // 开始递归，且把递归结果存到备忘录里
   let pathCounts = 0;
-  pathCounts += dfs(m, n, i + 1, j, memo);
-  pathCounts += dfs(m, n, i, j + 1, memo);
+  pathCounts += dfs(m, n, i + 1, j, memo); // 下
+  pathCounts += dfs(m, n, i, j + 1, memo); // 右
   memo[i][j] = pathCounts;
   return pathCounts;
 };
