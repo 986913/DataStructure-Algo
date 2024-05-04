@@ -17,7 +17,6 @@ const dfs = (m, n, i, j) => {
   if (i === m - 1 && j === n - 1) return 1; //到达bottom-right,更新结果
 
   let pathCounts = 0;
-
   pathCounts += dfs(m, n, i + 1, j); //下
   pathCounts += dfs(m, n, i, j + 1); //右
   return pathCounts;
