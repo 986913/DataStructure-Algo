@@ -14,14 +14,11 @@
 /*************************** Solution1:  穷举 + DFS分解思想 *****************************
   通过穷举根节点的值，然后递归构造左右子树的所有可能的组合来生成不同的BST
 */
-
 var generateTrees = function (n) {
   if (n === 0) return [];
-
   // 构造闭区间 [1, n] 组成的 BST
   return build(1, n);
 };
-
 /**
  * @param {number} lo
  * @param {number} hi
@@ -60,3 +57,5 @@ var build = function (lo, hi) {
 
   return res;
 };
+
+/*************************** Solution2:  DP  ******************************/
