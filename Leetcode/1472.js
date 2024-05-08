@@ -4,7 +4,7 @@
  */
 var BrowserHistory = function (homepage) {
   this.history = [homepage || ''];
-  this.currIdx = 0;
+  this.curIdx = 0;
 };
 
 /**
@@ -13,12 +13,12 @@ var BrowserHistory = function (homepage) {
  */
 BrowserHistory.prototype.visit = function (url) {
   //重点: 截断历史记录数组。这样做可以确保只保留当前页面及之前的历史记录，
-  if (this.currIdx !== this.history.length - 1) {
-    this.history = this.history.slice(0, this.currIdx + 1); // 因为slice(start, end) 截出来的不包括end
+  if (this.curIdx !== this.history.length - 1) {
+    this.history = this.history.slice(0, this.curIdx + 1); // 因为slice(start, end) 截出来的不包括end
   }
 
   this.history.push(url);
-  this.currIdx++;
+  this.curIdx++;
 };
 
 /**
@@ -26,8 +26,8 @@ BrowserHistory.prototype.visit = function (url) {
  * @return {string}
  */
 BrowserHistory.prototype.back = function (steps) {
-  this.currIdx = Math.max(0, this.currIdx - steps); // currIdx最小值应该是0
-  return this.history[this.currIdx];
+  this.curIdx = Math.max(0, this.curIdx - steps); // curIdx最小值应该是0
+  return this.history[this.curIdx];
 };
 
 /**
@@ -35,8 +35,8 @@ BrowserHistory.prototype.back = function (steps) {
  * @return {string}
  */
 BrowserHistory.prototype.forward = function (steps) {
-  this.currIdx = Math.min(this.history.length - 1, this.currIdx + steps); // currIdx最大值应该是history.length - 1
-  return this.history[this.currIdx];
+  this.curIdx = Math.min(this.history.length - 1, this.curIdx + steps); // curIdx最大值应该是history.length - 1
+  return this.history[this.curIdx];
 };
 
 /*************************************** Solution 2: ES6 - class ***************************************************/

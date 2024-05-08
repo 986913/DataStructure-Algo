@@ -20,10 +20,7 @@
   then return the result back.
 */
 
-/**
- * ----------------------------------------- 👍 backtracking 模版 -----------------------------------------------------------
- */
-
+/*---------------------------------- 👍 backtracking 模版 -----------------------------------------*/
 var exist = function (board, word) {
   if (board == null || word == null || board.length == 0) return false; //edge case
 
@@ -55,6 +52,37 @@ var exist = function (board, word) {
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
       if (dfs(board, i, j, 0)) return true; // 找到起点，开始搜索
+    }
+  }
+
+  return false;
+};
+
+/*---------------------------------- 👍 backtracking 模版 - 带备忘录 -----------------------------------------*/
+var exist = function (board, word) {
+  let m = board.length;
+  let n = board[0].length;
+  let memo = new Array(m).fill(-1).map(() => new Array(n).fill(false)); //备忘录
+
+  /****** helper function ******/
+  const dfs = (board, i, j, wordIdx) => {
+    if (i < 0 || i >= m || j < 0 || j >= n) return false;
+    if (board[i][j] !== word[wordIdx] || memo[i][j]) return false;
+    if (wordIdx === word.length - 1) return true;
+
+    memo[i][j] = true;
+    const isExsitOnUp = dfs(board, i - 1, j, wordIdx + 1);
+    const isExsitOnBelow = dfs(board, i + 1, j, wordIdx + 1);
+    const isExsitOnLeft = dfs(board, i, j - 1, wordIdx + 1);
+    const isExsitOnRight = dfs(board, i, j + 1, wordIdx + 1);
+    memo[i][j] = false;
+    return isExsitOnUp || isExsitOnRight || isExsitOnBelow || isExsitOnLeft;
+  };
+
+  /****** Main function ******/
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      if (dfs(board, i, j, 0)) return true;
     }
   }
 
