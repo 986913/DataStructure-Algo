@@ -3,7 +3,7 @@
  * @return {number}
  */
 
-/************************Solution: slow - fast pointers ******************************/
+/************************ Solution: slow - fast pointers ******************************/
 
 var countHillValley = function (nums) {
   let count = 0;
