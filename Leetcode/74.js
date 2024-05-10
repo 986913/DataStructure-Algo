@@ -4,43 +4,39 @@
  * @return {boolean}
  */
 
+/***************************************** Solution: Binary Search *******************************************/
 var searchMatrix = function (matrix, target) {
-  let left = 0;
-  let right = matrix.length - 1;
-  let cols = matrix[0].length;
+  let m = matrix.length;
+  let n = matrix[0].length;
 
+  let left = 0;
+  let right = m - 1;
   while (left <= right) {
     let mid = left + Math.floor((right - left) / 2);
-
-    //如果target在row区间，继续binary search
-    if (target <= matrix[mid][cols - 1] && target >= matrix[mid][0]) {
-      // just an Nested binary search,  pass an mid row as para:
-      return binarySearch(matrix[mid], target);
-    } else if (target > matrix[mid][cols - 1]) {
-      //target在右半段row
-      left = mid + 1;
-    } else if (target < matrix[mid][0]) {
+    if (target < matrix[mid][0]) {
       //target在左半段row
       right = mid - 1;
+    } else if (target > matrix[mid][n - 1]) {
+      //target在右半段row
+      left = mid + 1;
+    } else if (matrix[mid][0] <= target && target <= matrix[mid][n - 1]) {
+      //target在当前mid row, 那在当前row中binary search
+      return binarySearch(matrix[mid], target);
     }
   }
 
-  return false; // cant find at rows
+  return false; // can't find
 };
 
-// helper function:
+// helper function:  search in 1D array
 const binarySearch = (arr, target) => {
-  let l = 0;
-  let r = arr.length - 1;
-  while (l <= r) {
-    let m = l + Math.floor((r - l) / 2);
-    if (arr[m] < target) {
-      l = m + 1;
-    } else if (arr[m] > target) {
-      r = m - 1;
-    } else {
-      return true;
-    }
+  let left = 0;
+  let right = arr.length - 1;
+  while (left <= right) {
+    let mid = left + Math.floor((right - left) / 2);
+    if (arr[mid] === target) return true;
+    else if (arr[mid] > target) right = mid - 1;
+    else if (arr[mid] < target) left = mid + 1;
   }
-  return false; // cant find at cols
+  return false; // cant find
 };
