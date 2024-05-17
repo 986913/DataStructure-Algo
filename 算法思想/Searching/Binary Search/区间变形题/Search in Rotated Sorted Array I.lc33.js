@@ -25,7 +25,9 @@ var search = function (nums, target) {
  * @param {number} target
  * @return {number}
  * 要记住：
-    1. 如何判断mid在上下区的条件：  nums[left] <= nums[mid]  nums[mid] <= nums[right]
+    1. 如何判断mid在上下区的条件: 👉注意是和nums[right]进行比较 
+        - mid在上半区：nums[mid] >= nums[right]
+        - mid在下半区：nums[mid] <  nums[right]
     2. 第三步记得额外检查
  */
 var search = function (nums, target) {
@@ -37,31 +39,31 @@ var search = function (nums, target) {
 
     if (nums[mid] === target) return mid; // 找到了
 
-    // 1.1: mid在上半区
-    if (nums[left] <= nums[mid]) {
-      // 2.1: target处于上半区内，且target处于left和mid之间
+    // 1.1: mid在上半区: 注意nums[mid]是和👉nums[right]进行比较
+    if (nums[mid] >= nums[right]) {
+      // 2.1:   target在[left, mid]之间
       if (nums[left] <= target && target <= nums[mid]) {
         right = mid - 1;
       } else {
-        // 2.2: target处于上半区内，且target处于mid和right之间
+        // 2.2: target在[mid, right]之间
         left = mid + 1;
       }
     }
 
-    //1.2: mid在下半区
-    else if (nums[mid] <= nums[right]) {
-      // 2.3: target处于下半区内，且target处于mid和right之间
+    //1.2: mid在下半区: 注意nums[mid]是和👉nums[right]进行比较
+    else if (nums[mid] < nums[right]) {
+      // 2.3:  target在[mid, right]之间
       if (nums[mid] <= target && target <= nums[right]) {
         left = mid + 1;
       } else {
-        // 2.4: target处于下半区内，且target处于left和mid之间
+        // 2.4: target在[left, mid]之间
         right = mid - 1;
       }
     }
   }
 
   //有可能在退出循环后, left或right其中一个指向target，需要额外的检查来确定返回哪个索引
-  if (nums[left] == target) return left;
-  else if (nums[right] == target) return right;
-  else return -1; // 没找到
+  if (nums[left] === target) return left;
+  if (nums[right] === target) return right;
+  return -1; // can't find target
 };

@@ -14,23 +14,24 @@ var maxArea = function (height) {
   return maxArea;
 };
 
-/* ----------- Solution2: 👍 two pointer ---------------------- */
+/* ----------- Solution2: 👍 two pointer : 相向双指针 ---------------------- */
 var maxArea = function (height) {
-  let maxArea = -Infinity;
+  let max = -Infinity;
 
   let left = 0;
   let right = height.length - 1;
   while (left < right) {
-    let shortHeight = Math.min(height[left], height[right]);
-    maxArea = Math.max(maxArea, (right - left) * shortHeight);
+    let leftHeight = height[left];
+    let rightHeight = height[right];
 
+    max = Math.max(max, (right - left) * Math.min(leftHeight, rightHeight));
     //重点在这：什么时候移动left和right (Always move the pointer that points to the lower line.)
-    if (height[left] < height[right]) {
+    if (leftHeight < rightHeight) {
       left++;
     } else {
       right--;
     }
   }
 
-  return maxArea;
+  return max;
 };

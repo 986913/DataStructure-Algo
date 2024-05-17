@@ -13,14 +13,17 @@ var searchMatrix = function (matrix, target) {
   let right = m - 1;
   while (left <= right) {
     let mid = left + Math.floor((right - left) / 2);
-    if (target < matrix[mid][0]) {
+    let firstValInMidRow = matrix[mid][0];
+    let lastValInMidRow = matrix[mid][n - 1];
+
+    if (target < firstValInMidRow) {
       //target在左半段row
       right = mid - 1;
-    } else if (target > matrix[mid][n - 1]) {
+    } else if (target > lastValInMidRow) {
       //target在右半段row
       left = mid + 1;
-    } else if (matrix[mid][0] <= target && target <= matrix[mid][n - 1]) {
-      //target在当前mid row, 那在当前row中binary search
+    } else {
+      //target在当前mid行中 (firstValInMidRow <= target <= lastValInMidRow), 那在当前row中binary search:
       return binarySearch(matrix[mid], target);
     }
   }

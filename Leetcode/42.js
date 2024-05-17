@@ -4,31 +4,28 @@
  */
 /******************************** Solution 1: DP ********************************************** */
 var trap = function (height) {
-  const len = height.length;
+  let leftMax = new Array(height);
+  let rightMax = new Array(height);
+
+  //初始化leftMax,rightMax数组
+  leftMax[0] = height[0];
+  rightMax[height.length - 1] = height[height.length - 1];
 
   // DP to calculate leftMax: 从左到右过一遍
-  let leftMax = Array(len).fill(0);
-  leftMax[0] = height[0];
-  for (let i = 1; i < len; i++) {
+  for (let i = 1; i < height.length; i++) {
     leftMax[i] = Math.max(leftMax[i - 1], height[i]);
   }
-  // console.log(leftMax)
-
   // DP to calculate rightMax: 从右到左过一遍
-  let rightMax = Array(len).fill(0);
-  rightMax[len - 1] = height[len - 1];
-  for (let i = len - 2; i >= 0; i--) {
-    rightMax[i] = Math.max(rightMax[i + 1], height[i]);
-  }
-  // console.log(rightMax)
-
-  //根据leftMax数组和rightMax数组, 计算每一个点的积水量: 找这个点的左右两边的最高点, 取较小的一个, 再减去这个点的高度
-  let res = 0;
-  for (let i = 0; i < len; i++) {
-    res += Math.min(leftMax[i], rightMax[i]) - height[i];
+  for (let j = height.length - 2; j >= 0; j--) {
+    rightMax[j] = Math.max(rightMax[j + 1], height[j]);
   }
 
-  return res;
+  /*根据leftMax数组和rightMax数组, 计算每一个点的积水量: 找这个点的左右两边的最高点, 取较小的一个, 再减去这个点的高度*/
+  let area = 0;
+  for (let i = 0; i < leftMax.length; i++) {
+    area += Math.min(leftMax[i], rightMax[i]) - height[i];
+  }
+  return area;
 };
 
 /******************************** Solution 2: Two pointer ********************************************** */
@@ -57,3 +54,5 @@ var trap = function (height) {
 
   return result;
 };
+
+// https://leetcode.cn/problems/trapping-rain-water/solutions/692342/jie-yu-shui-by-leetcode-solution-tuvc/
