@@ -16,13 +16,12 @@ var nextGreatestLetter = function (letters, target) {
     } else if (target > letters[mid]) {
       left = mid + 1;
     } else {
-      left = mid + 1; // difference is here
+      left = mid + 1; //<--- difference is here： 以确保找到的是第一个大于target的位置。
     }
   }
 
-  if (left >= letters.length) {
-    return letters[0];
-  }
+  // left向右走到头
+  if (left >= letters.length) return letters[0]; // not find any greater than target, then按照题目要求return letters[0]
 
   return letters[left];
 };

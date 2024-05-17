@@ -18,6 +18,7 @@ var findClosestElements = function (arr, k, x) {
     }
   }
 
+  // slice(start, end), 截出来的arrary包括start,不包括end
   return arr.slice(left, left + k);
 };
 
