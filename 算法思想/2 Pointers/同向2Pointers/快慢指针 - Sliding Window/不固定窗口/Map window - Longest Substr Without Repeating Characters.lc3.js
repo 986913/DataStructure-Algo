@@ -8,7 +8,7 @@ const lengthOfLongestSubstring = function (s) {
   let maxLen = 0;
 
   for (let i = 0; i < s.length; i++) {
-    let set = new Set();
+    let set = new Set(); //在for-loop内部维持一个set
     for (let j = i; j < s.length; j++) {
       if (set.has(s[j])) break;
       set.add(s[j]);
@@ -21,24 +21,23 @@ const lengthOfLongestSubstring = function (s) {
 
 /* ------------------------ Solution2: 👍 Slding window ------------------------*/
 const lengthOfLongestSubstring = function (s) {
+  let maxLen = 0;
   const window = new Map();
 
   let slow = 0;
   let fast = 0;
-  let maxLen = 0;
   while (fast < s.length) {
-    const moveIn = s[fast]; // moveIn 是将移入窗口的字符
-    window.set(moveIn, window.get(moveIn) + 1 || 1); // update window
-    fast++; // 增大窗口
+    window.set(s[fast], window.get(s[fast]) + 1 || 1); // s[fast]是将移入窗口的字符，update window
 
-    // 判断左侧窗口是否要收缩: 当新进来的data重复出现时
-    while (window.get(moveIn) > 1) {
-      const moveOut = s[slow]; // moveOut 是将移出窗口的字符
-      window.set(moveOut, window.get(moveOut) - 1); // update window
+    /* 当window中有进来的data时,且出现次数>1时.说明重复了。 不符合题目要求（invalid window） 就shrink the window */
+    while (window.get(s[fast]) > 1) {
+      window.set(s[slow], window.get(s[slow]) - 1); //s[slow]是将移出窗口的字符， update window
       slow++; // 缩小窗口
     }
 
-    maxLen = Math.max(maxLen, fast - slow); // update maxLen inside outer while loop
+    maxLen = Math.max(maxLen, fast - slow); // update maxLen;
+
+    fast++; // 增大窗口
   }
   return maxLen;
 };
