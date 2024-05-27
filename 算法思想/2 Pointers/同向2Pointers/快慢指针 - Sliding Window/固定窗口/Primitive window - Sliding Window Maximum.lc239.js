@@ -5,21 +5,21 @@
  */
 /**************************** Solution1:  slding window 解法： O(n x k) *********************************************/
 var maxSlidingWindow = function (nums, k) {
-  let window = []; //窗口
-
+  let window = [];
   let result = [];
+
   let slow = 0;
   let fast = 0;
   while (fast < nums.length) {
-    let moveIn = nums[fast];
-    window.push(moveIn); //窗口内数据的更新
-    fast++;
+    window.push(nums[fast]);
 
     if (window.length >= k) {
       result.push(Math.max.apply(Math, window));
-      window.shift(); //窗口内数据的更新
+
+      window.shift();
       slow++;
     }
+    fast++;
   }
 
   return result;
