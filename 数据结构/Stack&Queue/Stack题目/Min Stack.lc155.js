@@ -1,22 +1,15 @@
 /**
-  You have to implement the minStack class, which will have a min() function. 
-  Whenever min() is called, the minimum value of the stack is returned in O(1) time. 
-  The element is not popped from the stack; its value is simply returned.
+  Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+  Implement the MinStack class:
+    MinStack() initializes the stack object.
+    void push(int val) pushes the element val onto the stack.
+    void pop() removes the element on the top of the stack.
+    int top() gets the top element of the stack.
+    int getMin() retrieves the minimum element in the stack.
+  You must implement a solution with O(1) time complexity for each function.
+  
+  注意：push新数据到stack中时候不牵扯排序的，别想着push后就排序....
  */
-
-/* --------------------- 用例测试 ----------------------- */
-var stack = new minStack();
-stack.push(5);
-stack.push(2);
-stack.push(4);
-stack.push(1);
-stack.push(3);
-stack.push(9);
-stack.min(); // 1
-stack.pop();
-stack.pop();
-stack.pop();
-stack.min(); // 2
 
 /******************************** Solution 1: Pairs Stack ******************************  
   时间O(1)  空间O(n)
