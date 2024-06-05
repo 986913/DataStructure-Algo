@@ -31,7 +31,10 @@ const quickSort = (arr, low, high) => {
   quickSort(arr, pi + 1, high);
 };
 
-// helper function : ----------------------------------
+/* Helper function : 
+  它选择一个pviot元素, 并将数组重新排列，使得所有< pviot的元素位于pviot的左边，所有> pviot的元素位于pviot的右边。
+  然后返回pviot元素的最终index
+*/
 function partition(arr, low, high) {
   let pivot = arr[high]; // pivot用数组最后一个元素
   let i = low - 1; // 用来跟踪 < pivot的元素的位置
