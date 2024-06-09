@@ -14,11 +14,11 @@ var minAddToMakeValid = function (s) {
     if (char === '(') {
       stack.push(char);
     } else {
-      // If there's no matching "(", increment the counter
+      // If there's no matching opening parenthesis, increment the counter
       if (stack.length === 0) {
         unmatchedClosingCount++;
       } else {
-        // pop a matching "(" from the stack
+        // pop a matching opening parenthesis from the stack
         stack.pop();
       }
     }
