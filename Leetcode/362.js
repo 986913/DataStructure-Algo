@@ -16,8 +16,8 @@ HitCounter.prototype.hit = function (timestamp) {
  * O(N)
  */
 HitCounter.prototype.getHits = function (timestamp) {
-  /* 因为题目要求valid range是[timestamp-300, timestamp]， 所以queue中就要挪出过期的timestamp： */
-  while (this.queue.length && timestamp - this.queue[0] >= 300) {
+  /* 留队列中最近 300 秒的数据即可:  因为题目要求valid range是[timestamp-300, timestamp]， 所以queue中就要挪出过期的timestamp： */
+  while (this.queue.length && timestamp - s.queue[0] >= 300) {
     this.queue.shift();
   }
   //因为queue中存储没过期的timestamp,所以直接return queue的长度就好
@@ -45,7 +45,8 @@ HitCounter.prototype.getHits = function (timestamp) {
   let left = 0;
   let right = this.queue.length - 1;
 
-  let target = timestamp - 300; //valid range: [timestamp-300, timestamp]， 在queue中找target的位置
+  //留队列中最近300秒的数据即可:
+  let target = timestamp - 300; //valid range: [timestamp-300, timestamp]， 在queue中找target的位置, target就是queue的新第一个元素了
 
   while (left <= right) {
     let mid = left + Math.floor((right - left) / 2);
@@ -57,5 +58,5 @@ HitCounter.prototype.getHits = function (timestamp) {
     }
   }
 
-  return this.queue.length - left; // 不维持queue，但是使用二分法找到target位置，然后做减法运算就好
+  return this.queue.length - left; // 不维持queue，但是使用二分法找到了target位置，然后做减法运算就好
 };

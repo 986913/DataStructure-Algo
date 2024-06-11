@@ -55,7 +55,7 @@ MinStack.prototype.getMin = function () {
 */
 var MinStack = function () {
   this.mainStack = []; // track of the order numbers arrived
-  this.minStack = []; //  track of the current minimum.
+  this.minStack = []; //  track of the current minimum: 来记录栈中每个元素入栈时的栈中的最小元素是多少
 };
 /**
  * @param {number} val
