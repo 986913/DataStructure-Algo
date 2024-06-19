@@ -22,20 +22,23 @@ var dailyTemperatures = function (temperatures) {
 /**************************** Solution 2:  Monotonic stack - 单调栈 O(n) ***********************************/
 var dailyTemperatures = function (temperatures) {
   let result = new Array(temperatures.length).fill(0);
-  let indexStack = []; // <--- 存储下标的单调栈 (递减)
+  let monoStack = []; // <--- 存储下标的单调栈 (递减)
 
-  let n = temperatures.length;
-  for (let curDay = 0; curDay < n; curDay++) {
-    let curTemperature = temperatures[curDay];
+  for (let i = temperatures.length - 1; i >= 0; i--) {
+    let curTemperatures = temperatures[i];
+
+    //出栈
     while (
-      indexStack.length !== 0 &&
-      curTemperature > temperatures[indexStack[indexStack.length - 1]]
+      monoStack.length &&
+      temperatures[monoStack[monoStack.length - 1]] <= curTemperatures
     ) {
-      let prevIndex = indexStack.pop();
-      result[prevIndex] = curDay - prevIndex; // key is here: 是index相减，不是温度差！
+      monoStack.pop();
     }
 
-    indexStack.push(curDay);
+    // update result:  key is here: 是index相减，不是温度差！
+    result[i] = monoStack.length ? monoStack[monoStack.length - 1] - i : 0;
+    //入栈
+    monoStack.push(i);
   }
 
   return result;
