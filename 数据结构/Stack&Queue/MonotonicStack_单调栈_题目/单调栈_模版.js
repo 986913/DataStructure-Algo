@@ -1,7 +1,7 @@
 // 定义函数 nextGreaterElement，参数为 nums 数组
 
 var nextGreaterElement = function (nums) {
-  var res = new Array(nums.length - 1).fill(0); // 存放结果的数组，初始为0;
+  var res = new Array(nums.length).fill(0); // 存放结果的数组，初始为0;
   var monoStack = []; // 单调栈，存放数组元素
 
   // 从数组末尾向前遍历

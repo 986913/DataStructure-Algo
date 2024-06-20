@@ -19,7 +19,7 @@ var dailyTemperatures = function (temperatures) {
   return result;
 };
 
-/**************************** Solution 2:  Monotonic stack - 单调栈 O(n) ***********************************/
+/**************************** Solution 2:  Monotonic stack - 单调栈 O(n)模版变形题 ***********************************/
 var dailyTemperatures = function (temperatures) {
   let result = new Array(temperatures.length).fill(0);
   let monoStack = []; // <--- 存储index的单调栈 (递减)
