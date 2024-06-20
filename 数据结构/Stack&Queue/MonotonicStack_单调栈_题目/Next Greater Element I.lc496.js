@@ -24,7 +24,7 @@ var nextGreaterElement = function (nums1, nums2) {
   return result;
 };
 
-/**************************** Solution 2:  Monotonic stack - 单调栈 O(n)模版变形题 ***********************************/
+/**************************** Solution 2:  Monotonic stack - 单调栈_模版变形题 O(n) ***********************************/
 var nextGreaterElement = function (nums1, nums2) {
   let resultMap = new Map();
   let monoStack = [];
