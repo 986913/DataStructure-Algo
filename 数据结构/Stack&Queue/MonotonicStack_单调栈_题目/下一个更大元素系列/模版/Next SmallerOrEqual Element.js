@@ -9,7 +9,7 @@
 
 var nextSmallerOrEqualElement = function (nums) {
   var res = new Array(nums.length).fill(0);
-  var monoStack = [];
+  var monoStack = []; // 单调递增栈
 
   for (var i = nums.length - 1; i >= 0; i--) {
     //出栈: 弹出/删掉nums[i](当前元素)后面较大的元素.   diff is here  <= 改成 >

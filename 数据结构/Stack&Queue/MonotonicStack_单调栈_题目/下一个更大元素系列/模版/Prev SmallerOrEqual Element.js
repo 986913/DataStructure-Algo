@@ -7,7 +7,7 @@
 
 var prevSmallerElement = function (nums) {
   var res = new Array(nums.length).fill(0);
-  var monoStack = [];
+  var monoStack = []; // 单调递增栈
 
   // 从数组头向后遍历: 因为是求nums[i]前面的元素，所以正着往栈里放
   for (var i = 0; i < nums.length; i++) {
