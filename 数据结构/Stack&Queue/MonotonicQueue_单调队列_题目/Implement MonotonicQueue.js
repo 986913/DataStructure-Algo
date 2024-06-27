@@ -1,31 +1,32 @@
-//自定义单调队列：
+/***********************  自定义单调递减的monoQueue ********************/
 class MonoQueue {
   constructor() {
-    this.queue = [];
+    this.monoQueue = [];
   }
 
+  // 在队尾添加元素value
   enqueue(value) {
-    let back = this.queue[this.queue.length - 1];
+    let back = this.monoQueue[this.monoQueue.length - 1];
 
-    //模拟相继弹出的过程
-    while (back !== undefined && back < value) {
-      this.queue.pop();
-      back = this.queue[this.queue.length - 1]; // re-assign back
+    //将小于value的元素全部弹出：
+    while (this.monoQueue.length && back < value) {
+      this.monoQueue.pop();
+      back = this.monoQueue[this.monoQueue.length - 1]; // re-assign back
     }
-
-    this.queue.push(value);
+    //添加value到队尾
+    this.monoQueue.push(value);
   }
 
+  //如果要pop的元素value是队头元素，那就要实际要删除队头元素
   dequeue(value) {
-    let front = this.peek();
-    //当要弹出p的value和queue的出口处一样时,则要实际pop queue的出口元素了
-    if (front === value) {
-      this.queue.shift();
+    //当要弹出的value和queue的出口处一样时,则要实际pop queue的出口元素了
+    if (this.monoQueue[0] === value) {
+      this.monoQueue.shift();
     }
   }
 
-  //出口处
+  //队头存的是最大值
   peek() {
-    return this.queue[0];
+    return this.monoQueue[0];
   }
 }

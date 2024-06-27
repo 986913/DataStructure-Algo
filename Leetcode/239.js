@@ -3,7 +3,7 @@
  * @param {number} k
  * @return {number[]}
  */
-/**************************** Solution1:  slding window 解法： O(n x k) *********************************************/
+/**************************** Solution1:  slding window 解法：O(n*k) *********************************************/
 var maxSlidingWindow = function (nums, k) {
   let window = [];
   let result = [];
@@ -25,67 +25,31 @@ var maxSlidingWindow = function (nums, k) {
   return result;
 };
 
-/**************** Solution2: Mono queue :是一个递增或递减的队列，可以用来维护滑动窗口区间的最值，即RMQ问题 *********************************
-  入队操作：队尾入队，会把前面破坏单调性的元素删除（维护单调性）
-  出队操作：如果队首元素超出区间范围，就将队首元素出队
-  元素性质：队首元素永远是当前区间的最值；元素入队的过程中该元素是当前队列的最值
+/*************************** Solution2: Mono quque单调队列 *******************************
 
+  单调队列 - 是一个递增或递减的队列，可以用来维护窗口区间的最值，即RMQ问题
   https://www.bilibili.com/video/BV1XS4y1p7qj/?vd_source=8b5297d974f6a5e72c60ec8ea33f2ff6
 */
-
-//自定义单调队列：
-class MonoQueue {
-  constructor() {
-    this.queue = [];
-  }
-
-  enqueue(value) {
-    let back = this.queue[this.queue.length - 1];
-
-    //模拟相继弹出的过程
-    while (back !== undefined && back < value) {
-      this.queue.pop();
-      back = this.queue[this.queue.length - 1]; // re-assign back
-    }
-
-    this.queue.push(value);
-  }
-
-  dequeue(value) {
-    let front = this.peek();
-    //当要弹出p的value和queue的出口处一样时,则要实际pop queue的出口元素了
-    if (front === value) {
-      this.queue.shift();
-    }
-  }
-
-  //出口处
-  peek() {
-    return this.queue[0];
-  }
-}
-// main function:
 var maxSlidingWindow = function (nums, k) {
   let result = [];
+  let window = new MonoQueue(); // <-- diff is here
 
-  let customized_queue = new MonoQueue();
-  let slow = 0; //滑动窗口start
-  let fast = 0; //滑动窗口end
-
-  //移动fast到k,入k个元素到queue中
+  let slow = 0;
+  let fast = 0;
+  //移动fast到k, 入k个元素到window中
   while (fast < k) {
-    customized_queue.enqueue(nums[fast]);
+    window.enqueue(nums[fast]);
     fast++;
   }
+  //初始result: result会添加一个最大值
+  result.push(window.peek());
 
-  //维护result, result会添加一个最大值
-  result.push(customized_queue.peek());
-
-  //继续移动fast直到nums末端
+  //继续移动fast直到nums末端,去更改window
   while (fast < nums.length) {
-    customized_queue.enqueue(nums[fast]); //queue入新元素： nums[fast]
-    customized_queue.dequeue(nums[slow]); //queue出无用的元素： nums[slow]
-    result.push(customized_queue.peek()); //维护result, result会添加一个最大值
+    window.enqueue(nums[fast]); //window入新元素： nums[fast]
+    window.dequeue(nums[slow]); //window出无用的元素：nums[slow]
+
+    result.push(window.peek()); //维护result, result会添加一个最大值
 
     slow++;
     fast++;
@@ -93,3 +57,36 @@ var maxSlidingWindow = function (nums, k) {
 
   return result;
 };
+
+/***********************  自定义单调递减的monoQueue ********************/
+class MonoQueue {
+  constructor() {
+    this.monoQueue = [];
+  }
+
+  // 在队尾添加元素value
+  enqueue(value) {
+    let back = this.monoQueue[this.monoQueue.length - 1];
+
+    //将小于value的元素全部弹出：
+    while (this.monoQueue.length && back < value) {
+      this.monoQueue.pop();
+      back = this.monoQueue[this.monoQueue.length - 1]; // re-assign back
+    }
+    //添加value到队尾
+    this.monoQueue.push(value);
+  }
+
+  //如果要pop的元素value是队头元素，那就要实际要删除队头元素
+  dequeue(value) {
+    //当要弹出的value和queue的出口处一样时,则要实际pop queue的出口元素了
+    if (this.monoQueue[0] === value) {
+      this.monoQueue.shift();
+    }
+  }
+
+  //队头存的是最大值
+  peek() {
+    return this.monoQueue[0];
+  }
+}
