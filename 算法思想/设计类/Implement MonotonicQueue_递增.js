@@ -1,4 +1,4 @@
-/***********************  自定义单调递减的monoQueue ********************/
+/*********************** 单调递增↗️的monoQueue ********************/
 class MonoQueue {
   constructor() {
     this.monoQueue = [];
@@ -8,8 +8,8 @@ class MonoQueue {
   enqueue(value) {
     let back = this.monoQueue[this.monoQueue.length - 1];
 
-    //将小于value的元素全部弹出：
-    while (this.monoQueue.length && back < value) {
+    //将所以大于value的元素全部弹出：
+    while (this.monoQueue.length && back > value) {
       this.monoQueue.pop();
       back = this.monoQueue[this.monoQueue.length - 1]; // re-assign back
     }
@@ -25,7 +25,7 @@ class MonoQueue {
     }
   }
 
-  //队头存的是最大值
+  //队头存的是最小值
   peek() {
     return this.monoQueue[0];
   }
