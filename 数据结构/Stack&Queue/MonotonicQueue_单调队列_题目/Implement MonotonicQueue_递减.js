@@ -26,7 +26,7 @@ class MonoQueue {
   }
 
   //队头存的是最大值
-  peek() {
+  max() {
     return this.monoQueue[0];
   }
 }

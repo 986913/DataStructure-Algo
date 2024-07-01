@@ -42,14 +42,14 @@ var maxSlidingWindow = function (nums, k) {
     fast++;
   }
   //初始result: result会添加一个最大值
-  result.push(window.peek());
+  result.push(window.max());
 
   //继续移动fast直到nums末端,去更改window
   while (fast < nums.length) {
     window.enqueue(nums[fast]); //window入新元素： nums[fast]
     window.dequeue(nums[slow]); //window出无用的元素：nums[slow]
 
-    result.push(window.peek()); //维护result, result会添加一个最大值
+    result.push(window.max()); //维护result, result会添加一个最大值
 
     slow++;
     fast++;
@@ -86,7 +86,7 @@ class MonoQueue {
   }
 
   //队头存的是最大值
-  peek() {
+  max() {
     return this.monoQueue[0];
   }
 }

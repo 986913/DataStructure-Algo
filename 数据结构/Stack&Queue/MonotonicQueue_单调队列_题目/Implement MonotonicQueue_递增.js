@@ -26,7 +26,7 @@ class MonoQueue {
   }
 
   //队头存的是最小值
-  peek() {
+  min() {
     return this.monoQueue[0];
   }
 }
