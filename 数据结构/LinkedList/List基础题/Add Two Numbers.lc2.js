@@ -10,6 +10,8 @@
  * @param {ListNode} l2
  * @return {ListNode}
  */
+
+/******************************* 分段双指针 + math ***************************************/
 var addTwoNumbers = function (l1, l2) {
   let dummyNode = new ListNode(-1);
   let curr = dummyNode;
