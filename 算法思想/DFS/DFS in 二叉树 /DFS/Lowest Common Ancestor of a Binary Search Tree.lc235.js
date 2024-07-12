@@ -50,14 +50,13 @@ var lowestCommonAncestor = function (root, p, q) {
 
 // helper function:
 const searchBT = (node, val1, val2) => {
-  if (!node) return null;
+  if (!node) return false;
 
   const findInLeft = searchBT(node.left, val1, val2);
   const findInRight = searchBT(node.right, val1, val2);
   //后序位置：回溯
   const findInMid = node.val === val1 || node.val === val2;
   if (findInMid) return node; //case 2: 当前节点等于val1或val2的值 那么当前节点是LCA节点
-
   if (findInLeft && findInRight) return node; //case 1: 当前节点能够在它的左右子树中分别找到p和q，则当前节点也是LCA节点,向上返回node
   return findInLeft || findInRight;
 
