@@ -19,7 +19,7 @@ var diameterOfBinaryTree = function (root) {
 
     const leftTreeDepth = traverse(node.left);
     const rightTreeDepth = traverse(node.right);
-    // change variable outside (后序位置，顺便计算最大直径: 就是一个节点的左右子树的最大深度之和)
+    // change variable outside (后序位置顺便计算最大直径: 就是一个节点的左右子树的最大深度之和)
     maxDiameter = Math.max(maxDiameter, leftTreeDepth + rightTreeDepth); // <--- diff is here
     return 1 + Math.max(leftTreeDepth, rightTreeDepth);
   };
