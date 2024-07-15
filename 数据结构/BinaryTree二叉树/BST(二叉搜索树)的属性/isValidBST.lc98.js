@@ -51,7 +51,7 @@ var isValidBST = function (root) {
     return isLeftValidBST && isRightValidBST;
   };
 
-  return helper(traversal);
+  return traversal(root);
 };
 
 /***************************** Solution3: 👍👍 DFS（分解思想） **********************************/
