@@ -33,7 +33,7 @@
 /*------------------------ Solution: Same as LC449 -------------------------- */
 /**
  * Encodes a tree to a single string.
- * 序列化: 这个答案用的前序序列话  DFS-PreOrder-遍历思想
+ * 序列化: 这个答案用的DFS-PreOrder-遍历思想
  * @param {TreeNode} root
  * @return {string}
  */

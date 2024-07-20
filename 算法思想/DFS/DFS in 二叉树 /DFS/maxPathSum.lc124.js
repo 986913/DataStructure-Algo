@@ -19,7 +19,7 @@ var maxPathSum = function (root) {
 
     const leftPathSum = Math.max(0, helper(node.left));
     const righPathSum = Math.max(0, helper(node.right));
-    // 当前节点为根的最大路径和，包括当前节点值加上左右子树的路径和
+    //后序位置: 当前节点为根的最大路径和，包括当前节点值加上左右子树的路径和
     const currentPathSum = node.val + leftPathSum + righPathSum;
     maxSum = Math.max(maxSum, currentPathSum); // 更新全局变量maxSum
     return node.val + Math.max(leftPathSum, righPathSum); //返回当前节点的最大pathSum
