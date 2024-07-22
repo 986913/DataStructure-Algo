@@ -1,3 +1,5 @@
+/************************************* LC211变形题 **************************************************/
+
 class TrieNode {
   constructor() {
     this.children = Array.from({ length: 26 }).fill(null);
