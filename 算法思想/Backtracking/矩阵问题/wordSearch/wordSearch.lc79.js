@@ -22,8 +22,6 @@
 
 /*---------------------------------- 👍 backtracking 模版 -----------------------------------------*/
 var exist = function (board, word) {
-  if (board == null || word == null || board.length == 0) return false; //edge case
-
   let m = board.length;
   let n = board[0].length;
 
@@ -62,7 +60,8 @@ var exist = function (board, word) {
 var exist = function (board, word) {
   let m = board.length;
   let n = board[0].length;
-  let memo = new Array(m).fill(-1).map(() => new Array(n).fill(false)); //备忘录
+  //备忘录, memo用于跟踪在DFS过程中哪些位置已经被访问过，以防止在一个递归路径中重复访问相同的位置。
+  let memo = new Array(m).fill(-1).map(() => new Array(n).fill(false));
 
   /****** helper function ******/
   const dfs = (board, i, j, wordIdx) => {
