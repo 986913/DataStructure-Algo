@@ -13,9 +13,9 @@
 
                                     [a,  b,  c]
                                     /    |     \  
-                                  a      b      c         <-- index=0时
+                                  a      b      c         <-- curIndex=0时
                                 / | \  / | \   / | \
-                              d   e  fd  e  f  d e  f     <-- index=1时 
+                              d   e  fd  e  f  d e  f     <-- curIndex=1时 
 
   Difference with LC 77 is: 
     LC77是在一个集合里面 求组合，所以需要startIdx告诉我之前已经收获了哪些元素，避免得到重复的组合
@@ -39,20 +39,20 @@ var letterCombinations = function (digits) {
   ];
   const result = [];
 
-  const traversal = (digits, curPath, index) => {
-    if (curPath.length === digits.length) {
+  const traversal = (str, curPath, curIndex) => {
+    if (curPath.length === str.length) {
       result.push(curPath.join(''));
       return;
     }
 
     //前序位置
-    let digit = +digits[index]; // eg: 2
+    let digit = +str[curIndex]; // eg: 2
     let letter = map[digit]; // eg: "abc"
 
     //i从0开始， 不需要startIdx (因为从两个集合里面取)
     for (let i = 0; i < letter.length; i++) {
       curPath.push(letter[i]);
-      traversal(digits, curPath, index + 1); // 注意是index+1,不是i+1。 index表示当前处理digits的下标(看上图index)
+      traversal(str, curPath, curIndex + 1); // 注意是index+1,不是i+1。 index表示当前处理digits的下标(看上图index)
       curPath.pop();
     }
     //后序位置
