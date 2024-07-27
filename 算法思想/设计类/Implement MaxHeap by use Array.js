@@ -1,9 +1,12 @@
 /*
-  buildMaxHeap([1, 2, 3, 4, 5, 6, 7]);  // [7, 4, 6, 1, 3, 2, 5] or any other valid max heap
-  buildMaxHeap([4, 6, 52, 10, 17, 28, 39, 43, 11]); // [52, 43, 39, 17, 10, 6, 28, 4, 11] or any other valid max heap
+  buildMaxHeap([1, 2, 3, 4, 5, 6, 7]);  
+  // [7, 4, 6, 1, 3, 2, 5] or any other valid max heap
+
+  buildMaxHeap([4, 6, 52, 10, 17, 28, 39, 43, 11]); 
+  // [52, 43, 39, 17, 10, 6, 28, 4, 11] or any other valid max heap
 */
 
-/******************** Main function s***************************************/
+/*********** Main function (same with implement maxheap by use array) ***********/
 const buildMaxHeap = (arr) => {
   let len = arr.length;
 
@@ -17,7 +20,8 @@ const buildMaxHeap = (arr) => {
 
   return arr;
 };
-/********************* helper function ***********************************/
+
+/**************** helper function **********************************************/
 const heapify = (arr, index) => {
   let len = arr.length;
 
