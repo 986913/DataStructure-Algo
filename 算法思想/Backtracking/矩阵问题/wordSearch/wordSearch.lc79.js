@@ -22,6 +22,8 @@
 
 /*---------------------------------- 👍 backtracking 模版 -----------------------------------------*/
 var exist = function (board, word) {
+  if (board == null || word == null || board.length == 0) return false; //edge case
+
   let m = board.length;
   let n = board[0].length;
 
@@ -53,28 +55,28 @@ var exist = function (board, word) {
     }
   }
 
-  return false;
+  return false; //全找了一遍，没找到
 };
 
 /*---------------------------------- 👍 backtracking 模版 - 带备忘录 -----------------------------------------*/
 var exist = function (board, word) {
   let m = board.length;
   let n = board[0].length;
-  //备忘录, memo用于跟踪在DFS过程中哪些位置已经被访问过，以防止在一个递归路径中重复访问相同的位置。
-  let memo = new Array(m).fill(-1).map(() => new Array(n).fill(false));
+  let memo = new Array(m).fill(-1).map(() => new Array(n).fill(false)); //<--- diff is here: 备忘录
 
   /****** helper function ******/
   const dfs = (board, i, j, wordIdx) => {
     if (i < 0 || i >= m || j < 0 || j >= n) return false;
-    if (board[i][j] !== word[wordIdx] || memo[i][j]) return false;
+    if (board[i][j] !== word[wordIdx]) return false;
+    if (memo[i][j] === 1) return false; // <--- diff is here：性能提升在这了，防止在同1次搜索中重复访问已经访问过的位置
     if (wordIdx === word.length - 1) return true;
 
-    memo[i][j] = true;
+    memo[i][j] = 1; // <--- diff is here
     const isExsitOnUp = dfs(board, i - 1, j, wordIdx + 1);
     const isExsitOnBelow = dfs(board, i + 1, j, wordIdx + 1);
     const isExsitOnLeft = dfs(board, i, j - 1, wordIdx + 1);
     const isExsitOnRight = dfs(board, i, j + 1, wordIdx + 1);
-    memo[i][j] = false;
+    memo[i][j] = -1; // <--- diff is here
     return isExsitOnUp || isExsitOnRight || isExsitOnBelow || isExsitOnLeft;
   };
 
