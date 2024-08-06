@@ -40,6 +40,7 @@ var letterCombinations = function (digits) {
   const result = [];
 
   const traversal = (str, curPath, curIndex) => {
+    // if (startIdx >= numDigits.length) 也行
     if (curPath.length === str.length) {
       result.push(curPath.join(''));
       return;
