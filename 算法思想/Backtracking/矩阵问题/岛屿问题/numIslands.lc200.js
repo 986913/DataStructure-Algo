@@ -30,21 +30,21 @@ var numIslands = function (grid) {
 };
 
 // helper function:
-const dfs = (grid, i, j) => {
-  let m = grid.length;
-  let n = grid[0].length;
+const dfs = (matrix, i, j) => {
+  let m = matrix.length;
+  let n = matrix[0].length;
 
   if (i < 0 || i >= m || j < 0 || j >= n) return; //base condition: 越界
-  if (grid[i][j] === '0') return; //base condition: 已遍历过（i,j) / 当前i,j位置已经被淹了
+  if (matrix[i][j] === '0') return; //base condition: 已遍历过（i,j) / 当前i,j位置已经被淹了
 
   //前序位置：
-  grid[i][j] = '0'; //把岛屿淹掉 (1变成0), 用来防止在后续遍历中重复访问同一片陆地，确保每个岛屿只被计数一次。
+  matrix[i][j] = '0'; //把岛屿淹掉 (1变成0), 用来防止在后续遍历中重复访问同一片陆地，确保每个岛屿只被计数一次。
 
   //这里不再是nide.left, node.right了， 而是i,j坐标的上下左右
-  dfs(grid, i + 1, j); // 上
-  dfs(grid, i - 1, j); // 下
-  dfs(grid, i, j + 1); // 右
-  dfs(grid, i, j - 1); // 左
+  dfs(matrix, i + 1, j); // 上
+  dfs(matrix, i - 1, j); // 下
+  dfs(matrix, i, j + 1); // 右
+  dfs(matrix, i, j - 1); // 左
 };
 
 /************************************ Solution : BFS   LC429，BFS模版变形题 **************************************/
@@ -66,12 +66,12 @@ var numIslands = function (grid) {
 };
 
 // helper function:
-const bfs = (grid, i, j) => {
-  let m = grid.length;
-  let n = grid[0].length;
+const bfs = (matrix, i, j) => {
+  let m = matrix.length;
+  let n = matrix[0].length;
 
   let queue = [[i, j]]; // <--- diff is here.  加进去的不是root了 而是[i，j]坐标
-  grid[i][j] = '0'; //把岛屿淹掉 (1变成0)
+  matrix[i][j] = '0'; //把岛屿淹掉 (1变成0)
 
   while (queue.length) {
     let len = queue.length;
@@ -81,24 +81,24 @@ const bfs = (grid, i, j) => {
 
       //diff are here， 加进去不再是node.left/right/children了，而是x,y坐标的上下左右
       //上
-      if (x - 1 >= 0 && grid[x - 1][y] === '1') {
+      if (x - 1 >= 0 && matrix[x - 1][y] === '1') {
         queue.push([x - 1, y]);
-        grid[x - 1][y] = '0';
+        matrix[x - 1][y] = '0';
       }
       //下
-      if (x + 1 < m && grid[x + 1][y] === '1') {
+      if (x + 1 < m && matrix[x + 1][y] === '1') {
         queue.push([x + 1, y]);
-        grid[x + 1][y] = '0';
+        matrix[x + 1][y] = '0';
       }
       //左
-      if (y - 1 >= 0 && grid[x][y - 1] === '1') {
+      if (y - 1 >= 0 && matrix[x][y - 1] === '1') {
         queue.push([x, y - 1]);
-        grid[x][y - 1] = '0';
+        matrix[x][y - 1] = '0';
       }
       //右
-      if (y + 1 < n && grid[x][y + 1] === '1') {
+      if (y + 1 < n && matrix[x][y + 1] === '1') {
         queue.push([x, y + 1]);
-        grid[x][y + 1] = '0';
+        matrix[x][y + 1] = '0';
       }
     }
   }
