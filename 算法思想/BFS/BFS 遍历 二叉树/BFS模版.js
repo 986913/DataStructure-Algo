@@ -63,10 +63,12 @@ var levelOrder = function (root) {
 
   let visited = [];
   let queue = [root];
+  // let depth=0; //optional: 记录tree总共有多少层。。
 
   while (queue.length) {
     let len = queue.length;
     let currLevel = [];
+    // depth++  //optional: 每进一次while循环就是进入了新的一层。。
 
     for (let i = 0; i < len; i++) {
       let node = queue.shift();
