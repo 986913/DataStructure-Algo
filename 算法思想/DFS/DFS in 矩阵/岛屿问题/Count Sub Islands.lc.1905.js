@@ -7,12 +7,12 @@
   ❗这道题不需要回溯❗，
  */
 
-/****************************** Solution : DFS 分解思想 LC200变形题 ************************************/
+/****************************** Solution : DFS 分解思想 LC200, 1254变形题 ************************************/
 // Main function:
 var countSubIslands = function (grid1, grid2) {
   let m = grid1.length;
   let n = grid1[0].length;
-  // diff is here: 提前去除(淹掉)不符合条件的格子
+  // diff is here --> 提前去除(淹掉)不符合条件的格子
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
       // 这个岛屿肯定不是子岛，淹掉
@@ -50,11 +50,11 @@ const dfs = (matrix, i, j) => {
   dfs(matrix, i, j + 1);
 };
 
-/************************************ Solution : BFS   LC200，BFS模版变形题 **************************************/
+/************************************ Solution : BFS   LC200，1254 BFS模版变形题 **************************************/
 var countSubIslands = function (grid1, grid2) {
   let m = grid1.length;
   let n = grid1[0].length;
-  // diff is here: 提前去除(淹掉)不符合条件的格子
+  // diff is here --> 提前去除(淹掉)不符合条件的格子
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
       // 这个岛屿肯定不是子岛，淹掉
