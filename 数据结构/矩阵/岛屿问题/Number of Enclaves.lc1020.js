@@ -70,6 +70,7 @@ var numEnclaves = function (grid) {
     for (let j = 0; j < n; j++) {
       if (grid[i][j] === 1) {
         area += 1;
+        // Don't call bfs here, 因为题目要求的是每个格子的数量，而不是"一整片格子"的数量
       }
     }
   }
