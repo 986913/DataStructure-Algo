@@ -22,7 +22,7 @@ var maxAreaOfIsland = function (grid) {
 
   return maxArea;
 };
-// helper function:
+// helper function: 给 dfs 函数设置返回值，记录每次淹没的陆地的个数
 const dfs = (matrix, i, j) => {
   let m = matrix.length;
   let n = matrix[0].length;
@@ -57,13 +57,13 @@ var maxAreaOfIsland = function (grid) {
 
   return maxArea;
 };
-// helper function:
+// helper function: 给 bfs 函数设置返回值，记录每次淹没的陆地的个数
 const bfs = (matrix, i, j) => {
   let m = matrix.length;
   let n = matrix[0].length;
 
   matrix[i][j] = 0; //把岛屿淹掉 (1变成0)
-  let area = 0; // <--- diff is here
+  let area = 1; // <--- diff is here
 
   let queue = [[i, j]];
   while (queue.length) {
@@ -71,27 +71,30 @@ const bfs = (matrix, i, j) => {
 
     for (let i = 0; i < len; i++) {
       let [x, y] = queue.shift();
-      area += 1; // <--- diff is here
 
       //上
       if (x - 1 >= 0 && matrix[x - 1][y] === 1) {
         queue.push([x - 1, y]);
         matrix[x - 1][y] = 0;
+        area += 1; // <-- diff is here
       }
       //下
       if (x + 1 < m && matrix[x + 1][y] === 1) {
         queue.push([x + 1, y]);
         matrix[x + 1][y] = 0;
+        area += 1; // <-- diff is here
       }
       //左
       if (y - 1 >= 0 && matrix[x][y - 1] === 1) {
         queue.push([x, y - 1]);
         matrix[x][y - 1] = 0;
+        area += 1; // <-- diff is here
       }
       //右
       if (y + 1 < n && matrix[x][y + 1] === 1) {
         queue.push([x, y + 1]);
         matrix[x][y + 1] = 0;
+        area += 1; // <-- diff is here
       }
     }
   }
