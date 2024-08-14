@@ -2,7 +2,7 @@
  * @param {number[][]} grid
  * @return {number}
  * 岛屿系列题目的核心考点就是用 DFS/BFS遍历二维数组
-  ❗这道题要回溯❗
+  ❗这道题要回溯❗ 因为这道题关注的是「树枝」（岛屿的遍历顺序），而不是「节点」（岛屿的每个格子）
  */
 
 /************************ Solution: DFS遍历思想 - 2D矩阵的DFS框架 （LC200变形题） **************************/
@@ -38,6 +38,6 @@ const dfs = (matrix, i, j, curPath, direction) => {
   dfs(matrix, i + 1, j, curPath, 'D'); // 下
   dfs(matrix, i, j - 1, curPath, 'L'); // 左
   dfs(matrix, i, j + 1, curPath, 'R'); // 右
-  curPath.push('B'); // “B”表示回撤，表示退回到上一个状态
+  curPath.push('B'); // <--- backtracking here, “B”表示回撤，表示退回到上一个状态
   return curPath;
 };
