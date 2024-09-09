@@ -8,9 +8,8 @@
  * @param {number[][]} prerequisites
  * @return {number[]}
  */
-
-/*************************** Solution1: 建图 + DFS遍历图路径，!无回溯（对应LC207 Solution1）****************************/
-var findOrder = function (numCourses, prerequisites) {
+/******************************** Solution1️⃣: 建图 + DFS遍历图路径，!无回溯（对应LC207 Solution1）****************************/
+const findOrder = (numCourses, prerequisites) => {
   /* step1: build prerequisites to directed graph */
   const graph = buildDirectedGraph(numCourses, prerequisites);
 
@@ -47,7 +46,7 @@ var findOrder = function (numCourses, prerequisites) {
   if (hasCycle) return [];
   return result.reverse(); //<-- diff is here:
 };
-// helper function:
+// Helper function:
 const buildDirectedGraph = (numCourses, prerequisites) => {
   let graph = Array.from({ length: numCourses }, () => []);
   for (let [course, pre] of prerequisites) {
@@ -58,8 +57,8 @@ const buildDirectedGraph = (numCourses, prerequisites) => {
   return graph;
 };
 
-/*************************** Solution2: 建图 + DFS遍历图路径 三色法（对应LC207 Solution2）****************************/
-var findOrder = function (numCourses, prerequisites) {
+/********************************* Solution2️⃣: 建图 + DFS遍历图路径 三色法（对应LC207 Solution2）****************************/
+const findOrder = (numCourses, prerequisites) => {
   /* step1: build prerequisites to directed graph */
   const graph = buildDirectedGraph(numCourses, prerequisites);
 
@@ -86,7 +85,7 @@ var findOrder = function (numCourses, prerequisites) {
 
   return result.reverse(); // <--- diff is here
 };
-// helper function:
+// Helper function:
 const buildDirectedGraph = (numCourses, prerequisites) => {
   // 图中共有 numCourses 个节点
   let graph = Array.from({ length: numCourses }, () => []);
@@ -98,38 +97,27 @@ const buildDirectedGraph = (numCourses, prerequisites) => {
   return graph;
 };
 
-/************************************ Solution3: BFS 👍👍  *******************************************/
-var findOrder = function (numCourses, prerequisites) {
+/********************************* Solution3️⃣: BFS拓扑排序 👍👍 对应LC207 Solution3 ***************************************/
+const findOrder = (numCourses, prerequisites) => {
   // 1. 建graph 和 indegree
-  let graph = new Map();
-  let indegree = new Array(numCourses).fill(0);
+  const { graph, indegree } = buildGraphAndIndegree(numCourses, prerequisites);
   let result = []; // <-- diff is here
-
-  for (let [course, pre] of prerequisites) {
-    let start = pre;
-    let end = course;
-    graph.set(start, [...(graph.get(start) || []), end]);
-    indegree[end]++;
-  }
 
   //2. 找到有向图的入口，(入度为0的点)
   let queue = [];
-  for (let i = 0; i < numCourses; i++) {
-    if (indegree[i] === 0) {
-      queue.push(i);
-    }
-  }
+  indegree.forEach((degree, index) => {
+    if (degree === 0) queue.push(index);
+  });
 
   //3. BFS拓扑排序
   let count = 0;
   while (queue.length) {
-    let node = queue.shift();
-    result[count] = node; // <-- diff is here
-    count += 1;
+    let cur = queue.shift();
+    result[count] = cur; // <-- diff is here
+    count++;
 
-    //得到且遍历当前node的所有后续课
-    let nextCourses = graph.get(node) || [];
-    for (let next of nextCourses) {
+    //得到且遍历当前课的所有后续课
+    for (let next of graph[cur]) {
       indegree[next]--;
       if (indegree[next] === 0) {
         queue.push(next);
@@ -137,5 +125,24 @@ var findOrder = function (numCourses, prerequisites) {
     }
   }
 
+  //返回结果
   return count === numCourses ? result : []; // <-- diff is here
+};
+// Helper function:
+const buildGraphAndIndegree = (numCourses, prerequisites) => {
+  let graph = Array.from({ length: numCourses }, () => []);
+  let indegree = Array.from({ length: numCourses }, () => 0);
+
+  for (let [course, pre] of prerequisites) {
+    let start = pre;
+    let end = course;
+
+    graph[start].push(end);
+    indegree[end]++;
+  }
+
+  return {
+    graph,
+    indegree,
+  };
 };

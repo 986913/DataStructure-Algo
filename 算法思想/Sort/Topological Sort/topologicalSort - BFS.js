@@ -1,55 +1,64 @@
 /**
- * @param {number} numCourses
- * @param {number[][]} prerequisites
- * @return {boolean}
+  用BFS or DFS来检测课程之间是否存在环路，如果存在环路，则无法完成所有课程，否则可以完成所有课程。
+  directed graph denotes: [precourse] --> [course]
  */
-/************************************** LC 207 ***************************************************/
-var canFinish = function (numCourses, prerequisites) {
-  // 1. 建graph 和 indegree
-  let graph = new Map(); // 图记录哪些课程是有依赖关系： { 先修课： [ 所有以该先修课为先决条件的后续课程们 ] }
-  let indegree = new Array(numCourses).fill(0); //每门课的入度/有多少指向我   方向是（后续课 <-- 先修课）
 
-  for (let [course, pre] of prerequisites) {
-    let start = pre;
-    let end = course;
-    /*
-        拿prerequisites = [[1后续课,0先修课],[2后续课,4先修课],[3后续课,2先修课]]举例，
-        图的方向是: 后续课 <-- 先修课  后续课的入度有所增加
-            indegree长这样： [0,1,1,1,0]
-            图就长这样: { 先修课： [ 所有以该先修课为先决条件的后续课程们 ] }
-            {
-                0 => [1],
-                4 => [2]
-                2 => [3]
-            }
-      */
-    graph.set(start, [...(graph.get(start) || []), end]);
-    indegree[end]++;
-  }
+/************************************ Solution: BFS 👍👍  ************************************************************/
+const canFinish = (numCourses, prerequisites) => {
+  /* Step1: Build the graph and indegree array to represent course dependencies: 构建图结构和入度数组。graph记录每门课程作为先决条件影响哪些后续课程，indegree记录每门课程有多少先决条件 */
+  const { graph, indegree } = buildGraphAndIndegree(numCourses, prerequisites);
 
-  //2. 找到有向图的入口，(入度为0的点)
+  /* Step2: Initialize BFS queue with courses that have no prerequisites (indegree === 0) 初始化队列，把所有入度为0的课程加入队列（即没有先决条件的课程）*/
   let queue = [];
-  for (let i = 0; i < numCourses; i++) {
-    if (indegree[i] === 0) {
-      queue.push(i);
-    }
-  }
+  indegree.forEach((degree, index) => {
+    if (degree === 0) queue.push(index);
+  });
 
-  //3. BFS拓扑排序
-  let count = 0;
+  /* Step3: Start BFS traversal to check if all courses can be finished. 使用BFS处理队列中的课程，依次处理每门课并减少依赖它的课程的入度。如果某课程入度减为 0，则把它加入队列*/
+  let count = 0; // Track number of courses processed
   while (queue.length) {
-    let node = queue.shift();
-    count += 1;
+    let cur = queue.shift(); // Dequeue a course
+    count++; // Increment count for each course with no prerequisites or whose prerequisites are met
 
-    //得到且遍历当前node的所有后续课,
-    let nextCourses = graph.get(node) || [];
-    for (let next of nextCourses) {
-      indegree[next]--; // update indegree
+    // Process the next courses dependent on the current one
+    for (let next of graph[cur]) {
+      indegree[next]--; // Reduce the indegree of dependent courses
       if (indegree[next] === 0) {
-        queue.push(next); // update queue
+        queue.push(next); // If the dependent course has no remaining prerequisites, add it to the queue
       }
     }
   }
 
+  /* Step4:  If count matches numCourses, all courses can be finished.如果队列处理过的课程数量与总课程数量相同，说明所有课程都可以完成，否则存在循环依赖*/
   return count === numCourses;
+};
+
+/* Helper function to build the directed graph and indegree array:
+  - Graph: an adjacency list where graph[i] contains all courses dependent on course i
+    邻接表graph长这样：[ [所有以课0为先决条件的后续课程们], [所有以课1为先决条件的后续课程们] ]
+                                    |                             |
+                                课0 index                       课1 index
+
+  - Indegree: an array where indegree[i] indicates how many prerequisites course i has
+    indegree长这样: [ [课0的入度数], [课1的入度数] ]
+                          |             |
+                      课0 index      课1 index
+*/
+const buildGraphAndIndegree = (numCourses, prerequisites) => {
+  let graph = Array.from({ length: numCourses }, () => []);
+  let indegree = Array.from({ length: numCourses }, () => 0);
+
+  // Build the graph and indegree array from the prerequisites list
+  for (let [course, pre] of prerequisites) {
+    let start = pre;
+    let end = course;
+
+    graph[start].push(end);
+    indegree[end]++; // <-- diff is here
+  }
+
+  return {
+    graph,
+    indegree,
+  };
 };
