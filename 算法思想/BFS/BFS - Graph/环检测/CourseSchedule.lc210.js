@@ -113,7 +113,7 @@ const findOrder = (numCourses, prerequisites) => {
   let count = 0;
   while (queue.length) {
     let cur = queue.shift();
-    result[count] = cur; // <-- diff is here
+    result[count] = cur; // <-- diff is here: 弹出节点的顺序即为拓扑排序结果
     count++;
 
     //得到且遍历当前课的所有后续课
