@@ -1,13 +1,19 @@
+/** Definition for a Node:
+	function Node(val,children) {
+		this.val = val;
+    this.children = children;
+	};
+ */
+
 /**
   Steps:
     1. 确定递归函数的 参数 和 返回值
     2. 确定终止条件
     3. 确定单层递归的逻辑
  **/
-
-/** ----------------------------- pre order: 中左右 ----------------------------- */
+/** ----------------------------- 二叉树 DFS pre order: 中左右 ----------------------------- */
 const preorderTraversal = (root) => {
-  let visted = [];
+  let visitedNodes = [];
 
   /*递归函数的 参数 和 返回值 */
   const helper = (node) => {
@@ -15,55 +21,53 @@ const preorderTraversal = (root) => {
     if (!node) return;
 
     /* 单层递归的逻辑 */
-    visted.push(node.val); // 🀄️
+    visitedNodes.push(node.val); // 🀄️
     helper(node.left); // 左
     helper(node.right); // 右
   };
 
   helper(root);
-  return visted;
+  return visitedNodes;
 };
-
-/** -----------------------------  in order: 左中右 ----------------------------- */
+/** -----------------------------  二叉树 DFS in order: 左中右 ----------------------------- */
 const inorderTraversal = (root) => {
-  let visted = [];
+  let visitedNodes = [];
 
   const helper = (node) => {
     if (!node) return;
 
     helper(node.left); // 左
-    visted.push(node.val); // 🀄️
+    visitedNodes.push(node.val); // 🀄️
     helper(node.right); // 右
   };
 
   helper(root);
-  return visted;
+  return visitedNodes;
 };
-
-/** -----------------------------   post order: 左右中 ----------------------------- */
+/** -----------------------------  二叉树 DFS post order: 左右中 ----------------------------- */
 const postorderTraversal = (root) => {
-  let visted = [];
+  let visitedNodes = [];
 
   const helper = (node) => {
     if (!node) return;
 
     helper(node.left); // 左
     helper(node.right); // 右
-    visted.push(node.val); // 🀄️
+    visitedNodes.push(node.val); // 🀄️
   };
 
   helper(root);
-  return visted;
+  return visitedNodes;
 };
 
-/** ----------------------------- N-aryTree多叉树 PreOrder遍历框架  ----------------------------- */
+/** ----------------------------- N-ary Tree 多叉树 PreOrder遍历框架  ----------------------------- */
 const preorderTraversal_Nary = (root) => {
-  let visted = [];
+  let visitedNodes = [];
 
   const traversal = (node) => {
     if (!node) return;
 
-    visted.push(node.val); //前序位置, console.log('进入节点 ' + node);
+    visitedNodes.push(node.val); //前序位置, console.log('进入节点 ' + node);
     for (let child of node.children) {
       traversal(child);
     }
@@ -71,12 +75,11 @@ const preorderTraversal_Nary = (root) => {
   };
 
   traversal(root);
-  return visted;
+  return visitedNodes;
 };
-
-/** ----------------------------- N-aryTree多叉树 PostOrder遍历框架 ----------------------------- */
+/** ----------------------------- N-ary Tree 多叉树 PostOrder遍历框架 ----------------------------- */
 const postorderTraversal_Nary = (root) => {
-  let visted = [];
+  let visitedNodes = [];
 
   const traversal = (node) => {
     if (!node) return;
@@ -85,14 +88,14 @@ const postorderTraversal_Nary = (root) => {
     for (let child of node.children) {
       traversal(child);
     }
-    visted.push(node.val); //后序位置, console.log('离开节点 ' + node);
+    visitedNodes.push(node.val); //后序位置, console.log('离开节点 ' + node);
   };
 
   traversal(root);
-  return visted;
+  return visitedNodes;
 };
 
-/*********************************** DFS  vs Backtracking ********************************************/
+/*********************************** DFS VS Backtracking ****************************************/
 // DFS 算法，关注点在节点
 var traverse = function (root) {
   if (root == null) return;
