@@ -4,16 +4,16 @@ const preorderTraversal_Graph = (graph) => {
   // 记录被遍历过的节点
   let visitedNodes = [];
 
-  const traversal = (graph, nodeIndex) => {
-    if (nodeIndex < 0 || nodeIndex >= graph.length) return;
+  const traversal = (graph, srcIndex) => {
+    if (srcIndex < 0 || srcIndex >= graph.length) return;
     // 需要一个 visited 数组记录被遍历过的节点，避免走回头路陷入死循环
-    if (visited[nodeIndex]) return;
+    if (visited[srcIndex]) return;
 
     // 前序位置
-    visited[nodeIndex] = true;
-    visitedNodes.push(nodeIndex); //更新visitedNodes, 记录被访问的节点索引
+    visited[srcIndex] = true;
+    visitedNodes.push(srcIndex); //更新visitedNodes, 记录被访问的节点索引
 
-    for (let neighbor of graph[nodeIndex]) {
+    for (let neighbor of graph[srcIndex]) {
       traversal(graph, neighbor.to);
     }
     // 后序位置（如果需要，可在这里添加逻辑）
