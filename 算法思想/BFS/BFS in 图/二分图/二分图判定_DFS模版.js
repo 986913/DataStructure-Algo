@@ -1,4 +1,4 @@
-/********************************* 二分图判定框架 *********************************/
+/***************************** 二分图判定框架（DFS遍历图节点模版-稍加变形） *********************************/
 
 const preorderTraversal_Graph = (graph) => {
   // boolean数组，每个元素表示图中相应节点是否在当前路径中
@@ -12,7 +12,7 @@ const preorderTraversal_Graph = (graph) => {
     visitedNodes.push(srcIndex); //更新visitedNodes, 记录被访问的节点索引
     for (let neighbor of graph[srcIndex]) {
       // 相邻节点neighbor没被访问过
-      if (!visited[neighbor.to]) {
+      if (visited[neighbor.to] === false) {
         // 那么应该给节点neighbor涂上和节点srcIndex不同的颜色
         // 然后继续遍历
         traversal(graph, neighbor.to);
