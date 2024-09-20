@@ -55,17 +55,17 @@ var isBipartite = function (graph) {
     visited[startIdx] = true;
 
     while (queue.length && isErFenTu) {
-      let nodeIdx = queue.shift();
+      let currIdx = queue.shift();
 
-      for (let neibor of graph[nodeIdx]) {
+      for (let neibor of graph[currIdx]) {
         //如果相邻节点neighbor没被访问过:
         if (visited[neibor] === false) {
-          color[neibor] = !color[nodeIdx]; // <--- 把邻居neibor染成和当前nodeIdx节点不同的颜色啦
+          color[neibor] = !color[currIdx]; // <--- 把邻居neibor染成和当前nodeIdx节点不同的颜色啦
           queue.push(neibor); //<--- 然后把邻居放入queue
           visited[neibor] = true; //<--- 然后把邻居标记已被访问
         } else {
           //如果相邻节点neighbor被访问过,那么应该比较节点neighbor和当前节点nodeIdx的颜色
-          if (color[neibor] === color[nodeIdx]) {
+          if (color[neibor] === color[currIdx]) {
             isErFenTu = false;
             return;
           }
