@@ -59,6 +59,7 @@ var closedIsland = function (grid) {
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
       if (i === 0 || i == m - 1 || j === 0 || j == n - 1) {
+        // 多了个if判断
         if (grid[i][j] === 0) {
           bfs(grid, i, j);
         }
