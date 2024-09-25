@@ -92,7 +92,6 @@ var findCircleNum = function (isConnected) {
   let n = isConnected.length;
   let visited = new Array(n).fill(false);
   let count = 0;
-
   // BFS Helper function <--- diff
   const bfs = (startIdx) => {
     let queue = [startIdx];

@@ -32,14 +32,14 @@
 /****************************** 根据多叉树的遍历框架 改写出 图的BFS代码框架 ***************************/
 
 // BFS遍历图的所有节点，从索引是startNodeIndex的节点开始进行BFS，且记录遍历的步数
-var levelOrder = function (graph, startNodeIndex) {
+var levelOrder = function (graph, srcIndex) {
   if (!graph) return [];
 
   let visitedNodes = [];
-  let queue = [startNodeIndex];
+  let queue = [srcIndex];
 
   let visited = new Array(graph.length).fill(false); // <--- diff is here，用于标记每个节点是否已经被访问过，初始化为false
-  visited[startNodeIndex] = true; // <--- diff is here
+  visited[srcIndex] = true; // <--- diff is here
   // let step = 0;     //optional: 记录遍历的步数
 
   while (queue.length) {
@@ -68,5 +68,5 @@ var levelOrder = function (graph, startNodeIndex) {
       [],                        // 节点 5 没有邻居
   ];
 
-  bfsTraversal_Graph(graph);  //输出被访问的节点索引：[0, 1, 3, 2, 4, 5]s
+  bfsTraversal_Graph(graph);  //输出被访问的节点索引：[0, 1, 3, 2, 4, 5]
 */
