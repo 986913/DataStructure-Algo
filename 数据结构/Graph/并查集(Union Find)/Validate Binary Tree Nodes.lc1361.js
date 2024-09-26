@@ -5,8 +5,62 @@
  * @return {boolean}
  */
 
-/******************* Solution: 直接用写好的 UnionFound class （LC261变形题） ********************/
-var validateBinaryTreeNodes = function (n, leftChild, rightChild) {};
+/******************* Solution1: 检查入度 + union found检测成环 （LC261变形题） ********************/
+var validateBinaryTreeNodes = function (n, leftChild, rightChild) {
+  // step1: create indegree, only root has indegree 0, other has indegree 1
+  const indegree = createIndegree(n, leftChild, rightChild);
+  let zeroIndegreeCount = 0;
+  for (let i = 0; i < n; i++) {
+    if (indegree[i] === 0) zeroIndegreeCount++;
+    else if (indegree[i] > 1) return false;
+  }
+  /*
+    zeroIndegreeCount === 0 是这个case:
+              0
+            /   \
+          1       2
+
+    0 -> 1
+    0 -> 2
+    1 -> 0
+    2 -> 0
+    有0个节点入度都是0 （0节点入度是2， 1节点入度是1,  2节点入度是1 ）
+    ------------------------------------------------------------
+    zeroIndegreeCount > 1 是这个case:
+              0      2
+            /         \
+          1            3
+
+    0 -> 1
+    3 -> 3
+    有两个节点(0和2)入度都是0
+  */
+  if (zeroIndegreeCount === 0 || zeroIndegreeCount > 1) return false;
+
+  // step2:  use union find to check for single 1 connected component.
+  let uf = new UnionFound(n);
+  for (let i = 0; i < n; i++) {
+    if (leftChild[i] !== -1) {
+      uf.union(leftChild[i], i);
+    }
+    if (rightChild[i] !== -1) {
+      uf.union(rightChild[i], i);
+    }
+  }
+  return uf.count() === 1; //合理的树最终connected component个数就是1
+};
+
+// Helper function:
+const createIndegree = (n, leftChild, rightChild) => {
+  let indegree = Array.from({ length: n }, () => 0);
+  leftChild.forEach((child) => {
+    if (child !== -1) indegree[child]++;
+  });
+  rightChild.forEach((child) => {
+    if (child !== -1) indegree[child]++;
+  });
+  return indegree;
+};
 // Helper class:
 class UnionFound {
   // n 为图中节点的个数
