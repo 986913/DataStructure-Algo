@@ -54,7 +54,7 @@ class UnionFound {
     const rootQ = this.find(q);
     if (rootP === rootQ) return;
 
-    this.parent[rootQ] = root; // 将两个不同集合合并
+    this.parent[rootQ] = rootP; // 将两个不同集合合并
     this._count--; // 两个连通分量合并成一个连通分量
   }
   // 判断节点 p 和节点 q 是否连通
