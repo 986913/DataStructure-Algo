@@ -3,6 +3,9 @@
  * @param {number[]} leftChild
  * @param {number[]} rightChild
  * @return {boolean}
+
+  Union-Find 不需要提前找出哪个节点是根，因为通过合并操作会动态确定每个节点的父节点，最终形成一个连通分量，并确保没有环。
+  在DFS方法中，我们需要显式地知道哪个节点是根节点来从它开始遍历，但Union-Find通过动态追踪各个节点的父节点隐式解决了这一点。
  */
 
 /******************* Solution1: 检查入度 + union found检测成环 （LC261变形题） ********************/
@@ -98,3 +101,57 @@ class UnionFound {
     return this._count;
   }
 }
+
+/******************* Solution2: 检查入度 + DFS遍历树检测成环   （LC261变形题） ********************/
+var validateBinaryTreeNodes = function (n, leftChild, rightChild) {
+  // step1: create indegree
+  const indegree = createIndegree(n, leftChild, rightChild);
+
+  // Identify the root node (node with indegree 0)
+  let root = -1;
+  let zeroIndegreeCount = 0;
+  for (let i = 0; i < n; i++) {
+    if (indegree[i] === 0) {
+      root = i;
+      zeroIndegreeCount++;
+    } else if (indegree[i] > 1) {
+      return false; // Invalid if any node has indegree > 1
+    }
+  }
+  // There must be exactly one root node
+  if (zeroIndegreeCount !== 1) return false;
+
+  // step2: use dfs to traverse tree to detect cycle
+  let hasCycle = false;
+  let visited = Array.from({ length: n }, () => false);
+  const dfs = (rootIdx) => {
+    if (rootIdx === -1 || hasCycle) return; // Base case, stop at null nodes
+    if (visited[rootIdx]) {
+      hasCycle = true;
+      return;
+    }
+
+    visited[rootIdx] = true;
+    dfs(leftChild[rootIdx]);
+    dfs(rightChild[rootIdx]);
+  };
+
+  dfs(root); // Start DFS from the root node
+  if (hasCycle) return false;
+  // Ensure all nodes are visited
+  const hasUnvisitedNode = visited.includes(false);
+  if (hasUnvisitedNode) return false;
+
+  return true;
+};
+// Helper function to create indegree array
+const createIndegree = (n, leftChild, rightChild) => {
+  let indegree = Array.from({ length: n }, () => 0);
+  leftChild.forEach((child) => {
+    if (child !== -1) indegree[child]++;
+  });
+  rightChild.forEach((child) => {
+    if (child !== -1) indegree[child]++;
+  });
+  return indegree;
+};
