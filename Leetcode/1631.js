@@ -1,3 +1,8 @@
+/**
+ * @param {number[][]} heights
+ * @return {number}
+ */
+
 /*************************   Solution: dijkstra 算法 (会用到PriortyQueue class) ******************************/
 
 /****************** Main function ******************/
