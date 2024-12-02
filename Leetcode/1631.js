@@ -10,8 +10,11 @@ var minimumEffortPath = function (heights) {
   let m = heights.length;
   let n = heights[0].length;
 
-  let effortTo = dijkstra(heights); // dijkstra returns the 2D array effortTo
-  return effortTo[m - 1][n - 1]; // Return the value at the bottom-right corner
+  // step1: 使用 dijkstra 算法计算从 (0, 0) 到每个格子的最小权重(effort），returns the 2D array effortTo
+  let effortTo = dijkstra(heights);
+
+  // step2: 返回右下角格子的最小权重（effort）
+  return effortTo[m - 1][n - 1];
 };
 
 /****************** Helper function ******************/
@@ -20,14 +23,17 @@ const dijkstra = (matrix) => {
   let n = matrix[0].length;
 
   // let effortTo = Array.from({ length: m }, () => Array(n).fill(Infinity));
+  // step1: 正着来，初始化 权重矩阵/effortTo矩阵，每个格子初始化为Infinity
   let effortTo = Array.from({ length: m }, () =>
     Array.from({ length: n }, () => Infinity)
   );
-  effortTo[0][0] = 0;
+  effortTo[0][0] = 0; // 起点 (0, 0) 的权重/effort 为 0
 
+  // step2: 正着来, 优先级队列 effortFromStart 较小的排在前面
   let pq = new MyPriorityQueue((a, b) => a.effortFromStart - b.effortFromStart);
-  pq.enqueue(new State(0, 0, 0));
 
+  // step3: 从起点 start(0,0) 开始进行 BFS
+  pq.enqueue(new State(0, 0, 0));
   while (!pq.isEmpty()) {
     let {
       x: curX,
@@ -35,8 +41,10 @@ const dijkstra = (matrix) => {
       effortFromStart: curEffortFromStart,
     } = pq.dequeue();
 
-    // If the current node is the destination (bottom-right corner), return the effort
-    if (curX === m - 1 && curY === n - 1) return effortTo; // Debugging: ensure the path is correct
+    // 遇到终点提前返回：
+    if (curX === m - 1 && curY === n - 1) return effortTo;
+
+    // 正着来: 已经有一条权重更小/effort更小 的路径 effortTo[curX][curY] 到达curNode节点了，则跳过
     if (curEffortFromStart > effortTo[curX][curY]) continue;
 
     for (let [nextX, nextY] of adj(matrix, curX, curY)) {
@@ -45,15 +53,15 @@ const dijkstra = (matrix) => {
         effortTo[curX][curY],
         Math.abs(matrix[curX][curY] - matrix[nextX][nextY])
       );
-
+      // 正着来: 看看从 curNode 达到 nextNode 的权重(effort)是否会更小
       if (effortToNextNode < effortTo[nextX][nextY]) {
         effortTo[nextX][nextY] = effortToNextNode;
         pq.enqueue(new State(nextX, nextY, effortToNextNode));
       }
     }
   }
-
-  return effortTo; // Ensure the correct return value
+  //返回完整的重矩阵(effortTo矩阵)
+  return effortTo;
 };
 
 const adj = (matrix, x, y) => {

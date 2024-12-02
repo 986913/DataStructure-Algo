@@ -12,15 +12,15 @@ var networkDelayTime = function (times, n, k) {
   // step 1: build graph
   let graph = buildGraph(n, times);
 
-  // step 2:  dijkstra - 计算以节点 k 为起点到其他节点的 最短路径(权重)
-  let distTo = dijkstra(graph, k);
+  // step 2: 使用 dijkstra 算法 计算从节点 k 到其他所有节点的最小权重 (最快路径 - 从k发送信号到各节点所需时间的最小值)
+  let timeTo = dijkstra(graph, k);
 
-  // step 3: 找到最长的那一条 最短路径(权重)
+  // step 3: 找到最大的最小权重 （即信号到达所有节点所需的最大时间）
   let result = 0;
   // 注意节点从 1 开始
-  for (let i = 1; i < distTo.length; i++) {
-    if (distTo[i] === Infinity) return -1; // 有节点不可达，返回 -1
-    result = Math.max(result, distTo[i]);
+  for (let i = 1; i < timeTo.length; i++) {
+    if (timeTo[i] === Infinity) return -1; // 有节点不可达，返回 -1
+    result = Math.max(result, timeTo[i]);
   }
   return result;
 };
@@ -37,39 +37,42 @@ const buildGraph = (n, edges) => {
 };
 
 class State {
-  constructor(id, distFromStart) {
+  constructor(id, timeFromStart) {
     this.id = id; // 图节点的 id
-    this.distFromStart = distFromStart; // 从 start 节点到当前节点的距离
+    this.timeFromStart = timeFromStart; // 从 start 节点到当前节点的距离
   }
 }
 
 const dijkstra = (graph, startIdx) => {
-  let V = graph.length;
-  let distTo = Array.from({ length: V }, () => Infinity);
-  distTo[startIdx] = 0;
+  // step1: 正着来，初始化 权重矩阵/timeTo矩阵，每个格子初始化为Infinity
+  let timeTo = Array.from({ length: graph.length }, () => Infinity);
+  timeTo[startIdx] = 0; // 起点到自身的时间为0
 
-  let pq = new MyPriorityQueue((a, b) => a.distFromStart - b.distFromStart);
+  // step2: 正着来: 优先级队列 timeFromStart 较小的排在前面
+  let pq = new MyPriorityQueue((a, b) => a.timeFromStart - b.timeFromStart);
+
+  // step3: 从起点 startIdx 开始进行 BFS
   pq.enqueue(new State(startIdx, 0));
-
   while (!pq.isEmpty()) {
-    let { id: curNodeId, distFromStart: curDistFromStart } = pq.dequeue();
+    let { id: curNodeId, timeFromStart: curDistFromStart } = pq.dequeue();
 
-    if (curDistFromStart > distTo[curNodeId]) continue;
+    // 正着来: 已经有一条时间更小的路径 timeTo[curNodeId] 到达 curNode 节点了，则跳过
+    if (curDistFromStart > timeTo[curNodeId]) continue;
 
     for (let neighbor of graph[curNodeId]) {
       let nextNodeId = neighbor[0];
       let weight = neighbor[1];
 
-      // 看看从 curNode 达到 nextNode 的距离(权重)是否会更短
-      let distToNextNode = distTo[curNodeId] + weight;
-      if (distToNextNode < distTo[nextNodeId]) {
-        distTo[nextNodeId] = distToNextNode;
-        pq.enqueue(new State(nextNodeId, distToNextNode));
+      // 正着来，看看从 curNode 达到 nextNode 权重(时间)是否会更小
+      let timeToNextNode = timeTo[curNodeId] + weight;
+      if (timeToNextNode < timeTo[nextNodeId]) {
+        timeTo[nextNodeId] = timeToNextNode;
+        pq.enqueue(new State(nextNodeId, timeToNextNode));
       }
     }
   }
 
-  return distTo;
+  return timeTo;
 };
 
 class MyPriorityQueue {
