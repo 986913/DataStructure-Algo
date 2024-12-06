@@ -26,6 +26,7 @@
     space complexity            O(1)
 */
 
+/***************************** 基础版 ******************************/
 const insertionSort = (nums) => {
   /* 外循环loop nums, 其中i就是当前索引 
     (已排序好的最后一个元素索引: sortedIdx）*/
@@ -42,6 +43,33 @@ const insertionSort = (nums) => {
     // swap 当前index(已排序部分最后一个元素) 和 未排序部分中最小元素
     if (sortedIdx !== minIndex) {
       [nums[sortedIdx], nums[minIndex]] = [nums[minIndex], nums[sortedIdx]];
+    }
+  }
+
+  return nums;
+};
+
+/************************* 稳定性 优化版 *************************/
+const sortArray = (nums) => {
+  for (let i = 0; i < nums.length; i++) {
+    let sortedIdx = i;
+    let minIndex = i;
+
+    for (let j = i + 1; j < nums.length; j++) {
+      if (nums[j] < nums[minIndex]) {
+        minIndex = j;
+      }
+    }
+    if (sortedIdx !== minIndex) {
+      //[nums[sortedIdx], nums[minIndex]] = [nums[minIndex], nums[sortedIdx]];
+
+      //优化： 将 nums[sortedIndex.....minIndex] 的元素整体向后移动一位
+      let minNumber = nums[minIndex];
+      // 数组搬移数据的操作
+      for (let i = minIndex; i > sortedIdx; i--) {
+        nums[i] = nums[i - 1];
+      }
+      nums[sortedIdx] = minNumber;
     }
   }
 
