@@ -1,44 +1,51 @@
 /* 
   Insertion sort：
-  插入排序的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。
+    先遍历一遍数组，找到数组中的最小值，然后把它和数组的第一个元素交换位置；
+    接着再遍历一遍数组，找到第二小的元素，和数组的第二个元素交换位置；
+    以此类推，直到整个数组有序。
   
-  Big O：
-    best time complexity     O(n)
-    average time complexity  O(n²)
-    worst time complexity    O(n²)
-    space complexity         O(1)
-
+  ----------------
   算法步骤 in general:
-    将第一待排序序列第一个元素看做一个有序序列，把第二个元素到最后一个元素当成是未排序序列。
-    从头到尾依次扫描未排序序列，将扫描到的每个元素插入有序序列的适当位置。（如果待插入的元素与有序序列中的某个元素相等，则将待插入元素插入到相等元素的后面。）
+    双层for循环。将数组分为sorted和unsorted两部分，
+    外循环控制走的轮数(arr.length) 同时sorted index也就是 i 本身在走, 
+    内循环负责找出最小/值的索引(minIndex). 
+    外循环每走完一轮,如果最小值的index和sorted index不一样 则进行swap.
 
-  算法步骤 in details:
-    1.把 n 个待排序的元素看成为一个有序表和一个无序表，开始时有序表中只包含一个元素，无序表中包含有n-1个元素
-    2.开始寻找插入点： 
-      排序过程中每次从无序表中取出第一个元素arr[i]存下来命为currValue，然后对currValue和currValue之前所有的元素进行比对：
-      因为这是一个持续的过程所以要用while, 如果之前任意的元素比currValue大，那么前面大的元素要shift to arr[i]坑的位置，然后把坑往前移动，
-      重复以上动作直到之前的元素小于currValue退出while.
-    3.插入点找到后，就把之前存的currValue插入进去 使之成为新的有序表
+    其实sortedIndex相当于一个分割线
+        索引 < sortedIndex 的元素都是已排序的
+        索引 >= sortedIndex 的元素都是未排序的
+        初始化为 0，表示整个数组都是未排序的
+
+  ----------------
+  Selection sorting不是稳定排序
+  Selection sorting  是原地排序
+  Big O：
+    best    time complexity     O(n²)
+    average time complexity     O(n²)
+    worst   time complexity     O(n²)
+    space complexity            O(1)
 */
 
-//https://www.youtube.com/watch?v=i-SKeOcBwko&ab_channel=mycodeschool
+const insertionSort = (nums) => {
+  /* 外循环loop nums, 其中i就是当前索引 
+    (已排序好的最后一个元素索引: sortedIdx）*/
+  for (let i = 0; i < nums.length; i++) {
+    let sortedIdx = i;
+    let minIndex = i; //注意：初始化为i
 
-const insertionSort = (arr) => {
-  /* 1. 外层for loop控制轮数，范围1到n */
-  for (let i = 1; i < arr.length; i++) {
-    let currValue = arr[i]; // save the value that need to be inserted to somewhere
-
-    /* 2. find the insert index: while控制shifting */
-    while (arr[i - 1] > currValue) {
-      arr[i] = arr[i - 1]; // use arr[i - 1] to fill up hole, when arr[i - 1] > currValue
-      i--; // continue to move hole to the left
+    /* 内循环找出 未排序中最小值的index */
+    for (let j = i + 1; j < nums.length; j++) {
+      if (nums[j] < nums[minIndex]) {
+        minIndex = j;
+      }
     }
-
-    /* 3. found the insert index is i --> fill up hole with currentValue(每轮结束会insert value) */
-    arr[i] = currValue;
+    // swap 当前index(已排序部分最后一个元素) 和 未排序部分中最小元素
+    if (sortedIdx !== minIndex) {
+      [nums[sortedIdx], nums[minIndex]] = [nums[minIndex], nums[sortedIdx]];
+    }
   }
 
-  return arr;
+  return nums;
 };
 
 // insertionSort([-2, 100, 34, 1, 0, 4, 88, 67]);
