@@ -1,38 +1,75 @@
 /* 
-  Selection Sort 🙅‍♀️: 没有bubble sort和insertion sort好使
+  Selection sort：
+    先遍历一遍数组，找到数组中的最小值，然后把它和数组的第一个元素交换位置；
+    接着再遍历一遍数组，找到第二小的元素，和数组的第二个元素交换位置；
+    以此类推，直到整个数组有序。
+  
+  ----------------
+  算法步骤 in general:
+    双层for循环。将数组分为sorted和unsorted两部分，
+    外循环控制走的轮数(arr.length) 同时sorted index也就是 i 本身在走, 
+    内循环负责找出最小/值的索引(minIndex). 
+    外循环每走完一轮,如果最小值的index和sorted index不一样 则进行swap.
 
-  Big O:
-    best time complexity     O(n2) 🙅‍♀️ 
-    average time complexity  O(n2)
-    worst time complexity    O(n2)
+    其实sortedIndex相当于一个分割线
+        索引 < sortedIndex 的元素都是已排序的
+        索引 >= sortedIndex 的元素都是未排序的
+        初始化为 0，表示整个数组都是未排序的
 
-    space complexity         O(1)
-
-  选择排序是一种简单直观的排序算法，无论什么数据进去都是 O(n²) 的时间复杂度。
-  所以用到它的时候，数据规模越小越好。唯一的好处可能就是不占用额外的内存空间了吧
-
-  算法步骤
-  1.首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置
-  2.再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。
-  3.重复第二步，直到所有元素均排序完毕。
-
-  动画：https://sort.hust.cc/2.selectionsort
+  ----------------
+  Selection sorting不是稳定排序
+  Selection sorting  是原地排序
+  Big O：
+    best    time complexity     O(n²)
+    average time complexity     O(n²)
+    worst   time complexity     O(n²)
+    space complexity            O(1)
 */
 
-function selectionSort(arr) {
-  /* outer loop control how many round should have (arr.length), i is sorting index */
-  for (let i = 0; i < arr.length; i++) {
-    let minIndex = i; // for tracking the min value's index
-    // 内循环负责找出最小值的index (inner loop is for find/updating minumn values's index)
-    for (let j = i + 1; j < arr.length; j++) {
-      if (arr[j] < arr[minIndex]) minIndex = j;
-    }
+/***************************** 基础版 ******************************/
+const selectionSort = (nums) => {
+  /* 外循环loop nums, 其中i就是当前索引  (已排序好的最后一个元素索引: sortedIdx）*/
+  for (let i = 0; i < nums.length; i++) {
+    let sortedIdx = i;
+    let minIndex = i; //注意：初始化为i
 
-    //每走完一轮,如果最小值的index和sorting index不一样 则进行swap.
-    if (minIndex !== i) [arr[minIndex], arr[i]] = [arr[i], arr[minIndex]];
+    /* 内循环找出 未排序中最小值的index */
+    for (let j = i + 1; j < nums.length; j++) {
+      if (nums[j] < nums[minIndex]) {
+        minIndex = j;
+      }
+    }
+    // swap 当前index(已排序部分最后一个元素) 和 未排序部分中最小元素
+    if (sortedIdx !== minIndex) {
+      [nums[sortedIdx], nums[minIndex]] = [nums[minIndex], nums[sortedIdx]];
+    }
   }
 
-  return arr;
-}
+  return nums;
+};
 
-//selectionSort([19, 5, 25, 3, 10]); //[3,5,10,19,25]
+/************************* 稳定性 优化版 *************************/
+const selectionSort = (nums) => {
+  for (let i = 0; i < nums.length; i++) {
+    let sortedIdx = i;
+    let minIndex = i;
+
+    for (let j = i + 1; j < nums.length; j++) {
+      if (nums[j] < nums[minIndex]) {
+        minIndex = j;
+      }
+    }
+    if (sortedIdx !== minIndex) {
+      //[nums[sortedIdx], nums[minIndex]] = [nums[minIndex], nums[sortedIdx]];
+      //优化： 将 nums[sortedIndex.....minIndex] 的元素整体向后移动一位
+      let minNumber = nums[minIndex];
+      // 数组搬移数据的操作
+      for (let i = minIndex; i > sortedIdx; i--) {
+        nums[i] = nums[i - 1];
+      }
+      nums[sortedIdx] = minNumber;
+    }
+  }
+
+  return nums;
+};

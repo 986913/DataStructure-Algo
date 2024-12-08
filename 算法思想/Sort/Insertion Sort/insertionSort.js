@@ -1,26 +1,21 @@
 /* 
   Insertion sort：
-    先遍历一遍数组，找到数组中的最小值，然后把它和数组的第一个元素交换位置；
-    接着再遍历一遍数组，找到第二小的元素，和数组的第二个元素交换位置；
-    以此类推，直到整个数组有序。
+  和 Selection sort相似，把n个带排序的元素看成一个sorted和一个unsorted, 
+  开始时sorted中只包含一个元素，unsorted中会有n-1个元素，
+  在 nums[0..sortedIndex-1] 这个部分有序的数组中，找到unsorted第一个元素nums[sortedIndex]应该插入的位置，然后进行插入
   
   ----------------
   算法步骤 in general:
-    双层for循环。将数组分为sorted和unsorted两部分，
-    外循环控制走的轮数(arr.length) 同时sorted index也就是 i 本身在走, 
-    内循环负责找出最小/值的索引(minIndex). 
-    外循环每走完一轮,如果最小值的index和sorted index不一样 则进行swap.
+  外层for loop控制轮数，范0到n-1。 
+  while控制shifting，每次循环会更新insertIdx
+  外层for loop每轮结束会插入元素
 
-    其实sortedIndex相当于一个分割线
-        索引 < sortedIndex 的元素都是已排序的
-        索引 >= sortedIndex 的元素都是未排序的
-        初始化为 0，表示整个数组都是未排序的
 
   ----------------
-  Selection sorting不是稳定排序
-  Selection sorting  是原地排序
+  Insertion sorting  是稳定排序
+  Insertion sorting  是原地排序
   Big O：
-    best    time complexity     O(n²)
+    best    time complexity     O(n)
     average time complexity     O(n²)
     worst   time complexity     O(n²)
     space complexity            O(1)
@@ -28,52 +23,19 @@
 
 /***************************** 基础版 ******************************/
 const insertionSort = (nums) => {
-  /* 外循环loop nums, 其中i就是当前索引 
-    (已排序好的最后一个元素索引: sortedIdx）*/
+  /* 外循环loop nums, 其中i是当前索引 */
   for (let i = 0; i < nums.length; i++) {
-    let sortedIdx = i;
-    let minIndex = i; //注意：初始化为i
+    let insertIdx = i; // 在哪儿插
+    let currValue = nums[i]; // 插什么值
 
-    /* 内循环找出 未排序中最小值的index */
-    for (let j = i + 1; j < nums.length; j++) {
-      if (nums[j] < nums[minIndex]) {
-        minIndex = j;
-      }
+    // while控制shifting, to find insertIdx
+    while (nums[insertIdx - 1] > currValue && insertIdx >= 0) {
+      nums[insertIdx] = nums[insertIdx - 1]; // use nums[i - 1] to fill up hole, when nums[i - 1] > currValue
+      insertIdx--; // continue to move hole to the left
     }
-    // swap 当前index(已排序部分最后一个元素) 和 未排序部分中最小元素
-    if (sortedIdx !== minIndex) {
-      [nums[sortedIdx], nums[minIndex]] = [nums[minIndex], nums[sortedIdx]];
-    }
+    // found the insertIdx,然后插入
+    nums[insertIdx] = currValue;
   }
 
   return nums;
 };
-
-/************************* 稳定性 优化版 *************************/
-const sortArray = (nums) => {
-  for (let i = 0; i < nums.length; i++) {
-    let sortedIdx = i;
-    let minIndex = i;
-
-    for (let j = i + 1; j < nums.length; j++) {
-      if (nums[j] < nums[minIndex]) {
-        minIndex = j;
-      }
-    }
-    if (sortedIdx !== minIndex) {
-      //[nums[sortedIdx], nums[minIndex]] = [nums[minIndex], nums[sortedIdx]];
-
-      //优化： 将 nums[sortedIndex.....minIndex] 的元素整体向后移动一位
-      let minNumber = nums[minIndex];
-      // 数组搬移数据的操作
-      for (let i = minIndex; i > sortedIdx; i--) {
-        nums[i] = nums[i - 1];
-      }
-      nums[sortedIdx] = minNumber;
-    }
-  }
-
-  return nums;
-};
-
-// insertionSort([-2, 100, 34, 1, 0, 4, 88, 67]);
