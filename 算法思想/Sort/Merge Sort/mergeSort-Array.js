@@ -1,19 +1,23 @@
 /*
-  merge Sort:
-
-  merge Sort 是利用merge的思想实现的排序方法
+  quick sort VS merge sort:
+    - Quick sort的思路是，先把一个元素放到正确的位置（排好序），然后将这个元素左右两边剩下的元素利用递归分别排好序，最终整个数组就排好序了
+    - merge sort的思路是，把数组切成两半，先把这两半子数组分别排好序，然后再合并这两个有序数组，整个数组就排好序了.
+  
+  ----------
+  Merge Sort 是利用merge的思想实现的排序方法
   原理： 假设初始序列有n个记录，就可以看成是n个有序的子序列，每个子序列的长度为1，然后两两merge,
         得到n/2个长度为2或1的有序子序列，再两两merge, 如此重复， 直到得到一个长度为n的有序序列为止
         这种方法被称为 2路merge sort
 
+  ----------
   Big O：
-    best time complexity     O(n log n)
-    average time complexity  O(n log n)
-    worst time complexity    O(n log n)
+    best time complexity     O(n log n)  --- 其中n是每层的复杂度，log n是树的高度
+    average time complexity  O(n log n)  --- 其中n是每层的复杂度，log n是树的高度
+    worst time complexity    O(n log n)  --- 其中n是每层的复杂度，log n是树的高度
     space complexity         O(n)
 */
 
-/* ---------------------------------------- Solution: (In-place) ------------------------------------------------------ */
+/************************************ Merge sort ********************************************/
 // Main function:
 function mergeSort(arr) {
   if (arr.length <= 1) return arr;
@@ -25,9 +29,9 @@ function mergeSort(arr) {
   //后序位置:
   let res = merge(left, right);
   arr.forEach((_, index) => (arr[index] = res[index]));
-
   return arr;
 }
+
 // helper function: merges two sorted arrays (use 2 pointer)
 function merge(arr1, arr2) {
   let results = [];

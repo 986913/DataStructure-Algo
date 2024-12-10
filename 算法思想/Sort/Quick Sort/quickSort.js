@@ -1,60 +1,57 @@
 /*
-  Quick sort:
+  Quick sort 原理:
+    若要对 arr[low..high] 进行排序，我们先找一个分界点 p (ie: arr[low])
+    通过交换元素使得 arr[low..pivotIdx-1] 都小于等于 arr[pivotIdx]，且 arr[pivotIdx+1..high] 都大于 arr[pivotIdx]，
+    然后递归地去 arr[low..pivotIdx-1] 和 arr[pivotIdx+1..high] 中寻找新的分界点，最后整个数组就被排序了。
 
-  原理:
-    若要对 arr[lo..hi] 进行排序，我们先找一个分界点 p，通过交换元素使得 arr[lo..p-1] 都小于等于 arr[p]，
-    且 arr[p+1..hi] 都大于 arr[p]，然后递归地去 arr[lo..p-1] 和 arr[p+1..hi] 中寻找新的分界点，最后整个数组就被排序了。
-
-    Quick sort is an efficient, in-place, recursive sorting algorithm that selects a "pivot" element and partitions all other elements into 2 subarrays:
-      Elements that are smaller than the pivot are added in 1 subarray that is placed before the pivot.
-      Elements that are larger than the pivot are added in 1 subarray that is placed after the pivot.
-    The quick sort is then recursively applied to each subarray. and once the subarrays are sorted they are then merged back with the pivot element between them as per above.
-
+    其中 partition 函数的实现是快速排序的核心: 即遍历 arr[low..high]，将切分点元素 pivot 放到正确的位置，并返回该位置的索引pivotIdx。
+    ---------
     Big O：
-      best time complexity     O(n log n)
-      average time complexity  O(n log n)
+      best time complexity     O(n log n) --- 其中n是每层的复杂度，log n是树的高度
+      average time complexity  O(n log n) --- 其中n是每层的复杂度，log n是树的高度
       worst time complexity    O(n²)
-      space complexity         O(log n)
+      space complexity         O(log n)   --- log n是树的高度
  */
 
-/************************************ Implemention  ********************************************/
-
+/************************************ Quick sort ********************************************/
 // Main function:
-const quickSort = (arr, low, high) => {
-  if (low >= high) return; // end recursion
+var sortArray = function (nums, low = 0, high = nums.length - 1) {
+  if (low > high) return; // end recursion
 
-  // 通过交换元素构建分界点pi
-  let pi = partition(arr, low, high);
+  // 在前序位置将arr[low]排好序（通过交换元素构建分界点pivotIdx); pivotIdx就是arr[low]应该在的index
+  const pivotIdx = partition(nums, low, high);
 
-  // 递归地去 arr[lo..p-1] 和 arr[p+1..hi] 中寻找新的分界点
-  quickSort(arr, low, pi - 1);
-  quickSort(arr, pi + 1, high);
+  // 递归地去 arr[low..pivotIdx-1] 和 arr[pivotIdx+1..high] 中寻找新的分界点
+  sortArray(nums, low, pivotIdx - 1);
+  sortArray(nums, pivotIdx + 1, high);
+
+  return nums;
 };
 
 /* Helper function : 
   它选择一个pviot元素, 并将数组重新排列，使得所有< pviot的元素位于pviot的左边，所有> pviot的元素位于pviot的右边。
-  然后返回pviot元素的最终index
+  然后把pviot拍好序
+  最后返回pviot元素的最终index
+  -----
+  Test cases:
+    const arr = [300, 2, 400, 100, 9];
+    console.log(partition(arr));        // 3
+    console.log(arr);                   // [9, 2, 100, 300, 400]
 */
-function partition(arr, low, high) {
-  let pivot = arr[high]; // pivot用数组最后一个元素
-  let i = low - 1; // 用来跟踪 < pivot的元素的位置
+const partition = (arr, low, high) => {
+  let pivot = arr[low]; //选择第一个元素作为 pivot
+  let swapIndex = low; //swapIndex用来追踪: 当前小于pivot的元素应该放到的位置
 
-  for (let j = low; j <= high - 1; j++) {
-    // If current element is smaller than the pivot
-    if (arr[j] < pivot) {
-      i++; // Increment index of smaller element
-      [arr[i], arr[j]] = [arr[j], arr[i]]; // Swap elements: 将当前元素arr[j]与第i个位置的元素进行交换，确保< pivot的元素都被移到数组的左边。
+  for (let i = low + 1; i <= high; i++) {
+    if (arr[i] < pivot) {
+      swapIndex++;
+      [arr[i], arr[swapIndex]] = [arr[swapIndex], arr[i]];
     }
   }
 
-  // 在遍历完成后，i的位置就是pivot在排好序的数组中的位置, so need Swap pivot-->arr[high] to its correct position-->arr[i+1]
-  [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
+  //在 partition 函数结束时，把 pivot 放到正确的最终位置 (也就是说：把pivot排好序)
+  [arr[swapIndex], arr[low]] = [arr[low], arr[swapIndex]];
 
-  return i + 1; // Return the partition index, 即pivot的新位置，这个位置也是分区的索引
-}
-
-/*
-  const test = [100, -3, 2, 300, 4, 6, 9, 1, 2, 5, 3, 23, 200];
-  quickSort(test, 0, test.length - 1);
-  console.log(test); // [-3, 1, 2, 2, 3, 4, 5, 6, 9, 23, 100, 200, 300]
-*/
+  //返回swapIndex
+  return swapIndex;
+};
