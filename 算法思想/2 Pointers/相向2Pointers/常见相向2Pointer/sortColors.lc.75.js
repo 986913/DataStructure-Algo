@@ -3,7 +3,7 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 
-/*********************  Solution: Two pointers 👍 **********************/
+/*********************  Solution 1: Two pointers 👍 **********************/
 var sortColors = function (nums) {
   let left = 0; // left指针左边都是0 -> red
   let right = nums.length - 1; // right指针右边都是2 -> blue
@@ -25,4 +25,26 @@ var sortColors = function (nums) {
       right--;
     }
   }
+};
+
+/*********************  Solution 2: Counting Sort **********************/
+var sortColors = function (nums) {
+  // 统计0，1，2出现的次数
+  let counts = [0, 0, 0]; //分别表示数组中 0、1、2 出现的次数
+  nums.forEach((n) => (counts[n] += 1));
+
+  // 按照count数组的统计结果，依次填充原数组
+  let idx = 0;
+  for (let i = 0; i < counts.length; i++) {
+    let element = i;
+    let count = counts[i];
+
+    while (count > 0) {
+      nums[idx] = element;
+      idx++;
+      count--;
+    }
+  }
+
+  return nums;
 };

@@ -31,7 +31,7 @@ var sortColors = function (nums) {
 var sortColors = function (nums) {
   // 统计0，1，2出现的次数
   let counts = [0, 0, 0]; //分别表示数组中 0、1、2 出现的次数
-  nums.forEach((n) => (counts[n] += 1));
+  nums.forEach((n) => (counts[n] += 1)); // nums中的每一项作为counts索引
 
   // 按照count数组的统计结果，依次填充原数组
   let idx = 0;
