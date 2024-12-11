@@ -15,15 +15,15 @@
 
 /************************************ Quick sort ********************************************/
 // Main function:
-var sortArray = function (nums, low = 0, high = nums.length - 1) {
+var quickSort = function (nums, low = 0, high = nums.length - 1) {
   if (low > high) return; // end recursion
 
   // 在前序位置将arr[low]排好序（通过交换元素构建分界点pivotIdx); pivotIdx就是arr[low]应该在的index
   const pivotIdx = partition(nums, low, high);
 
   // 递归地去 arr[low..pivotIdx-1] 和 arr[pivotIdx+1..high] 中寻找新的分界点
-  sortArray(nums, low, pivotIdx - 1);
-  sortArray(nums, pivotIdx + 1, high);
+  quickSort(nums, low, pivotIdx - 1);
+  quickSort(nums, pivotIdx + 1, high);
 
   return nums;
 };
