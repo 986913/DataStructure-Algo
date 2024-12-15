@@ -18,9 +18,9 @@ var countingSort = function (nums) {
   // 找到最大和最小元素, 计算索引偏移量和 counts 数组大小
   let max = Math.max(...nums);
   let min = Math.min(...nums);
+  let offset = -min;
 
   // 根据最大值和最小值，将元素映射到从0开始的索引值
-  let offset = -min;
   let counts = new Array(max - min + 1).fill(0);
 
   // 统计每个元素出现的次数
