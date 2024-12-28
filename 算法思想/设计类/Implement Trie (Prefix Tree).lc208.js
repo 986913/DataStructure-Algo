@@ -3,7 +3,7 @@
 class TrieNode {
   constructor() {
     this.children = Array.from({ length: 26 }).fill(null);
-    this.isWord = false; // 它用来表示从根节点到当前节点是否构成了一个完整的单词。
+    this.isWord = false; // 表示从ROOT到当前节点 是否构成了一个完整的单词。
   }
 }
 
@@ -17,16 +17,16 @@ class Trie {
    * @return {void}
    */
   insert(word) {
-    let node = this.root;
+    let curNode = this.root;
 
     for (let i = 0; i < word.length; i++) {
       let idx = word.charCodeAt(i) - 'a'.charCodeAt(0);
-      if (node.children[idx] === null) {
-        node.children[idx] = new TrieNode();
+      if (curNode.children[idx] === null) {
+        curNode.children[idx] = new TrieNode();
       }
-      node = node.children[idx];
+      curNode = curNode.children[idx]; //将当前节点更新为当前字符所对应的子节点
     }
-    node.isWord = true; // 在单词的最后一个字符处标记为一个完整单词
+    curNode.isWord = true; // 在单词的最后一个字符处标记为一个完整单词
   }
 
   /**
@@ -34,13 +34,13 @@ class Trie {
    * @return {boolean}
    */
   search(word) {
-    let node = this.root;
+    let curNode = this.root;
     for (let i = 0; i < word.length; i++) {
       let idx = word.charCodeAt(i) - 'a'.charCodeAt(0);
-      if (node.children[idx] === null) return false;
-      node = node.children[idx];
+      if (curNode.children[idx] === null) return false;
+      curNode = curNode.children[idx];
     }
-    return node.isWord; // 检查最后一个字符节点是否标记为一个完整单词
+    return curNode.isWord; // 检查最后一个字符节点是否标记为一个完整单词
   }
 
   /**
@@ -48,11 +48,11 @@ class Trie {
    * @return {boolean}
    */
   startsWith(prefix) {
-    let node = this.root;
+    let curNode = this.root;
     for (let i = 0; i < prefix.length; i++) {
       let idx = prefix.charCodeAt(i) - 'a'.charCodeAt(0);
-      if (node.children[idx] === null) return false;
-      node = node.children[idx];
+      if (curNode.children[idx] === null) return false;
+      curNode = curNode.children[idx];
     }
     return true;
   }
