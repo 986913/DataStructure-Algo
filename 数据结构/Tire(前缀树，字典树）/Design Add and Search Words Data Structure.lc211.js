@@ -1,5 +1,3 @@
-/************************************* LC208变形题 : prefix tree + DFS回溯 **************************************************/
-
 class TrieNode {
   constructor() {
     this.children = Array.from({ length: 26 }).fill(null);
@@ -43,10 +41,10 @@ class WordDictionary {
       */
       if (word[index] === '.') {
         for (let child of curNode.children) {
-          // 回溯在这里： 如果子节点存在且递归调用dfs返回true, 否则回溯尝试其他子节点
+          // 如果子节点存在且递归调用dfs返回true
           if (child && dfs(child, index + 1)) return true;
         }
-        // 如果没有子节点匹配，返回 false
+        // 回溯在这里(当一个方向失败时，退回上层，并尝试其他方向-下一个child): 没有子节点匹配 给上层返回false
         return false;
       } else {
         let idx = word.charCodeAt(index) - 'a'.charCodeAt(0);
