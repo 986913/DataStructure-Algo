@@ -1,3 +1,36 @@
+/**
+  Problem Statement:
+  Given the heads of two singly linked lists, determine whether the two lists
+  are identical.
+
+  Two linked lists are considered identical if:
+  - They have the same length, and
+  - All corresponding nodes contain the same data in the same order.
+
+  The function should return 1 if the lists are identical, and 0 otherwise.
+
+  Example 1:
+    llist1 = 1 -> 2 -> 3 -> null
+    llist2 = 1 -> 2 -> 3 -> null
+
+    Output:
+    1
+
+  Example 2:
+    llist1 = 1 -> 2 -> 3 -> null
+    llist2 = 1 -> 2 -> 4 -> null
+
+    Output:
+    0
+
+  Example 3:
+    llist1 = 1 -> 2 -> null
+    llist2 = 1 -> 2 -> 3 -> null
+
+    Output:
+    0
+**/
+
 /*********************************** Solution 1 - 递归 ***********************************
   Time:  O(max(n, m))
   Space: O(max(n, m)) due to recursion call stack
