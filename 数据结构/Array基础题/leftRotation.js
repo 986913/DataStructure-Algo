@@ -23,6 +23,7 @@ function rotateLeft(d, arr) {
   let times = d % arr.length;
 
   while (times > 0) {
+    // arr.push(arr.shift())
     let first = arr[0];
     for (let i = 0; i < len; i++) {
       arr[i] = arr[i + 1];
