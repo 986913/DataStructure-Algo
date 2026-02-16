@@ -1,68 +1,58 @@
-/***************************************** Solution : Queue ***************************************************/
+/**************************** Solution : Cicular Array Technique / Queues ***********************************/
 
 /**
  * @param {number} k
  */
 var MyCircularQueue = function (k) {
-  this.queue = new Array(k); // <--- 注意数组定长, 后续不能通过push无线扩容数组
-  this.currSize = 0;
+  this.queue = Array.from({ length: k }, () => undefined);
+  this.size = k;
+  this.count = 0; // 当前有效元素个数
 
-  // 依靠frontIdx, rearIdx来定位
-  this.frontIdx = 0;
-  this.rearIdx = -1;
+  this.startIdx = 0; // 指向队头元素
+  this.endIdx = -1; // 指向队尾元素
 };
 
 /**
- * @param {number} value
- * @return {boolean}
+ * 入队：移动尾指针
  */
 MyCircularQueue.prototype.enQueue = function (value) {
   if (this.isFull()) return false;
 
-  this.rearIdx = (this.rearIdx + 1) % this.queue.length; // % 保证了当指针到达数组末端时，会回到数组的起始位置，从而实现了循环。
-  this.queue[this.rearIdx] = value;
-  this.currSize++;
+  // 核心：通过 % 运算形成环
+  this.endIdx = (this.endIdx + 1) % this.size; // % 保证了当指针到达数组末端时，会回到数组的起始位置，从而实现了循环。
+  this.queue[this.endIdx] = value;
+  this.count++;
   return true;
 };
 
 /**
+ * 出队：移动头指针
  * @return {boolean}
- * deQueue操作通过更新frontIdx指针而不是实际删除数组中的元素来实现。
- *  实际上，数组中的元素并没有被物理删除，只是通过更新frontIdx指针来“忽略”已经出队的元素。
- *  这种方法有助于提高操作的效率，因为物理删除元素会涉及到数组的重排，而更新指针则是常数时间操作
+ * deQueue操作通过更新startIdx指针而不是实际删除数组中的元素来实现
+ *  实际上，数组中的元素并没有被物理删除，只是通过更新startIdx指针来“忽略”已经出队的元素。
+ *  这种方法有助于提高操作的效率，因为物理删除元素会涉及到数组的重排，而更新指针则是常数O(1)时间操作
  */
 MyCircularQueue.prototype.deQueue = function () {
   if (this.isEmpty()) return false;
 
-  this.frontIdx = (this.frontIdx + 1) % this.queue.length; // % 保证了当指针到达数组末端时，会回到数组的起始位置，从而实现了循环。
-  this.currSize--;
+  // 注意：数组元素不删除！，只移动逻辑窗口
+  this.startIdx = (this.startIdx + 1) % this.size; // % 保证了当指针到达数组末端时，会回到数组的起始位置，从而实现了循环。
+  this.count--;
   return true;
 };
 
-/**
- * @return {number}
- */
 MyCircularQueue.prototype.Front = function () {
-  return this.isEmpty() ? -1 : this.queue[this.frontIdx];
+  return this.isEmpty() ? -1 : this.queue[this.startIdx];
 };
 
-/**
- * @return {number}
- */
 MyCircularQueue.prototype.Rear = function () {
-  return this.isEmpty() ? -1 : this.queue[this.rearIdx];
+  return this.isEmpty() ? -1 : this.queue[this.endIdx];
 };
 
-/**
- * @return {boolean}
- */
 MyCircularQueue.prototype.isEmpty = function () {
-  return this.currSize === 0;
+  return this.count === 0;
 };
 
-/**
- * @return {boolean}
- */
 MyCircularQueue.prototype.isFull = function () {
-  return this.currSize === this.queue.length;
+  return this.count === this.size;
 };
