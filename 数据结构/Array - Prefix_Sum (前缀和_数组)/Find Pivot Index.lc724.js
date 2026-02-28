@@ -29,3 +29,20 @@ var pivotIndex = function (nums) {
 
   return -1;
 };
+
+/*------------------------解法3: Prefix sum  ------------------------ */
+// 时间 O(n), 空间O(n)
+var pivotIndex = function (nums) {
+  let preSum = new Array(nums.length + 1).fill(0);
+  for (let i = 1; i < preSum.length; i++) {
+    preSum[i] = preSum[i - 1] + nums[i - 1];
+  }
+
+  for (let i = 0; i < preSum.length; i++) {
+    let leftSum = preSum[i];
+    let rightSum = preSum[preSum.length - 1] - preSum[i + 1];
+    if (leftSum === rightSum) return i;
+  }
+
+  return -1;
+};
