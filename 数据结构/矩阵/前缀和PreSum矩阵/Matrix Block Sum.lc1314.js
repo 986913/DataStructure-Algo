@@ -63,7 +63,7 @@ var matrixBlockSum = function (mat, k) {
       let r2 = Math.min(m - 1, i + k);
       let c1 = Math.max(0, j - k);
       let c2 = Math.min(n - 1, j + k);
-      // 查询 the preSumMat matrix(前缀和矩阵)： 目标矩阵之和由四个相邻矩阵运算获得: 区间 = 整体 - 左下 - 右上 + 左上角
+      // 查询 the preSumMat matrix(前缀和矩阵)
       resMat[i][j] =
         preSumMat[r2 + 1][c2 + 1] - //整体sum
         preSumMat[r2 + 1][c1] - //左下整体sum

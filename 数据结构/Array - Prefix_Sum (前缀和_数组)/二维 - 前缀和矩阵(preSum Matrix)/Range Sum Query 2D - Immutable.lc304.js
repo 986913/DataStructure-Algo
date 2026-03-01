@@ -39,10 +39,10 @@ NumMatrix.prototype.calcPreSum = function () {
   for (let i = 1; i < preSumMatrix.length; i++) {
     for (let j = 1; j < preSumMatrix[0].length; j++) {
       preSumMatrix[i][j] =
-        preSumMatrix[i - 1][j] +
-        preSumMatrix[i][j - 1] +
-        this.matrix[i - 1][j - 1] -
-        preSumMatrix[i - 1][j - 1];
+        preSumMatrix[i - 1][j] + // 代表当前元素上方的所有矩阵面积
+        preSumMatrix[i][j - 1] + // 代表当前元素左方的所有矩阵面积
+        this.matrix[i - 1][j - 1] - // 代表原矩阵mat中当前元素的值（新增的一块小拼图)
+        preSumMatrix[i - 1][j - 1]; //因为我们在加“上方”和“左侧”时，左上角的这块矩形区域被加了两次，所以必须要减去1次
     }
   }
 
@@ -50,11 +50,11 @@ NumMatrix.prototype.calcPreSum = function () {
 };
 
 NumMatrix.prototype.sumRegion = function (x1, y1, x2, y2) {
-  // 目标矩阵之和由四个相邻矩阵运算获得: 区间 = 整体 - 上 - 左 + 左上
+  // 查询 the preSumMat matrix(前缀和矩阵)： 目标矩阵之和由四个相邻矩阵运算获得: 区间 = 整体 - 左下 - 右上 + 左上角
   return (
-    this.preSumMatrix[x2 + 1][y2 + 1] -
-    this.preSumMatrix[x1][y2 + 1] -
-    this.preSumMatrix[x2 + 1][y1] +
-    this.preSumMatrix[x1][y1]
+    this.preSumMatrix[x2 + 1][y2 + 1] - //整体sum
+    this.preSumMatrix[x1][y2 + 1] - //左下整体sum
+    this.preSumMatrix[x2 + 1][y1] + //右上整体sum
+    this.preSumMatrix[x1][y1] //左上角整体sum
   );
 };
