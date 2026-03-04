@@ -4,22 +4,66 @@
  * @return {number}
  */
 var countBinarySubstrings = function (s) {
-  let cur = 0; // count the number of consecutive characters in the current group.
-  let pre = 0; // count the number of consecutive characters in the previous group.
-  let result = 0; // count the valid binary substrings.
+  let consecutiveBlockLens = [];
+  let consecutiveLen = 1;
 
-  for (let i = 0; i < s.length; i++) {
-    //说明在连续的区间里, increment the current group count.
+  // 步骤 1：数据转化（巧妙利用 i < s.length + 1 处理收尾）
+  for (let i = 1; i < s.length + 1; i++) {
     if (s[i] === s[i - 1]) {
-      cur++;
+      consecutiveLen++;
     } else {
-      result += Math.min(pre, cur); // Calculate the number of valid binary substrings based on the previous and current group counts.
-
-      pre = cur; // Update the previous group count with the current group count.
-      cur = 1; // Reset the current group count to 1 since we encountered a different character.
+      consecutiveBlockLens.push(consecutiveLen);
+      consecutiveLen = 1; // 重置长度
     }
   }
 
-  // After the loop, add the remaining valid binary substrings based on the last group.
-  return result + Math.min(pre, cur);
+  let res = 0;
+  // 步骤 2：数学计算，取代复杂的 if/else
+  for (let i = 1; i < consecutiveBlockLens.length; i++) {
+    res += Math.min(consecutiveBlockLens[i], consecutiveBlockLens[i - 1]);
+  }
+
+  return res;
 };
+
+/*
+  ### 🚨 典型的思维陷阱：状态机泥潭 (Spaghetti Code)
+
+  当我们遇到“连续”、“交替”、“计数”这类字眼时，第一直觉往往是**线性模拟**。
+
+  - **本能反应：** 试图通过增加变量来追踪每一个实时状态。比如设置 isOneContinue, isZeroContinue, currentOneLen, currentZeroLen 等。
+  - **陷阱暴露：** 随着遍历的进行，`0` 和 `1` 的切换会导致这些变量互相牵扯。代码中会充斥着大量的 `if...else` 来处理各种边界和重置逻辑。大脑的短时记忆无法同时维护超过 3 个互相依赖的动态变量，最终导致逻辑混乱，极其容易产生 Bug，且极难调试。
+
+  ### 💡 破局核心：数据转化 (Data Transformation)
+
+  这道题真正的考点不在于“字符串遍历”，而在于“**数据抽象与转化**”**。
+  与其死死盯着每一个字符的变化，不如退后一步，观察数据的宏观特征：题目要求 0 和 1 必须**各自扎堆。
+
+  既然它们是扎堆的，我们为什么不直接把这些“堆”提取出来呢？
+
+  **核心动作：游程编码 (Run-Length Encoding)**
+  这是一种经典的数据处理思想。我们不再关心当前是 `0` 还是 `1`，我们只关心“连续相同字符的长度”
+
+  - **原始数据：** `s = "00011011"` (杂乱、带有两种状态)
+  - **转化过程：**
+  • 3个0  → `3`
+  • 2个1 → `2`
+  • 1个0 → `1`
+  • 2个1 → `2`
+  - **转化后数据：** `arr = [3, 2, 1, 2]` (干净、剥离了字符状态，只保留了长度信息)
+  
+  > **顿悟时刻：** 经过这一步转化，原本复杂的“字符串状态切换”问题，被成功降维成了一个纯粹的“一维数组相邻元素比较”问题！我们彻底消灭了所有的布尔状态变量。
+  > 
+
+  ### **🧮 逻辑极简：用数学公式代替逻辑分支**
+
+  将数据转化为 `[3, 2, 1, 2]` 后，题目要求寻找“**数量相等**的相邻 0 和 1 子串”。
+
+  在转化后的数组中，这完美等价于：**取相邻两个数字的较小值。**
+  • 看 `3` 和 `2`  → 较小值是 `2` （代表能组成 `0011`，包含 2 个合法子串 `01` 和 `0011`）
+  • 看 `2` 和 `1` → 较小值是 `1`（代表能组成 `110`，  包含 1 个合法子串 `10`）
+  • 看 `1`和 `2` → 较小值是 `1` （代表能组成 `011`，  包含 1 个合法子串 `01`）
+
+  然后全部加起来所有的合法字串个数
+  核心代码仅仅是一句极简的数学公式：`res += Math.min(arr[i], arr[i-1])`
+*/
