@@ -34,6 +34,7 @@ const getFibonacci = (n) => {
     return sum;
   };
 
+  // Generate the Fibonacci sequence by for-loop
   for (let i = 0; i < n; i++) {
     res.push(helper(i, memo));
   }
