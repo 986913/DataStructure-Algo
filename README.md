@@ -183,78 +183,78 @@ mindmap
 
 ### Binary Tree
 
-| Subcategory                                 | Path                                                                                                                                                                                                                              |
-| ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Traversal templates (recursive + iterative) | [遍历模版](./数据结构/BinaryTree二叉树/遍历模版)                                                                              |
-| Tree properties & queries                   | [二叉树的属性](./数据结构/BinaryTree二叉树/二叉树的属性)                                                        |
-| Tree construction & modification            | [二叉树的修改和构造](./数据结构/BinaryTree二叉树/二叉树的修改和构造)                       |
-| BST — properties & validation               | [BST的属性](<./数据结构/BinaryTree二叉树/BST(二叉搜索树)的属性>)                                  |
+| Subcategory                                 | Path                                                                         |
+| ------------------------------------------- | ---------------------------------------------------------------------------- |
+| Traversal templates (recursive + iterative) | [遍历模版](./数据结构/BinaryTree二叉树/遍历模版)                             |
+| Tree properties & queries                   | [二叉树的属性](./数据结构/BinaryTree二叉树/二叉树的属性)                     |
+| Tree construction & modification            | [二叉树的修改和构造](./数据结构/BinaryTree二叉树/二叉树的修改和构造)         |
+| BST — properties & validation               | [BST的属性](<./数据结构/BinaryTree二叉树/BST(二叉搜索树)的属性>)             |
 | BST — insertion, deletion, construction     | [BST的修改和构造](<./数据结构/BinaryTree二叉树/BST(二叉搜索树)的修改和构造>) |
 | Lowest Common Ancestor (LCA)                | [LCA问题](<./数据结构/BinaryTree二叉树/二叉树最近公共祖先问题(LCA)>)         |
-| DFS problems                                | [DFS in 二叉树](./算法思想/DFS/DFS%20in%20二叉树%20)                                                                                                                                                                              |
-| BFS problems                                | [BFS 遍历 二叉树](./算法思想/BFS/BFS%20遍历%20二叉树)                                                                                       |
+| DFS problems                                | [DFS in 二叉树](./算法思想/DFS/DFS%20in%20二叉树%20)                         |
+| BFS problems                                | [BFS 遍历 二叉树](./算法思想/BFS/BFS%20遍历%20二叉树)                        |
 
 ### Graph
 
-| Subcategory                             | Path                                                                                                                                                            |
-| --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| BFS traversal                           | [BFS遍历](./数据结构/Graph/BFS遍历)                                                            |
-| DFS traversal                           | [DFS遍历](./数据结构/Graph/DFS遍历)                                                            |
-| Union-Find (Disjoint Set)               | [并查集](<./数据结构/Graph/并查集(Union%20Find)>)                                       |
-| Shortest / longest path (Dijkstra, BFS) | [最短(长)路径](<./数据结构/Graph/最短(长)路径>)                           |
-| Cycle detection + topological sort      | [环检测\_topologicalSort](./数据结构/Graph/环检测_topologicalSort)                      |
-| Bipartite graph                         | [二分图](./数据结构/Graph/二分图)                                                       |
-| Kruskal MST                             | [Kruskal最小生成树](./数据结构/Graph/Kruskal最小生成树算法) |
-| DFS in graph                            | [DFS in 图](./算法思想/DFS/DFS%20in%20图)                                                             |
-| BFS in graph                            | [BFS in 图](./算法思想/BFS/BFS%20in%20图)                                                             |
+| Subcategory                             | Path                                                               |
+| --------------------------------------- | ------------------------------------------------------------------ |
+| BFS traversal                           | [BFS遍历](./数据结构/Graph/BFS遍历)                                |
+| DFS traversal                           | [DFS遍历](./数据结构/Graph/DFS遍历)                                |
+| Union-Find (Disjoint Set)               | [并查集](<./数据结构/Graph/并查集(Union%20Find)>)                  |
+| Shortest / longest path (Dijkstra, BFS) | [最短(长)路径](<./数据结构/Graph/最短(长)路径>)                    |
+| Cycle detection + topological sort      | [环检测\_topologicalSort](./数据结构/Graph/环检测_topologicalSort) |
+| Bipartite graph                         | [二分图](./数据结构/Graph/二分图)                                  |
+| Kruskal MST                             | [Kruskal最小生成树](./数据结构/Graph/Kruskal最小生成树算法)        |
+| DFS in graph                            | [DFS in 图](./算法思想/DFS/DFS%20in%20图)                          |
+| BFS in graph                            | [BFS in 图](./算法思想/BFS/BFS%20in%20图)                          |
 
 ### Stack & Queue
 
-| Subcategory                 | Path                                                                                                                                                                   |
-| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Classic stack problems      | [传统Stack题目](./数据结构/Stack&Queue/传统Stack题目)                                   |
-| Classic queue problems      | [传统Queue题目](./数据结构/Stack&Queue/传统Queue题目)                                   |
-| Monotonic stack             | [单调栈](./数据结构/Stack&Queue/MonotonicStack_单调栈_题目)                      |
-| Monotonic queue             | [单调队列](./数据结构/Stack&Queue/MonotonicQueue_单调队列_题目)           |
+| Subcategory                 | Path                                                               |
+| --------------------------- | ------------------------------------------------------------------ |
+| Classic stack problems      | [传统Stack题目](./数据结构/Stack&Queue/传统Stack题目)              |
+| Classic queue problems      | [传统Queue题目](./数据结构/Stack&Queue/传统Queue题目)              |
+| Monotonic stack             | [单调栈](./数据结构/Stack&Queue/MonotonicStack_单调栈_题目)        |
+| Monotonic queue             | [单调队列](./数据结构/Stack&Queue/MonotonicQueue_单调队列_题目)    |
 | Priority queue (heap-based) | [优先级队列](./数据结构/Stack&Queue/PriorityQueue_优先级队列_题目) |
 
 ### Linked List
 
-| Subcategory                   | Path                                                                                                                    |
-| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| All linked list problems      | [List基础题](./数据结构/LinkedList/List基础题)  |
+| Subcategory                   | Path                                                   |
+| ----------------------------- | ------------------------------------------------------ |
+| All linked list problems      | [List基础题](./数据结构/LinkedList/List基础题)         |
 | Two-pointer patterns on lists | [同向2Pointers](./算法思想/2%20Pointers/同向2Pointers) |
 
 ### Array / Prefix Sum
 
-| Subcategory                               | Path                                                                                                                                                                                                                                                   |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Subcategory                               | Path                                                                                                            |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | 1D prefix sum                             | [一维前缀和数组](<./数据结构/Array%20-%20Prefix_Sum%20(前缀和_数组)/一维%20-%20前缀和数组(preSum%20Array)>)     |
 | 1D prefix product                         | [一维前缀积数组](<./数据结构/Array%20-%20Prefix_Sum%20(前缀和_数组)/一维%20-%20前缀积数组(preProduce%20Array)>) |
 | 2D prefix sum matrix                      | [二维前缀和矩阵](<./数据结构/Array%20-%20Prefix_Sum%20(前缀和_数组)/二维%20-%20前缀和矩阵(preSum%20Matrix)>)    |
-| Interval problems                         | [区间题](./数据结构/Array基础题/区间题)                                                                                                                   |
-| Circular array                            | [环形数组](<./数据结构/Array基础题/环形数组(逻辑上的环形)>)                                              |
-| Sliding window                            | [同向2Pointers](./算法思想/2%20Pointers/同向2Pointers)                                                                                                                                |
-| Binary search                             | [Binary Search](./算法思想/Searching/Binary%20Search)                                                                                                                               |
-| Opposite two pointers (N-sum, palindrome) | [相向2Pointers](./算法思想/2%20Pointers/相向2Pointers)                                                                                                                                |
+| Interval problems                         | [区间题](./数据结构/Array基础题/区间题)                                                                         |
+| Circular array                            | [环形数组](<./数据结构/Array基础题/环形数组(逻辑上的环形)>)                                                     |
+| Sliding window                            | [同向2Pointers](./算法思想/2%20Pointers/同向2Pointers)                                                          |
+| Binary search                             | [Binary Search](./算法思想/Searching/Binary%20Search)                                                           |
+| Opposite two pointers (N-sum, palindrome) | [相向2Pointers](./算法思想/2%20Pointers/相向2Pointers)                                                          |
 
 ### Matrix
 
-| Subcategory                 | Path                                                                                                                                                     |
-| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Island problems (DFS)       | [DFS岛屿问题](./数据结构/矩阵/DFS岛屿问题)                  |
-| Shortest path in grid (BFS) | [BFS路径问题](./数据结构/矩阵/BFS路径问题)                  |
-| N-Queens                    | [N皇后](./数据结构/矩阵/N皇后)                                            |
-| Word Search                 | [wordSearch](./数据结构/矩阵/wordSearch)                                                |
-| Sudoku solver               | [数独](./数据结构/矩阵/数独)                                              |
+| Subcategory                 | Path                                                 |
+| --------------------------- | ---------------------------------------------------- |
+| Island problems (DFS)       | [DFS岛屿问题](./数据结构/矩阵/DFS岛屿问题)           |
+| Shortest path in grid (BFS) | [BFS路径问题](./数据结构/矩阵/BFS路径问题)           |
+| N-Queens                    | [N皇后](./数据结构/矩阵/N皇后)                       |
+| Word Search                 | [wordSearch](./数据结构/矩阵/wordSearch)             |
+| Sudoku solver               | [数独](./数据结构/矩阵/数独)                         |
 | 2D prefix sum               | [前缀和PreSum矩阵](./数据结构/矩阵/前缀和PreSum矩阵) |
-| DFS in matrix               | [DFS in 矩阵](./算法思想/DFS/DFS%20in%20矩阵)                                           |
-| BFS in matrix               | [BFS in 矩阵](./算法思想/BFS/BFS%20in%20矩阵)                                           |
+| DFS in matrix               | [DFS in 矩阵](./算法思想/DFS/DFS%20in%20矩阵)        |
+| BFS in matrix               | [BFS in 矩阵](./算法思想/BFS/BFS%20in%20矩阵)        |
 
 ### Heap
 
-| Subcategory       | Path                                                                                             |
-| ----------------- | ------------------------------------------------------------------------------------------------ |
+| Subcategory       | Path                            |
+| ----------------- | ------------------------------- |
 | All heap problems | [Heap题目](./数据结构/Heap题目) |
 
 ### Trie
@@ -265,92 +265,92 @@ mindmap
 
 ### String
 
-| Subcategory         | Path                                                                                                                      |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| All string problems | [String](./数据结构/String)                                            |
-| DFS in string       | [DFS in String](./算法思想/DFS/DFS%20in%20String)                      |
+| Subcategory         | Path                                              |
+| ------------------- | ------------------------------------------------- |
+| All string problems | [String](./数据结构/String)                       |
+| DFS in string       | [DFS in String](./算法思想/DFS/DFS%20in%20String) |
 | BFS in string       | [BFS in 字符串](./算法思想/BFS/BFS%20in%20字符串) |
 
 ---
 
 ### DFS
 
-| Subcategory        | Path                                                                                                                         |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| Subcategory        | Path                                                 |
+| ------------------ | ---------------------------------------------------- |
 | DFS in binary tree | [DFS in 二叉树](./算法思想/DFS/DFS%20in%20二叉树%20) |
-| DFS in graph       | [DFS in 图](./算法思想/DFS/DFS%20in%20图)                          |
-| DFS in matrix      | [DFS in 矩阵](./算法思想/DFS/DFS%20in%20矩阵)               |
+| DFS in graph       | [DFS in 图](./算法思想/DFS/DFS%20in%20图)            |
+| DFS in matrix      | [DFS in 矩阵](./算法思想/DFS/DFS%20in%20矩阵)        |
 | DFS in n-ary tree  | [DFS in 多叉树](./算法思想/DFS/DFS%20in%20多叉树)    |
-| DFS in string      | [DFS in String](./算法思想/DFS/DFS%20in%20String)                         |
+| DFS in string      | [DFS in String](./算法思想/DFS/DFS%20in%20String)    |
 
 ### BFS
 
-| Subcategory        | Path                                                                                                                                        |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Subcategory        | Path                                                  |
+| ------------------ | ----------------------------------------------------- |
 | BFS on binary tree | [BFS 遍历 二叉树](./算法思想/BFS/BFS%20遍历%20二叉树) |
-| BFS on graph       | [BFS in 图](./算法思想/BFS/BFS%20in%20图)                                         |
-| BFS on matrix      | [BFS in 矩阵](./算法思想/BFS/BFS%20in%20矩阵)                              |
-| BFS on string      | [BFS in 字符串](./算法思想/BFS/BFS%20in%20字符串)                   |
+| BFS on graph       | [BFS in 图](./算法思想/BFS/BFS%20in%20图)             |
+| BFS on matrix      | [BFS in 矩阵](./算法思想/BFS/BFS%20in%20矩阵)         |
+| BFS on string      | [BFS in 字符串](./算法思想/BFS/BFS%20in%20字符串)     |
 
 ### Two Pointers
 
-| Subcategory                                | Path                                                                                                                    |
-| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| Subcategory                                | Path                                                   |
+| ------------------------------------------ | ------------------------------------------------------ |
 | Same-direction (fast/slow, sliding window) | [同向2Pointers](./算法思想/2%20Pointers/同向2Pointers) |
 | Opposite-direction (binary search, N-sum)  | [相向2Pointers](./算法思想/2%20Pointers/相向2Pointers) |
 | Mixed / unknown pattern                    | [未知2Pointers](./算法思想/2%20Pointers/未知2Pointers) |
 
 ### Dynamic Programming
 
-| Subcategory                                         | Path                                                                                                                                                   |
-| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Single-sequence DP (LIS, House Robber, Word Break…) | [单序列 (30%)](<./算法思想/Dynamic%20Programming/单序列%20(30%25)>)            |
-| Dual-sequence DP (Edit Distance, LCS…)              | [双序列 (30%)](<./算法思想/Dynamic%20Programming/双序列%20(30%25)>)            |
-| Grid / coordinate DP                                | [坐标类 (15%)](<./算法思想/Dynamic%20Programming/坐标类%20(15%25)>)            |
+| Subcategory                                         | Path                                                                    |
+| --------------------------------------------------- | ----------------------------------------------------------------------- |
+| Single-sequence DP (LIS, House Robber, Word Break…) | [单序列 (30%)](<./算法思想/Dynamic%20Programming/单序列%20(30%25)>)     |
+| Dual-sequence DP (Edit Distance, LCS…)              | [双序列 (30%)](<./算法思想/Dynamic%20Programming/双序列%20(30%25)>)     |
+| Grid / coordinate DP                                | [坐标类 (15%)](<./算法思想/Dynamic%20Programming/坐标类%20(15%25)>)     |
 | Knapsack (0-1 + complete)                           | [背包问题 (10%)](<./算法思想/Dynamic%20Programming/背包问题%20(10%25)>) |
-| Interval DP                                         | [区间类 (5%)](<./算法思想/Dynamic%20Programming/区间类%20(5%25)>)              |
-| Game theory DP                                      | [博弈类](./算法思想/Dynamic%20Programming/博弈类)                              |
-| Tree DP                                             | [DP in Trees](./算法思想/Dynamic%20Programming/DP%20in%20Trees)                                     |
-| Palindrome DP                                       | [回文串](./算法思想/Dynamic%20Programming/回文串)                              |
+| Interval DP                                         | [区间类 (5%)](<./算法思想/Dynamic%20Programming/区间类%20(5%25)>)       |
+| Game theory DP                                      | [博弈类](./算法思想/Dynamic%20Programming/博弈类)                       |
+| Tree DP                                             | [DP in Trees](./算法思想/Dynamic%20Programming/DP%20in%20Trees)         |
+| Palindrome DP                                       | [回文串](./算法思想/Dynamic%20Programming/回文串)                       |
 | Stock problems                                      | [股票问题](./算法思想/Dynamic%20Programming/股票问题)                   |
 
 ### Backtracking
 
-| Subcategory                                     | Path                                                                                       |
-| ----------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Subcategory                                     | Path                                    |
+| ----------------------------------------------- | --------------------------------------- |
 | Combinations, subsets & permutations            | [Backtracking](./算法思想/Backtracking) |
 | Matrix problems (N-Queens, Sudoku, Word Search) | [Backtracking](./算法思想/Backtracking) |
 | Tree-based backtracking                         | [Backtracking](./算法思想/Backtracking) |
 
 ### Greedy
 
-| Subcategory         | Path                                                                                                 |
-| ------------------- | ---------------------------------------------------------------------------------------------------- |
+| Subcategory         | Path                                              |
+| ------------------- | ------------------------------------------------- |
 | All greedy problems | [Greedy Algorithm](./算法思想/Greddy%20Algorithm) |
 
 ### Binary Search
 
-| Subcategory                         | Path                                                                                                                    |
-| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| All binary search problems          | [Binary Search](./算法思想/Searching/Binary%20Search)                |
+| Subcategory                         | Path                                                   |
+| ----------------------------------- | ------------------------------------------------------ |
+| All binary search problems          | [Binary Search](./算法思想/Searching/Binary%20Search)  |
 | Opposite-direction pointer patterns | [相向2Pointers](./算法思想/2%20Pointers/相向2Pointers) |
 
 ### Sorting
 
-| Subcategory                 | Path                                                                       |
-| --------------------------- | -------------------------------------------------------------------------- |
+| Subcategory                 | Path                    |
+| --------------------------- | ----------------------- |
 | All sorting implementations | [Sort](./算法思想/Sort) |
 
 ### Hash Table
 
-| Subcategory             | Path                                                                                                           |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Subcategory             | Path                                          |
+| ----------------------- | --------------------------------------------- |
 | All hash table problems | [Hashtable 技巧](./算法思想/Hashtable%20技巧) |
 
 ### Recursion
 
-| Subcategory            | Path                                                                                 |
-| ---------------------- | ------------------------------------------------------------------------------------ |
+| Subcategory            | Path                              |
+| ---------------------- | --------------------------------- |
 | All recursion problems | [Recursion](./算法思想/Recursion) |
 
 ---
@@ -369,32 +369,13 @@ Each file is named `<problem-name>.lc<number>.js` — use `Cmd+P` / `Ctrl+P` in 
 
 ---
 
-## Overview
-
-How data structures and algorithm techniques connect across this repo:
-
-```mermaid
-graph LR
-  BT[Binary Tree] --> DFS & BFS & DP
-  G[Graph]        --> DFS & BFS & UF[Union-Find] & Dijkstra
-  Arr[Array]      --> TP[Two-Pointers] & PS[Prefix-Sum] & DP & Sort & Hash[Hash-Table]
-  Mat[Matrix]     --> DFS & BFS & BK[Backtracking]
-  SQ[Stack/Queue] --> MonoStack[Monotonic-Stack] & BFS
-  LL[Linked-List] --> TP
-  Heap            --> Greedy & Sort
-  Trie            --> DFS & BK
-  Str[String]     --> TP & DP & Hash
-```
-
----
-
 ## Quick Navigation
 
 **Data Structures**
-[Binary Tree](#binary-tree--94-files) · [Graph](#graph--43-files) · [Stack & Queue](#stack--queue--61-files) · [Linked List](#linked-list--31-files) · [Array / Prefix Sum](#array--prefix-sum--34-files) · [Matrix](#matrix--38-files) · [Heap](#heap--19-files) · [Trie](#trie--8-files) · [String](#string--7-files)
+[Binary Tree](#binary-tree) · [Graph](#graph) · [Stack & Queue](#stack--queue) · [Linked List](#linked-list) · [Array / Prefix Sum](#array--prefix-sum) · [Matrix](#matrix) · [Heap](#heap) · [Trie](#trie) · [String](#string)
 
 **Algorithm Techniques**
-[DFS](#dfs--113-files) · [BFS](#bfs--52-files) · [Two Pointers](#two-pointers--142-files) · [Dynamic Programming](#dynamic-programming--98-files) · [Backtracking](#backtracking--59-files) · [Greedy](#greedy--25-files) · [Sorting](#sorting--20-files) · [Hash Table](#hash-table--31-files)
+[DFS](#dfs) · [BFS](#bfs) · [Two Pointers](#two-pointers) · [Dynamic Programming](#dynamic-programming) · [Backtracking](#backtracking) · [Greedy](#greedy) · [Sorting](#sorting) · [Hash Table](#hash-table)
 
 **[LeetCode Index](#leetcode-index)**
 
@@ -402,7 +383,7 @@ graph LR
 
 ## Data Structures
 
-### Binary Tree · `94 files`
+### Binary Tree
 
 ```mermaid
 graph LR
@@ -427,7 +408,7 @@ graph LR
 | DFS problems                                | [算法思想/DFS/DFS in 二叉树 ](./算法思想/DFS/DFS%20in%20二叉树%20)                                                 |
 | BFS problems                                | [算法思想/BFS/BFS 遍历 二叉树](./算法思想/BFS/BFS%20遍历%20二叉树)                                                 |
 
-### Graph · `43 files`
+### Graph
 
 ```mermaid
 graph LR
@@ -454,7 +435,7 @@ graph LR
 | DFS in graph                            | [算法思想/DFS/DFS in 图](./算法思想/DFS/DFS%20in%20图)                            |
 | BFS in graph                            | [算法思想/BFS/BFS in 图](./算法思想/BFS/BFS%20in%20图)                            |
 
-### Stack & Queue · `61 files`
+### Stack & Queue
 
 ```mermaid
 graph LR
@@ -475,7 +456,7 @@ graph LR
 | Monotonic queue             | [数据结构/Stack&Queue/MonotonicQueue*单调队列*题目](./数据结构/Stack&Queue/MonotonicQueue_单调队列_题目)   |
 | Priority queue (heap-based) | [数据结构/Stack&Queue/PriorityQueue*优先级队列*题目](./数据结构/Stack&Queue/PriorityQueue_优先级队列_题目) |
 
-### Linked List · `31 files`
+### Linked List
 
 ```mermaid
 graph LR
@@ -492,7 +473,7 @@ graph LR
 | All linked list problems      | [数据结构/LinkedList/List基础题](./数据结构/LinkedList/List基础题)         |
 | Two-pointer patterns on lists | [算法思想/2 Pointers/同向2Pointers](./算法思想/2%20Pointers/同向2Pointers) |
 
-### Array / Prefix Sum · `34 files`
+### Array / Prefix Sum
 
 ```mermaid
 graph LR
@@ -518,7 +499,7 @@ graph LR
 | Binary search on arrays                             | [算法思想/Searching/Binary Search](./算法思想/Searching/Binary%20Search)                                                                                                       |
 | Opposite-direction two pointers (N-sum, palindrome) | [算法思想/2 Pointers/相向2Pointers](./算法思想/2%20Pointers/相向2Pointers)                                                                                                     |
 
-### Matrix · `38 files`
+### Matrix
 
 ```mermaid
 graph LR
@@ -543,7 +524,7 @@ graph LR
 | DFS in matrix               | [算法思想/DFS/DFS in 矩阵](./算法思想/DFS/DFS%20in%20矩阵)         |
 | BFS in matrix               | [算法思想/BFS/BFS in 矩阵](./算法思想/BFS/BFS%20in%20矩阵)         |
 
-### Heap · `19 files`
+### Heap
 
 ```mermaid
 graph LR
@@ -558,7 +539,7 @@ graph LR
 | ----------------- | ---------------------------------------- |
 | All heap problems | [数据结构/Heap题目](./数据结构/Heap题目) |
 
-### Trie · `8 files`
+### Trie
 
 ```mermaid
 graph LR
@@ -573,7 +554,7 @@ graph LR
 | ----------------- | ------------------------------------------------------------------ |
 | All trie problems | [数据结构/Tire(前缀树，字典树）](./数据结构/Tire(前缀树，字典树）) |
 
-### String · `7 files`
+### String
 
 ```mermaid
 graph LR
@@ -596,7 +577,7 @@ graph LR
 
 ## Algorithm Techniques
 
-### DFS · `113 files`
+### DFS
 
 ```mermaid
 graph LR
@@ -618,7 +599,7 @@ graph LR
 | DFS in n-ary tree  | [算法思想/DFS/DFS in 多叉树](./算法思想/DFS/DFS%20in%20多叉树)     |
 | DFS in string      | [算法思想/DFS/DFS in String](./算法思想/DFS/DFS%20in%20String)     |
 
-### BFS · `52 files`
+### BFS
 
 ```mermaid
 graph LR
@@ -637,7 +618,7 @@ graph LR
 | BFS on matrix      | [算法思想/BFS/BFS in 矩阵](./算法思想/BFS/BFS%20in%20矩阵)         |
 | BFS on string      | [算法思想/BFS/BFS in 字符串](./算法思想/BFS/BFS%20in%20字符串)     |
 
-### Two Pointers · `142 files`
+### Two Pointers
 
 ```mermaid
 graph LR
@@ -659,7 +640,7 @@ graph LR
 | Opposite-direction pointers (binary search, N-sum)  | [算法思想/2 Pointers/相向2Pointers](./算法思想/2%20Pointers/相向2Pointers) |
 | Mixed / unknown pattern                             | [算法思想/2 Pointers/未知2Pointers](./算法思想/2%20Pointers/未知2Pointers) |
 
-### Dynamic Programming · `98 files`
+### Dynamic Programming
 
 ```mermaid
 graph LR
@@ -687,7 +668,7 @@ graph LR
 | Palindrome DP                                       | [算法思想/Dynamic Programming/回文串](./算法思想/Dynamic%20Programming/回文串)                       |
 | Stock problems                                      | [算法思想/Dynamic Programming/股票问题](./算法思想/Dynamic%20Programming/股票问题)                   |
 
-### Backtracking · `59 files`
+### Backtracking
 
 ```mermaid
 graph LR
@@ -708,7 +689,7 @@ graph LR
 | Permutation variants    | [算法思想/Backtracking](./算法思想/Backtracking) |
 | Tree-based backtracking | [算法思想/Backtracking](./算法思想/Backtracking) |
 
-### Greedy · `25 files`
+### Greedy
 
 ```mermaid
 graph LR
@@ -724,7 +705,7 @@ graph LR
 | ------------------- | ---------------------------------------------------------- |
 | All greedy problems | [算法思想/Greddy Algorithm](./算法思想/Greddy%20Algorithm) |
 
-### Sorting · `20 files`
+### Sorting
 
 ```mermaid
 graph LR
@@ -741,7 +722,7 @@ graph LR
 | --------------------------- | -------------------------------- |
 | All sorting implementations | [算法思想/Sort](./算法思想/Sort) |
 
-### Hash Table · `31 files`
+### Hash Table
 
 ```mermaid
 graph LR
@@ -760,7 +741,7 @@ graph LR
 
 ---
 
-### Binary Search · `22 files`
+### Binary Search
 
 ```mermaid
 graph LR
@@ -777,7 +758,7 @@ graph LR
 | All binary search problems      | [算法思想/Searching/Binary Search](./算法思想/Searching/Binary%20Search)   |
 | Same-direction pointer patterns | [算法思想/2 Pointers/相向2Pointers](./算法思想/2%20Pointers/相向2Pointers) |
 
-### Recursion · `58 files`
+### Recursion
 
 ```mermaid
 graph LR
@@ -792,15 +773,3 @@ graph LR
 | Subcategory            | Path                                       |
 | ---------------------- | ------------------------------------------ |
 | All recursion problems | [算法思想/Recursion](./算法思想/Recursion) |
-
----
-
-## LeetCode Index
-
-Problems organized by number (1 → 2951+). Each file is named `<problem-name>.lc<number>.js` or just `<number>.js`.
-
-| Folder                  | Contents                       |
-| ----------------------- | ------------------------------ |
-| [Leetcode/](./Leetcode) | 523 problems, numbered 1–2951+ |
-
-> **Tip:** Use your editor's file search (`Cmd+P` / `Ctrl+P`) and type a problem number to jump directly to its solution.
