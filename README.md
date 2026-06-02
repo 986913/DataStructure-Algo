@@ -154,7 +154,8 @@ graph LR
 | Interval problems | [数据结构/Array基础题/区间题](./数据结构/Array基础题/区间题) |
 | Circular array problems | [数据结构/Array基础题/环形数组(逻辑上的环形)](./数据结构/Array基础题/环形数组(逻辑上的环形)) |
 | Sliding window | [算法思想/2 Pointers/同向2Pointers](./算法思想/2%20Pointers/同向2Pointers) |
-| Binary search on arrays | [算法思想/2 Pointers/相向2Pointers](./算法思想/2%20Pointers/相向2Pointers) |
+| Binary search on arrays | [算法思想/Searching/Binary Search](./算法思想/Searching/Binary%20Search) |
+| Opposite-direction two pointers (N-sum, palindrome) | [算法思想/2 Pointers/相向2Pointers](./算法思想/2%20Pointers/相向2Pointers) |
 
 ### Matrix · `38 files`
 
@@ -395,6 +396,41 @@ graph LR
 | Subcategory | Path |
 |---|---|
 | All hash table technique problems | [算法思想/Hashtable 技巧](./算法思想/Hashtable%20技巧) |
+
+---
+
+### Binary Search · `22 files`
+
+```mermaid
+graph LR
+  BS[Binary Search] --> Arr[Sorted Array]
+  BS --> Range[Range / Boundary]
+  BS --> Peak[Peak / Mountain Array]
+  BS --> Answer[Binary Search on Answer]
+  Arr --> Classic[Classic Templates]
+  Answer --> Guess[Guess the Answer]
+```
+
+| Subcategory | Path |
+|---|---|
+| All binary search problems | [算法思想/Searching/Binary Search](./算法思想/Searching/Binary%20Search) |
+| Same-direction pointer patterns | [算法思想/2 Pointers/相向2Pointers](./算法思想/2%20Pointers/相向2Pointers) |
+
+### Recursion · `58 files`
+
+```mermaid
+graph LR
+  Rec[Recursion] --> Tree[Binary Tree]
+  Rec --> LL[Linked List]
+  Rec --> Divide[Divide & Conquer]
+  Rec --> Math[Math Problems]
+  Tree --> DFS[DFS patterns]
+  Divide --> MergeSort[Merge Sort]
+```
+
+| Subcategory | Path |
+|---|---|
+| All recursion problems | [算法思想/Recursion](./算法思想/Recursion) |
 
 ---
 
