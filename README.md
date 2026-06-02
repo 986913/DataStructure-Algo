@@ -2,9 +2,9 @@
 
 1,500+ LeetCode solutions in JavaScript, organized by data structure and algorithm technique.
 
-[![Interactive Graph](https://img.shields.io/badge/Knowledge_Graph-Interactive-58a6ff?style=flat-square)](./graph.html)
+[![Interactive Graph](https://img.shields.io/badge/Knowledge_Graph-Interactive-58a6ff?style=flat-square)](https://986913.github.io/DataStructure-Algo/graph.html)
 
-> **[→ Open Interactive Knowledge Graph](./graph.html)** — drag nodes, hover to highlight connections
+> **[→ Open Interactive Knowledge Graph](https://986913.github.io/DataStructure-Algo/graph.html)** — drag nodes, hover to highlight connections
 
 ---
 
