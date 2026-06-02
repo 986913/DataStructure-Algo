@@ -26,6 +26,65 @@
   #tooltip .t-type  { font-size: 11px; margin-bottom: 5px; }
   #tooltip .t-meta  { color: #8b949e; font-size: 11px; line-height: 1.6; }
 
+  /* ── SIDE PANEL ─────────────────────────────────────────────────────────── */
+  #panel {
+    position: fixed; top: 0; right: 0; bottom: 0; z-index: 300;
+    width: 320px;
+    background: rgba(13,17,23,0.98);
+    border-left: 1px solid #21262d;
+    display: flex; flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
+    backdrop-filter: blur(12px);
+  }
+  #panel.open { transform: translateX(0); }
+
+  #panel-header {
+    padding: 16px 18px 14px;
+    border-bottom: 1px solid #21262d;
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+    flex-shrink: 0;
+  }
+  #panel-title { font-size: 16px; font-weight: 700; color: #f0f6fc; margin-bottom: 4px; }
+  #panel-badge { display: inline-block; }
+  #panel-meta { font-size: 11px; color: #8b949e; margin-top: 5px; }
+  #panel-close {
+    background: none; border: none; cursor: pointer; color: #484f58;
+    font-size: 18px; line-height: 1; padding: 2px 4px; flex-shrink: 0;
+    border-radius: 4px; transition: color 0.15s, background 0.15s;
+  }
+  #panel-close:hover { color: #e6edf3; background: #21262d; }
+
+  #panel-body { flex: 1; overflow-y: auto; padding: 14px 0; }
+  #panel-body::-webkit-scrollbar { width: 4px; }
+  #panel-body::-webkit-scrollbar-track { background: transparent; }
+  #panel-body::-webkit-scrollbar-thumb { background: #30363d; border-radius: 2px; }
+
+  .panel-section-label {
+    font-size: 10px; color: #8b949e; text-transform: uppercase; letter-spacing: 0.6px;
+    padding: 0 18px 8px;
+  }
+
+  .problem-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 18px;
+    text-decoration: none;
+    transition: background 0.1s;
+    cursor: pointer;
+  }
+  .problem-item:hover { background: rgba(56,139,253,0.07); }
+  .problem-num {
+    font-size: 10px; color: #484f58; font-variant-numeric: tabular-nums;
+    min-width: 32px; text-align: right; flex-shrink: 0;
+  }
+  .problem-name {
+    font-size: 13px; color: #c9d1d9; line-height: 1.35;
+    flex: 1;
+  }
+  .problem-item:hover .problem-name { color: #58a6ff; }
+  .problem-arrow { font-size: 11px; color: #30363d; flex-shrink: 0; }
+  .problem-item:hover .problem-arrow { color: #58a6ff; }
+
   svg { display: block; }
   .link { stroke-opacity: 0.35; stroke-width: 1.5; transition: stroke-opacity 0.15s, stroke-width 0.15s; }
   .link.hi  { stroke-opacity: 0.9; stroke-width: 2.5; }
@@ -36,6 +95,7 @@
   .node.dim circle { opacity: 0.12; }
   .node.dim text   { opacity: 0.08; }
   .node.hi  circle { filter: brightness(1.35) drop-shadow(0 0 6px currentColor); }
+  .node.selected circle { filter: brightness(1.5) drop-shadow(0 0 10px currentColor); stroke-width: 3; }
 </style>
 </head>
 <body>
@@ -45,7 +105,7 @@
   <span class="badge badge-ds">● Data Structure</span>
   <span class="badge badge-algo">● Algorithm</span>
   <span class="badge badge-sub">● Sub-technique</span>
-  <span class="hint">Drag nodes · Hover to highlight · Scroll to zoom</span>
+  <span class="hint">Drag · Hover to highlight · Scroll to zoom · Click to browse problems</span>
 </div>
 
 <div id="legend">
@@ -61,6 +121,22 @@
   <div class="t-meta"  id="tt-meta"></div>
 </div>
 
+<!-- Side panel -->
+<div id="panel">
+  <div id="panel-header">
+    <div>
+      <div id="panel-title"></div>
+      <div id="panel-badge"></div>
+      <div id="panel-meta"></div>
+    </div>
+    <button id="panel-close" title="Close (Esc)">✕</button>
+  </div>
+  <div id="panel-body">
+    <div class="panel-section-label">Representative Problems</div>
+    <div id="panel-list"></div>
+  </div>
+</div>
+
 <svg id="graph"></svg>
 
 <script>
@@ -68,6 +144,260 @@ const W = window.innerWidth, H = window.innerHeight;
 const svg = d3.select('#graph').attr('width', W).attr('height', H);
 const g   = svg.append('g');
 svg.call(d3.zoom().scaleExtent([0.25, 4]).on('zoom', e => g.attr('transform', e.transform)));
+
+// ── PROBLEM DATA ─────────────────────────────────────────────────────────────
+// Each entry: [problemNumber, "Problem Name", "leetcode-slug"]
+const problemData = {
+  BinaryTree: [
+    [94,  'Binary Tree Inorder Traversal',       'binary-tree-inorder-traversal'],
+    [104, 'Maximum Depth of Binary Tree',         'maximum-depth-of-binary-tree'],
+    [226, 'Invert Binary Tree',                   'invert-binary-tree'],
+    [101, 'Symmetric Tree',                       'symmetric-tree'],
+    [102, 'Binary Tree Level Order Traversal',    'binary-tree-level-order-traversal'],
+    [98,  'Validate Binary Search Tree',          'validate-binary-search-tree'],
+    [105, 'Construct BT from Preorder+Inorder',   'construct-binary-tree-from-preorder-and-inorder-traversal'],
+    [235, 'Lowest Common Ancestor of BST',        'lowest-common-ancestor-of-a-binary-search-tree'],
+    [124, 'Binary Tree Maximum Path Sum',         'binary-tree-maximum-path-sum'],
+    [297, 'Serialize and Deserialize Binary Tree','serialize-and-deserialize-binary-tree'],
+  ],
+  Graph: [
+    [200, 'Number of Islands',                   'number-of-islands'],
+    [133, 'Clone Graph',                          'clone-graph'],
+    [207, 'Course Schedule',                      'course-schedule'],
+    [210, 'Course Schedule II',                   'course-schedule-ii'],
+    [547, 'Number of Provinces',                  'number-of-provinces'],
+    [785, 'Is Graph Bipartite?',                  'is-graph-bipartite'],
+    [797, 'All Paths From Source to Target',      'all-paths-from-source-to-target'],
+    [684, 'Redundant Connection',                 'redundant-connection'],
+    [743, 'Network Delay Time',                   'network-delay-time'],
+    [332, 'Reconstruct Itinerary',                'reconstruct-itinerary'],
+  ],
+  Array: [
+    [1,   'Two Sum',                              'two-sum'],
+    [121, 'Best Time to Buy and Sell Stock',      'best-time-to-buy-and-sell-stock'],
+    [238, 'Product of Array Except Self',         'product-of-array-except-self'],
+    [53,  'Maximum Subarray',                     'maximum-subarray'],
+    [56,  'Merge Intervals',                      'merge-intervals'],
+    [75,  'Sort Colors',                          'sort-colors'],
+    [442, 'Find All Duplicates in an Array',      'find-all-duplicates-in-an-array'],
+    [189, 'Rotate Array',                         'rotate-array'],
+    [217, 'Contains Duplicate',                   'contains-duplicate'],
+  ],
+  Matrix: [
+    [200, 'Number of Islands',                   'number-of-islands'],
+    [695, 'Max Area of Island',                   'max-area-of-island'],
+    [54,  'Spiral Matrix',                        'spiral-matrix'],
+    [73,  'Set Matrix Zeroes',                    'set-matrix-zeroes'],
+    [79,  'Word Search',                          'word-search'],
+    [51,  'N-Queens',                             'n-queens'],
+    [37,  'Sudoku Solver',                        'sudoku-solver'],
+    [417, 'Pacific Atlantic Water Flow',          'pacific-atlantic-water-flow'],
+    [130, 'Surrounded Regions',                   'surrounded-regions'],
+  ],
+  StackQueue: [
+    [20,  'Valid Parentheses',                    'valid-parentheses'],
+    [155, 'Min Stack',                            'min-stack'],
+    [232, 'Implement Queue using Stacks',         'implement-queue-using-stacks'],
+    [739, 'Daily Temperatures',                   'daily-temperatures'],
+    [84,  'Largest Rectangle in Histogram',       'largest-rectangle-in-histogram'],
+    [496, 'Next Greater Element I',               'next-greater-element-i'],
+    [239, 'Sliding Window Maximum',               'sliding-window-maximum'],
+    [150, 'Evaluate Reverse Polish Notation',     'evaluate-reverse-polish-notation'],
+    [394, 'Decode String',                        'decode-string'],
+  ],
+  LinkedList: [
+    [206, 'Reverse Linked List',                  'reverse-linked-list'],
+    [141, 'Linked List Cycle',                    'linked-list-cycle'],
+    [21,  'Merge Two Sorted Lists',               'merge-two-sorted-lists'],
+    [19,  'Remove Nth Node From End of List',     'remove-nth-node-from-end-of-list'],
+    [146, 'LRU Cache',                            'lru-cache'],
+    [2,   'Add Two Numbers',                      'add-two-numbers'],
+    [234, 'Palindrome Linked List',               'palindrome-linked-list'],
+    [160, 'Intersection of Two Linked Lists',     'intersection-of-two-linked-lists'],
+    [142, 'Linked List Cycle II',                 'linked-list-cycle-ii'],
+  ],
+  Heap: [
+    [215, 'Kth Largest Element in an Array',      'kth-largest-element-in-an-array'],
+    [347, 'Top K Frequent Elements',              'top-k-frequent-elements'],
+    [295, 'Find Median from Data Stream',         'find-median-from-data-stream'],
+    [23,  'Merge k Sorted Lists',                 'merge-k-sorted-lists'],
+    [621, 'Task Scheduler',                       'task-scheduler'],
+    [973, 'K Closest Points to Origin',           'k-closest-points-to-origin'],
+    [378, 'Kth Smallest Element in a Sorted Matrix','kth-smallest-element-in-a-sorted-matrix'],
+  ],
+  Trie: [
+    [208, 'Implement Trie (Prefix Tree)',         'implement-trie-prefix-tree'],
+    [211, 'Design Add and Search Words Structure','design-add-and-search-words-data-structure'],
+    [212, 'Word Search II',                       'word-search-ii'],
+    [648, 'Replace Words',                        'replace-words'],
+    [1268,'Search Suggestions System',            'search-suggestions-system'],
+    [677, 'Map Sum Pairs',                        'map-sum-pairs'],
+  ],
+  String: [
+    [125, 'Valid Palindrome',                     'valid-palindrome'],
+    [5,   'Longest Palindromic Substring',        'longest-palindromic-substring'],
+    [242, 'Valid Anagram',                        'valid-anagram'],
+    [49,  'Group Anagrams',                       'group-anagrams'],
+    [14,  'Longest Common Prefix',                'longest-common-prefix'],
+    [151, 'Reverse Words in a String',            'reverse-words-in-a-string'],
+    [8,   'String to Integer (atoi)',             'string-to-integer-atoi'],
+  ],
+  DFS: [
+    [200, 'Number of Islands',                   'number-of-islands'],
+    [695, 'Max Area of Island',                   'max-area-of-island'],
+    [417, 'Pacific Atlantic Water Flow',          'pacific-atlantic-water-flow'],
+    [207, 'Course Schedule',                      'course-schedule'],
+    [797, 'All Paths From Source to Target',      'all-paths-from-source-to-target'],
+    [94,  'Binary Tree Inorder Traversal',        'binary-tree-inorder-traversal'],
+    [113, 'Path Sum II',                          'path-sum-ii'],
+    [79,  'Word Search',                          'word-search'],
+    [130, 'Surrounded Regions',                   'surrounded-regions'],
+    [1254,'Number of Closed Islands',             'number-of-closed-islands'],
+  ],
+  BFS: [
+    [102, 'Binary Tree Level Order Traversal',   'binary-tree-level-order-traversal'],
+    [994, 'Rotting Oranges',                      'rotting-oranges'],
+    [127, 'Word Ladder',                          'word-ladder'],
+    [1091,'Shortest Path in Binary Matrix',       'shortest-path-in-binary-matrix'],
+    [210, 'Course Schedule II',                   'course-schedule-ii'],
+    [286, 'Walls and Gates',                      'walls-and-gates'],
+    [815, 'Bus Routes',                           'bus-routes'],
+    [542, '01 Matrix',                            '01-matrix'],
+  ],
+  DP: [
+    [70,  'Climbing Stairs',                      'climbing-stairs'],
+    [198, 'House Robber',                         'house-robber'],
+    [1143,'Longest Common Subsequence',           'longest-common-subsequence'],
+    [72,  'Edit Distance',                        'edit-distance'],
+    [322, 'Coin Change',                          'coin-change'],
+    [300, 'Longest Increasing Subsequence',       'longest-increasing-subsequence'],
+    [62,  'Unique Paths',                         'unique-paths'],
+    [139, 'Word Break',                           'word-break'],
+    [91,  'Decode Ways',                          'decode-ways'],
+    [309, 'Best Time to Buy and Sell Stock with Cooldown', 'best-time-to-buy-and-sell-stock-with-cooldown'],
+  ],
+  Backtracking: [
+    [22,  'Generate Parentheses',                 'generate-parentheses'],
+    [39,  'Combination Sum',                      'combination-sum'],
+    [78,  'Subsets',                              'subsets'],
+    [46,  'Permutations',                         'permutations'],
+    [51,  'N-Queens',                             'n-queens'],
+    [79,  'Word Search',                          'word-search'],
+    [37,  'Sudoku Solver',                        'sudoku-solver'],
+    [17,  'Letter Combinations of a Phone Number','letter-combinations-of-a-phone-number'],
+    [131, 'Palindrome Partitioning',              'palindrome-partitioning'],
+    [40,  'Combination Sum II',                   'combination-sum-ii'],
+  ],
+  TwoPointers: [
+    [167, 'Two Sum II - Input Array Is Sorted',   'two-sum-ii-input-array-is-sorted'],
+    [11,  'Container With Most Water',            'container-with-most-water'],
+    [15,  '3Sum',                                 '3sum'],
+    [42,  'Trapping Rain Water',                  'trapping-rain-water'],
+    [26,  'Remove Duplicates from Sorted Array',  'remove-duplicates-from-sorted-array'],
+    [76,  'Minimum Window Substring',             'minimum-window-substring'],
+    [3,   'Longest Substring Without Repeating Characters', 'longest-substring-without-repeating-characters'],
+    [125, 'Valid Palindrome',                     'valid-palindrome'],
+    [18,  '4Sum',                                 '4sum'],
+  ],
+  Greedy: [
+    [55,  'Jump Game',                            'jump-game'],
+    [56,  'Merge Intervals',                      'merge-intervals'],
+    [135, 'Candy',                                'candy'],
+    [134, 'Gas Station',                          'gas-station'],
+    [455, 'Assign Cookies',                       'assign-cookies'],
+    [45,  'Jump Game II',                         'jump-game-ii'],
+    [860, 'Lemonade Change',                      'lemonade-change'],
+    [406, 'Queue Reconstruction by Height',       'queue-reconstruction-by-height'],
+  ],
+  Sort: [
+    [75,  'Sort Colors',                          'sort-colors'],
+    [56,  'Merge Intervals',                      'merge-intervals'],
+    [215, 'Kth Largest Element in an Array',      'kth-largest-element-in-an-array'],
+    [148, 'Sort List',                            'sort-list'],
+    [912, 'Sort an Array',                        'sort-an-array'],
+    [315, 'Count of Smaller Numbers After Self',  'count-of-smaller-numbers-after-self'],
+    [179, 'Largest Number',                       'largest-number'],
+  ],
+  HashTable: [
+    [1,   'Two Sum',                              'two-sum'],
+    [242, 'Valid Anagram',                        'valid-anagram'],
+    [49,  'Group Anagrams',                       'group-anagrams'],
+    [146, 'LRU Cache',                            'lru-cache'],
+    [347, 'Top K Frequent Elements',              'top-k-frequent-elements'],
+    [217, 'Contains Duplicate',                   'contains-duplicate'],
+    [387, 'First Unique Character in a String',   'first-unique-character-in-a-string'],
+    [454, '4Sum II',                              '4sum-ii'],
+    [128, 'Longest Consecutive Sequence',         'longest-consecutive-sequence'],
+  ],
+  BinarySearch: [
+    [704, 'Binary Search',                        'binary-search'],
+    [33,  'Search in Rotated Sorted Array',       'search-in-rotated-sorted-array'],
+    [153, 'Find Minimum in Rotated Sorted Array', 'find-minimum-in-rotated-sorted-array'],
+    [74,  'Search a 2D Matrix',                   'search-a-2d-matrix'],
+    [162, 'Find Peak Element',                    'find-peak-element'],
+    [4,   'Median of Two Sorted Arrays',          'median-of-two-sorted-arrays'],
+    [875, 'Koko Eating Bananas',                  'koko-eating-bananas'],
+    [34,  'Find First and Last Position of Element in Sorted Array', 'find-first-and-last-position-of-element-in-sorted-array'],
+  ],
+  Recursion: [
+    [509, 'Fibonacci Number',                     'fibonacci-number'],
+    [206, 'Reverse Linked List',                  'reverse-linked-list'],
+    [21,  'Merge Two Sorted Lists',               'merge-two-sorted-lists'],
+    [23,  'Merge k Sorted Lists',                 'merge-k-sorted-lists'],
+    [50,  'Pow(x, n)',                            'powx-n'],
+    [241, 'Different Ways to Add Parentheses',    'different-ways-to-add-parentheses'],
+    [779, 'K-th Symbol in Grammar',              'k-th-symbol-in-grammar'],
+    [1448,'Count Good Nodes in Binary Tree',      'count-good-nodes-in-binary-tree'],
+  ],
+  SlidingWindow: [
+    [3,   'Longest Substring Without Repeating Characters', 'longest-substring-without-repeating-characters'],
+    [76,  'Minimum Window Substring',             'minimum-window-substring'],
+    [239, 'Sliding Window Maximum',               'sliding-window-maximum'],
+    [567, 'Permutation in String',                'permutation-in-string'],
+    [904, 'Fruit Into Baskets',                   'fruit-into-baskets'],
+    [424, 'Longest Repeating Character Replacement', 'longest-repeating-character-replacement'],
+    [209, 'Minimum Size Subarray Sum',            'minimum-size-subarray-sum'],
+  ],
+  MonoStack: [
+    [739, 'Daily Temperatures',                   'daily-temperatures'],
+    [496, 'Next Greater Element I',               'next-greater-element-i'],
+    [84,  'Largest Rectangle in Histogram',       'largest-rectangle-in-histogram'],
+    [42,  'Trapping Rain Water',                  'trapping-rain-water'],
+    [503, 'Next Greater Element II',              'next-greater-element-ii'],
+    [907, 'Sum of Subarray Minimums',             'sum-of-subarray-minimums'],
+    [856, 'Score of Parentheses',                 'score-of-parentheses'],
+  ],
+  UnionFind: [
+    [684, 'Redundant Connection',                 'redundant-connection'],
+    [547, 'Number of Provinces',                  'number-of-provinces'],
+    [721, 'Accounts Merge',                       'accounts-merge'],
+    [947, 'Most Stones Removed with Same Row or Column', 'most-stones-removed-with-same-row-or-column'],
+    [128, 'Longest Consecutive Sequence',         'longest-consecutive-sequence'],
+    [990, 'Satisfiability of Equality Equations', 'satisfiability-of-equality-equations'],
+  ],
+  Dijkstra: [
+    [743, 'Network Delay Time',                   'network-delay-time'],
+    [787, 'Cheapest Flights Within K Stops',      'cheapest-flights-within-k-stops'],
+    [1631,'Path With Minimum Effort',             'path-with-minimum-effort'],
+    [778, 'Swim in Rising Water',                 'swim-in-rising-water'],
+    [1514,'Path with Maximum Probability',        'path-with-maximum-probability'],
+  ],
+  PrefixSum: [
+    [303, 'Range Sum Query - Immutable',          'range-sum-query-immutable'],
+    [560, 'Subarray Sum Equals K',                'subarray-sum-equals-k'],
+    [238, 'Product of Array Except Self',         'product-of-array-except-self'],
+    [304, 'Range Sum Query 2D - Immutable',       'range-sum-query-2d-immutable'],
+    [525, 'Contiguous Array',                     'contiguous-array'],
+    [724, 'Find Pivot Index',                     'find-pivot-index'],
+  ],
+  TopoSort: [
+    [207, 'Course Schedule',                      'course-schedule'],
+    [210, 'Course Schedule II',                   'course-schedule-ii'],
+    [310, 'Minimum Height Trees',                 'minimum-height-trees'],
+    [329, 'Longest Increasing Path in a Matrix',  'longest-increasing-path-in-a-matrix'],
+    [444, 'Sequence Reconstruction',              'sequence-reconstruction'],
+  ],
+};
 
 // ── DATA ────────────────────────────────────────────────────────────────────
 const nodes = [
@@ -216,6 +546,8 @@ nodeSel.each(function(d) {
 
 // ── HOVER ────────────────────────────────────────────────────────────────────
 const tip = document.getElementById('tooltip');
+let isDragging = false;
+
 nodeSel
   .on('mouseenter', function(e, d) {
     const nbrs = new Set([d.id, ...(adj[d.id] || [])]);
@@ -229,7 +561,7 @@ nodeSel
     const tt = document.getElementById('tt-type');
     tt.textContent = typeLabel; tt.style.color = d.color;
     document.getElementById('tt-meta').textContent =
-      `${d.files} files · ${(adj[d.id] || []).length} connections`;
+      `${d.files} files · ${(adj[d.id] || []).length} connections · click to browse problems`;
     tip.style.opacity = 1;
     tip.style.left = (e.pageX + 14) + 'px';
     tip.style.top  = (e.pageY - 10) + 'px';
@@ -240,6 +572,70 @@ nodeSel
     linkSel.classed('hi dim', false);
     tip.style.opacity = 0;
   });
+
+// ── CLICK / PANEL ────────────────────────────────────────────────────────────
+const panel     = document.getElementById('panel');
+const panelList = document.getElementById('panel-list');
+let selectedId  = null;
+
+function openPanel(d) {
+  selectedId = d.id;
+  nodeSel.classed('selected', n => n.id === d.id);
+
+  document.getElementById('panel-title').textContent = d.label;
+
+  const typeLabel = d.type === 'ds' ? 'Data Structure' : d.type === 'algo' ? 'Algorithm Technique' : 'Sub-technique';
+  const pb = document.getElementById('panel-badge');
+  pb.innerHTML = `<span class="badge badge-${d.type === 'ds' ? 'ds' : d.type === 'algo' ? 'algo' : 'sub'}">${typeLabel}</span>`;
+
+  document.getElementById('panel-meta').textContent =
+    `${d.files} files · ${(adj[d.id] || []).length} connections`;
+
+  const problems = problemData[d.id] || [];
+  panelList.innerHTML = '';
+  if (problems.length === 0) {
+    panelList.innerHTML = '<div style="padding:8px 18px;color:#484f58;font-size:12px;">No problems listed for this node.</div>';
+  } else {
+    problems.forEach(([num, name, slug]) => {
+      const a = document.createElement('a');
+      a.className = 'problem-item';
+      a.href = `https://leetcode.com/problems/${slug}/`;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.innerHTML = `
+        <span class="problem-num">#${num}</span>
+        <span class="problem-name">${name}</span>
+        <span class="problem-arrow">↗</span>
+      `;
+      panelList.appendChild(a);
+    });
+  }
+
+  panel.classList.add('open');
+}
+
+function closePanel() {
+  panel.classList.remove('open');
+  nodeSel.classed('selected', false);
+  selectedId = null;
+}
+
+nodeSel.on('click', function(e, d) {
+  e.stopPropagation();
+  if (selectedId === d.id) {
+    closePanel();
+  } else {
+    openPanel(d);
+  }
+});
+
+document.getElementById('panel-close').addEventListener('click', closePanel);
+
+// click on graph background closes panel
+svg.on('click', closePanel);
+
+// Escape key closes panel
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
 
 sim.on('tick', () => {
   linkSel
