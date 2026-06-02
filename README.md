@@ -361,3 +361,49 @@ graph LR
 | Subcategory | Path |
 |---|---|
 | All greedy problems | [算法思想/Greddy Algorithm](./算法思想/Greddy%20Algorithm) |
+
+### Sorting · `20 files`
+
+```mermaid
+graph LR
+  Sort --> Comparison[Comparison-Based]
+  Sort --> NonComp[Non-Comparison]
+  Comparison --> Bubble & Selection & Insertion
+  Comparison --> Merge[Merge Sort] & Quick[Quick Sort] & HeapSort[Heap Sort]
+  NonComp --> Counting[Counting Sort] & Radix & Bucket
+  Merge --> DAC[Divide & Conquer]
+  Quick --> Partition
+```
+
+| Subcategory | Path |
+|---|---|
+| All sorting implementations | [算法思想/Sort](./算法思想/Sort) |
+
+### Hash Table · `31 files`
+
+```mermaid
+graph LR
+  Hash[Hash Table] --> Array
+  Hash --> String
+  Hash --> Graph
+  Hash --> Trie
+  Array --> TwoSum & Anagram
+  String --> Substring & Pattern
+  Graph --> AdjList[Adjacency List]
+```
+
+| Subcategory | Path |
+|---|---|
+| All hash table technique problems | [算法思想/Hashtable 技巧](./算法思想/Hashtable%20技巧) |
+
+---
+
+## LeetCode Index
+
+Problems organized by number (1 → 2951+). Each file is named `<problem-name>.lc<number>.js` or just `<number>.js`.
+
+| Folder | Contents |
+|---|---|
+| [Leetcode/](./Leetcode) | 523 problems, numbered 1–2951+ |
+
+> **Tip:** Use your editor's file search (`Cmd+P` / `Ctrl+P`) and type a problem number to jump directly to its solution.
