@@ -155,3 +155,77 @@ graph LR
 | Circular array problems | [数据结构/Array基础题/环形数组(逻辑上的环形)](./数据结构/Array基础题/环形数组(逻辑上的环形)) |
 | Sliding window | [算法思想/2 Pointers/同向2Pointers](./算法思想/2%20Pointers/同向2Pointers) |
 | Binary search on arrays | [算法思想/2 Pointers/相向2Pointers](./算法思想/2%20Pointers/相向2Pointers) |
+
+### Matrix · `38 files`
+
+```mermaid
+graph LR
+  M[Matrix] --> DFS & BFS
+  M --> BK[Backtracking]
+  M --> DP[Grid DP]
+  M --> PS[2D Prefix Sum]
+  DFS --> Islands[Island Problems]
+  BK --> NQ[N-Queens]
+  BK --> Sudoku
+  BK --> WS[Word Search]
+```
+
+| Subcategory | Path |
+|---|---|
+| Island problems (DFS) | [数据结构/矩阵/DFS岛屿问题](./数据结构/矩阵/DFS岛屿问题) |
+| Shortest path in grid (BFS) | [数据结构/矩阵/BFS路径问题](./数据结构/矩阵/BFS路径问题) |
+| N-Queens | [数据结构/矩阵/N皇后](./数据结构/矩阵/N皇后) |
+| Word Search | [数据结构/矩阵/wordSearch](./数据结构/矩阵/wordSearch) |
+| Sudoku solver | [数据结构/矩阵/数独](./数据结构/矩阵/数独) |
+| 2D prefix sum | [数据结构/矩阵/前缀和PreSum矩阵](./数据结构/矩阵/前缀和PreSum矩阵) |
+| DFS in matrix | [算法思想/DFS/DFS in 矩阵](./算法思想/DFS/DFS%20in%20矩阵) |
+| BFS in matrix | [算法思想/BFS/BFS in 矩阵](./算法思想/BFS/BFS%20in%20矩阵) |
+
+### Heap · `19 files`
+
+```mermaid
+graph LR
+  H[Heap] --> Greedy
+  H --> Sort[Heap Sort]
+  H --> TopK[Top-K Problems]
+  H --> Dijkstra[Dijkstra Base]
+  TopK --> Greedy
+```
+
+| Subcategory | Path |
+|---|---|
+| All heap problems | [数据结构/Heap题目](./数据结构/Heap题目) |
+
+### Trie · `8 files`
+
+```mermaid
+graph LR
+  T[Trie] --> DFS[DFS word search]
+  T --> BK[Backtracking]
+  T --> Hash[Hash Table storage]
+  BK --> AutoComplete[Auto-complete]
+  BK --> WordConstruct[Word Construction]
+```
+
+| Subcategory | Path |
+|---|---|
+| All trie problems | [数据结构/Tire(前缀树，字典树）](./数据结构/Tire(前缀树，字典树）) |
+
+### String · `7 files`
+
+```mermaid
+graph LR
+  S[String] --> TP[Two Pointers]
+  S --> DP[Edit Distance / LCS]
+  S --> BK[Backtracking]
+  S --> Hash[Hash Table]
+  TP --> Palindrome
+  BK --> Partition
+  Hash --> Anagram
+```
+
+| Subcategory | Path |
+|---|---|
+| All string problems | [数据结构/String](./数据结构/String) |
+| DFS in string | [算法思想/DFS/DFS in String](./算法思想/DFS/DFS%20in%20String) |
+| BFS in string | [算法思想/BFS/BFS in 字符串](./算法思想/BFS/BFS%20in%20字符串) |
