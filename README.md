@@ -229,3 +229,70 @@ graph LR
 | All string problems | [数据结构/String](./数据结构/String) |
 | DFS in string | [算法思想/DFS/DFS in String](./算法思想/DFS/DFS%20in%20String) |
 | BFS in string | [算法思想/BFS/BFS in 字符串](./算法思想/BFS/BFS%20in%20字符串) |
+
+---
+
+## Algorithm Techniques
+
+### DFS · `113 files`
+
+```mermaid
+graph LR
+  DFS --> BT[Binary Tree]
+  DFS --> G[Graph]
+  DFS --> Mat[Matrix]
+  DFS --> Trie
+  DFS --> Str[String]
+  BT --> Pre[Preorder] & In[Inorder] & Post[Postorder]
+  G  --> Cycle[Cycle Detection] & Topo[Topological Sort]
+  Mat --> Islands[Island Problems]
+```
+
+| Subcategory | Path |
+|---|---|
+| DFS in binary tree | [算法思想/DFS/DFS in 二叉树 ](./算法思想/DFS/DFS%20in%20二叉树%20) |
+| DFS in graph | [算法思想/DFS/DFS in 图](./算法思想/DFS/DFS%20in%20图) |
+| DFS in matrix | [算法思想/DFS/DFS in 矩阵](./算法思想/DFS/DFS%20in%20矩阵) |
+| DFS in n-ary tree | [算法思想/DFS/DFS in 多叉树](./算法思想/DFS/DFS%20in%20多叉树) |
+| DFS in string | [算法思想/DFS/DFS in String](./算法思想/DFS/DFS%20in%20String) |
+
+### BFS · `52 files`
+
+```mermaid
+graph LR
+  BFS --> BT[Binary Tree level-order]
+  BFS --> G[Graph]
+  BFS --> Mat[Matrix shortest path]
+  BFS --> Str[String]
+  G --> Dijk[Dijkstra]
+  G --> Topo[Kahn's Topo Sort]
+```
+
+| Subcategory | Path |
+|---|---|
+| BFS on binary tree | [算法思想/BFS/BFS 遍历 二叉树](./算法思想/BFS/BFS%20遍历%20二叉树) |
+| BFS on graph | [算法思想/BFS/BFS in 图](./算法思想/BFS/BFS%20in%20图) |
+| BFS on matrix | [算法思想/BFS/BFS in 矩阵](./算法思想/BFS/BFS%20in%20矩阵) |
+| BFS on string | [算法思想/BFS/BFS in 字符串](./算法思想/BFS/BFS%20in%20字符串) |
+
+### Two Pointers · `142 files`
+
+```mermaid
+graph LR
+  TP[Two Pointers] --> SW[Sliding Window]
+  TP --> Opp[Opposite Direction]
+  TP --> Same[Same Direction]
+  SW --> Fixed[Fixed Window]
+  SW --> Variable[Variable Window]
+  Opp --> NSum[N-Sum]
+  Opp --> Palindrome
+  Opp --> BS[Binary Search]
+  Same --> FastSlow[Fast & Slow — LinkedList]
+  Same --> Partition[Array Partition]
+```
+
+| Subcategory | Path |
+|---|---|
+| Same-direction pointers (fast/slow, sliding window) | [算法思想/2 Pointers/同向2Pointers](./算法思想/2%20Pointers/同向2Pointers) |
+| Opposite-direction pointers (binary search, N-sum) | [算法思想/2 Pointers/相向2Pointers](./算法思想/2%20Pointers/相向2Pointers) |
+| Mixed / unknown pattern | [算法思想/2 Pointers/未知2Pointers](./算法思想/2%20Pointers/未知2Pointers) |
