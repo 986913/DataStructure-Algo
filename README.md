@@ -92,3 +92,66 @@ graph LR
 | Kruskal MST | [数据结构/Graph/Kruskal最小生成树算法](./数据结构/Graph/Kruskal最小生成树算法) |
 | DFS in graph | [算法思想/DFS/DFS in 图](./算法思想/DFS/DFS%20in%20图) |
 | BFS in graph | [算法思想/BFS/BFS in 图](./算法思想/BFS/BFS%20in%20图) |
+
+### Stack & Queue · `61 files`
+
+```mermaid
+graph LR
+  SQ[Stack / Queue] --> MonoStack[Monotonic Stack]
+  SQ --> MonoQueue[Monotonic Queue]
+  SQ --> PQ[Priority Queue]
+  SQ --> BFS
+  SQ --> DFS[Iterative DFS]
+  MonoStack --> NextGreater[Next Greater Element]
+  PQ --> Greedy
+```
+
+| Subcategory | Path |
+|---|---|
+| Classic stack problems | [数据结构/Stack&Queue/传统Stack题目](./数据结构/Stack&Queue/传统Stack题目) |
+| Classic queue problems | [数据结构/Stack&Queue/传统Queue题目](./数据结构/Stack&Queue/传统Queue题目) |
+| Monotonic stack | [数据结构/Stack&Queue/MonotonicStack_单调栈_题目](./数据结构/Stack&Queue/MonotonicStack_单调栈_题目) |
+| Monotonic queue | [数据结构/Stack&Queue/MonotonicQueue_单调队列_题目](./数据结构/Stack&Queue/MonotonicQueue_单调队列_题目) |
+| Priority queue (heap-based) | [数据结构/Stack&Queue/PriorityQueue_优先级队列_题目](./数据结构/Stack&Queue/PriorityQueue_优先级队列_题目) |
+
+### Linked List · `31 files`
+
+```mermaid
+graph LR
+  LL[Linked List] --> TP[Two Pointers]
+  LL --> Recursion
+  TP --> FastSlow[Fast & Slow Pointers]
+  TP --> Reversal[In-place Reversal]
+  FastSlow --> CycleDetect[Cycle Detection]
+  FastSlow --> Midpoint
+```
+
+| Subcategory | Path |
+|---|---|
+| All linked list problems | [数据结构/LinkedList/List基础题](./数据结构/LinkedList/List基础题) |
+| Two-pointer patterns on lists | [算法思想/2 Pointers/同向2Pointers](./算法思想/2%20Pointers/同向2Pointers) |
+
+### Array / Prefix Sum · `34 files`
+
+```mermaid
+graph LR
+  A[Array] --> TP[Two Pointers]
+  A --> SW[Sliding Window]
+  A --> BS[Binary Search]
+  A --> PS[Prefix Sum]
+  A --> DP[Dynamic Prog.]
+  A --> Greedy
+  A --> Sort
+  A --> Hash[Hash Table]
+  SW --> TP
+```
+
+| Subcategory | Path |
+|---|---|
+| 1D prefix sum array | [数据结构/Array - Prefix_Sum (前缀和_数组)/一维 - 前缀和数组(preSum Array)](./数据结构/Array%20-%20Prefix_Sum%20(前缀和_数组)/一维%20-%20前缀和数组(preSum%20Array)) |
+| 1D prefix product array | [数据结构/Array - Prefix_Sum (前缀和_数组)/一维 - 前缀积数组(preProduce Array)](./数据结构/Array%20-%20Prefix_Sum%20(前缀和_数组)/一维%20-%20前缀积数组(preProduce%20Array)) |
+| 2D prefix sum matrix | [数据结构/Array - Prefix_Sum (前缀和_数组)/二维 - 前缀和矩阵(preSum Matrix)](./数据结构/Array%20-%20Prefix_Sum%20(前缀和_数组)/二维%20-%20前缀和矩阵(preSum%20Matrix)) |
+| Interval problems | [数据结构/Array基础题/区间题](./数据结构/Array基础题/区间题) |
+| Circular array problems | [数据结构/Array基础题/环形数组(逻辑上的环形)](./数据结构/Array基础题/环形数组(逻辑上的环形)) |
+| Sliding window | [算法思想/2 Pointers/同向2Pointers](./算法思想/2%20Pointers/同向2Pointers) |
+| Binary search on arrays | [算法思想/2 Pointers/相向2Pointers](./算法思想/2%20Pointers/相向2Pointers) |
