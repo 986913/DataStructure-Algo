@@ -38,3 +38,57 @@ graph LR
 **[LeetCode Index](#leetcode-index)**
 
 ---
+
+## Data Structures
+
+### Binary Tree · `94 files`
+
+```mermaid
+graph LR
+  BT[Binary Tree] --> Traversal
+  BT --> BST[BST Operations]
+  BT --> LCA[Lowest Common Ancestor]
+  BT --> TreeDP[Tree DP]
+  Traversal --> DFS[DFS recursive/iterative]
+  Traversal --> BFS[BFS level-order]
+  BST --> BinarySearch[Binary Search]
+  TreeDP --> DP[Dynamic Programming]
+```
+
+| Subcategory | Path |
+|---|---|
+| Traversal templates (recursive + iterative) | [数据结构/BinaryTree二叉树/遍历模版](./数据结构/BinaryTree二叉树/遍历模版) |
+| Tree properties & queries | [数据结构/BinaryTree二叉树/二叉树的属性](./数据结构/BinaryTree二叉树/二叉树的属性) |
+| Tree construction & modification | [数据结构/BinaryTree二叉树/二叉树的修改和构造](./数据结构/BinaryTree二叉树/二叉树的修改和构造) |
+| BST — properties & validation | [数据结构/BinaryTree二叉树/BST(二叉搜索树)的属性](./数据结构/BinaryTree二叉树/BST(二叉搜索树)的属性) |
+| BST — insertion, deletion, construction | [数据结构/BinaryTree二叉树/BST(二叉搜索树)的修改和构造](./数据结构/BinaryTree二叉树/BST(二叉搜索树)的修改和构造) |
+| Lowest Common Ancestor (LCA) | [数据结构/BinaryTree二叉树/二叉树最近公共祖先问题(LCA)](./数据结构/BinaryTree二叉树/二叉树最近公共祖先问题\(LCA\)) |
+| DFS problems | [算法思想/DFS/DFS in 二叉树 ](./算法思想/DFS/DFS%20in%20二叉树%20) |
+| BFS problems | [算法思想/BFS/BFS 遍历 二叉树](./算法思想/BFS/BFS%20遍历%20二叉树) |
+
+### Graph · `43 files`
+
+```mermaid
+graph LR
+  G[Graph] --> DFS & BFS
+  G --> UF[Union-Find]
+  G --> Dijk[Dijkstra]
+  G --> Topo[Topological Sort]
+  G --> Bipartite[Bipartite Check]
+  Topo --> DFS
+  Topo --> BFS
+  Dijk --> BFS
+  UF --> MST[Minimum Spanning Tree]
+```
+
+| Subcategory | Path |
+|---|---|
+| BFS traversal | [数据结构/Graph/BFS遍历](./数据结构/Graph/BFS遍历) |
+| DFS traversal | [数据结构/Graph/DFS遍历](./数据结构/Graph/DFS遍历) |
+| Union-Find (Disjoint Set) | [数据结构/Graph/并查集(Union Find)](./数据结构/Graph/并查集(Union%20Find)) |
+| Shortest / longest path (Dijkstra, BFS) | [数据结构/Graph/最短(长)路径](./数据结构/Graph/最短(长)路径) |
+| Cycle detection + topological sort | [数据结构/Graph/环检测_topologicalSort](./数据结构/Graph/环检测_topologicalSort) |
+| Bipartite graph | [数据结构/Graph/二分图](./数据结构/Graph/二分图) |
+| Kruskal MST | [数据结构/Graph/Kruskal最小生成树算法](./数据结构/Graph/Kruskal最小生成树算法) |
+| DFS in graph | [算法思想/DFS/DFS in 图](./算法思想/DFS/DFS%20in%20图) |
+| BFS in graph | [算法思想/BFS/BFS in 图](./算法思想/BFS/BFS%20in%20图) |
