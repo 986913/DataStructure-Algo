@@ -296,3 +296,68 @@ graph LR
 | Same-direction pointers (fast/slow, sliding window) | [算法思想/2 Pointers/同向2Pointers](./算法思想/2%20Pointers/同向2Pointers) |
 | Opposite-direction pointers (binary search, N-sum) | [算法思想/2 Pointers/相向2Pointers](./算法思想/2%20Pointers/相向2Pointers) |
 | Mixed / unknown pattern | [算法思想/2 Pointers/未知2Pointers](./算法思想/2%20Pointers/未知2Pointers) |
+
+### Dynamic Programming · `98 files`
+
+```mermaid
+graph LR
+  DP --> Single[Single Sequence]
+  DP --> Dual[Dual Sequence]
+  DP --> Grid[Grid / Coordinate]
+  DP --> Knapsack[Knapsack]
+  DP --> Interval[Interval DP]
+  DP --> Game[Game Theory]
+  DP --> Tree[Tree DP]
+  Single --> LIS[LIS] & Robber[House Robber] & WB[Word Break]
+  Dual --> Edit[Edit Distance] & LCS
+  Knapsack --> K01[0-1 Knapsack] & KComp[Complete Knapsack]
+```
+
+| Subcategory | Path |
+|---|---|
+| Single-sequence DP (LIS, House Robber, Word Break…) | [算法思想/Dynamic Programming/单序列 (30%)](./算法思想/Dynamic%20Programming/单序列%20(30%25)) |
+| Dual-sequence DP (Edit Distance, LCS…) | [算法思想/Dynamic Programming/双序列 (30%)](./算法思想/Dynamic%20Programming/双序列%20(30%25)) |
+| Grid / coordinate DP | [算法思想/Dynamic Programming/坐标类 (15%)](./算法思想/Dynamic%20Programming/坐标类%20(15%25)) |
+| Knapsack (0-1 + complete) | [算法思想/Dynamic Programming/背包问题 (10%)](./算法思想/Dynamic%20Programming/背包问题%20(10%25)) |
+| Interval DP | [算法思想/Dynamic Programming/区间类 (5%)](./算法思想/Dynamic%20Programming/区间类%20(5%25)) |
+| Game theory DP | [算法思想/Dynamic Programming/博弈类](./算法思想/Dynamic%20Programming/博弈类) |
+| Tree DP | [算法思想/Dynamic Programming/DP in Trees](./算法思想/Dynamic%20Programming/DP%20in%20Trees) |
+| Palindrome DP | [算法思想/Dynamic Programming/回文串](./算法思想/Dynamic%20Programming/回文串) |
+| Stock problems | [算法思想/Dynamic Programming/股票问题](./算法思想/Dynamic%20Programming/股票问题) |
+
+### Backtracking · `59 files`
+
+```mermaid
+graph LR
+  BK[Backtracking] --> Comb[Combination / Subsets]
+  BK --> Perm[Permutation]
+  BK --> Mat[Matrix]
+  BK --> Tree
+  BK --> Str[String]
+  Comb --> NoRepeat[No-repeat no-reuse]
+  Comb --> Reuse[No-repeat reusable]
+  Comb --> Repeat[With-repeat no-reuse]
+  Mat --> NQ[N-Queens] & Sudoku & WS[Word Search]
+```
+
+| Subcategory | Path |
+|---|---|
+| Combination & subsets | [算法思想/Backtracking](./算法思想/Backtracking) |
+| Permutation variants | [算法思想/Backtracking](./算法思想/Backtracking) |
+| Tree-based backtracking | [算法思想/Backtracking](./算法思想/Backtracking) |
+
+### Greedy · `25 files`
+
+```mermaid
+graph LR
+  Gr[Greedy] --> Arr[Array]
+  Gr --> Heap[Priority Queue]
+  Gr --> Graph[MST]
+  Arr --> Interval[Interval Scheduling]
+  Arr --> Jump[Jump Game]
+  Arr --> Candy
+```
+
+| Subcategory | Path |
+|---|---|
+| All greedy problems | [算法思想/Greddy Algorithm](./算法思想/Greddy%20Algorithm) |
