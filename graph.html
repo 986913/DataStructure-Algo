@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DataStructure-Algo — Knowledge Graph</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0d1117; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #e6edf3; overflow: hidden; }
+
+  #header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 14px 24px; background: rgba(13,17,23,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid #21262d; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  #header h1 { font-size: 15px; font-weight: 600; color: #f0f6fc; }
+  .badge { font-size: 11px; padding: 3px 10px; border-radius: 12px; font-weight: 500; white-space: nowrap; }
+  .badge-ds   { background: rgba(56,139,253,0.15); color: #58a6ff; border: 1px solid rgba(56,139,253,0.3); }
+  .badge-algo { background: rgba(63,185,80,0.15);  color: #3fb950; border: 1px solid rgba(63,185,80,0.3); }
+  .badge-sub  { background: rgba(210,168,255,0.15);color: #d2a8ff; border: 1px solid rgba(210,168,255,0.3); }
+  #header .hint { font-size: 11px; color: #484f58; margin-left: auto; }
+
+  #legend { position: fixed; bottom: 24px; left: 24px; z-index: 100; background: rgba(22,27,34,0.95); border: 1px solid #30363d; border-radius: 8px; padding: 12px 16px; }
+  #legend h4 { font-size: 10px; color: #8b949e; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; font-size: 12px; color: #c9d1d9; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  #tooltip { position: fixed; z-index: 200; background: rgba(22,27,34,0.97); border: 1px solid #30363d; border-radius: 8px; padding: 10px 14px; font-size: 12px; pointer-events: none; opacity: 0; transition: opacity 0.15s; max-width: 220px; }
+  #tooltip .t-title { font-weight: 600; color: #f0f6fc; margin-bottom: 3px; font-size: 13px; }
+  #tooltip .t-type  { font-size: 11px; margin-bottom: 5px; }
+  #tooltip .t-meta  { color: #8b949e; font-size: 11px; line-height: 1.6; }
+
+  svg { display: block; }
+  .link { stroke-opacity: 0.35; stroke-width: 1.5; transition: stroke-opacity 0.15s, stroke-width 0.15s; }
+  .link.hi  { stroke-opacity: 0.9; stroke-width: 2.5; }
+  .link.dim { stroke-opacity: 0.04; }
+
+  .node circle { cursor: grab; }
+  .node circle:active { cursor: grabbing; }
+  .node.dim circle { opacity: 0.12; }
+  .node.dim text   { opacity: 0.08; }
+  .node.hi  circle { filter: brightness(1.35) drop-shadow(0 0 6px currentColor); }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <h1>DataStructure-Algo — Knowledge Graph</h1>
+  <span class="badge badge-ds">● Data Structure</span>
+  <span class="badge badge-algo">● Algorithm</span>
+  <span class="badge badge-sub">● Sub-technique</span>
+  <span class="hint">Drag nodes · Hover to highlight · Scroll to zoom</span>
+</div>
+
+<div id="legend">
+  <h4>Node size = file count</h4>
+  <div class="legend-item"><div class="legend-dot" style="background:#58a6ff"></div>Data Structure</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#3fb950"></div>Algorithm Technique</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#d2a8ff"></div>Sub-technique</div>
+</div>
+
+<div id="tooltip">
+  <div class="t-title" id="tt-title"></div>
+  <div class="t-type"  id="tt-type"></div>
+  <div class="t-meta"  id="tt-meta"></div>
+</div>
+
+<svg id="graph"></svg>
+
+<script>
+const W = window.innerWidth, H = window.innerHeight;
+const svg = d3.select('#graph').attr('width', W).attr('height', H);
+const g   = svg.append('g');
+svg.call(d3.zoom().scaleExtent([0.25, 4]).on('zoom', e => g.attr('transform', e.transform)));
+
+// ── DATA ────────────────────────────────────────────────────────────────────
+const nodes = [
+  // Data Structures
+  { id:'BinaryTree',    type:'ds',   label:'Binary Tree',         files:94,  color:'#58a6ff' },
+  { id:'Graph',         type:'ds',   label:'Graph',               files:43,  color:'#58a6ff' },
+  { id:'Array',         type:'ds',   label:'Array',               files:34,  color:'#58a6ff' },
+  { id:'Matrix',        type:'ds',   label:'Matrix',              files:38,  color:'#58a6ff' },
+  { id:'StackQueue',    type:'ds',   label:'Stack / Queue',       files:61,  color:'#58a6ff' },
+  { id:'LinkedList',    type:'ds',   label:'Linked List',         files:31,  color:'#58a6ff' },
+  { id:'Heap',          type:'ds',   label:'Heap',                files:19,  color:'#58a6ff' },
+  { id:'Trie',          type:'ds',   label:'Trie',                files:8,   color:'#58a6ff' },
+  { id:'String',        type:'ds',   label:'String',              files:7,   color:'#58a6ff' },
+  // Algorithm Techniques
+  { id:'DFS',           type:'algo', label:'DFS',                 files:113, color:'#3fb950' },
+  { id:'BFS',           type:'algo', label:'BFS',                 files:52,  color:'#3fb950' },
+  { id:'DP',            type:'algo', label:'Dynamic Prog.',       files:98,  color:'#3fb950' },
+  { id:'Backtracking',  type:'algo', label:'Backtracking',        files:59,  color:'#3fb950' },
+  { id:'TwoPointers',   type:'algo', label:'Two Pointers',        files:142, color:'#3fb950' },
+  { id:'Greedy',        type:'algo', label:'Greedy',              files:25,  color:'#3fb950' },
+  { id:'Sort',          type:'algo', label:'Sorting',             files:20,  color:'#3fb950' },
+  { id:'HashTable',     type:'algo', label:'Hash Table',          files:31,  color:'#3fb950' },
+  { id:'BinarySearch',  type:'algo', label:'Binary Search',       files:22,  color:'#3fb950' },
+  { id:'Recursion',     type:'algo', label:'Recursion',           files:58,  color:'#3fb950' },
+  // Sub-techniques
+  { id:'SlidingWindow', type:'sub',  label:'Sliding Window',      files:17,  color:'#d2a8ff' },
+  { id:'MonoStack',     type:'sub',  label:'Monotonic Stack',     files:8,   color:'#d2a8ff' },
+  { id:'UnionFind',     type:'sub',  label:'Union Find',          files:10,  color:'#d2a8ff' },
+  { id:'Dijkstra',      type:'sub',  label:'Dijkstra',            files:5,   color:'#d2a8ff' },
+  { id:'PrefixSum',     type:'sub',  label:'Prefix Sum',          files:12,  color:'#d2a8ff' },
+  { id:'TopoSort',      type:'sub',  label:'Topo Sort',           files:6,   color:'#d2a8ff' },
+];
+
+// Compute radius from file count
+nodes.forEach(n => { n.r = Math.max(14, Math.sqrt(n.files) * 3.6); });
+
+const links = [
+  // BinaryTree
+  { s:'BinaryTree',  t:'DFS',          rel:'traversal' },
+  { s:'BinaryTree',  t:'BFS',          rel:'level-order' },
+  { s:'BinaryTree',  t:'DP',           rel:'tree DP' },
+  { s:'BinaryTree',  t:'Recursion',    rel:'core pattern' },
+  { s:'BinaryTree',  t:'BinarySearch', rel:'BST search' },
+  // Graph
+  { s:'Graph',       t:'DFS',          rel:'traversal' },
+  { s:'Graph',       t:'BFS',          rel:'traversal' },
+  { s:'Graph',       t:'UnionFind',    rel:'MST / components' },
+  { s:'Graph',       t:'Dijkstra',     rel:'shortest path' },
+  { s:'Graph',       t:'TopoSort',     rel:'ordering' },
+  // Array
+  { s:'Array',       t:'TwoPointers',  rel:'search / shrink' },
+  { s:'Array',       t:'SlidingWindow',rel:'subarray' },
+  { s:'Array',       t:'BinarySearch', rel:'sorted array' },
+  { s:'Array',       t:'PrefixSum',    rel:'range query' },
+  { s:'Array',       t:'DP',           rel:'sequence DP' },
+  { s:'Array',       t:'Greedy',       rel:'intervals' },
+  { s:'Array',       t:'Sort',         rel:'ordering' },
+  { s:'Array',       t:'HashTable',    rel:'lookup' },
+  // Matrix
+  { s:'Matrix',      t:'DFS',          rel:'islands' },
+  { s:'Matrix',      t:'BFS',          rel:'shortest path' },
+  { s:'Matrix',      t:'Backtracking', rel:'N-Queens / Sudoku' },
+  { s:'Matrix',      t:'DP',           rel:'grid DP' },
+  { s:'Matrix',      t:'PrefixSum',    rel:'2D prefix' },
+  // Stack & Queue
+  { s:'StackQueue',  t:'MonoStack',    rel:'next greater' },
+  { s:'StackQueue',  t:'BFS',          rel:'queue → BFS' },
+  { s:'StackQueue',  t:'DFS',          rel:'iterative DFS' },
+  { s:'StackQueue',  t:'Greedy',       rel:'priority queue' },
+  // Linked List
+  { s:'LinkedList',  t:'TwoPointers',  rel:'fast/slow pointers' },
+  { s:'LinkedList',  t:'Recursion',    rel:'reversal' },
+  // Heap
+  { s:'Heap',        t:'Greedy',       rel:'top-K' },
+  { s:'Heap',        t:'Sort',         rel:'heap sort' },
+  { s:'Heap',        t:'Dijkstra',     rel:'priority queue base' },
+  // Trie
+  { s:'Trie',        t:'DFS',          rel:'word search' },
+  { s:'Trie',        t:'Backtracking', rel:'word construction' },
+  { s:'Trie',        t:'HashTable',    rel:'prefix storage' },
+  // String
+  { s:'String',      t:'TwoPointers',  rel:'palindrome' },
+  { s:'String',      t:'DP',           rel:'edit distance / LCS' },
+  { s:'String',      t:'Backtracking', rel:'partition' },
+  { s:'String',      t:'HashTable',    rel:'anagram' },
+  // Sub-technique relationships
+  { s:'TwoPointers', t:'SlidingWindow',rel:'specialization' },
+  { s:'Dijkstra',    t:'BFS',          rel:'weighted BFS' },
+  { s:'TopoSort',    t:'DFS',          rel:'DFS-based' },
+  { s:'TopoSort',    t:'BFS',          rel:"Kahn's algo" },
+];
+
+// Build adjacency for hover
+const adj = {};
+links.forEach(l => {
+  (adj[l.s] = adj[l.s] || []).push(l.t);
+  (adj[l.t] = adj[l.t] || []).push(l.s);
+});
+
+// ── SIMULATION ──────────────────────────────────────────────────────────────
+const edgeData = links.map(l => ({ source: l.s, target: l.t, rel: l.rel }));
+
+const sim = d3.forceSimulation(nodes)
+  .force('link',      d3.forceLink(edgeData).id(d => d.id).distance(d => d.source.r + d.target.r + 55).strength(0.35))
+  .force('charge',    d3.forceManyBody().strength(d => -d.r * 30))
+  .force('center',    d3.forceCenter(W / 2, H / 2))
+  .force('collision', d3.forceCollide().radius(d => d.r + 12));
+
+// ── DRAW ─────────────────────────────────────────────────────────────────────
+const linkSel = g.append('g')
+  .selectAll('line').data(edgeData).join('line')
+  .attr('class', 'link')
+  .attr('stroke', '#30363d');
+
+const nodeSel = g.append('g')
+  .selectAll('.node').data(nodes).join('g')
+  .attr('class', 'node')
+  .call(d3.drag()
+    .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+    .on('drag',  (e, d) => { d.fx = e.x; d.fy = e.y; })
+    .on('end',   (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; }));
+
+nodeSel.append('circle')
+  .attr('r', d => d.r)
+  .attr('fill',         d => d.color + '1a')
+  .attr('stroke',       d => d.color)
+  .attr('stroke-width', 1.8);
+
+nodeSel.each(function(d) {
+  const lines = d.label.split(' / ');
+  const el = d3.select(this);
+  const fs = Math.max(9, d.r * 0.37);
+  if (lines.length === 1) {
+    el.append('text').text(d.label)
+      .attr('font-size', fs).attr('fill', '#e6edf3')
+      .attr('text-anchor', 'middle').attr('dominant-baseline', 'central');
+  } else {
+    lines.forEach((line, i) => {
+      el.append('text').text(line)
+        .attr('font-size', fs - 1).attr('fill', '#e6edf3')
+        .attr('text-anchor', 'middle').attr('dominant-baseline', 'central')
+        .attr('dy', (i - (lines.length - 1) / 2) * (fs + 2));
+    });
+  }
+});
+
+// ── HOVER ────────────────────────────────────────────────────────────────────
+const tip = document.getElementById('tooltip');
+nodeSel
+  .on('mouseenter', function(e, d) {
+    const nbrs = new Set([d.id, ...(adj[d.id] || [])]);
+    nodeSel.classed('hi',  n => n.id === d.id);
+    nodeSel.classed('dim', n => !nbrs.has(n.id));
+    linkSel.classed('hi',  l => l.source.id === d.id || l.target.id === d.id);
+    linkSel.classed('dim', l => l.source.id !== d.id && l.target.id !== d.id);
+
+    document.getElementById('tt-title').textContent = d.label;
+    const typeLabel = d.type === 'ds' ? '📦 Data Structure' : d.type === 'algo' ? '⚙️ Algorithm Technique' : '🔧 Sub-technique';
+    const tt = document.getElementById('tt-type');
+    tt.textContent = typeLabel; tt.style.color = d.color;
+    document.getElementById('tt-meta').textContent =
+      `${d.files} files · ${(adj[d.id] || []).length} connections`;
+    tip.style.opacity = 1;
+    tip.style.left = (e.pageX + 14) + 'px';
+    tip.style.top  = (e.pageY - 10) + 'px';
+  })
+  .on('mousemove', e => { tip.style.left = (e.pageX + 14) + 'px'; tip.style.top = (e.pageY - 10) + 'px'; })
+  .on('mouseleave', () => {
+    nodeSel.classed('hi dim', false);
+    linkSel.classed('hi dim', false);
+    tip.style.opacity = 0;
+  });
+
+sim.on('tick', () => {
+  linkSel
+    .attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+    .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+  nodeSel.attr('transform', d => `translate(${d.x},${d.y})`);
+});
+</script>
+</body>
+</html>
