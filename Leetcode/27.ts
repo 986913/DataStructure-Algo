@@ -35,11 +35,11 @@ var removeElement = function (nums, val) {
     slow pointer is use for: 记录更新所有不重复的, 指向更新 新数组下标的位置
 */
 var removeElement = function (nums, val) {
-  let slow = 0;
-  let fast = 0;
+  let slow = 0; // 写指针
+  let fast = 0; // 读指针
 
   while (fast < nums.length) {
-    //只有当nums[fast]不等于val时候，才会swap和slow++
+    //只有当nums[fast]不等于val时候 （题目要求），才会更新 写指针
     if (nums[fast] !== val) {
       nums[slow] = nums[fast];
       slow++;
